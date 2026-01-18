@@ -1,0 +1,94 @@
+\section{Princíopios Fundamentais de Contagem}
+
+Nesta seção veremos duas técnicas elementares para realizar a contagem de
+elementos de um dado conjunto finitio: o princípio aditivo e o princípio
+multiplicativo, também denominado o Princípio Fundamental da Contagem.
+
+\subsection{Princípio Aditivo}
+
+O nosso primeiro problema de contagem será o de determinar a quantidade de
+elementos na união de uma família finita de conjuntos finitos disjuntos,
+o que nos dará nosso primeiro resultado.
+
+\begin{thm:pa}
+  Se $\mathcal{F} = \{A_1, A_2, \dots, A_n\}$ é uma família de conjuntos finitos,
+  disjuntos dois a dois, então cardinalidade de $U$ dado como a união
+  dos elementos dessa família é dada pela soma das cardinalidades dos conjuntos.
+
+  \begin{proof}
+    A prova será por indução no tamanho de $\mathcal{F}$.
+
+    Base: Se $n = 1$, então $\mathcal{F} = \{A_1\}$ e a união terá a mesma
+    cardinalidade de $A_1$, ou seja, $|U| = |A_1|$. Por outro lado,
+    se $n = 2$, então $\mathcal{F} = \{A_1, A_2\}$ e a união terá todos os
+    elementos de ambos os conjuntos, ou seja, $|U| = |A_1| + |A_2|$.
+
+    Hipótese de Indução: Suponha que o teorema seja válido para uma familia
+    $\mathcal{F}$ com $n$ conjuntos, ou seja,
+    \[
+      |U| = |A_1| + |A_2| + \dots + |A_n|
+    \]
+    Para determinar a cardinalidade de uma união $V$ de uma família $\mathcal{F'}$
+    dada por $\mathcal{F'} = \{A_1, A_2, \dots, A_n, A_{n+1}\}$
+    com $n+1$ conjuntos, podemos escrever o problema como simplesmente a soma
+    de dois conjuntos, $U$ e $A_{n+1}$, caso para o qual vale a hipótese de
+    indução. Assim, temos pelo Princíopio de Indução, que vale que a união de
+    conjuntos disjuntos terá cardinalidade igual a soma das cardinalidades
+    do conjuntos.
+  \end{proof}
+\end{thm:pa}
+
+O teorema acima enuncia um dos princípios mais elementares de contagem:
+o Princípio Aditivo.
+
+\subsection{Princípio Multiplicativo}
+
+Um outro problema fundamental de contagem é determinar a quantidade
+de tuplas ordenadas que podemos formar, de forma que cada posição é
+ocupada por um elemento selecionado de um conjunto finito específico.
+Para resolvê-lo, iremos enunciar o resultado denominado o Princípio
+Fundamental da Contagem
+
+\begin{thm:pfc}
+  Sejam $A_1, A_2, \dots, A_n$ conjuntos finitos. O número de tuplas
+  ordenadas $(a_1, a_2, \dots, a_n)$ tais que $a_i \in A_i$ para
+  cada $i = 1, 2, \dots, n$ é dado pelo produto das cardinalidades
+  dos conjuntos, ou seja,
+  \[
+    |A_1| \times |A_2| \times \dots \times |A_n|
+  \]
+  \begin{proof}
+    A prova será por indução no número de conjuntos $n$.
+    Base: Se $n = 1$, então só há um conjunto $A_1$ e o número de tuplas
+    ordenadas é simplesmente o número de elementos em $A_1$, ou seja,
+    $|A_1|$. Se $n = 2$, então temos dois conjuntos $A_1$ e $A_2$. e
+    sempre que fixarmos um elemento $a_1 \in A_1$ na primeira posição, há
+    $|A_2|$ escolhas para a segunda. Como isso vale para toda escolha
+    da primeira posição, então o número de pares ordenados é dado por
+    \[
+      \sum_{a_1 \in A_1} |A_2| = |A_1| \times |A_2|
+    \]
+    Hipótese de Indução: Suponha que o teorema seja válido para $n$ conjuntos,
+    ou seja, o número de tuplas ordenadas formadas por elementos dos conjuntos
+    $A_1, A_2, \dots, A_n$ é dado por
+    \[
+      |A_1| \times |A_2| \times \dots \times |A_n|
+    \]
+    Para determinar o número de tuplas ordenadas formadas por elementos dos
+    conjuntos $A_1, A_2, \dots, A_n, A_{n+1}$, podemos considerar que cada
+    tupla ordenada pode ser vista como uma tupla ordenada dos primeiros
+    $n$ conjuntos seguida de um elemento do conjunto $A_{n+1}$. Pelo
+    Princípio de Indução, o número de tuplas ordenadas dos primeiros
+    $n$ conjuntos é dado pela hipótese de indução. Multiplicando esse valor
+    pelo número de escolhas possíveis para o elemento do conjunto $A_{n+1}$,
+    obtemos, pois,
+    \[
+      |A_1| \times |A_2| \times \dots \times |A_n|
+    \]
+    tuplas possíveis.
+  \end{proof}
+\end{thm:pfc}
+
+O Princípio Fundamental da Contagem é especial, pois ele serve como base
+para resolver muitos problemas de enumeração que serão vistos mais adiante.
+

@@ -1,0 +1,114 @@
+\section{Arranjos e Permutações}
+
+Nesta seção iremos explorar algumas estruturas combinatórias baseadas em
+tuplas ordenada, e determinaremos fórmulas para que consigamos enumerar quantas
+dessas estruturas podem ser obtidas a partir de um conjunto finito.
+
+\subsection{Fatoriais}
+
+O fatorial é uma função discreta que admite uma definição recursiva no domínio
+dos inteiros não negativos, dada como:
+
+\begin{def:fatorial}
+ Se $n$ é um inteiro positivo, então o seu fatorial, denotado por $n!$ é
+ definido por:
+ \[
+  n! = \begin{cases}
+    1, &\text{ se } n = 0\\
+    n \cdot (n-1)!,&\text{ se } n > 0\\
+  \end{cases}
+ \]
+\end{def:fatorial}
+
+A função fatorial é importante, pois ela surge naturalmente em diversos problemas
+combinatórios, especialmente de enumeração, como alguns que veremos a seguir.
+
+\subsection{Arranjos}
+
+Os arranjos são nada mais do que uma tupla ordenada obtida sem repetição a
+partir de um conjunto discreto.
+
+\begin{def:arranjo}
+ Seja $A$ um conjunto discreto. Um arranjo dos elementos de $A$ é uma tupla
+ ordenada com elementos de $A$.
+\end{def:arranjo}
+
+Nosso problema será agora enumerar quantos arranjos são possíveis de se obter
+a partir de um conjunto finito de $n$ elementos, já que para conjuntos discretos
+inifinitos, infinitos arranjos podem ser formados. O primeiro caso será para
+arranjos sem repetição, i.e., se $(a_1, \ldots, a_r)$ é um arranjo de $A$, então
+não há $a_i = a_j$ para qualquer $i$ e $j$ inteiros positivos menores ou iguais
+a $r$.
+
+\begin{thm:enum arranjo}
+  Se $A$ é um conjunto finito com $n$ elementos, então o número de arranjos de
+  $r$ elementos desse conjunto é dado por
+  \[
+    \frac{n!}{(n-r)!}
+  \]
+  \begin{proof}
+    Para provar a fórmula, iremos prover um argumento combinatório usando
+    o Princípio Fundamental da Contagem. Sempre que escolhemos um elemento de
+    $A$ para ocupar a posição de índice $i$, não podemos repetir esse elemento,
+    ou seja, nosso universo de escolhas se reduz em 1 cada vez que fixamos
+    um elemento. Diante disso, representemos nossos universos de escolhas em
+    cada passo da construção da tupla com uma definição recursiva,
+    presumindo que $a_1 \in A$ é o primeiro elemento escolhido, $a_2 \in A$
+    o segundo, e assim em diante:
+    \[
+      A_i = \begin{cases}
+        A, &\text{ se }i=0\\
+        A_{i-1} \backslash \{a_i\}, &\text{ se }i>1\\
+      \end{cases}
+    \]
+    Dessa forma, o conjunto $A_i$ representa os elementos que ainda podemos
+    escolher para compor a tupla após já termos escolhido $i$ elementos.
+    Por coseguinte, ao preencher as $r$ posições da tupla, teremos escolhido
+    respectivamente, elementos da família $A_0, A_1, \dots, A_{r-1}$. Logo,
+    enumerar arranjos é equivalente a enumerar quantas tuplas odenadas podem
+    ser obtidas ao escolher, respectivamente, elementos da família citada, que
+    pelo Princípio Fundamental da Contagem, deve ser igual ao produto das
+    cardinalidades dos conjuntos. Uma vez que $|A_i| = |A| - i = n - i$, então
+    o número de arranjos é dado por:
+    \begin{gather*}
+     n \cdot (n -1) \cdot \ldots \cdot (n - r - 1) \\
+     n \cdot (n -1) \cdot \ldots \cdot (n - r - 1) \cdot \frac{(n-r)!}{(n-r)!} \\
+    \end{gather*}
+    que equivale a
+    \[
+      \frac{n!}{(n-r)!}
+    \]
+  \end{proof}
+\end{thm:enum arranjo}
+O caso de arranjos com repetição é siginificativamente mais trivial, pois
+nosso universo de escolhas nunca se reduz, ou seja, para cada posição da tupla,
+teremos $n$ escolhas possíveis, de forma que o número total de arranjos será
+dado por $n^r$, provando o corolário abaixo.
+
+\begin{cor:enum arranjo 1}
+  O número de arranjos de tamanho $r$ com repetição de um conjunto $A$ de $n$
+  elementos é $n^r$
+\end{cor:enum arranjo 1}
+
+Um caso especial dos arranjos são as permutações, que são arranjos tomados,
+com ou sem repetição, de todos os elementos de um conjunto finito.
+
+\begin{def:permutacao}
+  Uma permutação de um conjunto finito $A$ de cardnalidade $n$ é um arranjo
+  de tamanho $n$ dos elementos de $A$.
+\end{def:permutacao}
+
+\begin{cor:enum arranjo 2}
+  Se $A$ poossui $n$ elementos, então há $n!$ permutações sem repetição de
+  elementos de $A$.
+
+  \begin{proof}
+    Caso em que $n = r$ na fórmula de contagem de arranjos.
+    \[
+      \frac{n!}{(n-r)!} = \frac{n!}{0!} = n!
+    \]
+  \end{proof}
+\end{cor:enum arranjo 2}
+O caso de permutações com repetição iremos adiar por um momento.
+
+

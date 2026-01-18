@@ -1,0 +1,86 @@
+\section{Medidas de Posição}
+
+Além das técnicas de tabelas de frequência ou métodos gŕaficos para resumir
+informações de dados, há formas de resumir ainda mais os dados. Geralmente,
+as mais comuns são medidas de centralidade: moda, média e mediana. Primeiramente,
+vamos tratar do caso amostral.
+
+\begin{def:moda}
+  Se $X$ é uma variável aleatória com função de distribuição $f$, a moda de $X$,
+  designidada por $\moda{X}$, é o valor $x$ que maximiza $f$.
+  \[
+    \moda{x} = \arg\max_{x} f(x)
+  \]
+\end{def:moda}
+Desse modo, num conjunto de dados que amostra uma variável, podemos estimar
+a moda apenas contando o valor mais frequente.
+
+A média populacional de uma variável aleatória é o seu valor esperado $E[X]$,
+e, dada uma amostra, a média amostral que estima a populacional é dada por:
+\[
+  \mu = \frac{1}{n} \sum_{i=1}^n x_i
+\]
+onde $n$ é o número de amostras obtidas. Por fim, a mediana de uma variável
+aleatória é o valor $x$ tal que o quantil de probabilidade seja $1/2$, ou seja,
+\[
+  P(X \leq x) = 1/2
+\]
+
+Para estimar a mediana de $X$, suponha que $\vec v = (x_1, \dots, x_n)$
+seja um vetor de realizações de $X$, e $k = \lfloor n/2 \rfloor$, então
+a mediana $q$ será dada por:
+
+\begin{enumerate}
+  \item Se $n$ é impar, então faça a mediana igual a $x_k$.
+
+  \item Se $n$ é par, então a mediana é dada por
+    \[
+      \frac{x_k + x_{k+1}}{2}
+    \]
+\end{enumerate}
+Repare que, no caso de $n$ par, deve-se ter cuidado com variáveis não contínuas.
+
+\section{Medidas de Dispersão}
+
+Além da análise de centralidade e de valores típicos, pode ser que deseja-se
+estudar a variabilidade de um conjunto de dados. Com isso, introduziremos
+algumas medidas de dispersão.
+
+O primeiro deles será o desvio médio, dado como
+\[
+  \dm{X} = \sum_{i = 1}^n \frac{ \left| x_i - \bar x \right| }{n}
+\]
+O segundo é a variância, que se assemelha ao desvio-médio, mas com a exceção
+de que os desvios são elevados ao quadrado para se acentuar os desvios maiores.
+\[
+  \var{X} = \sum_{i = 1}^n \frac{ \left| x_i - \bar x \right|^2 }{n-1}
+\]
+A variância gera um valor cuja a unidade está elevada ao quadrado, sendo menos
+interpretável. Por isso, utiliza-se também o desvio-padrão, dado como
+\[
+  \std{X} = \sqrt{ \sum_{i = 1}^n \frac{ \left| x_i - \bar x \right|^2 }{n-1} }
+\]
+
+Com base no que foi dito sobre o quadrado dos desvios, a variância e o
+desvio-padrão são mais sensíveis a outliers, e a amplitude dos dados de modo
+geral, sendo adequadas para quando a distribuição dos dados é aproximadamente
+normal. O desvio-médio é uma medida menos sensível.
+
+\section{Quantis}
+
+O quantil $q$ de probabilidade $p$ é um número que satisfaz
+\[
+  \mathrm P(X \leq q) = p
+\]
+por exemplo: a mediana é o quantil de probabilidade de 50\%. Os quantis de
+probabilidade de 0.25, 0.5 e 0.75 são, respectivamente, chamados de quartis,
+sendo os mais utilizados em resumos de dados.
+
+A estimação de um quantil, quando a função de distribuição não está disponível,
+pode ser calculado da seguinte forma: dada a probabilidade $p$ acumulada pelo
+quantil $q$, ordene os dados e faça $k = np$. Se $k \in \mathbb{N}$, então
+o quantil é $x_k$, se não obtenha $k' = \lfloor k \rfloor$ e obtanha o
+quantil como
+\[
+  \frac{x_{k'} + x_{k'+1}}{2}
+\]

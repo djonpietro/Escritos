@@ -1,0 +1,110 @@
+\section{Combinações}
+
+\subsection{Definição e Enumeração}
+
+Combinações são uma abstração da ação de selecionar elementos de um conjunto,
+de modo que a ordem em que os selecionamos não importa, apenas a coleção obtida
+ao final. Essa seleção pode ser feita sem ou com repetição de elementos: no
+priemeiro caso, a seleção gera um sobconjunto do conjunto original, enquanto
+que na segunda, obtemos um multiconjunto, cuja eliminação das redundâncias
+também se reduz a um subconjunto da coleção original.
+
+\begin{def:combinacao}
+  Seja $A$ um conjunto discreto. Uma combinação $C$ dos elementos de $A$
+  é um multiconjunto não trivial dos elementos de $A$. Quando a imagem de $C$
+  está contida em $\{0, 1\}$, então dizemos que ela é uma combinação
+  sem reptição, do contrário, com repetição.
+\end{def:combinacao}
+
+O próximo passo será contar quantas combinações (sem repetição) de $r$ elementos
+um conjunto finito possui.
+
+\begin{thm:enum combinacao}
+ Seja $A$ um conjunto de $n$ elementos. O número de combinações com $r$
+ elementos sem repetição de $A$ será dada por
+ \[
+   \frac{n!}{(n-r)!r!}
+ \]
+ \begin{proof}
+   Contar quantas combinações de $r$ elementos sem repetição podem ser obtidas
+   de $A$ equivale ao problema de contar o total de subconjuntos de $r$
+   elementos que podem ser obtidos de $A$. Suponha que haja $x$ subconjuntos
+   de $r$ elementos de $A$ denotados por $C_1, C_2, \ldots, C_x$. Dos elementos
+   de um subconjunto $C_i$, $1 \leq i \leq n$, podemos obter $r!$ arranjos
+   dos elementos de $A$, e como não é possível produzir um desses arranjos
+   a partir de outro sobconjunto $C_j$, então podemos afirmar que a contagem
+   dos arranjos de $r$ de elementos de $A$ pode ser dada por $x \cdot r!$.
+   Pela fórmula canônica de enumeração de arranjos, temos então:
+   \begin{gather}
+      x \cdot r! = \frac{n!}{(n-r)!} \\
+      x = \frac{n!}{(n-r)!r!}
+   \end{gather}
+ \end{proof}
+\end{thm:enum combinacao}
+
+O valor da função de contagem de combinações de tamanho $r$ dum conjunto finito
+de cardinalidade $n$ também pode ser denotada por $C^r_n$
+
+\subsection{Permutações com Repetição}
+
+Seções atrás, comentamos sobre os arranjos com repetição, cuja fómula de
+contagem poderia ser deduzida de um argumento combinatório elementar. No entanto,
+a mesma situação não se aplica sobre as permutações com repetição, que são
+tuplas em que um mesmo elemento se repete um número fixo de vezes.
+
+\begin{def:permutacao com repeticao}
+  Seja $A$ um conjunto de $n$ elementos. Dado um multiconjunto $m: A \to \mathbb{N}$,
+  uma permutação com repetição de elementos de $A$ é uma tupla em que
+  um elemento $a \in A$ ocorre em $m(a)$ posições.
+\end{def:permutacao com repeticao}
+
+Permutações com repetição de um conjunto finito são gerada ao selecionar
+elementos desse conjunto zero ou mais vezes e os ordenar de diferentes maneiras.
+Um ponto de atenção ocorre no fato de que, se um elemento ocorre em duas ou mais
+posições, permutações nessas posições não geram novas ordenações, o que torna
+a enumeração desse tipo de estrutura um pouco mais criteriosa.
+
+Tendo, então, definido as combinações. a tarefa de determinar uma função de
+contagem de permutações com repetição de conjunto finito dadas as multiplicidades
+de cada elemento torna-se possível por um argumento combinatório envolvendo
+as estruturas definidas neste capítulo.
+
+\begin{thm:enum permutacao com repeticao}
+  Seja $A$ um conjunto de $n$ elementos. O número de permutações com repetição
+  de elementos de $A$ com multiplicidades dadas por um multiconjunto $m: A \to \mathbb{N}$,
+  tal que $m(a_i) = r_i$, $a_i \in A$, e $1 \leq i \leq n$, é dado por
+  \[
+    \frac{ T! }{ r_1! r_2! \ldots r_n! }
+  \]
+  onde $T$ é a soma das multiplicidades.
+  \begin{proof}
+    Dadas as multiplicidades dos elementos, podemos afirmar que a tupla terá
+    tamanho igual a $T = r_1 + \ldots + r_n$. A cnstrução de uma permutação poderá
+    ser feita da seguinte maneira: para o primeiro elemento, selecionamos $r_1$
+    posições que serão ocupadas por ele na tupla dentre as $T$ possíveis,
+    restando $T - r_1$ posições para alocar os demais. Para o segundo elemento,
+    escolheremos $r_2$ possições dentre as $T - r_1$ possíveis, sobrando, por
+    consequeência, $T - r_1 - r_2$ para os outros. Generalizando: para cada
+    índice $k$, teremos de escolher $r_k$ posições de um total de
+    $T - \sum_{j=1}^{k-1} r_j$. Dessa forma, o número de permutações com
+    repetição será dada por
+    \[
+      C_T^{r_1} \cdot C_{T - r_1}^{r_2} \cdot \ldots \cdot C_{T - r_1 - \ldots - r_n}^{r_n}
+    \]
+    expandindo os termos e cancelando os semelhantes,
+    \begin{align}
+    \frac{T!}{\cancel{(T - r_1)!} \, r_1!}
+    \cdot
+    \frac{\cancel{(T - r_1)!}}{\cancel{(T - r_1 - r_2)!} \, r_2!}
+    \cdot \ldots \cdot
+    \frac{\cancel{(T - r_1 - \ldots - r_{n-1})!}}{\cancelto{1}{(T - r_1 - \ldots - r_n)!} \, r_n!}
+    \end{align}
+    donde segue a expressão
+    \[
+      \frac{ T! }{ r_1!r_2!\ldots r_n! }
+    \]
+  \end{proof}
+
+\end{thm:enum permutacao com repeticao}
+\subsection{Número de Seoluções não Negativas de uma Equação }
+\subsection{Combinações com Repetição}
