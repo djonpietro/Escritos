@@ -100,21 +100,22 @@ de arranjos será dado por $n^r$, provando o corolário abaixo.
   elementos é $n^r$
 \end{cor:enum arranjo 1}
 
-Um caso especial dos arranjos são as permutações, que são arranjos tomados,
-com ou sem repetição, de todos os elementos de um conjunto finito.
+Um caso especial dos arranjos são as permutações, que são arranjos tomados
+sem repetição de todos os elementos de um conjunto finito.
 
 \begin{def:permutacao}
   Uma permutação de um conjunto finito $A$ de cardnalidade $n$ é um arranjo
-  de tamanho $n$ dos elementos de $A$, i.e., uma função na forma
+  de tamanho $n$ dos elementos de $A$, i.e., uma função bijetiva na forma
   \[
     f: [n] \to A
   \]
-  A permutação $f$ será com repetição se, e somente se, $f$ não for injetiva.
 \end{def:permutacao}
+O caso das permutações com repetição será discutido separadamente em seções
+posteriores. Dito isso, a função de contagem de permutações de um conjunto finito
+é facilmente deduzida pelo corolário a seguir.
 
 \begin{cor:enum arranjo 2}
-  Se $A$ poossui $n$ elementos, então há $n!$ permutações sem repetição de
-  elementos de $A$.
+  Se $A$ poossui $n$ elementos, então há $n!$ permutações de elementos de $A$.
   \[
     \Pm{n} = n!
   \]
@@ -125,4 +126,3 @@ com ou sem repetição, de todos os elementos de um conjunto finito.
     \]
   \end{proof}
 \end{cor:enum arranjo 2}
-O caso de permutações com repetição iremos adiar por um momento.

@@ -5,26 +5,22 @@
 Combinações são uma abstração da ação de selecionar elementos de um conjunto,
 de modo que a ordem em que os selecionamos não importa, apenas a coleção obtida
 ao final. Essa seleção pode ser feita sem ou com repetição de elementos: no
-priemeiro caso, a seleção gera um sobconjunto do conjunto original, enquanto
+primeiro caso, a seleção gera um sobconjunto do conjunto original, enquanto
 que na segunda, obtemos um multiconjunto, cuja eliminação das redundâncias
 também se reduz a um subconjunto da coleção original.
 
+A nossa definição formal de combinação parte da ideia de criar uma coleção
+de objetos de um conjunto discreto associando uma multiplicidade a cada
+objeto, que poderia ser entendido como ``quantas vezes o objeto aparece
+nessa coleção''.
+
 \begin{def:combinacao}
-  Seja $A$ um conjunto discreto. Uma combinação $C$ dos elementos de $A$
-  é um multiconjunto não trivial dos elementos de $A$. Quando a imagem de $C$
-  está contida em $\{0, 1\}$, então dizemos que ela é uma combinação
-  sem reptição, do contrário, com repetição.
+  Seja $A$ um conjunto discreto. Uma combinação dos elementos de $A$
+  de tamanho $r$ é uma função $f: A \to \mathbb{N}$ que satisfaz
 \end{def:combinacao}
 
-Daqui em diante, iremos acordar algumas terminologias. Quando nos referimos
-apenas a ``combinação'', estaremos apenas omitindo o complemento ``sem repetição'',
-equanto que sempre iremos adicionar ``com repetição'' quando estivermos lidando
-com esse caso. Além disso, sempre que dissermos que uma combinação possui $r$
-elementos, estaremos dizendo que a soma das multiplicidades associadas pelo
-multiconjunto é igual a $r$.
-
-Acordado a terminologia, iremos agora determinar a função de contagem de uma
-ombinação de $r$ elementos.
+ O resultado a seguir apresenta a função de contagem de
+combinações de um conjunto finito no caso sem repetição.
 
 \begin{thm:enum combinacao}
  Seja $A$ um conjunto de $n$ elementos. O número de combinações com $r$
@@ -33,15 +29,17 @@ ombinação de $r$ elementos.
    \C{n}{r} = \frac{n!}{(n-r)!r!}
  \]
  \begin{proof}
-   Contar quantas combinações de $r$ elementos podem ser obtidas
-   de $A$ equivale ao problema de contar o total de subconjuntos de $r$
-   elementos que podem ser obtidos de $A$. Suponha que haja $x$ subconjuntos
-   de $r$ elementos de $A$ denotados por $C_1, C_2, \ldots, C_x$. Dos elementos
-   de um subconjunto $C_i$, $1 \leq i \leq n$, podemos obter $r!$ arranjos
-   dos elementos de $A$, e como não é possível produzir um desses arranjos
-   a partir de outro sobconjunto $C_j$, então podemos afirmar que a contagem
-   dos arranjos de $r$ de elementos de $A$ pode ser dada por $x \cdot r!$.
-   Pela fórmula canônica de enumeração de arranjos, temos então:
+   A cada elemento de $A$, a combinação pode associar somente dois valores:
+   0 e 1, que pode ser compreendido como ao pertencimento ou não do elemento
+   à combinação. Diante disso, contar quantas combinações de $r$ elementos
+   podem ser obtidas de $A$ equivale ao problema de contar o total de
+   subconjuntos de $r$ elementos que podem ser obtidos de $A$. Suponha que haja
+   $x$ subconjuntos de $r$ elementos de $A$ denotados por $C_1, C_2, \ldots, C_x$.
+   Dos elementos de um subconjunto $C_i$, $1 \leq i \leq n$, podemos obter $r!$
+   arranjos dos elementos de $A$, e como não é possível produzir um desses
+   arranjos a partir de outro sobconjunto $C_j$, então podemos afirmar que a
+   contagem dos arranjos de $r$ de elementos de $A$ pode ser dada por $x \cdot r!$.
+   Pela função de contagem de arranjos, temos então:
    \begin{gather}
       x \cdot r! = \frac{n!}{(n-r)!} \\
       x = \frac{n!}{(n-r)!r!}
@@ -51,27 +49,41 @@ ombinação de $r$ elementos.
 
 \subsection{Permutações com Repetição}
 
-Seções atrás, comentamos sobre os arranjos com repetição, cuja fómula de
-contagem poderia ser deduzida de um argumento combinatório elementar. No entanto,
-a mesma situação não se aplica sobre as permutações com repetição, que são
-tuplas em que um mesmo elemento se repete um número fixo de vezes.
+As permutações com repetição devem ser tratadas como um caso à parte das
+permutações tradicionais. Isso porque essas últimas são nada mais do que
+um caso especial dos arranjos, enquanto que a noção geral de permutação
+com repetição carrega consigo a noção de multiplicidade de elementos,
+como ocorre com as combinações.
+
+Dado um conjunto $A$ finito, permutações com repetição dos elementos desse
+conjunto só podem ser construídas se tivermos, além do conjunto, a
+multiplicidade de cada elemento. A forma usual de as representar
+é como ordenações de elementos de $A$ tal que cada elemento repita-se
+tantas vezes quanto forem a sua multiplicidade.
 
 \begin{def:permutacao com repeticao}
   Seja $A$ um conjunto de $n$ elementos. Dado um multiconjunto $m: A \to \mathbb{N}$,
-  uma permutação com repetição de elementos de $A$ é uma tupla em que
-  um elemento $a \in A$ ocorre em $m(a)$ posições.
+  uma permutação com repetição de elementos de $A$ é uma função sobrejetora
+  $f: [T] \to A$ tal que
+  \[
+    T = \sum_{a \in A} m(a)
+  \]
+  e que satisfaz
+  \[
+    \forall a \in A,\ C = \{x \in [T] \mid f(x) = a\} \longrightarrow |C| = m(a)
+  \]
 \end{def:permutacao com repeticao}
+Vamos explicar a última definição em mais detalhes. É dado um conjunto finito
+$A$ de $n$ elementos e um multiconjunto $m: A \to \mathbb{N}$, que dará
+a multiplicidade de cada elemento $a \in A$ na permutação. Em seguida, definimos
+$T$ como a soma das multiplicidades, e adicionamos a restrição de que o
+número de elementos em $[T]$, que são os índices das posições da ordenação
+representada na permutação, ligados a um mesmo elemento de $A$ deve ser igual
+a multiplicidade desse elemento.
 
-Permutações com repetição de um conjunto finito são gerada ao selecionar
-elementos desse conjunto zero ou mais vezes e os ordenar de diferentes maneiras.
-Um ponto de atenção ocorre no fato de que, se um elemento ocorre em duas ou mais
-posições, permutações nessas posições não geram novas ordenações, o que torna
-a enumeração desse tipo de estrutura um pouco mais criteriosa.
-
-Tendo, então, definido as combinações. a tarefa de determinar uma função de
-contagem de permutações com repetição de conjunto finito dadas as multiplicidades
-de cada elemento torna-se possível por um argumento combinatório envolvendo
-as estruturas definidas neste capítulo.
+Tendo, então, definido as permutações com repetição, podemos usar as combinações
+para determinar a função de contagem delas dado um conjunto finito $A$ e
+multiplicidades definidas por $m: A \to \mathbb{N}$.
 
 \begin{thm:enum permutacao com repeticao}
   Seja $A$ um conjunto de $n$ elementos. O número de permutações com repetição
@@ -82,6 +94,12 @@ as estruturas definidas neste capítulo.
   \]
   onde $T$ é a soma das multiplicidades.
   \begin{proof}
+    Mais uma vez, recorreremos à técnica de contagem dupla. Nesta prova,
+    iremos contar as permutações com repetições as igualando ao número de tuplas
+    de $T$ elementos em que um elemento $a_i \in A$ pode se repetir $r_i$
+    vezes, de modo que a posição do elemento na tupla representa ele
+    ser imagem do índice $i \in [T]$ daquela posição.
+
     Dadas as multiplicidades dos elementos, podemos afirmar que a tupla terá
     tamanho igual a $T = r_1 + \ldots + r_n$. A construção de uma permutação poderá
     ser feita da seguinte maneira: para o primeiro elemento, selecionamos $r_1$
@@ -92,8 +110,7 @@ as estruturas definidas neste capítulo.
     Generalizando: para cada índice $k$, teremos $C_{T - r_1 - \ldots - r_k}^{r_k}$
     maneiras de escolher $r_k$ posições de um total de
     $T - \sum_{j=1}^{k-1} r_j$. Dessa forma, o número de permutações com
-    repetição que podem ser feitas, pelo Princípio Fundamental da Contagem,
-    é dado por
+    repetição que podem ser feitas, pelo PFC, é dado por
     \[
       C_T^{r_1} \cdot C_{T - r_1}^{r_2} \cdot \ldots \cdot C_{T - r_1 - \ldots - r_n}^{r_n}
     \]
@@ -136,7 +153,7 @@ passos:
 \end{enumerate}
 
 Vamos a exemplos. A equação $x_1 + x_2 = 3$ tem, entre suas soluções, as tuplas
-$(1, 2)$ e $(0, 3$. As strings produzidas pelos passos mencionados seriam,
+$(1, 2)$ e $(0, 3)$. As strings produzidas pelos passos mencionados seriam,
 respectivamente, ``$.+..$'' e ``$+...$''. É fácil ver que cada tupla produz apenas
 uma string na forma proposta, e que não é possível que tuplas diferentes produzam
 a mesma string. Portanto, há uma bijeção entre uma solução da equação e uma
@@ -144,7 +161,7 @@ string produzida conforme os passos especificados.
 
 Obtemos, então, que o número de soluções inteiras não negativas de uma equação
 é equivalente ao número de anagramas de uma string que tenha $r$ símbolos
-iguais a $.$ e $n-1$ símbolos iguais a $+$. Isso configura um problema de
+iguais a ``$.$'' e $n-1$ símbolos iguais a ``$+$''. Isso configura um problema de
 permutação com repetição, que, como vimos na seção anterior, pode ser resolvido
 ao computar a função de contagem $\PR{r+n-1}{r,n-1}$.
 \[
@@ -177,6 +194,4 @@ com repetição com $r$ elementos é definida por
     \frac{ (r + n - 1)! }{r! (n-1)! }
   \]
 \end{proof}
-
 \end{thm:enum combinacao com repeticao}
-
