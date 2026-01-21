@@ -1,94 +1,124 @@
 \section{Princíopios Fundamentais de Contagem}
 
-Nesta seção veremos duas técnicas elementares para realizar a contagem de
-elementos de um dado conjunto finitio: o princípio aditivo e o princípio
-multiplicativo, também denominado o Princípio Fundamental da Contagem.
+A grande maioria dos exercícios de contagem se baseiam no uso de dois
+princípios básicos: o aditivo e o multiplicativo. A seguir, iremos enunciar
+o problema fundamental de cada princípio e demonstrar o seu funcinamento.
 
 \subsection{Princípio Aditivo}
 
 O nosso primeiro problema de contagem será o de determinar a quantidade de
-elementos na união de uma família finita de conjuntos finitos disjuntos,
-o que nos dará nosso primeiro resultado.
+elementos na união de uma família finita de conjuntos finitos e disjuntos.
+A seguir, enunciaremos o Princípio Aditivo para resolver esse problema.
 
 \begin{thm:pa}
-  Se $\mathcal{F} = \{A_1, A_2, \dots, A_n\}$ é uma família de conjuntos finitos,
-  disjuntos dois a dois, então cardinalidade de $U$ dado como a união
-  dos elementos dessa família é dada pela soma das cardinalidades dos conjuntos.
-
+Se $\mathcal{F} = \{A_1, A_2, \dots, A_n\}$ é uma família de conjuntos finitos
+disjuntos dois a dois, então cardinalidade da união $U$ desses
+conjuntos é a soma de suas cardinalidades.
   \begin{proof}
-    A prova será por indução no tamanho de $\mathcal{F}$.
+  Considere o conjunto
+  \[
+  D = \bigcup_{A \in \mathcal{F}} (A \times \{A\}).
+  \]
+  Como os conjuntos de $\mathcal{F}$ são disjuntos dois a dois, para todo
+  elemento $a \in U$ existe um único conjunto $A \in \mathcal{F}$ tal que
+  $a \in A$. Definimos então a função
+  \[
+  f : U \to D,
+  \qquad
+  f(a) = (a,A).
+  \]
 
-    Base: Se $n = 1$, então $\mathcal{F} = \{A_1\}$ e a união terá a mesma
-    cardinalidade de $A_1$, ou seja, $|U| = |A_1|$. Por outro lado,
-    se $n = 2$, então $\mathcal{F} = \{A_1, A_2\}$ e a união terá todos os
-    elementos de ambos os conjuntos, ou seja, $|U| = |A_1| + |A_2|$.
+  A função $f$ é bem definida e bijetiva. De fato, se $f(a) = f(b)$, então
+  $(a,A) = (b,A)$, o que implica $a = b$, mostrando que $f$ é injetiva.
+  Além disso, dado $(a,A) \in D$, temos $a \in U$ e $f(a) = (a,A)$, logo
+  $f$ é sobrejetiva.
 
-    Hipótese de Indução: Suponha que o teorema seja válido para uma familia
-    $\mathcal{F}$ com $n$ conjuntos, ou seja,
-    \[
-      |U| = |A_1| + |A_2| + \dots + |A_n|
-    \]
-    Para determinar a cardinalidade de uma união $V$ de uma família $\mathcal{F'}$
-    dada por $\mathcal{F'} = \{A_1, A_2, \dots, A_n, A_{n+1}\}$
-    com $n+1$ conjuntos, podemos escrever o problema como simplesmente a soma
-    de dois conjuntos, $U$ e $A_{n+1}$, caso para o qual vale a hipótese de
-    indução. Assim, temos pelo Princíopio de Indução, que vale que a união de
-    conjuntos disjuntos terá cardinalidade igual a soma das cardinalidades
-    do conjuntos.
+  Assim, $|U| = |D|$. Como $D$ é uma união disjunta e
+  \[
+  |D| = \sum_{A \in \mathcal{F}} |A|,
+  \]
+  concluímos que
+  \[
+  |U| = \sum_{A \in \mathcal{F}} |A|.
+\]
   \end{proof}
 \end{thm:pa}
 
-O teorema acima enuncia um dos princípios mais elementares de contagem:
-o Princípio Aditivo.
-
 \subsection{Princípio Multiplicativo}
 
-Um outro problema fundamental de contagem é determinar a quantidade
-de tuplas ordenadas que podemos formar, de forma que cada posição é
-ocupada por um elemento selecionado de um conjunto finito específico.
-Para resolvê-lo, iremos enunciar o resultado denominado o Princípio
-Fundamental da Contagem
+Outro problema básico de contagem é determinar a cardinalidade
+do produto cartesiano de dois ou mais conjuntos. Esse problema
+também pode ser enunciado como o número de tuplas ordenas
+podem ser geradas de forma que cada posição seja preenchida por
+um elemento de um conjunto finito. A solução desse problema
+encontra-se no Princípio Multiplicativo, também chamado de Princípio Fundamental
+da Contagem (PFC) por ser a base das soluções de vários outros problemas
+de contagem. O PFC é enunciado e demonstrado a seguir.
 
 \begin{thm:pfc}
-  Sejam $A_1, A_2, \dots, A_n$ conjuntos finitos. O número de tuplas
-  ordenadas $(a_1, a_2, \dots, a_n)$ tais que $a_i \in A_i$ para
-  cada $i = 1, 2, \dots, n$ é dado pelo produto das cardinalidades
-  dos conjuntos, ou seja,
+  Seja $\mathcal{F} = \{A_1, \ldots, A_n\}$ uma família de dois ou mais conjuntos
+  finitos. A cardinalidade do produto cartesiano $R$ desses conjuntos
+  é igual ao produto das cardinalides deles.
   \[
-    |A_1| \times |A_2| \times \dots \times |A_n|
+    |R| = \prod_{A \in \mathcal{F}} |A|
   \]
   \begin{proof}
-    A prova será por indução no número de conjuntos $n$.
-    Base: Se $n = 1$, então só há um conjunto $A_1$ e o número de tuplas
-    ordenadas é simplesmente o número de elementos em $A_1$, ou seja,
-    $|A_1|$. Se $n = 2$, então temos dois conjuntos $A_1$ e $A_2$. e
-    sempre que fixarmos um elemento $a_1 \in A_1$ na primeira posição, há
-    $|A_2|$ escolhas para a segunda. Como isso vale para toda escolha
-    da primeira posição, então o número de pares ordenados é dado por
+    A prova será por indução no número de conjuntos $n$ em $\mathcal{F}$.
+
+    Base: Se $n = 2$, então suponha que $\mathcal{F}$ seja formada
+    por dois conjuntos $A_1 = A$ e $A_2 = B$. Admita também
+    uma partição de $R$ dada por $\mathcal{P}$ tal que
     \[
-      \sum_{a_1 \in A_1} |A_2| = |A_1| \times |A_2|
+      \mathcal{P} = \{P_1, \ldots, P_m\}
     \]
-    Hipótese de Indução: Suponha que o teorema seja válido para $n$ conjuntos,
-    ou seja, o número de tuplas ordenadas formadas por elementos dos conjuntos
-    $A_1, A_2, \dots, A_n$ é dado por
+    em que, para $k \in [m]$, tem-se
     \[
-      |A_1| \times |A_2| \times \dots \times |A_n|
+      P_k = \{(a_k, b) \mid b \in B\}
     \]
-    Para determinar o número de tuplas ordenadas formadas por elementos dos
-    conjuntos $A_1, A_2, \dots, A_n, A_{n+1}$, podemos considerar que cada
-    tupla ordenada pode ser vista como uma tupla ordenada dos primeiros
-    $n$ conjuntos seguida de um elemento do conjunto $A_{n+1}$. Pelo
-    Princípio de Indução, o número de tuplas ordenadas dos primeiros
-    $n$ conjuntos é dado pela hipótese de indução. Multiplicando esse valor
-    pelo número de escolhas possíveis para o elemento do conjunto $A_{n+1}$,
-    obtemos, pois,
+    e $a_k$ é o k-ésimo elemento numa ordenação para $A$. Considere agora
+    uma família de funções indexadas por $[m]$ tal que
+    \begin{gather*}
+      f_k: B \to P_k \\
+      f_k(b) = (a_k, b)
+    \end{gather*}
+    É verdade que, para todo $k \in [m]$, $f_k$ está bem definida e é
+    bijetiva. Primeiramente, a sobrejetividade é garantida, pois
+    se $(a_k, b) \in P_k$, então $\exists b \in B$ tal que $f_k(b) = (a_k, b)$.
+    Também é verdade que $f_k$ é injetiva, uma vez que se $f_k(b_i) = f_k(b_j)$,
+    para $i, j \in [|B|]$, então $(a_k, b_i) = (a_k, b_j)$, implicando
+    que $b_i = b_j$. Isso mostra que $|B| = |P_k|$.
+
+    Por outro lado, é fácil perceber que, se $g$ é a função definida por
+    \begin{gather*}
+      g: A \to \mathcal{P} \\
+      g(a_k) = P_k
+    \end{gather*}
+    então $g$ também é uma bijeção e $|A| = |\mathcal{P}| = m$. Além disso,
+    pelo fato de $R$ ser a união da família de conjuntos disjuntos
+    $\mathcal{P}$, temos que a cardinalidade de $R$ é igual a
     \[
-      |A_1| \times |A_2| \times \dots \times |A_n|
+      \sum_{P \in \mathcal{P}} |P|
     \]
-    tuplas possíveis.
+    pelo Principio Aditivo, donde segue que
+    \[
+      |R| = \sum_{P \in \mathcal{P}} |P| = m \cdot |B| = |A| \cdot |B|
+    \]
+    o que prova o teorema para o caso base.
+
+    Hipótese de Indução: Suponha que o teorema vale para uma família
+    de $n$ conjuntos. É verdade que, se $\mathcal{F} = \{A_1, \ldots, A_{n+1}\}$
+    e que
+    \[
+      R = A_1 \times \ldots \times A_{n+1}
+    \]
+    então o teorema vale para os primeiros $n$ conjuntos de $\mathcal{F}$ pela
+    Hipótese de Indução. Por conseguinte, se $R' = A_1 \times \ldots \times A_n$,
+    então $R = R' \times A_{n+1}$, que consiste no caso base de dois
+    conjuntos, para qual o teorema vale. Temos então
+    \[
+      |R| = |R'| \cdot |A_{n+1}| = \prod_{A \in R} |A|
+    \]
+    provando o teorema.
   \end{proof}
 \end{thm:pfc}
-
-O Princípio Fundamental da Contagem é especial, pois ele serve como base
-para resolver muitos problemas de enumeração que serão vistos mais adiante.
 
