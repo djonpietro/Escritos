@@ -1,0 +1,477 @@
+\section{Teoria de Conjuntos}
+
+Nesta seção, abordaremos alguns conceitos principais da Teoria de Conjuntos,
+mais precisamente da sua versão axiomática dada pela teoria de Zermelo-Fraenkel
+acrescido do Axioma da Escolha (ZFC). Não nos prenderemos muitos aos detalhes
+e demonstrações formais dos resultados da teoria, pois nossa intenção é
+apresentar as ideias que estarão permeando os capítulos futuros do texto.
+
+Passaremos rapidamente pelos Axiomas de ZFC, apresentando-os conforme a
+necessidade de abordar uma forma especial de definir conjuntos, operações e
+outros objetos de interesse. Em seguida, apresentamos os conceitos de relação
+e função. Adiante, discutiremos o tópico dos números ordinais e cardinais,
+que formalizam os conceitos fundamentais de ordenação e quantidade tratados
+em Matemática Discreta. Por fim, daremos uma definição satisfatória para um
+dos principais objetos manipulados neste material: os conjuntos discretos.
+
+\subsection{Definindo Conjuntos}
+
+A ZFC é uma teoria de primeira ordem, o que significa que suas fórmulas
+\footnote{Fórmulas são qualquer sequência de símbolos que possuem um significado
+	em uma teoria} lógicas quantificam e afirmam a respeito de objetos individuais,
+chamados de conjuntos. Conjuntos é uma ideia primitiva que representa uma
+coleção de objetos que podem também ser partes de outras coleções.
+
+Entre conjuntos, persiste uma relação binária fundamental chamada de pertinência,
+denotada por $\in$. Desse modo, se $a \in A$, então dizemos que $a$ é elemento
+-- ou membro -- de $A$, ou que $a$ pertence a $A$. A igualdade de conjuntos é
+definida pelo \textbf{Axioma da Extensão}, que determina que dois conjuntos são iguais
+quando possuem os mesmos elementos, não importando a ordem ou as multiplicidades
+deles.
+\[
+	A = B \Longleftrightarrow \forall x\ (x \in A \leftrightarrow x \in B)
+\]
+Por essa razão, diz-se que a identidade de um conjunto é definida inteiramente
+por seus elementos. Em especial, o conjunto $x$ que satisfaz a fórmula
+\[
+	\forall y,\ ( y \notin x )
+\]
+é chamado de conjunto vazio, sendo denotado por $\varnothing$. Do Axioma da
+Extensão, segue que esse conjunto é único.
+
+A partir da relação fundamental de pertinência, podemos definir outra chamada
+de ``inclusão'', denotada por $\subset$. Dizemos que $A$ inclui um conjunto $B$
+caso todo elemento de $B$ seja um elemento de $A$. Da mesma forma, podemos
+dizer que $B$ é incluído por $A$, o que $B$ é subconjunto de $A$.
+\[
+	B \subset A  \Longleftrightarrow \forall x\ (x \in B \rightarrow x \in A)
+\]
+Se a relação vale nas duas direções, então $A$ e $B$ são iguais pelo Axioma da
+Extensão. A definição de inclusão implica também que o vazio e o próprio $A$
+são subconjuntos de $A$, de modo que subconjuntos diferentes desses últimos
+são chamados de subconjuntos próprios.
+
+O \textbf{Axioma da Separação} nos oferece uma forma conveniente de definir subconjuntos
+de um conjunto por meio de uma propriedade. Se $A$ é um conjunto, então podemos
+definir um subconjunto $S \subseteq A$  cujos elementos satisfazem uma propriedade
+$P(x)$. Denotaremos essa maneira de definir conjuntos como
+\[
+	S = \{x \in A \mid P(x)\}
+\]
+Perceba que, na verdade, esse axioma trata-se de um esquema, pois ele é
+enunciado para cada uma das infinitas propriedades $P(x)$\footnote{Como
+	mencionado, a ZFC é uma teoria de primeira ordem, não sendo capaz de
+	enunciar fórmulas que quantifiquem outras fórmulas. Com isso,
+  cada propriedade $P(x)$ necessita do seu próprio axioma.}
+
+Para facilitar representação de conjuntos, muitas vezes iremos construir o
+conjunto $S$ omitindo o superconjunto $A$. Logo, dada a propriedade $P(x)$,
+diremos simplesmente que $S$ será o conjunto de todos os indivíduos que
+satisfazem ela.
+\[
+  S = \{x \mid P(x)\}
+\]
+Esse modo de definição é chamado de ``por abstração''.
+
+\subsection{Operações com Conjuntos}
+
+Entre conjuntos, podemos definir algumas operações básicas usando os axiomas
+anteriores. Com o Axioma da Separação, definimos a interseção $I$ de conjuntos
+$A$ e $B$, que possui membros em comum desses dois últimos
+\[
+	I = \{x \in A \mid x \in A \land x \in B\}
+\]
+Representaremos a interseção dos membros de um conjunto $\mathcal{F}$ como
+\[
+	\bigcap_{A \in \mathcal{F}} A
+\]
+Se a interseção de $A$ e $B$ for vazia, então dizemos que são disjuntos. Quando
+os elementos de um conjunto $\mathcal{F}$ forem todos disjuntos entre si, diremos
+que $\mathcal{F}$ é disjunto.
+
+Com o Axioma da Separação também definimos a operação de diferença entre $A$
+e $B$, que resulta no conjunto de todos os membros do primeiro que não são
+membros do segundo.
+\[
+	D = A \setminus B \Longleftrightarrow D = \{x \in A \mid x \notin B\}
+\]
+
+Por fim, a operação de união entre $A$ e $B$ resulta no conjunto que possui
+tantos os membros de $A$ quanto de $B$ como elementos. No entanto,
+diferente das duas operações anteriores, o resultado não é subconjunto de
+um dos operandos, o que impede a utilização do Axioma da Separação e torna
+necessário a introdução de um novo axioma que garanta a existência da união.
+O \textbf{Axioma da União} enuncia que se $\mathcal{F}$ é um conjunto, então existe um
+conjunto $U$ que reúne os membros dos membros de $\mathcal{F}$. Representaremos
+esse conjunto como
+\[
+	U = \bigcup_{A \in \mathcal{F}} A
+\]
+Em particular, se $\mathcal{F} = {A, B}$, é comum escrever simplesmente que
+$U = A \cup B$.
+\[
+	U = A \cup B \Longleftrightarrow \forall x,\ (x \in U \leftrightarrow x \in A \lor x \in B)
+\]
+
+% Caso seja necessário, aqui pode serintroduzida a diferença simétrica
+%-------
+
+\subsection{Conjuntos das Partes e Partições}
+
+O \textbf{Axioma da Potência} garante, para todo conjunto $A$, a existência
+do conjunto das partes de $A$, denotado por $\parts{A}$, que reúne todos os
+subconjuntos de $A$ como membros.
+\[
+	\forall A \exists \mathcal{P} \forall S,\ (S \subset A \rightarrow S \in \mathcal{P})
+\]
+Usaremos a notação $\partsnn{A}$ para denotar $\parts{A} \setminus \varnothing$.
+
+No conjunto das partes, há subconjuntos especiais que são chamados de partições.
+Se $P \subset \partsnn{A}$ é um conjunto que satisfaz
+\[
+	\forall x, y \in P ( x \cap y = \varnothing ) \quad \text{e} \quad A = \bigcup_{x \in P} x
+\]
+chamamos $P$ de uma partição para o conjunto $A$.
+
+\subsection{Produto Cartesiano}
+
+O \textbf{Axioma do Par} enuncia que, dados conjuntos $A$ e $B$, podemos construir um
+novo conjunto $C = \{A, B\}$. Esse axioma, em conjunto dos anteriores, torna
+a definição de Kuratowski para pares ordenados -- uma coleção de dois objetos em
+que a ordem importa -- satisfatória:
+\[
+  (a, b) = \{a, \{a, b\}\},
+\]
+pois dela pode ser demonstrado que
+\[
+	(a, b) = (c, d) \Longleftrightarrow a = c \land b = d
+\]
+
+Exposto isso, definiremos a operação de produto cartesiano de dois conjuntos $A$
+e $B$, denotada por $A \times B$, como o conjunto de todos os
+pares ordenados $(a, b)$ tal que que $a \in A$ e $b \in B$. É possível mostrar
+que esse conjunto existe agrumentando que
+\[
+  A \times B \subset \parts{\parts{A \cup B}}
+\]
+
+\subsection{Outros Axiomas de ZFC}
+
+Dando sequência, aparesentaremos os demais axiomas da ZFC. O Axioma da
+Regularidade afirma que todo conjunto não vazio é disjunto com pelo menos
+um de seus elementos. Esse axioma impede a construção de uma série
+conjuntos que introduziriam paradoxos na Teoria de Conjuntos, a exemplos
+de
+\[
+  A = \{A\} \quad A = \{A, \varnothing\}
+\]
+ou tembém situações como $A \in B$ e $B \in A$.
+
+Chamamos de sucessor de um conjunto $A$ aquele definido por $S(A) = A \cup \{A\}$.
+Com isso, definiremos o conjunto $I$ que satisfaz
+\[
+  \varnothing \in I \land \forall A (A \in I \rightarrow S(A) \in I ).
+\]
+O conjunto $I$ é chamado de indutivo, e a existência de pelo menos um conjunto
+indutivo é enunciada pelo Axioma do Infinito. A motivação para ele é garantir
+não só a existência de um conjunto infinito, mas também permitir a definição dos
+números naturais. Cada natural poderia, individualmente, ser definido como
+\begin{gather*}
+	0 = \varnothing \\
+	1 = S(0)   = \{\varnothing\} \\
+	2 = S(S(0)) = \{\varnothing, \{\varnothing\}\} \\
+	\vdots
+\end{gather*}
+No entanto, ainda não teríamos garantido a existência de um conjunto que
+contenha todos os naturais definidos daquela maneira. Pela definição de
+conjunto indutivos, o vazio e seus sucessores precisam pertencer a qualquer
+conjunto deste tipo; em outras palavras, todos os conjuntos indutivos incluem
+os números naturais. Dessa forma, o conjunto dos naturais é definido como a
+interseção de todos os conjuntos indutivos.
+\[
+  \mathbb{N} = \{x \in I \mid \forall J,\ (J \text{ é indutivo} \rightarrow x \in J \}
+\]
+
+O próximo é o Axioma da Substituição, o qual afirma que, em qualquer conjunto
+$A$, se para todo elemento $x \in A$ existe um único $y$, denominado imagem,
+que satisfaça uma relação $\phi$, então existe um conjunto $B$ que reúne
+todos os $y$ para os quais existe $x \in A$ que satisfaça $\phi$.
+Em resumo, o axioma garante a existência de um conjunto que reúne as
+imagens dos elementos de $A$ sobre a relação $\phi$. Esse axioma está
+intimamente ligado ao conceito de funções e o aplicaremos mais adiante.
+
+Por fim, temos o Axioma da Escolha. Ele afirma que, dado um conjunto $\mathcal{F}$
+com membros não vazios, existe um conjunto $C$ tal que, para todo $A \in \mathcal{F}$,
+existe um único $(A,a) \in C$ com $a \in A$. O conjunto $C$ é chamado de
+função de escolha, que toma um conjunto $A \in \mathcal{F}$ e retorna um
+elemento $a \in A$.
+
+
+\subsection{Relações}
+
+Chamaremos $R$ uma relação entre $A$ e $B$ se $R$ for um conjunto em $\parts{A \times B}$, e
+se $(a, b) \in R$, então denotaremos esse fato por $aRb$. O conjunto $\dm{R} \subset A$,
+chamado de domínio, é o conjunto de todos os elementos $a \in A$ tal que existe
+um $b \in B$ e $(a, b) \in R$. Já o conjunto $B$ é chamado de contradomínio da relação,
+e o seu subconjunto $\mathrm{Im}$ que contém todos os $b$ para os quais há
+um $a \in A$ e $(a, b) \in R$ é chamado de imagem da relação.
+Geralmente, definimos uma relação por meio de uma dada fórmula $\varphi(a, b)$
+envolvendo símbolos para elementos daqueles conjuntos, possibilitando definir
+a relação tal como
+\[
+  R = \{(a, b) \in A \times B \mid a \in A \land b \in B \land \varphi(a, b)\}
+\]
+A fórmula $\varphi(a, b)$ é chamada de lei de correspondência.
+
+
+O conceito de relações também podem ser extendido para além das binárias, que
+ocorrem entre dois conjuntos. Intuitivamente, o conceito de aridade duma relação
+está ligado a quantidade de conjuntos envolvidos nela, ou também com o tamanho
+das ordenações de elementos que pertencem a ela. Exemplo, uma relação ternária $R$
+entre conjuntos $A$, $B$ e $C$ terá como domínio $A \times B$ e contradomíno $C$,
+logo
+\[
+  R \subset (A \times B) \times C
+\]
+Um exemplo de elemento em $R$ seria $((a, b), c)$, mas iremos facilitar a notação
+impondo que
+\[
+  ((a, b), c) = (a, b, c)
+\]
+que é uma tripla ordenada. Em geral, uma relação de aridade $n$ será um subconjunto
+no produto cartesiano de $n$ conjuntos e cujos elementos serão tuplas ordenadas
+(ou tuplas somente).\footnote{Fundamentalmente, nossas definições permitem apenas
+  construírmos relações binárias, já que o produto cartesiano é uma operação
+  binária por definição. Todavia, isso trata-se apenas de um detalhe de formalização,
+  e, neste texto e em outros, adotaremos as tuplas para denotar elementos que
+  estão relacionados entre si numa relação que envolve mais de dois conjuntos.}
+
+
+Há algumas relações que valem a pena serem destacadas para menções futuras.
+A primeira delas será a relação de ordem estrita linear, que, em essência,
+define uma maneira de comparar elementos num conjunto. Formalmente,
+uma relação $R$ é uma ordem estrita linear para o conjunto $A$ se satisfaz três
+propriedades\footnote{O conjunto $A$ é também o contradomíno da relação}:
+\begin{enumerate}
+	\item Assimetria - a relação não vale em duas direções.
+	      \[
+		      \forall x, y \in A ( x R y \rightarrow y \cancel{R} x )
+	      \]
+	\item Transitividade - numa cadeia de elementos relacionados, a relação
+	  vale para os elementos nas pontas da cadeia.
+	      \[
+		      \forall x, y, z \in A ( x R y \land y R z \rightarrow x R z)
+	      \]
+	\item Totalidade - todos os elementos estão relacionados entre si em ao
+	  menos uma direção.
+	      \[
+		      \forall x, y \in A ( x \neq y \rightarrow x R y \lor y R x)
+	      \]
+\end{enumerate}
+A relação $R$ será uma boa ordem para $A$ se for uma ordem estrita linear, e todo
+subconjunto $B \subset A$ possui um menor elemento $x$, isto é,
+\[
+	\forall y \in B ( x R y)
+\]
+O conjunto $A$ será bem ordenado se admite alguma boa ordem.
+
+A segunda relação a ser mencionada é a de equivalência, que define um tipo
+especial de partição. Uma relação $R$ é uma relação de equivalência num
+conjunto $A$ se satisfaz:
+\begin{enumerate}
+	\item Transitividade - já apresentada na relação de ordem.
+
+	\item Reflexividade - todo elemento está relacionado consigo mesmo.
+	      \[
+		      \forall x \in A ( x R x )
+	      \]
+	\item Simestria - a relação é bidirecional.
+	      \[
+		      \forall x, y \in A ( x R y \rightarrow y R x )
+	      \]
+\end{enumerate}
+Pelo Axioma da Separação, podemos formar um conjunto $[x]_R \subset A$, com $x \in A$
+e $\varphi(y) = x R y$ tal que
+\[
+	[x]_R = \{y \in A \mid \varphi(y) \}
+\]
+Considere então os conjuntos $[x]_R$ e $[z]_R$. Se tivermos que $x R z$,
+segue que $[x]_R = [z]_R$, no contrário, $[x]_R \cap [z]_R = \varnothing$. O
+conjunto $[a]_R$ é chamado de classe de equivalência de $A$ sobre $R$, e
+usando os axiomas do Par e da União, podemos construir o conjunto das
+classes de equivalência de $A$ sobre $R$, denotado por $A / R$, que é uma
+partição de $A$.
+
+\subsection{Funções}
+
+Um tipo especial de relação são as famosas funções. Dados conjuntos
+$A$ e $B$, $f$ é chamada de função de $A$ em $B$ se:
+\begin{enumerate}
+  \item A = \dm{f}
+
+  \item Se $(a, b) \in f$ e $(a, c) \in f$, então $b = c$, para todo $a$,
+    $b$ e $c$.
+\end{enumerate}
+Em resumo, uma função relaciona todo elemento do domínio $A$ a um único
+elemento do contradomínio $B$. Graças ao Axioma da Substituição, nem sempre
+é necessário explicitar o conjunto $B$, pois se temos o domínio $A$, uma fórmula
+$\varphi(x, y)$ e sabemos que, para todo $x \in A$, existe um único $y$, então
+já vimos que o axioma garantirá a existência de um conjunto imagem $\mathrm{Im}$ para a relação
+definida por $\varphi(x, y)$. Desse modo, a função $f$ poderia ser definida com
+contradomínio no próprio $\mathrm{Im}$ ou qualquer conjunto que o contenha.
+
+A notação usual para representar uma função $f$ com domínio $A$ no contradomínio
+$B$ é
+\begin{gather*}
+	f: A \to B \\
+	x \mapsto f(x)
+\end{gather*}
+em que $f(x)$ é o elemento $y \in B$ que é imagem de $x \in A$. Denotaremos
+$\im{f}$ como o conjunto imagem da função $f$.
+
+Uma função pode ser classificada de três maneiras
+\begin{itemize}
+	\item Injetiva - se um elemento no contradomínio é imagem de outro
+	  no domínio, então ele é imagem apenas desse último.
+	      \[
+		      \forall y \in B,\ (y \in \im{f} \rightarrow \exists! x \in A,\ (f(x) = y))
+	      \]
+	\item Sobrejetiva - contradomínio e o cojunto imagem são iguais
+	      \[
+		      B = \im{f}
+	      \]
+	\item Bijetiva - a função é injetiva e sobrejetiva, construindo uma
+	      correspondência de 1 para 1 entre os elementos no domínio e contradomínio
+	      da função.
+\end{itemize}
+
+\subsection{Números Ordinais e Cardinais}
+
+Conjuntos transitivos são aqueles que possuem todos os elementos de
+seus elementos.
+\[
+	\forall x \forall y (x \in y \land y \in \alpha \rightarrow x \in \alpha)
+\]
+Por sua vez, um ordinal $\alpha$ é um conjuntos que satisfaz
+\begin{enumerate}
+	\item $\alpha$ e seus elementos são conjuntos transitivos
+
+	\item A relação $\in$ é uma boa ordem para $\alpha$
+\end{enumerate}
+
+Da definição segue que\footnote{As afirmações listadas não são óbvias, mas
+	as suas demonstrações em termos formais fugiria do escopo proposto para o texto}:
+\begin{enumerate}
+	\item[I] - $\varnothing$ é um ordinal por vacuidade, e os elementos de um
+	      ordinal são ordinais.
+
+	\item[II] - Todo ordinal é o conjunto de seus predecessores.
+
+	\item[III] - O suscessor de um ordinal é um ordinal.
+\end{enumerate}
+
+Em especial, os elementos do conjunto dos naturais $\mathbb{N}$ são ordinais, ou
+seja, os números 1, 2, 3, \dots, são ordinais (finitos).
+Além disso, o ordinal indentificado pelo próprio $\mathbb{N}$ é denotado por
+$\omega$, sendo o primeiro ordinal transfinito.
+
+Apresentados os ordinais, diremos que duas boas ordens $(A, R)$ e $(B, S)$
+são isomorfas se existe uma bijeção $f: A \to B$ tal que
+\[
+	\forall x, y \in A ( x R y \leftrightarrow f(x) S f(y) )
+\]
+Neste ponto é que a principal propriedade dos ordinais surge: todo conjunto
+bem ordenado é isomorfo a um, e somente um, ordinal. Isso implica que, se
+$(A, R)$ é uma boa ordenação isomorfa a $(\alpha, \in)$, onde $\alpha$ é um
+ordinal, então podemos rotular cada elemento de $A$ por um único elemento de
+$\alpha$. Em outras palavras, os elementos de $A$ podem ser indexados por
+ordinais, de acordo com sua posição na ordem. Ademais, como $\alpha$ é único
+para $(A, R)$, então ele é uma representação canônica da estrutura daquela boa
+ordem.
+
+Por fim, introduziremos a ideia dos cardinais, que, diferente dos ordinais,
+não indetifica a estrutura do conjunto, mas o seu tamanho.
+
+Antes de tudo, diremos que dois conjuntos são equipotentes se existe uma bijeção
+entre eles. Do Axioma da Escolha, segue o interessante Teorema da
+Boa Ordenação, o qual afirma que todo conjunto pode ser bem ordenado. Portanto,
+pelo que vimos dos ordinais, para todo conjunto $A$, existe um ordinal $\alpha$
+equipotente a ele. Chamaremos de cardinal -- ou cardinalidade -- de um conjunto
+$A$, denotado por $|A|$, o menor ordinal equipotente a $A$.
+
+Um conjunto será finito se o menor ordinal equipotente a ele for finito, isto é,
+um elemento de $\omega$. Dessa forma, a cardinalidade de um conjunto finito
+é igual a algum número natural. O cardinal $\aleph_0$ é representado pelo ordinal
+$\omega$, sendo, pois, a cardinalidade dos naturais. Um conjunto $A$ é infinito
+se possui cardinalidade maior ou igual a $\aleph_0$\footnote{Existe outras
+	definições alternativas para um conjunto
+	infinito: (a) se existe uma injeção $f: A \to A$ não sobrejetiva, ou (b) se
+	existe uma injeção $f: \mathbb{N} \to A$.}.
+
+\subsection{Estruturas Discretas}
+
+Um conjunto é contável, ou enumerável, se sua cardinalidade é menor ou igual aos
+dos números naturais. Isso significa que é possível listar todos os seus
+elementos e indexá-los utilizando somente os naturais. Uma condição necessária
+e suficiente para que dois conjuntos tenham a mesma cardinalidade é que exista
+alguma bijeção entre eles. Dado isso, ser enumerável equivale a ter uma bijeção
+com algum subconjunto dos naturais\footnote{Georg Cantor provou que os naturais,
+  os inteiros e os racionais possuem a mesma cardinalidade, logo são todos
+  enumeráveis. No caso de $\mathbb{R}$, ele mostrou que é impossível criar uma lista
+  que contenha todos os números reais, provando que a cardinalidade desse último
+é maior do que de $\mathbb{N}$.}.
+
+A ideia de estruturas discretas é intuitivamente simples, porém, formalmente,
+sua natureza é difícil de especificar. Intuitivamente, estruturas discretas são
+conjuntos finitos ou enumeráveis tais que todos os elementos distintos estão bem
+separados. A forma padrão de formalizar ``separação'' de elementos em um conjunto
+é por meio de topologias, que não iremos entrar em muitos detalhes por fugir
+do escopo do que a matemática discreta, especialmente a combinatória, necessitam.
+
+A propriedade de discretude não é dada como uma característica de um conjunto,
+mas como parte de uma estrutura que, neste caso, consiga isolar os elementos
+um dos outros.
+% dá para falar um pouco mais sobre elas aqui, mas fica para depois.
+
+% -------------- Futuro Apêndice de Formalização de Discretude
+Uma topologia $\tau \subset \parts{X}$ é uma coleção de partes de um conjunto $X$ cujos
+elementos, denominados abertos, satisfazem:
+\begin{enumerate}
+  \item $\varnothing$ e $X$ são membros de $\tau$.
+  \item A interseção de um número finito de abertos é um aberto
+  \item A união de um número potencialmente infinito de abertos é um aberto.
+\end{enumerate}
+O par $(X, \tau)$ é chamado de espaço topológico.
+A ideia por detrás dos abertos é a de vizinhança de um ponto, composto por
+elementos que estão arbitrariamente próximos desse último. Uma vizinhança $V$ de
+um ponto $x \in X$ é um subconjunto de $X$ tal que exista um aberto $A$ com $ x \in A \subset V$.
+
+Para representar a ideia de separção de um ponto, usamos as suas vizinhanças,
+como se essas fossem as identidades do ponto na topologia especificada, como
+na famosa frase ``digamas com quem tu andas que direi que tu és''. Dessa forma,
+um ponto isolado seria aquele que não necessita de ninguém além dele mesmo para
+ser identificado. Seja $(X, \tau)$ um espaço topológico, dizemos que $x \in X$
+é um ponto isolado no subconjunto $S \subset X$, com $x \in S$, se há
+vizinhança $V$ para $x$ tal que
+\[
+  V \cap S = \{x\}
+\]
+Isso equivale a dizer que, no subespaço topológico $(S, \tau_S)$, tal que
+\[
+  \tau_S = \{ U \cap S \mid U \in \tau\}
+\]
+temos que $\{x\}$ é um aberto de $\tau_S$. Se for satisfeito que
+\[
+  \tau = \parts{X}
+\]
+então o espaço topológico $(X, \tau)$ é discreto, pois
+\[
+  \forall x \in X, \{x\} \in \tau
+\]
+e todo ponto é uma vizinhança de si mesmo, ou que todo ponto é isolado no próprio
+$X$.
+
+
+
+
+
