@@ -1,4 +1,4 @@
-\section{Princíopios Fundamentais de Contagem}
+\section{Princípios Fundamentais de Contagem}
 
 A grande maioria dos exercícios de contagem se baseiam no uso de dois
 princípios básicos: o aditivo e o multiplicativo. A seguir, iremos enunciar
@@ -57,29 +57,32 @@ de contagem. O PFC é enunciado e demonstrado a seguir.
 
 \begin{thm:pfc}
   Seja $\mathcal{F} = \{A_1, \ldots, A_n\}$ uma família de dois ou mais conjuntos
-  finitos. A cardinalidade do produto cartesiano $R$ desses conjuntos
+  finitos. A cardinalidade do produto cartesiano desses conjuntos
   é igual ao produto das cardinalides deles.
   \[
-    |R| = \prod_{A \in \mathcal{F}} |A|
+    |A_1 \times A_2 \times \ldots \times A_n| = \prod_{A \in \mathcal{F}} |A|
   \]
   \begin{proof}
     A prova será por indução no número de conjuntos $n$ em $\mathcal{F}$.
 
     Base: Se $n = 2$, então suponha que $\mathcal{F}$ seja formada
-    por dois conjuntos $A_1 = A$ e $A_2 = B$. Admita também
-    uma partição de $R$ dada por $\mathcal{P}$ tal que
+    pelos conjuntos $A$ e $B$, tal que
     \[
-      \mathcal{P} = \{P_1, \ldots, P_m\}
+      A = [a_1, \ldots, a_m].
+    \]
+    Admita também uma partição de $R = A \times B$ dada por $\Psi \subset \parts{R}$
+    tal que
+    \[
+      \Psi = \{P_1, \ldots, P_m\},
     \]
     em que, para $k \in [m]$, tem-se
     \[
-      P_k = \{(a_k, b) \mid b \in B\}
+      P_k = \{(a, b) \in A \times B \mid a = a_k\}
     \]
-    e $a_k$ é o k-ésimo elemento numa ordenação para $A$. Considere agora
-    uma família de funções indexadas por $[m]$ tal que
+    Considere agora uma família de funções indexadas por $[m]$ tal que
     \begin{gather*}
       f_k: B \to P_k \\
-      f_k(b) = (a_k, b)
+      b \mapsto (a_k, b)
     \end{gather*}
     É verdade que, para todo $k \in [m]$, $f_k$ está bem definida e é
     bijetiva. Primeiramente, a sobrejetividade é garantida, pois
@@ -91,13 +94,13 @@ de contagem. O PFC é enunciado e demonstrado a seguir.
     Por outro lado, é fácil perceber que, se $g$ é a função definida por
     \begin{gather*}
       g: A \to \mathcal{P} \\
-      g(a_k) = P_k
+      a_k \mapsto P_k
     \end{gather*}
     então $g$ também é uma bijeção e $|A| = |\mathcal{P}| = m$. Além disso,
     pelo fato de $R$ ser a união da família de conjuntos disjuntos
-    $\mathcal{P}$, temos que a cardinalidade de $R$ é igual a
+    $\Psi$, temos que a cardinalidade de $R$ é igual a
     \[
-      \sum_{P \in \mathcal{P}} |P|
+      \sum_{P \in \Psi} |P|
     \]
     pelo Principio Aditivo, donde segue que
     \[
@@ -114,7 +117,7 @@ de contagem. O PFC é enunciado e demonstrado a seguir.
     então o teorema vale para os primeiros $n$ conjuntos de $\mathcal{F}$ pela
     Hipótese de Indução. Por conseguinte, se $R' = A_1 \times \ldots \times A_n$,
     então $R = R' \times A_{n+1}$, que consiste no caso base de dois
-    conjuntos, para qual o teorema vale. Temos então
+    conjuntos, para qual o princípio de indução vale. Temos então
     \[
       |R| = |R'| \cdot |A_{n+1}| = \prod_{A \in R} |A|
     \]
@@ -122,3 +125,91 @@ de contagem. O PFC é enunciado e demonstrado a seguir.
   \end{proof}
 \end{thm:pfc}
 
+
+\begin{cor:numero de escolhas}
+Seja $\mathcal{F} = \{A_1, \ldots, A_n\}$ uma família de conjuntos finitos não
+vazios. O número de funções de escolhas para $\mathcal{F}$ é igual a
+\[
+  \prod_{A \in \mathcal{F}} |A|
+\]
+\begin{proof}
+  Toda função de escolha $f$ equivale a uma única tupla no produto
+  cartesiano dos conjuntos de $\mathcal{F}$, o qual será equipotente ao
+  conjunto das funções de escolha.
+\end{proof}
+\end{cor:numero de escolhas}
+Esse resultado irá facilitar bastante nosso trabalho, pois ele pode ser
+interpretado como: se uma escolha final é obtida por escolhas menores tomadas
+individualmente de universos finitos, então o total de escolhas é igual
+ao produto das quantidades de escolhas individuais em cada universo.
+Em demonstrações de resultados futuros, usaremos essa abordagem para aplicar
+o PFC.
+
+Outro corolário interessante do PFC é:
+\begin{cor:numero de funcoes}
+\label{cor:numero de funcoes}
+Sejam $A$ e $B$ conjuntos finitos tal que
+\[
+  n = |A| \quad \quad m = |B|.
+\]
+O número de funções de $f: A \to B$ é igual a
+\[
+  m^n.
+\]
+\begin{proof}
+  Contar quantas funções de $A$ para $B$ existem equivale a contar
+  de quantas formas podemos escolher um elemento de $B$ para ser
+  imagem $A$. Dado que $A$ tem $n$ elementos, cada um para o qual
+  há $m$ escolhas, então o número total de funções é dado por:
+  \[
+    \underbrace{m \cdot \ldots \cdot m}_{n} = m^n
+  \]
+\end{proof}
+\end{cor:numero de funcoes}
+
+\subsection{Arranjos}
+
+Arranjar os elementos de um conjunto finito significa criar sequência
+de elementos desse conjunto. A repetição de cada elemento e a ordem da
+sequência distinguem um arranjo um do outro. Com isso, os arranjos são
+equivalentes a sequências
+
+\begin{def:arranjo}
+Seja $A$ um conjunto de $n$ elementos. Diremos que uma sequência $S$ é
+um arranjo de $r$ elementos $A$ se
+\[
+  S: [r] \to A
+\]
+Quando $S$ for injetora, o arranjo é dito sem repetição.
+\end{def:arranjo}
+Do corolário \ref{cor:numero de funcoes} segue que o número de arranjos
+de tamanho $r$ com de um conjunto com $n$ elementos é $n^r$. Para o caso sem
+repetição, precisamos contar quantas funções injetivas existem entre dois conjuntos.
+
+\begin{cor:numero de arranjos}
+Se $A$ e $B$ são conjuntos finitos com cardinalidades $n$ e $m$ respectivamente,
+então existem
+\[
+  \frac{n!}{(n - m)!}
+\]
+funções injetivas entre $A$ e $B$.
+
+\begin{proof}
+  A diferença para uma função qualquer e que, a cada escolha feita para imagem
+  de um elemento de $A$, o universo de escolhas é reduzido em 1. Com efeito,
+  o total de injeções será igual a
+  \begin{gather*}
+   n \cdot (n -1) \cdot \ldots \cdot (n - m + 1) \\
+   n \cdot (n -1) \cdot \ldots \cdot (n - m + 1) \cdot \frac{(n-m)!}{(n-m)!}
+  \end{gather*}
+  que equivale a
+  \[
+    \frac{n!}{(n-m)!}
+  \]
+\end{proof}
+\end{cor:numero de arranjos}
+Desta forma, se o arranjo é de $r$ elementos, então a função de contagem de
+arranjos dos elementos de um conjunto finito de $n$ elementos é
+\[
+  \Arr{n, r} = \frac{n!}{(n-r)!}
+\]

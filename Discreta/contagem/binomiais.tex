@@ -1,13 +1,118 @@
 \section{Número Binomiais}
 
+Os números binomiais são objetos combinatórios simples e que representam
+o conceito de seleção de elementos de um conjunto finito. A seguir,
+apresentaremos sua definição formal, identidades básicas e algumas
+propriedades interessantes.
+
 \subsection{Definição e Interpretação}
 
-Os números binomiais, também chamados de coeficientes binomiais,
-são objetos matemáticos compostos de um numerador $n$ e uma classe $k$,
-sendo denotados na forma
+\begin{def:binomial}
+Sejam $n$ e $k$ inteiros não negativos. Um número binomial, ou coeficiente
+binomial, de numerador $n$ e classe $k$, denotado por
 \[
-  \binom{n}{k}
+\binom{n}{k}
 \]
-Eles são, geralmente, apresentados como sendo equivalente ao número
-de forma de selecionar $k$ objetos de um conjunto de $n$ elementos
+é igual ao número de subconjuntos de $k$ elementos presentes em $[n]$.
+\end{def:binomial}
+
+Conjuntos não admitem repetição de elementos, o que torna razoável
+a interpretação combinatória de que um subconjunto $S$ dum conjunto $A$ é uma
+seleção de membros desse último. Se chamarmos os subconjuntos de $A$, com
+$|A| = n$, que possuem exatamente $k \leq n$ elementos de subconjuntos de classe
+$k$, então o número binomial $\binom{n}{k}$ representa quantos subconjuntos
+de classe $k$ o conjunto $A$ possui. Essa representação está de acordo
+com a definição dos binomiais, uma vez que $|A| = |[n]|$, e ambos os conjuntos possuirão a mesma quantidade de subconjuntos.
+
+\subsection{Identidades Básicas}
+
+Demonstraremos agora duas propriedades fundamentais sobre números binomiais.
+
+\begin{def:binomial complementar}
+ Seja o número binomial $\binom{n}{k}$, o seu complementar é aquele dado por
+ \[
+  \binom{n}{n - k}
+ \]
+\end{def:binomial complementar}
+
+Se um subconjunto $S \subset A$ é uma seleção, então seu complementar $S^c$ é
+a seleção complementar. Uma vez que para todo subconjunto há um único
+complementar, então a contagem de seleção realizadas por um binomial
+deve ser igual àquela feita pelo seu complementar, resultado esse formalizado
+a seguir:
+
+\begin{thm:binomial complementar}
+Números binomiais complementares são iguais
+\[
+ \binom{n}{k} = \binom{n}{n - k}
+\]
+\begin{proof}
+ % Seja $A$ um conjunto de $n$ elementos, e $C$ o conjunto dos subconjuntos de
+ % $A$ de classe $k$.
+ Suponha que $C$ seja o conjunto dos subconjuntos de $[n]$ de classe $k$
+ \[
+  C = \{S \in \parts{[n]} \mid |S| = k\},
+ \]
+ e o conjunto $C'$ aquele cujos subconjuntos são de classe $n - k$
+ \[
+  C' = \{S \in \parts{[n]} \mid |S| = n-k\},
+ \]
+ Para todo $S \in C$, vale que $[n] \setminus S \in C'$, pois
+ $|[n] \setminus S| = n - k$. Com efeito, $C'$ será o conjunto imagem da relação
+ de complementar dos subconjuntos de classe $k$ e $n - k$. Em outras
+ palavras, existe uma função $f$ sobrejetora tal que
+ \begin{gather*}
+  f: C \to C'  \\
+  S \mapsto S^c
+ \end{gather*}
+ A função $f$ é injetora, pois vale que se $f(S_1) = f(S_2)$, então
+ \begin{gather*}
+  S_1^c = S_2^c \\
+  S_1 = S_2
+\end{gather*}
+Sendo $f$ uma bijeção, então $|C| = |C'|$, implicando, finalmente, que
+\[
+ \binom{n}{k} = \binom{n}{n - k}
+\]
+\end{proof}
+\end{thm:binomial complementar}
+
+Introduzemos agora a relação de consecutividade entre binomiais.
+\begin{def:binomial consecutivo}
+Dois números binomiais são consecutivos se possuem o mesmo numerador
+e o módulo da diferença de suas classes é 1.
+\end{def:binomial consecutivo}
+Uma propriedade fundamental dos números binomiais consecutivos é chamada
+de Relação de Stifel, e é ela é a base da construção do famoso triângulo
+de Pascal, que veremos mais adiante.
+
+\begin{thm:stifel}[Relação de Stifel]
+ Sejam $n$ e $k$ inteiros não negativos com $n - 1 > k$, então
+\[
+ \binom{n}{k} + \binom{n}{k+1} = \binom{n+1}{k+1}
+\]
+\begin{proof}
+ Seja $S \subset [n]$ subconjunto de classe $k$.
+ Com efeito, o complementar de $S$ em relação a $[n]$ terá $n - k$ elementos,
+ e para todo subconjunto de classe $k$ de $[n]$, haverá $n - k$ formas
+ de criar um novo subconjunto de classe $k+1$. Pelo PFC, temos
+ que
+ \[
+  \binom{n}{k+1} = (n - k) \binom{n}{k},
+ \]
+ e somando $\binom{n}{k}$ a ambos os membros, obtemos
+ \[
+  \binom{n}{k} + \binom{n}{k+1} = (n - k + 1) \binom{n}{k}
+ \]
+ Usaremos agora um argumento combinatório para demonstrar o resultado desejado.
+ Visto que $[n + 1] = [n] \cup \{n+1\}$, o complementar de $S$ em relação a
+ $[n+1]$ terá $n - k + 1$ elementos. Desse modo, para todo subconjunto de classe
+ $k$ de $[n]$, existem $n - k + 1$ maneiras de obter um subconjunto de classe
+ $k + 1$ de $[n+1]$, e, pelo PFC,
+\[
+ (n - k + 1) \binom{n}{k} = \binom{n+1}{k+1},
+\]
+o que prova o teorema.
+\end{proof}
+\end{thm:stifel}
 

@@ -16,7 +16,8 @@ nessa coleção''.
 
 \begin{def:combinacao}
   Seja $A$ um conjunto discreto. Uma combinação dos elementos de $A$
-  de tamanho $r$ é uma função $f: A \to \mathbb{N}$.
+  de tamanho $r$ é um multiconjunto $c: A \to \mathbb{N}$. Se $c$
+  é binário, então a combinação é dita sem repetição.
 \end{def:combinacao}
 
 O resultado a seguir apresenta a função de contagem de
@@ -29,17 +30,21 @@ combinações de um conjunto finito no caso sem repetição.
    \C{n}{r} = \frac{n!}{(n-r)!r!}
  \]
  \begin{proof}
+   Nosso argumento será por contagem dupla.
    A cada elemento de $A$, a combinação pode associar somente dois valores:
    0 e 1, que pode ser compreendido como ao pertencimento ou não do elemento
    à combinação. Diante disso, contar quantas combinações de $r$ elementos
    podem ser obtidas de $A$ equivale ao problema de contar o total de
-   subconjuntos de $r$ elementos que podem ser obtidos de $A$. Suponha que haja
+   subconjuntos de $r$ elementos que podem ser obtidos de $A$.
+
+   Suponha que haja
    $x$ subconjuntos de $r$ elementos de $A$ denotados por $C_1, C_2, \ldots, C_x$.
    Dos elementos de um subconjunto $C_i$, $1 \leq i \leq n$, podemos obter $r!$
    arranjos dos elementos de $A$, e como não é possível produzir um desses
    arranjos a partir de outro sobconjunto $C_j$, então podemos afirmar que a
    contagem dos arranjos de $r$ de elementos de $A$ pode ser dada por $x \cdot r!$.
-   Pela função de contagem de arranjos, temos então:
+
+   No entato, pela função de contagem de arranjos, temos então:
    \begin{gather}
       x \cdot r! = \frac{n!}{(n-r)!} \\
       x = \frac{n!}{(n-r)!r!}
@@ -58,8 +63,8 @@ como ocorre com as combinações.
 Dado um conjunto $A$ finito, permutações com repetição dos elementos desse
 conjunto só podem ser construídas se tivermos, além do conjunto, a
 multiplicidade de cada elemento. A forma usual de as representar
-é como ordenações de elementos de $A$ tal que cada elemento repita-se
-tantas vezes quanto forem a sua multiplicidade.
+é como ordenações de elementos de $A$ tal que cada elemento repete-se
+tantas vezes quanto for a sua multiplicidade.
 
 \begin{def:permutacao com repeticao}
   Seja $A$ um conjunto de $n$ elementos. Dado um multiconjunto $m: A \to \mathbb{N}$,
@@ -70,7 +75,7 @@ tantas vezes quanto forem a sua multiplicidade.
   \]
   e que satisfaz
   \[
-    \forall a \in A,\ C = \{x \in [T] \mid f(x) = a\} \longrightarrow |C| = m(a)
+    \forall a \in A,\ C = \{x \in [T] \mid f(x) = a\} \rightarrow |C| = m(a)
   \]
 \end{def:permutacao com repeticao}
 Vamos explicar a última definição em mais detalhes. É dado um conjunto finito
@@ -79,7 +84,8 @@ a multiplicidade de cada elemento $a \in A$ na permutação. Em seguida, definim
 $T$ como a soma das multiplicidades, e adicionamos a restrição de que o
 número de elementos em $[T]$, que são os índices das posições da ordenação
 representada na permutação, ligados a um mesmo elemento de $A$ deve ser igual
-a multiplicidade desse elemento.
+a multiplicidade desse elemento\footnote{Repare que o caso sem repetição
+é equivalente a quando $m(a) = 1$ para todo $a \in A$.}.
 
 Tendo, então, definido as permutações com repetição, podemos usar as combinações
 para determinar a função de contagem delas dado um conjunto finito $A$ e
@@ -95,7 +101,7 @@ multiplicidades definidas por $m: A \to \mathbb{N}$.
   onde $T$ é a soma das multiplicidades.
   \begin{proof}
     Mais uma vez, recorreremos à técnica de contagem dupla. Nesta prova,
-    iremos contar as permutações com repetições as igualando ao número de tuplas
+    iremos contar as permutações com repetições as igualando ao número de sequências
     de $T$ elementos em que um elemento $a_i \in A$ pode se repetir $r_i$
     vezes, de modo que a posição do elemento na tupla representa ele
     ser imagem do índice $i \in [T]$ daquela posição.
