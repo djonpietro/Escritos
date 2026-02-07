@@ -1,0 +1,155 @@
+\section{Introdução}
+
+\subsection{O que é Matmética Discreta}
+
+A definição de Matmática Discreta é difícil de se obter, sendo comum dizer
+que é mais fácil a definir pelo que está fora dela do que de
+fato está incluso nela. Ela estuda uma coleção ampla e heterogênea de objetos,
+e que dialoga com diversas outras áreas, muito pelo fato dela lidar, entre
+outras coisas, com princípios fundamentais da matemática, como a contagem.
+
+Numa tentiva de definir o conceito, podemos dizer que a Matemática Discreta não é um
+campo da matemática, mas sim a parte dela cujo foco está nas estruturas algébricas
+nas quais não há continuidade entre seus elementos.
+Seus objetos de estudo são estruturas, conjuntos e funções que lidam
+com elementos distintos e separados, tais como números inteiros, grafos
+e fórmulas lógicas.
+
+\subsection{Áreas da Matemática Discreta}
+
+Neste texto, iremos explorar alguns campos que são estudados, primariamente,
+sob luz da Matmética Discreta. Todos os campos compartilham a propriedade
+fundamental de estarem lidando com objetos como conjunto e funções discretas,
+implicando que eles podem ser distinguidos um dos outros, enumerados, ordenados
+e contados.
+
+\subsubsection{Combinatória}
+
+A combinatória, também chamada de Análise Combinatória em contextos mais
+elementares, estuda modos de contar, selecionar, combinar ou ordenar elementos de um
+conjunto finito sem necessariamente listar todas as possibilidades. Por
+sua vez, a combinatória pode ser dividida em alguns campos mais especializados,
+como:
+
+\begin{itemize}
+  \item Enumerativa - busca contar o números de elementos de um conjunto
+    que satisfazem uma determinada propriedade. É a área mais elementar da
+    combinatória, sendo também chamada de contagem.
+
+  \item Extremal - busca determinar o quão grande ou pequena uma coleção
+    de elementos pode ser caso tenha que satisfazer determinadas restrições.
+    Também estuda como selecionar objetos que satisfaçam uma condição de
+    extremalidade ou otimiladade.
+    Surge em problemas combinatórios relacionados a otimização.
+
+  \item Algébrica - um campo que visa empregar métodos da Álgebra Abstrata,
+    especialmente da Teoria de Grupos e da Representação, em contextos
+    combinatórios, enquanto que, ao mesmo tempo, emprega métodos combinatórios
+    para manipular objetos de uma estrutura algébrica.
+
+  \item Probabilística -  um campo com maior grau de especialização introduzido
+    por Paul Erdös que estuda o emprego de métodos probablísticos para
+    demonstrar a existência de um determinado objeto combinatório. Em essência,
+    busca-se provar que, ao selecionar aleatoriamente um objeto em dado
+    universo, a probabilidade de que o objeto escolhido satisfaça uma propriedade
+    desejada é estritamente maior do que zero.
+\end{itemize}
+
+\subsubsection{Relações de Recorrência}
+
+As relações de recorrência são fórmulas que definem termos de uma sequência
+em função de termos anteriores. A relação de recorrência mais famosa é com
+certeza a Sequência de Fibonacci; nela, o termo base é $a_0 = 0$, e a fórmula
+de recorrência é dada por $a_n = a_{n-1} + a_{n-2}$, ou seja, um termos é
+definido como a soma dos outros dois imediatamente anteriores. Também é
+comum denotar recorrências como funções dos índices dos termos da sequeência,
+que no mesmo exemplo dado seria $f(0) = 0$ e $f(n) = f(n-1) + f(n-2)$.
+
+As recorrências surgem naturalmente em diversos problemas que envolvem objetos
+discretos, de modo que a solução do problema torna-se resolver a recorrência,
+isto é, achar uma fórmula não recursiva -- também chamada de fórmula fechada --
+em termos do próprio índice para obter qualquer termo da sequência, sem precisar
+computar os anteriores na ordem.
+
+\subsubsection{Teoria dos Grafos}
+
+A Teoria dos Grafos é um grande ramo da Matemática Discreta que lida
+com conjuntos de objetos que estão relacionados entre si. Os objetos de um
+grafo são representados por pontos, enquanto que as relações entre eles são
+denotados por setas ou segmentos de retas, a depender do tipo da relação sendo
+representada.
+
+O estudo dos grafos gera ferramentas poderosas para a modelagem de diversos
+problemas, que passam a poder ser solucionados por algoritmos que resolvem
+questões como conectividade, caminhos mínimos, fluxos, emparelhamentos e
+colorações. Dessa forma, problemas oriundos de áreas como ciência da
+computação, engenharia, logística, biologia, redes sociais e economia podem
+ser formalizados de maneira precisa e analisados sistematicamente por meio
+dessas estruturas.
+
+\subsection{Notação}
+
+A seguir, serão apresentados, em grande parte, os símbolos e seus respectivos
+significados que virão ser usados no texto. Muitas delas terão seu significado
+melhor explicado quando for oportuno.
+
+\begin{multicols}{2}
+\noindent
+$\mathbb{N}$ -- Conjunto dos Naturais, incluindo o $0$.
+
+\noindent
+$\mathbb{Z}$ -- Conjunto dos Inteiros.
+
+\noindent
+$\mathbb{R}$ -- Conjunto dos Reais.
+
+\noindent
+$\{x \in U \mid P(x)\}$ -- Conjunto dos elementos em $U$ que satisfazem a
+propriedade $P(x)$.
+
+\noindent
+$[n]$ -- conjunto dos naturais menores ou iguais a $n$.
+
+\noindent
+$[n]^*$ -- conjunto dos naturais não nulos menores ou iguais a $n$.
+
+\noindent
+$\parts{A}$ -- conjunto das partes de $A$.
+
+\noindent
+$[x]_R$ -- classe de equivalência $x$ na relação $R$.
+
+\noindent
+$\lor$ -- operador lógico de conjunção (ou).
+
+\noindent
+$\land$ -- operador lógico de disjunção (e).
+
+\noindent
+$p \rightarrow q$ -- se $p$, então $q$.
+
+\noindent
+$p \Longrightarrow q$ -- $p$ implica $q$.
+
+\noindent
+$p \leftrightarrow q$ -- $p$ se, e somente se, $q$.
+
+\noindent
+$p \Longleftrightarrow q$ -- $p$ equivale a $q$.
+
+\noindent
+$\forall$ -- para todo.
+
+\noindent
+$\exists$ -- existe.
+
+\noindent
+$!\exists$ -- existe um único.
+
+\noindent
+$(a_1, \ldots, a_n)$ -- tupla ou sequência finita de $n$ elementos.
+
+\noindent
+$(a_1, a_2, \ldots)$ -- sequência infinita.
+
+\end{multicols}

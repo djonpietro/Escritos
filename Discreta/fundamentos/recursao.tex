@@ -1,0 +1,51 @@
+\section{Recursão e Indução}
+\label{sec:recursao}
+
+Nesta seção, discutiremos em alto nível uma das ferramentas mais úteis para
+solução de problemas matemáticos: o Princípio de Indução Finita. Este
+princípio permite demonstrar que, quando determinados estruturas podem
+ter seus elementos definidos a partir de outros mais simples, e provarmos
+que certa propriedade vale para esses últimos, então a propriedade vale
+também para elementos mais complexos. Antes disso, explicaremos a ideia de
+recursão e a usaremos para construir intuitivamente o Princípio de Indução.
+
+\subsection{Recursão}
+
+A recursão é uma forma de definição aplicada a objetos que podem ser descritos
+em termos de outros objetos do mesmo tipo, porém mais simples. Em geral, uma
+definição recursiva é composta por casos base, que correspondem aos objetos mais
+simples e não dependem de outras definições, e por casos recursivos, nos quais
+um objeto é definido a partir de instâncias menores ou mais simples de si mesmo.
+
+Uma definição recursiva é dita bem definida quando todo objeto que não é um caso
+base pode ser decomposto, em um número finito de passos, até alcançar um dos
+casos base, garantindo assim que o processo de definição termine.
+
+De modo mais formal, um conjunto admite uma definição recursiva quando
+seus elementos podem ser descritos a partir de casos bases e de regras de
+construção que utilizam objetos previamente definidos. Os casos base são
+constituem os elementos mínimos da definição, enquanto que as regras recursivas
+garantem que todo objeto, pode ser reduzido, num número finito de aplicações, a esses
+casos.
+
+As definições recursivas são, sem dúvida, uma das ferramentas mais
+úteis para o estudo de objetos discretos pelo fato de muitos deles terem a
+propriedade de serem definidos a partir de objetos discretos menores. Com isso,
+nos aproveitaremos dessa forma de definição para criar descrições elegantes
+sobre muitas estruturas.
+
+\subsection{Princípio de Indução Finita}
+
+As definições recursivas permitem a demonstração de resultados
+a partir do poderoso Princípio de Indução Matemática. A demonstração por
+indução, geralmente aplicada em situações em que deseja-se provar que
+uma propriedade é satisfeita por todos os elementos de um conjunto, envolve
+dois passos principais: provar que a propriedade é verdadeira para os casos
+base e, supondo que a propriedade vale para um caso recursivo, provar
+que, ao obter um novo caso pelas regras de construção da definição recursiva,
+a propriedade valerá para esse novo caso.
+
+Em resumo, a indução consiste em demonstrar que, se a propriedade vale para os
+casos base e que ela se mantém verdadeira sempre que aplicamos a regra de
+construção recursiva para um novo caso, então ela é verdadeira para todos os
+casos.

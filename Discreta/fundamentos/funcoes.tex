@@ -1,0 +1,228 @@
+\section{Funções Discretas}
+
+Nesta seção, iremos dissertar um pouco mais com o tipo de funções com as quais
+esteremos lidando ao longo do texto. Assim como na seção anterior, iremos
+dissecar a ideia do que seria a propriedade de discretude aplicada a funções,
+e, em seguida introduziremos alguns tipos de funções discretas que nos acompanharão.
+Pontua-se aqui que, nos exemplos, estará implícito que as funções manipulam objetos
+discretos.
+
+\subsection{Discretude de Funções}
+
+Como funções são um tipo de relação especial entre dois conjuntos, então
+é razoável pensar que se tivermos estruturas discretas envolvidas numa relação,
+então essa propriedade influenciará a própria estrutura da relação. Seja
+a função $f: A \to B$, $f$ será uma função discreta caso $A$ tenha uma estrutura
+discreta. Para defender que essa ideia faz sentido, podemos argumentar que:
+
+\begin{enumerate}
+  \item O conjunto imagem sempre terá cardinalidade menor ou igual a do domínio.
+    Dessa forma, a propriedade de enumerabilidade é preservada para imagem se
+    ela vale para o domínio.
+
+  \item Se os objetos do domínio são separáveis, o fato de que cada elemento
+    possui uma única imagem implicará que as imagens também poderão ser vistas
+    a partir de uma estrutura que separa os seus pontos, sendo, pois, discreta.
+\end{enumerate}
+
+No geral, a forma como se trata uma função discreta é a mesma como se trata
+uma contínua, com a diferença que a estrutura subjacente dos domínios envolvidos
+é que lhes dará comportamentos distintos. Nas partes as seguir, iremos
+observar alguns exemplos típicos de funções discretas.
+
+\subsection{Multiconjuntos}
+
+Multiconjuntos, apesar do nome, é um tipo de função que é utilizada como
+artifício para criar estruturas em que há repetição de elementos. Formalmente,
+chamaremos de multiconjuntos qualquer função na forma:
+\[
+  m: X \to \mathbb{N}
+\]
+em que a imagem $m(x)$ de $x \in X$ é chamada de multiplicidade. Um multiconjunto
+trivial é aquele tal que
+\[
+  \forall x \in X,\ ( m(x) = 0 )
+\]
+e chamaremos de binário aqueles que satisfazem
+\[
+  \forall x \in X,\ ( m(x) = 0 \lor m(x) = 1 )
+\]
+que será usado para representar situações em que fazemos uma seleção sem repetição
+dos elementos de $X$.
+
+Dado um conjunto odenado $X = \{x_1, \ldots, x_n\}$ e um multiconjunto $m$,
+denotaremos por $m(X)$ o conjunto ordenado $\{m_1, \ldots, m_n\}$ tal que
+$m(x_i) = m_i$, para $i \in [n]$.
+
+\subsection{Funções de Contagem}
+
+Um dos problemas fundamentais da matemática combinatória é a contagem de objetos
+membros de uma dado universo que satisfazem certas restrições. Muitas vezes,
+é possível detectar um padrão nessas estruturas de forma a possibilitar
+a abstração da contagem por meio de uma função que relaciona uma tupla de
+parâmetros característicos da estrutura ao número de objetos que satisfazem as
+restrições impostas. Chamaremos essas relações de funções de contagem, que
+assumem a forma
+\[
+  f: \mathbb{N}^k \to \mathbb{N}
+\]
+onde $k$ é o número de parâmetros envolvidos na contagem.
+
+As funções de contagem possuem um forte aspecto computacional embutido, pois
+muitas vezes a sua lei de relação é uma especificação de um método que permite,
+por meio de uma sequência finita de passos, determinar a contagem dos objetos.
+Em outras palavras, essas funções especificam algoritmos.
+
+\subsection{Fatoriais}
+
+Um caso particular de função discreta que surge naturalmente em problemas
+combinatórios são os fatoriais. Essas funções computam o produto de todos
+os inteiros não negativos até um $n \in \mathbb{N}$. Visto isso, o fatorial
+de um número $n$, denotado por $n!$, é recursivamente definindo como
+\[
+  n! = \begin{cases}
+    1,       &\text{ se } n = 0\\
+    n(n-1)!, &\text{ se } n > 0
+  \end{cases}
+\]
+
+Os fatoriais tem uma propriedade interessante de que os valores se tornam
+absurdamente grandes mesmo com variações graduais na entrada da função. A
+calculadora do meu celular, por exemplo, só é capaz de computar o fatorial de
+até 170, cujo resultado supera -- com grande folga -- o número de partículas
+no universo.
+
+\subsection{Sequências}
+
+As sequências discretas são uma forma de representar uma sucessão de valores,
+que pode ser finita ou infinita, que possuem um primeiro elemento.
+Formalmente, diremos que $S$ é uma sequência se for uma função injetora
+na forma $S: D \to A$ tal que $D$ satisfaz uma das opções a seguir:
+\begin{enumerate}
+  \item $D = [n]^*$, tal que $n \in \mathbb{N}$, caso em que a sequência é dita
+    finita.
+
+  \item $D = \mathbb{N}$, caso onde a sequência é dita infinita.
+\end{enumerate}
+Diremos que $S$ é uma sequência para um conjunto $A$ se ele for o contradomínio
+da sequência.
+Se $S: D \to A$, representaremos essa sequência enquanto uma tupla ordenada
+$(a_1, \ldots, a_n)$ de $A^n$, com $n = |D|$ de modo que
+\[
+  a_i = a \Longleftrightarrow S(i) = a.
+\]
+Quando a sequência for infinita, usaremos as reticências, como em
+$(1, 2, \ldots)$. Dessa maneira, conseguiremos tratar sequências e
+tuplas de maneira intercambiável. Rotineiramente, iremos dizer
+que uma sequência é igual a sua tupla correspondente.
+
+Usaremos as sequências também para representar conjuntos cujos elementos estão
+ordenados em idexados por naturais. Resumidamente, se $A$ é enumerável e bem ordenado
+pela relação estrita linear $R$, com menor elemento $a_1$, i.e.,
+\[
+  \forall a \in A,\ ( a \cancel{R} a_1 )
+\]
+e $S$ for uma sequência para $A$ com $S(1) = a_1$, então representaremos
+$A$ como:
+
+\begin{enumerate}
+  \item A é finito, então seja $a_n$ aquele que statisfaz
+    \[
+      \forall a \in A,\ ( a R a_n ),
+    \]
+    com $|A| = n$ e
+    \[
+      A = [a_1, \ldots, a_n] \Longleftrightarrow \forall i, j \in [n],\ (
+        i < j \leftrightarrow S(i)\ R\ S(j)
+      )
+    \]
+  \item Se A for infinito enumerável, então
+    \[
+      A = [a_1, \ldots] \Longleftrightarrow \forall i, j \in \mathbb{N},\ (
+       i < j \leftrightarrow S(i)\ R\ S(j)
+      )
+    \]
+\end{enumerate}
+Omitindo a relação $R$ e a sequência $S$, iremos usar a representação
+de um conjunto enquanto sequência para denotar uma situação em que
+queremos tratar os elementos do conjunto em uma determinada ordem\footnote{
+  Em outros textos é comum denotar os elementos de conjuntos ordenados
+  estando entre parênteses, mas preferiremos os colchetes pela opinião
+de que os primeiros já estão semanticamente sobrecarregados.}.
+
+
+Ainda sobre notações, tomemos a sequência $S: D \to A$ e a função $f: A \to B$.
+Construiremos a sequência $S_f: D \to \im{f}$ como aquela que satisfaz
+\[
+ \forall k \in D \forall a \in A,\ ( S(k) = a \leftrightarrow S_f(k) = f(x) )
+\]
+Com essa formalização, iremos admitir que, quando houver uma sequência $S$
+para $A$, e $f$ for uma função com domínio em $A$, então podemos tomar
+a tupla da sequência
+\[
+  (a_1, a_2, \ldots)
+\]
+e substituir os termos pelas suas respectivas imagens em $f$, obtendo a
+representação em tupla da sequência $S_f$:
+\[
+  (f(a_1), f(a_2), \ldots).
+\]
+Também usaremos essa forma para representar uma função $f$ qualquer, intercalando
+com as formas já mostradas em seções anteriores..
+
+Existem três formas principais de definir uma sequência discreta:
+
+\subsubsection{Relações de Recorrência}
+
+Aplicando as definições recursivas vistas na \ref{sec:recursao},
+as relações de recorrência, ou funções recursivamente definidas, definem sequências
+em que os termos dependem seus anteriores na sequência. Um exemplo clássico
+é a sequência de Fibonacci, em que cada termo é a soma dos outros dois anteriores.
+\[
+  S(n) = \begin{cases}
+    1,               &\text{ se } n = 1\\
+    1,               &\text{ se } n = 2 \\
+    f(n-1) + f(n-2), &\text{ se } n > 2
+  \end{cases}
+\]
+
+\subsubsection{Funções de Índice}
+
+Ao contrário das definições recursivas, as sequências com função do índice são
+aquelas em que cada termo pode ser dado por uma fórmula fechada apenas em termos
+do índice da posição dele na sequência. Em outras palavras, a lei de formação
+de $S$ é expressa numa fórmula apenas em termos de $n$.
+
+\subsubsection{Propriedade dos Termos}
+
+Alguns tipos de sequência, em vez de uma lei algébrica -- como nos casos
+anteriores -- utilizam uma determinada propriedade para definir os seus termos.
+Exemplos desse casos incluem: a sequência dos números primos ou a sequência
+do número de divisores de cada natural.
+
+\subsection{Princípio da Casa dos Pombos}
+
+O princípio da casas dos pombos é um interessante, e ao mesmo tempo simples,
+resultado sobre funções entre dois conjuntos finitos. Esse princípio carrega
+aquele nome devido ao forma como ele é geralmente explicado; admita que tenhamos
+$n$ pombos e queiramos construir casas para eles, porém somente dispomos de material
+o suficiente para construir $m$ casas, tal que $n > m$. Consequentemente, conclui-se
+que pelo menos dois pombos terão de compartilhar a mesma casa.
+
+Na sua forma formal, o princípio estabelece que, se $A$ e $B$ são conjuntos
+finitos, de modo que $|A| > |B|$, então toda função $f: A \to B$ não poderá
+ser uma injeção. É verdade que, presumindo que $f$ seja uma injeção, então dois
+casos podem ocorrer:
+\begin{enumerate}
+  \item Se $f$ for sobrejetiva, então ela é uma bijeção, e como vimos na seção
+    de conjunto, $A$ e $B$ teriam de ter a mesma cardinalidade.
+
+  \item Se $f$ não é sobrejetiva, então há pelo menos um elemento de $B$ que
+    não se relaciona com nenhum de $A$. Como $|A| = |\im{f}|$ pela injetividade,
+    e $|\im{f}| \leq B$, então $|A| \leq |B|$.
+\end{enumerate}
+
+O princípio, apesar de simples, é suficiente poderoso para demonstrar alguns
+teoremas interessantes, como o resultado de que num grupo qualquer de pessoas,
+em que alguém pode ou não ser amigo de outros, sempre haverá duas pessoas com
+o mesmo número de amigos.
