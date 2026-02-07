@@ -1,0 +1,133 @@
+\section{Medidas de Posição}
+
+Além das técnicas de tabelas de frequência ou métodos gŕaficos para resumir
+informações, há formas de resumir ainda mais os dados. Geralmente,
+as mais comuns são medidas de centralidade: moda, média e mediana.
+
+A moda é mede qual das realizações de uma variável $X$ é a mais frequente,
+isto é, aquela que maximiza a função de probabilidade da variável.
+\[
+  \moda{X} = \argmax_x P(X \leq x)
+\]
+Para obter a moda amostral -- ou empírica -- de uma distribuição, basta contarmos
+o valor que mais frequente na amostra.
+
+A média populacional de uma variável aleatória é o seu valor esperado $E[X]$,
+e, dada uma amostra, a média amostral que estima a populacional é dada por:
+\[
+  \mu = \frac{1}{n} \sum_{i=1}^n x_i
+\]
+onde $n$ é o número de amostras obtidas. Por fim, a mediana de uma variável
+aleatória é o valor $x$ tal que o quantil de probabilidade seja $1/2$, ou seja,
+\[
+  P(X \leq x) = 1/2
+\]
+Para estimar a mediana de $X$, suponha que $\vec v = (x_1, \dots, x_n)$
+seja um vetor de realizações de $X$, e $k = \lfloor n/2 \rfloor$, então
+a mediana $q$ será dada por:
+
+\begin{enumerate}
+  \item Se $n$ é impar, então faça a mediana igual a $x_k$.
+
+  \item Se $n$ é par, então a mediana é dada pore
+    \[
+      \frac{x_k + x_{k+1}}{2}
+    \]
+\end{enumerate}
+Repare que, no caso de $n$ par, deve-se ter cuidado com variáveis não contínuas.
+
+\section{Medidas de Dispersão}
+
+Além da análise de centralidade e de valores típicos, pode ser que deseja-se
+estudar a variabilidade de um conjunto de dados. Com isso, introduziremos
+algumas medidas de dispersão. O primeiro deles será o desvio médio, dado como
+\[
+  \dm{X} = \sum_{i = 1}^n \frac{ \left| x_i - \bar x \right| }{n}
+\]
+O segundo é a variância, que se assemelha ao desvio-médio, mas com a exceção
+de que os desvios são elevados ao quadrado para se acentuar os desvios maiores.
+\[
+  \var{X} = \sum_{i = 1}^n \frac{ \left| x_i - \bar x \right|^2 }{n-1}
+\]
+A variância gera um valor cuja a unidade está elevada ao quadrado, sendo menos
+interpretável. Por isso, utiliza-se também o desvio-padrão, dado como
+\[
+  \std{X} = \sqrt{ \sum_{i = 1}^n \frac{ \left| x_i - \bar x \right|^2 }{n-1} }
+\]
+
+Com base no que foi dito sobre o quadrado dos desvios, a variância e o
+desvio-padrão são mais sensíveis a outliers, e a amplitude dos dados de modo
+geral, sendo adequadas para quando a distribuição dos dados é aproximadamente
+normal. O desvio-médio é uma medida menos sensível.
+
+\section{Quantis}
+
+O quantil $q$ de probabilidade $p$ é um número que satisfaz
+\[
+  \mathrm P(X \leq q) = p
+\]
+por exemplo: a mediana é o quantil de probabilidade de 50\%. Os quantis de
+probabilidade de 0.25, 0.5 e 0.75 são, respectivamente, chamados de quartis,
+sendo os mais utilizados em resumos de dados.
+
+A estimação de um quantil, quando a função de distribuição não está disponível,
+pode ser calculado utilizando-se da função de distribuição empírica da variável.
+Para isso, computamos a probabilidade empírica acumulada para cada realização
+da variável, com os valores ordenados em grandeza, e usamos uma interpolação
+linear para obter o valor do quantil $q$ de probabilidade $p$. O método está
+implementado no Algoritmo \ref{alg:quantil}.
+
+\begin{algorithm}
+\SetAlgoLined
+\Entrada{uma amostra $\vec x = (x_1, \ldots, x_n)$ e um $p \in [0,1]$}
+\Saida{O quantil empírico $q$}
+\Inicio{
+  $\vec s \gets \mathrm{ordene}(\vec x)$\;
+  \ParaCada{$i$ de 1 até $n$}{
+    $p_i \gets \frac{i - 0.5}{n}$\;
+  }
+  \Se {$\exists i \in [n] \; (p_i = p)$} {
+    \Retorna{ $s_i$ }\;
+  }
+  \Senao {
+    Encontre $i$ tal que $p_i < p < p_{i+1}$\;
+    $f_i \gets \frac{p - p_i}{p_{i+1} - p_i}$\;
+    $q \gets (1 - f_i) s_i + f_i \cdot s_{i+1}$\;
+    \Retorna{$q$}\;
+  }
+}
+\caption{Método de Interpolação do Quantil Empírico}
+\label{alg:quantil}
+\end{algorithm}
+
+\section{Transformações}
+
+São conhecidos diversos procedimentos para se aplicar a dados com distribuição
+normal ou que sejam aproximadamente simétricos. No entanto, os dados do mundo
+real possuem, em grande parte, uma forma assimétrica. A fim de possibilitar
+a aplicação das técnicas para distribuições simétricas, podemos utilizar
+transformações sobre os valores dos dados, de modo a consertar a sua assimetria.
+A família de transformações mais comuns para um variável $X$ são
+\[
+  T(X, p) = \begin{cases}
+    x^p,&\text{ se } p > 0\\
+    \log x,&\text{ se } p = 0 \\
+    -x^p,&\text{ se } p < 0
+  \end{cases}
+\]
+onde $p$ é um valor empírico geralmente adotado na sequência
+\[
+  -3,\ -2,\ -1,\ -1/2,\ -1/3,\ -1,4,\ 0,\ 1/4,\ 1/3,\ 1/2,\ 1,\ 2,\ 3.
+\]
+
+Quanto maior for a assimetria à direita da distribuição, menor deverá ser
+o valor de $p$ a fim de corrigi-la. Para assimetrias à esquerda, valores
+negativos de $p > 1$ provocam uma compressão de valores pequenos e expandem
+os valores maiores. Se a distribuição for levemente assimétrica à direita,
+valores positivos de $p < 1$ provocarão uma correção leve em valores grandes.
+Transformações como a logaritmíca são adequadas para assimetrias à direita
+moderadas, especialmente quando o desvio padrão é proporcional à média, ou
+quando o efeito modelado é multiplicativo invés de aditivo. Já transformações
+com $p < 0$ são aplicadas em assimetrias à direita severas, em que o sinal
+negativo nos valores é usado para preservar a sua ordem.
+
