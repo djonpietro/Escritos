@@ -1,20 +1,35 @@
 \usepackage[T1]{fontenc}
 \usepackage[utf8]{inputenc}
-\usepackage{lmodern}
+% Fontes
+\usepackage{kpfonts}
+\usepackage{calrsfs}
 \usepackage{amssymb}
 \usepackage{amsmath}
 \usepackage{amsfonts}
 \usepackage{amsthm}
+% Parágrafos
 \usepackage{parskip}
 \usepackage{indentfirst}
-\usepackage{geometry}
+% Colunas
+\usepackage{multicol}
+% Margem
+\usepackage[
+	a4paper,
+	inner=3cm,
+	outer=2cm,
+	top=2.5cm,
+	bottom=2.5cm
+]{geometry}
+% Figuras, Gráficos e Plots
 \usepackage{tikz}
 \usepackage{graphicx}
 \usepackage{caption}
 \usepackage{subcaption}
 \usepackage{float}
 \usepackage{tikz-3dplot}
+% Riscar símbolos
 \usepackage{cancel}
+% Algoritmos
 \usepackage[linesnumbered,ruled,vlined,portuguese]{algorithm2e}
 \usepackage{hyperref}
 \hypersetup{
@@ -24,8 +39,12 @@
     urlcolor={blue!80!black}
 }
 
+% Tamanho do parágrafo
 \setlength{\parindent}{1.25cm}
+% Níveis de Título no Sumário
+\setcounter{tocdepth}{1}
 
+% Ambiente de Prova
 \renewcommand{\proofname}{Demonstração}
 \renewcommand{\qedsymbol}{\ensuremath{\blacksquare}}
 
@@ -44,7 +63,11 @@
 }
 \makeatother
 
+\newcommand{\parts}[1]{\mathcal{P}(#1)}
+\newcommand{\partsnn}[1]{\mathcal{P}^*(#1)}
+\newcommand{\dm}[1]{\mathrm{Dm}(#1)}
 \newcommand{\im}[1]{\mathrm{Im}(#1)}
+\newcommand{\Arr}[1]{\mathrm{Arr}(#1)}
 \newcommand{\Pm}[1]{\mathrm{P}(#1)}
 \newcommand{\PR}[2]{\mathrm{PR}_{#1}^{#2}}
 \newcommand{\C}[2]{\mathrm{C}_{#1}^{#2}}
