@@ -62,14 +62,14 @@ Perceba que, na verdade, esse axioma trata-se de um esquema, pois ele é
 enunciado para cada uma das infinitas propriedades $P(x)$\footnote{Como
 	mencionado, a ZFC é uma teoria de primeira ordem, não sendo capaz de
 	enunciar fórmulas que quantifiquem outras fórmulas. Com isso,
-  cada propriedade $P(x)$ necessita do seu próprio axioma.}
+	cada propriedade $P(x)$ necessita do seu próprio axioma.}
 
 Para facilitar representação de conjuntos, muitas vezes iremos construir o
 conjunto $S$ omitindo o superconjunto $A$. Logo, dada a propriedade $P(x)$,
 diremos simplesmente que $S$ será o conjunto de todos os indivíduos que
 satisfazem ela.
 \[
-  S = \{x \mid P(x)\}
+	S = \{x \mid P(x)\}
 \]
 Esse modo de definição é chamado de ``por abstração''.
 
@@ -140,7 +140,7 @@ novo conjunto $C = \{A, B\}$. Esse axioma, em conjunto dos anteriores, torna
 a definição de Kuratowski para pares ordenados -- uma coleção de dois objetos em
 que a ordem importa -- satisfatória:
 \[
-  (a, b) = \{a, \{a, b\}\},
+	(a, b) = \{a, \{a, b\}\},
 \]
 pois dela pode ser demonstrado que
 \[
@@ -152,7 +152,7 @@ e $B$, denotada por $A \times B$, como o conjunto de todos os
 pares ordenados $(a, b)$ tal que que $a \in A$ e $b \in B$. É possível mostrar
 que esse conjunto existe agrumentando que
 \[
-  A \times B \subset \parts{\parts{A \cup B}}
+	A \times B \subset \parts{\parts{A \cup B}}
 \]
 
 \subsection{Outros Axiomas de ZFC}
@@ -163,14 +163,14 @@ um de seus elementos. Esse axioma impede a construção de uma série
 conjuntos que introduziriam paradoxos na Teoria de Conjuntos, a exemplos
 de
 \[
-  A = \{A\} \quad A = \{A, \varnothing\}
+	A = \{A\} \quad A = \{A, \varnothing\}
 \]
 ou tembém situações como $A \in B$ e $B \in A$.
 
 Chamamos de sucessor de um conjunto $A$ aquele definido por $S(A) = A \cup \{A\}$.
 Com isso, definiremos o conjunto $I$ que satisfaz
 \[
-  \varnothing \in I \land \forall A (A \in I \rightarrow S(A) \in I ).
+	\varnothing \in I \land \forall A (A \in I \rightarrow S(A) \in I ).
 \]
 O conjunto $I$ é chamado de indutivo, e a existência de pelo menos um conjunto
 indutivo é enunciada pelo Axioma do Infinito. A motivação para ele é garantir
@@ -189,7 +189,7 @@ conjunto deste tipo; em outras palavras, todos os conjuntos indutivos incluem
 os números naturais. Dessa forma, o conjunto dos naturais é definido como a
 interseção de todos os conjuntos indutivos.
 \[
-  \mathbb{N} = \{x \in I \mid \forall J,\ (J \text{ é indutivo} \rightarrow x \in J \}
+	\mathbb{N} = \{x \in I \mid \forall J,\ (J \text{ é indutivo} \rightarrow x \in J \}
 \]
 
 O próximo é o Axioma da Substituição, o qual afirma que, em qualquer conjunto
@@ -219,7 +219,7 @@ Geralmente, definimos uma relação por meio de uma dada fórmula $\varphi(a, b)
 envolvendo símbolos para elementos daqueles conjuntos, possibilitando definir
 a relação tal como
 \[
-  R = \{(a, b) \in A \times B \mid a \in A \land b \in B \land \varphi(a, b)\}
+	R = \{(a, b) \in A \times B \mid a \in A \land b \in B \land \varphi(a, b)\}
 \]
 A fórmula $\varphi(a, b)$ é chamada de lei de correspondência.
 
@@ -231,20 +231,20 @@ das ordenações de elementos que pertencem a ela. Exemplo, uma relação terná
 entre conjuntos $A$, $B$ e $C$ terá como domínio $A \times B$ e contradomíno $C$,
 logo
 \[
-  R \subset (A \times B) \times C
+	R \subset (A \times B) \times C
 \]
 Um exemplo de elemento em $R$ seria $((a, b), c)$, mas iremos facilitar a notação
 impondo que
 \[
-  ((a, b), c) = (a, b, c)
+	((a, b), c) = (a, b, c)
 \]
 que é uma tripla ordenada. Em geral, uma relação de aridade $n$ será um subconjunto
 no produto cartesiano de $n$ conjuntos e cujos elementos serão tuplas ordenadas
 (ou tuplas somente).\footnote{Fundamentalmente, nossas definições permitem apenas
-  construírmos relações binárias, já que o produto cartesiano é uma operação
-  binária por definição. Todavia, isso trata-se apenas de um detalhe de formalização,
-  e, neste texto e em outros, adotaremos as tuplas para denotar elementos que
-  estão relacionados entre si numa relação que envolve mais de dois conjuntos.}
+	construírmos relações binárias, já que o produto cartesiano é uma operação
+	binária por definição. Todavia, isso trata-se apenas de um detalhe de formalização,
+	e, neste texto e em outros, adotaremos as tuplas para denotar elementos que
+	estão relacionados entre si numa relação que envolve mais de dois conjuntos.}
 
 
 Há algumas relações que valem a pena serem destacadas para menções futuras.
@@ -258,12 +258,12 @@ propriedades\footnote{O conjunto $A$ é também o contradomíno da relação}:
 		      \forall x, y \in A ( x R y \rightarrow y \cancel{R} x )
 	      \]
 	\item Transitividade - numa cadeia de elementos relacionados, a relação
-	  vale para os elementos nas pontas da cadeia.
+	      vale para os elementos nas pontas da cadeia.
 	      \[
 		      \forall x, y, z \in A ( x R y \land y R z \rightarrow x R z)
 	      \]
 	\item Totalidade - todos os elementos estão relacionados entre si em ao
-	  menos uma direção.
+	      menos uma direção.
 	      \[
 		      \forall x, y \in A ( x \neq y \rightarrow x R y \lor y R x)
 	      \]
@@ -307,10 +307,10 @@ partição de $A$.
 Um tipo especial de relação são as famosas funções. Dados conjuntos
 $A$ e $B$, a relação $f$ é chamada de função de $A$ em $B$ se:
 \begin{enumerate}
-  \item A = \dm{f}
+	\item $A = \dm{f}$
 
-  \item Se $(a, b) \in f$ e $(a, c) \in f$, então $b = c$, para todo $a$,
-    $b$ e $c$.
+	\item Se $(a, b) \in f$ e $(a, c) \in f$, então $b = c$, para todo $a$,
+	      $b$ e $c$.
 \end{enumerate}
 Em resumo, uma função relaciona todo elemento do domínio $A$ a um único
 elemento do contradomínio $B$. Graças ao Axioma da Substituição, nem sempre
@@ -332,7 +332,7 @@ $\im{f}$ como o conjunto imagem da função $f$.
 Uma função pode ser classificada de três maneiras
 \begin{itemize}
 	\item Injetiva - se um elemento no contradomínio é imagem de outro
-	  no domínio, então ele é imagem apenas desse último.
+	      no domínio, então ele é imagem apenas desse último.
 	      \[
 		      \forall y \in B,\ (y \in \im{f} \rightarrow \exists! x \in A,\ (f(x) = y))
 	      \]
@@ -416,10 +416,10 @@ elementos e indexá-los utilizando somente os naturais. Uma condição necessár
 e suficiente para que dois conjuntos tenham a mesma cardinalidade é que exista
 alguma bijeção entre eles. Dado isso, ser enumerável equivale a ter uma bijeção
 com algum subconjunto dos naturais\footnote{Georg Cantor provou que os naturais,
-  os inteiros e os racionais possuem a mesma cardinalidade, logo são todos
-  enumeráveis. No caso de $\mathbb{R}$, ele mostrou que é impossível criar uma lista
-  que contenha todos os números reais, provando que a cardinalidade desse último
-é maior do que de $\mathbb{N}$.}.
+	os inteiros e os racionais possuem a mesma cardinalidade, logo são todos
+	enumeráveis. No caso de $\mathbb{R}$, ele mostrou que é impossível criar uma lista
+	que contenha todos os números reais, provando que a cardinalidade desse último
+	é maior do que de $\mathbb{N}$.}.
 
 A ideia de estruturas discretas é intuitivamente simples, porém, formalmente,
 sua natureza é difícil de especificar. Intuitivamente, estruturas discretas são
@@ -437,9 +437,9 @@ um dos outros.
 Uma topologia $\tau \subset \parts{X}$ é uma coleção de partes de um conjunto $X$ cujos
 elementos, denominados abertos, satisfazem:
 \begin{enumerate}
-  \item $\varnothing$ e $X$ são membros de $\tau$.
-  \item A interseção de um número finito de abertos é um aberto
-  \item A união de um número potencialmente infinito de abertos é um aberto.
+	\item $\varnothing$ e $X$ são membros de $\tau$.
+	\item A interseção de um número finito de abertos é um aberto
+	\item A união de um número potencialmente infinito de abertos é um aberto.
 \end{enumerate}
 O par $(X, \tau)$ é chamado de espaço topológico.
 A ideia por detrás dos abertos é a de vizinhança de um ponto, composto por
@@ -454,19 +454,19 @@ ser identificado. Seja $(X, \tau)$ um espaço topológico, dizemos que $x \in X$
 é um ponto isolado no subconjunto $S \subset X$, com $x \in S$, se há
 vizinhança $V$ para $x$ tal que
 \[
-  V \cap S = \{x\}
+	V \cap S = \{x\}
 \]
 Isso equivale a dizer que, no subespaço topológico $(S, \tau_S)$, tal que
 \[
-  \tau_S = \{ U \cap S \mid U \in \tau\}
+	\tau_S = \{ U \cap S \mid U \in \tau\}
 \]
 temos que $\{x\}$ é um aberto de $\tau_S$. Se for satisfeito que
 \[
-  \tau = \parts{X}
+	\tau = \parts{X}
 \]
 então o espaço topológico $(X, \tau)$ é discreto, pois
 \[
-  \forall x \in X, \{x\} \in \tau
+	\forall x \in X, \{x\} \in \tau
 \]
 e todo ponto é uma vizinhança de si mesmo, ou que todo ponto é isolado no próprio
 $X$.
