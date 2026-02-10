@@ -165,7 +165,7 @@ O número de funções de $f: A \to B$ é igual a
 \end{proof}
 \end{cor:numero de funcoes}
 
-\subsection{Arranjos}
+\subsection{Arranjos e Permutações}
 
 Arranjar os elementos de um conjunto finito significa criar sequência
 de elementos desse conjunto. A repetição de cada elemento e a ordem da
@@ -178,7 +178,8 @@ um arranjo de $r$ elementos de $A$ se
 \[
   S: [r] \to A
 \]
-Quando $S$ for injetora, o arranjo é dito sem repetição.
+Quando $S$ for injetora, o arranjo é dito sem repetição. Se for bijetora, o arranjo
+é chamado de permutação.
 \end{def:arranjo}
 Do corolário \ref{cor:numero de funcoes} segue que o número de arranjos
 de tamanho $r$ com de um conjunto com $n$ elementos é $n^r$. Para o caso sem
@@ -209,5 +210,10 @@ funções injetivas entre $A$ e $B$.
 Desta forma, se o arranjo é de $r$ elementos, então a função de contagem de
 arranjos dos elementos de um conjunto finito de $n$ elementos é
 \[
-  \Arr{n, r} = \frac{n!}{(n-r)!}
+  \Arr{n, r} = \frac{n!}{(n-r)!}.
+\]
+As permutações correspondem ao caso em que $n = r$, e o número de permutações de tamanho
+$n$ será dado simplesmnte por:
+\[
+    \Pm{n} = n!
 \]
