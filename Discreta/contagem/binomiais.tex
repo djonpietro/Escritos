@@ -47,8 +47,6 @@ Números binomiais complementares são iguais
  \binom{n}{k} = \binom{n}{n - k}
 \]
 \begin{proof}
- % Seja $A$ um conjunto de $n$ elementos, e $C$ o conjunto dos subconjuntos de
- % $A$ de classe $k$.
  Suponha que $C$ seja o conjunto dos subconjuntos de $[n]$ de classe $k$
  \[
   C = \{S \in \parts{[n]} \mid |S| = k\},
@@ -116,3 +114,59 @@ o que prova o teorema.
 \end{proof}
 \end{thm:stifel}
 
+Por fim, iremos demonstrar como computar o valor de um número binomial.
+\begin{thm:enum combinacao}
+	\[
+	    \binom{n}{k} = \frac{n!}{(n-k)!r!}
+	\]
+\begin{proof}
+	Suponhamos que
+    \[
+        x = \binom{n}{k}
+    \]
+    e seja $C = \{C_1, C_2, \ldots, C_x\}$ os subconjuntos de classe $k$ de $[n]$.
+    Iremos utilizar agora o argumento de contagem dupla sobre o número de arrajos
+    de tamnaho $k$ de $[n]$. Com efeito, para cada $i \in [x]$, podemos obter $k!$ arranjos
+    de $k$ elementos de $C_i$, totalizando
+    \[
+        x \cdot k!
+    \]
+    arranjos de $k$ elementos de $[n]$. Mas sabemos que
+    \[
+        \Arr{n, k} = \frac{n!}{(n-r)!},
+    \]
+    donde segue
+   \begin{align*}
+       x \cdot k! &= \frac{n!}{(n-r)!} \\
+       x &= \frac{n!}{(n-r)!r!}
+   \end{align*}
+\end{proof}
+\end{thm:enum combinacao}
+
+\subsection{Combinações}
+
+Combinações são seleções de objetos de um conjunto finito, estando intimamente conectadas
+com os binomiais vistos anteriormente. A definição a seguir formalizará a intuição
+de seleção que estávamos usando até então, representando-as como multiconjuntos.
+
+\begin{def:combinacao}
+	Seja $A$ um conjunto de $n$ elementos. Uma combinação $s$ de $A$ é um
+    multiconjunto não trivial na forma
+   \[
+        s: A \to \mathbb{N}
+   \]
+   Se $s$ é uma combinação binária, então ela é dita sem repetição.
+\end{def:combinacao}
+
+Toda combinação $s$ sem repetição de $A$ equivale a um subconjunto desse conjunto.
+A intuição é simples: o multiconjunto é função booleana que indica se o elemento pertence
+ou não ao subconjunto. Se $S \subset A$, então $S$ equivale a combinação $s$ que satisfaz:
+\[
+    \forall x \in A\, (x \in S \leftrightarrow s(x) = 1)
+\]
+Dessa maneira, toda combinação de $r$ elementos de $A$ equivale a um subconjunto de
+classe $r$ de $A$, e o número de combinações de um conjunto finito de $n$ elementos será,
+portanto, igual ao binomial
+\[
+    \binom{n}{r} = \frac{n!}{(n-r)!r!}.
+\]

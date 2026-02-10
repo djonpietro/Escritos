@@ -1,108 +1,108 @@
-\section{Arranjos}
+% \section{Arranjos}
 
-Arranjar os elementos de um conjunto finito significa criar sequência
-de elementos desse conjunto. A repetição de cada elemento e a ordem da
-sequência distinguem um arranjo um do outro.
+% Arranjar os elementos de um conjunto finito significa criar sequência
+% de elementos desse conjunto. A repetição de cada elemento e a ordem da
+% sequência distinguem um arranjo um do outro.
 
-\subsection{Arranjos}
+% \subsection{Arranjos}
 
-A ideia de arranjos de um conjunto finito está ligada à maneiras de ordenar
-elementos desse conjunto de diferentes formas em um número de posições
-menor ou igual ao tamanho do conjunto.
-sequência de elementos de um conjunto finito.
+% A ideia de arranjos de um conjunto finito está ligada à maneiras de ordenar
+% elementos desse conjunto de diferentes formas em um número de posições
+% menor ou igual ao tamanho do conjunto.
+% sequência de elementos de um conjunto finito.
 
-\begin{def:arranjo}
-Seja $A$ um conjunto de $n$ elementos. Um arranjo de $r$ elementos de $A$,
-tal que $r \leq n$, é uma função $f$ definida por:
-\[
-  f: [r] \to A
-\]
-Quando $f$ é injetora, o arranjo é dito sem repetição, ou com repetição
-no caso contrário.
-\end{def:arranjo}
-Nos referenciaremos a arranjos sem repetição apenas como arranjos, enquanto
-que a nomenclatura para o outro caso se mantém\footnote{Isso valerá para
-outras estruturas combinatórias que admitam repetição de elementos.}.
+% \begin{def:arranjo}
+% Seja $A$ um conjunto de $n$ elementos. Um arranjo de $r$ elementos de $A$,
+% tal que $r \leq n$, é uma função $f$ definida por:
+% \[
+%   f: [r] \to A
+% \]
+% Quando $f$ é injetora, o arranjo é dito sem repetição, ou com repetição
+% no caso contrário.
+% \end{def:arranjo}
+% Nos referenciaremos a arranjos sem repetição apenas como arranjos, enquanto
+% que a nomenclatura para o outro caso se mantém\footnote{Isso valerá para
+% outras estruturas combinatórias que admitam repetição de elementos.}.
 
-Suponha que $f$ seja um arranjo de tamanho 2 do conjunto $\{a, b, c\}$, tal que
-$f$ associe cada um desses elementos a uma posição numa sequência: a primeira ou
-segunda. Disso, temos, por exemplo, que se $f(1) = a$ e $f(2) = b$, então
-isso representa a sequência
-\[
-  (a, b),
-\]
-que é um caso sem repetição. Um caso com repetição poderia ser $f(1) = f(2) = a$,
-gerando a sequência $(a, a)$.
+% Suponha que $f$ seja um arranjo de tamanho 2 do conjunto $\{a, b, c\}$, tal que
+% $f$ associe cada um desses elementos a uma posição numa sequência: a primeira ou
+% segunda. Disso, temos, por exemplo, que se $f(1) = a$ e $f(2) = b$, então
+% isso representa a sequência
+% \[
+%   (a, b),
+% \]
+% que é um caso sem repetição. Um caso com repetição poderia ser $f(1) = f(2) = a$,
+% gerando a sequência $(a, a)$.
 
-Nosso problema será agora enumerar quantos arranjos são possíveis de se obter
-a partir de um conjunto finito de $n$ elementos, já que para conjuntos discretos
-infinitos, infinitos arranjos podem ser formados.
+% Nosso problema será agora enumerar quantos arranjos são possíveis de se obter
+% a partir de um conjunto finito de $n$ elementos, já que para conjuntos discretos
+% infinitos, infinitos arranjos podem ser formados.
 
-\begin{thm:enum arranjo}
-  Se $A$ é um conjunto finito com $n$ elementos, então a função de contagem
-  elementos desse conjunto é dado por
-  \[
-    \frac{n!}{(n-r)!}
-  \]
-  \begin{proof}
-    A demonstração se baseia na própria definição do arranjo sem repetição:
-    basta contarmos quantas funções injetivas $f: [r] \to A$ podem ser
-    obtidas. Para isso, suponha que
-    \[
-      (a_1, \ldots, a_r)
-    \]
-    seja a sequência tal que $a_i$ é a imagem de $i \in [r]$.
-    Pela restrição de injetividade, temos que $a_i \neq a_j$ para todos $i, j \in [r]$.
-    Então, sempre que uma posição na sequência é definida,
-    as possibilidades de preencher o próximo elemento
-    é reduzido em 1. Se o conjunto original possui $n$ elementos, e o
-    reduzimos de 1 em 1 por $r$ vezes a cada posição, deduz-se que
-    o número de escolhas para cada posição é, respectivamente, $n$, $n-1$,
-    $n-2$, \dots, $n-r+1$. Portanto, pelo Princípio Fundamental da Contagem temos,
-    que o número de arranjos é dado por
-    \begin{gather*}
-     n \cdot (n -1) \cdot \ldots \cdot (n - r + 1) \\
-     n \cdot (n -1) \cdot \ldots \cdot (n - r + 1) \cdot \frac{(n-r)!}{(n-r)!} \\
-    \end{gather*}
-    que equivale a
-    \[
-      \frac{n!}{(n-r)!}
-    \]
-  \end{proof}
-\end{thm:enum arranjo}
-O caso de arranjos com repetição é siginificativamente mais trivial, pois
-não há restrição de injetividade, e para cada escolha de imagem $a \in A$
-de um elemento $i \in [r]$, nosso universo de escolhas nunca se reduz, ou seja,
-sempre teremos $n$ escolhas possíveis de imagens, de forma que o número total
-de arranjos será dado por $n^r$, provando o corolário abaixo.
+% \begin{thm:enum arranjo}
+%   Se $A$ é um conjunto finito com $n$ elementos, então a função de contagem
+%   elementos desse conjunto é dado por
+%   \[
+%     \frac{n!}{(n-r)!}
+%   \]
+%   \begin{proof}
+%     A demonstração se baseia na própria definição do arranjo sem repetição:
+%     basta contarmos quantas funções injetivas $f: [r] \to A$ podem ser
+%     obtidas. Para isso, suponha que
+%     \[
+%       (a_1, \ldots, a_r)
+%     \]
+%     seja a sequência tal que $a_i$ é a imagem de $i \in [r]$.
+%     Pela restrição de injetividade, temos que $a_i \neq a_j$ para todos $i, j \in [r]$.
+%     Então, sempre que uma posição na sequência é definida,
+%     as possibilidades de preencher o próximo elemento
+%     é reduzido em 1. Se o conjunto original possui $n$ elementos, e o
+%     reduzimos de 1 em 1 por $r$ vezes a cada posição, deduz-se que
+%     o número de escolhas para cada posição é, respectivamente, $n$, $n-1$,
+%     $n-2$, \dots, $n-r+1$. Portanto, pelo Princípio Fundamental da Contagem temos,
+%     que o número de arranjos é dado por
+%     \begin{gather*}
+%      n \cdot (n -1) \cdot \ldots \cdot (n - r + 1) \\
+%      n \cdot (n -1) \cdot \ldots \cdot (n - r + 1) \cdot \frac{(n-r)!}{(n-r)!} \\
+%     \end{gather*}
+%     que equivale a
+%     \[
+%       \frac{n!}{(n-r)!}
+%     \]
+%   \end{proof}
+% \end{thm:enum arranjo}
+% O caso de arranjos com repetição é siginificativamente mais trivial, pois
+% não há restrição de injetividade, e para cada escolha de imagem $a \in A$
+% de um elemento $i \in [r]$, nosso universo de escolhas nunca se reduz, ou seja,
+% sempre teremos $n$ escolhas possíveis de imagens, de forma que o número total
+% de arranjos será dado por $n^r$, provando o corolário abaixo.
 
-\begin{cor:enum arranjo 1}
-  O número de arranjos de tamanho $r$ com repetição de um conjunto $A$ de $n$
-  elementos é $n^r$
-\end{cor:enum arranjo 1}
+% \begin{cor:enum arranjo 1}
+%   O número de arranjos de tamanho $r$ com repetição de um conjunto $A$ de $n$
+%   elementos é $n^r$
+% \end{cor:enum arranjo 1}
 
-Um caso especial dos arranjos são as permutações, que são arranjos tomados de
-todos os elementos de um conjunto finito.
-\begin{def:permutacao}
-  Uma permutação de um conjunto finito $A$ de cardnalidade $n$ é um arranjo
-  de tamanho $n$ dos elementos de $A$, i.e., uma função bijetiva na forma
-  \[
-    f: [n] \to A
-  \]
-\end{def:permutacao}
-O caso das permutações com repetição será discutido separadamente em seções
-posteriores. Dito isso, a função de contagem de permutações de um conjunto finito
-é facilmente deduzida pelo corolário a seguir.
+% Um caso especial dos arranjos são as permutações, que são arranjos tomados de
+% todos os elementos de um conjunto finito.
+% \begin{def:permutacao}
+%   Uma permutação de um conjunto finito $A$ de cardnalidade $n$ é um arranjo
+%   de tamanho $n$ dos elementos de $A$, i.e., uma função bijetiva na forma
+%   \[
+%     f: [n] \to A
+%   \]
+% \end{def:permutacao}
+% O caso das permutações com repetição será discutido separadamente em seções
+% posteriores. Dito isso, a função de contagem de permutações de um conjunto finito
+% é facilmente deduzida pelo corolário a seguir.
 
-\begin{cor:enum arranjo 2}
-  Se $A$ poossui $n$ elementos, então há $n!$ permutações de elementos de $A$.
-  \[
-    \Pm{n} = n!
-  \]
-  \begin{proof}
-    Caso em que $n = r$ na fórmula de contagem de arranjos.
-    \[
-      \frac{n!}{(n-r)!} = \frac{n!}{0!} = n!
-    \]
-  \end{proof}
-\end{cor:enum arranjo 2}
+% \begin{cor:enum arranjo 2}
+%   Se $A$ poossui $n$ elementos, então há $n!$ permutações de elementos de $A$.
+%   \[
+%     \Pm{n} = n!
+%   \]
+%   \begin{proof}
+%     Caso em que $n = r$ na fórmula de contagem de arranjos.
+%     \[
+%       \frac{n!}{(n-r)!} = \frac{n!}{0!} = n!
+%     \]
+%   \end{proof}
+% \end{cor:enum arranjo 2}

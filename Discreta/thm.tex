@@ -1,13 +1,11 @@
 % -------------------- Chapter 3: Definições --------------------
-\newtheorem{def:fatorial}{Definição}[chapter]
-\newtheorem{def:arranjo}[def:fatorial]{Definição}
-\newtheorem{def:permutacao}[def:fatorial]{Definição}
-\newtheorem{def:combinacao}[def:fatorial]{Definição}
-\newtheorem{def:permutacao com repeticao}[def:fatorial]{Definição}
-\newtheorem{def:binomial}{Definição}
-
-\newtheorem{def:binomial complementar}{Definição}
-\newtheorem{def:binomial consecutivo}{Definição}
+\newtheorem{def:arranjo}{Definição}[chapter]
+% \newtheorem{def:permutacao}[def:arranjo]{Definição}
+\newtheorem{def:binomial}[def:arranjo]{Definição}
+\newtheorem{def:binomial complementar}[def:arranjo]{Definição}
+\newtheorem{def:binomial consecutivo}[def:arranjo]{Definição}
+\newtheorem{def:combinacao}[def:arranjo]{Definição}
+% \newtheorem{def:permutacao com repeticao}[def:arranjo]{Definição}
 
 % -------------------- Chapter 3: Teoremas ----------------------
 \newtheorem{thm:pa}{Teorema}[chapter]
@@ -17,14 +15,11 @@
 \newtheorem{thm:enum permutacao com repeticao}[thm:pa]{Teorema}
 \newtheorem{thm:enum combinacao com repeticao}[thm:pa]{Teorema}
 
-\newtheorem{thm:binomial complementar}{Teorema}
-\newtheorem{thm:stifel}{Teorema}
-\newtheorem{thm:valor binomial}{Teorema}
+\newtheorem{thm:binomial complementar}[thm:pa]{Teorema}
+\newtheorem{thm:stifel}[thm:pa]{Teorema}
+\newtheorem{thm:valor binomial}[thm:pa]{Teorema}
 
 % -------------------- Chapter 3: Corolários ----------------------
-\newtheorem{cor:enum arranjo 1}{Corolário}[chapter]
-\newtheorem{cor:enum arranjo 2}[cor:enum arranjo 1]{Corolário}
-
-\newtheorem{cor:numero de funcoes}{Corolário}
-\newtheorem{cor:numero de escolhas}{Corolário}
-\newtheorem{cor:numero de arranjos}{Corolário}
+\newtheorem{cor:numero de escolhas}{Corolário}[chapter]
+\newtheorem{cor:numero de funcoes}[cor:numero de escolhas]{Corolário}
+\newtheorem{cor:numero de arranjos}[cor:numero de escolhas]{Corolário}
