@@ -1,0 +1,68 @@
+\section{Anagramas}
+
+Nesta seção iremos introduzir os anagramas de um multiconjunto, também
+chamados de permutações com repetição. Depois, iremos aplicar o conceito
+para contar as soluções não negativas de uma equação, e, no fim,
+iremos demonstrar a função de contagem das combinações com repetição.
+
+\subsection{Contagem de Anagramas}
+
+A ideia de anagramas é análoga àquela para strings\footnote{sequência de símbolos}:
+diferentes sequências de elementos em que trocar elementos repetidos em posições
+distintas não altera a sequência.
+\begin{def:anagrama}
+    Seja $A$ um conjunto, e $s: A \to \mathbb{N}$ um multiconjunto.
+    Chamamos $g: [n] \to A$ de anagrama de $s$ se
+    \[
+        n = \sum_{a \in A} s(a)
+    \]
+    e se $I(a)$ é o conjunto dos índices em $[n]$ que tem $a$ como imagem em $g$, i.e.,
+    \[
+        I(a) = \{k \in A \mid s(k) = a \land a \in A\}
+    \]
+    então $|I(a)| = s(a)$.
+\end{def:anagrama}
+
+O que vai nos interressar é a contagem dos anagramas de um multiconjunto $s$.
+\begin{thm:enum anagramas}
+	Seja $s: A \to \mathbb{N}$ um multiconjunto com $|A| = m$. Se
+	\[
+	    n = \sum_{a \in A} s(a),
+	\]
+	então o número de anagramas de $s$ é dado por
+	\[
+	    \frac{n!}{\prod_{a \in A} s(a)!}
+	\]
+\begin{proof}
+	Com $A = [a_1, \ldots, a_m]$, denotemos $s_i = s(a_i)$ para $i \in [m]$.
+	A prova usará contagem dupla para enumerar permutações de $n$ elementos.
+	A primeira contagem é dada por simplesmente $Pm(n) = n!$. Para segunda,
+	presumindo que o número de anagramas seja $x$, seja $g: [n] \to A$ representado
+	pela tupla
+	\[
+	    (a_{ij})_{i \in [m] \land j \in [n]},
+	\]
+	em que o i-ésimo elemento de $A$ ocupa a j-ésima posição. Com efeito, para toda
+	sequência $g$ teremos que
+	\[
+	    x \cdot s_i!
+	\]
+	é equivalente ao número permutações de $m + s_i - 1$ elementos considerando que
+	permutar os termos iguais a $a_i$ geram sequências diferentes. Isso vale pelo PFC,
+	pois para cada anagrama, podemos obter $s_i!$ ordenações em que considera-se a repetições
+	de $a_i$. Generalizando, termos então que
+	\[
+	    x \cdot \prod_{i \in [m]} s_i!
+	\]
+	conta o número de permutações em que se considera a repetição de todos os elementos
+	de $A$, equivalendo ao número de permutações de
+	\[
+	   m + \sum_{i \in [m]} s_i - 1 = m + n - m = n
+	\]
+	elementos. Ora, temos então que
+	\begin{align*}
+        x &\cdot \prod_{i \in [m]} s_i! = n! \\
+        x &= \frac{n!}{\prod_{i \in [m]} s_i!}
+    \end{align*}
+\end{proof}
+\end{thm:enum anagramas}
