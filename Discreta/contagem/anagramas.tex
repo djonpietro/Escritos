@@ -25,6 +25,7 @@ distintas não altera a sequência.
 
 O que vai nos interressar é a contagem dos anagramas de um multiconjunto $s$.
 \begin{thm:enum anagramas}
+\label{thm:enum anagramas}
 	Seja $s: A \to \mathbb{N}$ um multiconjunto com $|A| = m$. Se
 	\[
 	    n = \sum_{a \in A} s(a),
@@ -66,3 +67,108 @@ O que vai nos interressar é a contagem dos anagramas de um multiconjunto $s$.
     \end{align*}
 \end{proof}
 \end{thm:enum anagramas}
+
+\subsection{Soluções Não Negativas de Equações}
+
+Aqui demonstraremos bravemente uma aplicação do que vimos até aqui para resolver
+um problema interessante. Equações são entidades algébricas que representam a
+igualdade entre dois membros, e nosso foco será naquelas que assumem a forma:
+\begin{equation}
+\label{eq:soma-linear}
+    \sum_{i = 1}^n x_i = r.
+\end{equation}
+O problema combinatório em questão é enumerar as soluções não negativas desse
+tipo de equação, ou melhor, quantas tuplas $(a_1, \ldots, a_n)$, tal que
+$a_i \in \mathbb{N},\ i \in [n]$, são solução para aquela equação.
+
+Para chegar à solução, iremos utilizar um argumento de bijeção, determinando
+uma associação entre uma tupla solução e uma forma única de a codificar.
+Introduzamos o seguinte algoritmo:
+
+\begin{algorithm}
+\SetAlgoLined
+\Entrada{Uma tupla $s = (a_1, \ldots, a_n)$ solução de uma equação na forma de \ref{eq:soma-linear}}
+\Saida{Uma string que codifica a tupla $s$}
+\Inicio{
+    $str \gets ``''$\;
+    \ParaCada{$i \in [n]$}{
+        $p \gets$ string com $a_i$ símbolos iguais a ``.''\;
+       $str \gets \mathrm{concatena}(str,p)$\;
+       \Se{$i \neq n$}{
+            $str \gets \mathrm{concatena}(str, ``+'')$\;
+       }
+    }
+    \Retorna{$str$}
+}
+\caption{Codificação de uma solução inteira não negativa de uma equação}
+\label{alg:codificacao solucao}
+\end{algorithm}
+
+Agora devemos provar a terminação e a corretude do algoritmo. A terminação
+é trivial, pois a tupla é finita. A demonstração da corretude consiste
+em provar que duas soluções distintas nunca terão a mesma codificação.
+Para isso, basta argumentar que, se $(a_i)_{i \in [n]}$ e $(b_j)_{j \in [n]}$
+são soluções de uma equação na forma de \ref{eq:soma-linear} que tem a mesma
+codificação dada pelo algoritmo \ref{alg:codificacao solucao}, então elas
+são a mesma solução. Isso é verdade, pois, para cada iteração no loop iniciado
+na linha 3, a string $p$ da linha 4 será a mesma para duas entrada se, e somente,
+se $a_i = b_i$. Com isso, se a codificação produzida for a mesma, então é verdade
+que, para todo $i \in [n]$, temos $a_i = b_i$, provando que o algoritmo produz
+uma única representação para cada solução.
+
+Mas por que a representação dada pelo \ref{alg:codificacao solucao} é razoável?
+Se $(a_i)_{i \in [n]}$ é uma solução, então
+\[
+    \sum_{i=1}^n a_i = r,
+\]
+e o total de símbolos iguais a ``.'' na representação é igual ao próprio $r$. Por
+exemplo: a equação $x_1 + x_2 = 3$ tem como algumas de suas soluções as tuplas
+$(1, 2)$ e $(3, 0)$, cujas representações seriam, respectivamente: ``.+..'' e
+``...+''. Em ambas, temos 3 símbolos iguais a $3$. Outra invariante das
+representações é que haverão $n-1$ símbolos iguais a ``+'', em que $n$ é
+o número de variáveis, já que o algoritmo adiciona o simbolo citado para
+cada iteração exceto a última.
+
+Como toda solução admite uma representação dada pelo algoritmo \ref{alg:codificacao solucao},
+e essa representação é única, então contar o número de soluções inteiras não negativas
+de uma equação como em \ref{eq:soma-linear} equivale a contar quantos anagramas existem
+com $r$ símbolos iguais a ``.'' e $n-1$ símbolos iguais a ``+''. Pelo teorema
+\ref{thm:enum anagramas}, teremos que essa quantidade é exatamente
+\[
+    \frac{(r+n-1)!}{r!(n-1)!}
+\]
+
+\subsection{Combinações com Repetição}
+
+Quando abordamos combinações de um conjunto finito, apenas consideramos aquelas
+sem repetição, isto é, aos subconuntos do conjunto de escolhas. No entanto, neste
+momento, estamos aptos a prover um argumento combinatório para demonstrar a
+função de contagem de uma combinação $s: A \to \mathbb{N}$ qualquer, isto é,
+com repetição de elementos.
+
+\begin{thm:enum combinacao com repeticao}
+    Seja $A$ um conjunto de $n$ elementos. A função de contagem das combinações
+    $s: A \to \mathbb{N}$ de $r$ elementos de $A$ é dada por
+    \[
+       \CR{r, n} = \frac{(r+n-1)!}{r!(n-1)!}
+    \]
+\begin{proof}
+	Admitindo que $A = [a_1, \ldots, a_n]$, toda combinação com repetição de $r$
+	elementos pode ser representada por uma sequência $(s_1, \ldots, s_n)$ tal que
+	\[
+	    s_i = s(a_i)
+	\]
+	para $i \in [n]$. Como essas combinações são ditas com $r$ elementos, então
+	todas elas devem satisfazer que
+	\[
+	    \sum_{i = 1}^n s_i = r.
+	\]
+	Dessa forma, toda representação de tupla $(s_i)_{i \in [n]}$ para
+	uma combinação de $r$ elementos equivale a uma solução da equação anterior, e,
+	pelo visto na seção anterior, temos que há
+	\[
+	   \frac{(r+n-1)!}{r!(n-1)!}
+	\]
+	combinações com repetição de $r$ elementos de $A$.
+\end{proof}
+\end{thm:enum combinacao com repeticao}
