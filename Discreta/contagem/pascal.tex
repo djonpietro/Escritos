@@ -1,6 +1,172 @@
 \section{Triângulo de Pascal}
 
 O Triângulo de Pascal, ou Triângulo Aritmético, é uma representação triangular
-dos coeficientes binomiais. Ele é construído de forma que cada número seja a soma
-dos dois números diretamente acima dele. O triângulo começa com um 1 no topo, e
-cada linha subsequente contém os coeficientes binomiais correspondentes.
+dos coeficientes binomiais. Ele é construído de forma que os binomiais de mesmo
+numerador estejam na mesma linha, enquanto os que possuem as mesmas classes estejam
+na mesma coluna. O triângulos pode ser recursivamente construído utilizando a Relação
+de Stifel e sobre ele podem ser provadas interessantes propriedades sobre sua estrutura,
+especialmente a soma de números numa mesma linha, coluna ou diagonal. O triângulo
+também possui uma importante relação com os coeficientes de um binômio $(a+b)^n$, também
+chamado de binômio de Newton.
+
+\subsection{Defnição dos Termos}
+
+Como bem vimos, todo número binomial é definido a partir de um numerador $n$ e uma classe
+$k$. Fazendo uso da Relação de Stifel, podemos construir uma definição recursiva para os
+números binomiais da seguinte forma:
+
+\begin{def:triangulo de pascal}
+% \label{def:triangulo de pascal}
+	Sejam $n$ e $k$ inteiros não negativos, e $f: \mathbb{N}^2 \to \mathbb{N}$ uma função
+	definida tal como
+	\[
+	    f(n, k) = \begin{cases}
+			0, &\text{ se } k > n\\
+			1, &\text{ se } k = 0\\
+			f(n - 1, k) + f(n - 1, k - 1), &\text{ caso contrário. }
+		\end{cases}
+	\]
+	Chamos de Triângulo de Pascal a sequência bidimensional -- ou tabela -- definida
+	por $f$.
+\end{def:triangulo de pascal}
+
+Nosso dever agora é mostrar que todo termo do triângulo equivale a um número binomial.
+
+\begin{thm:eqvl binomial pascal}
+	Todo termo do Triângulo de Pascal é um termo binomial e vice-versa.
+\begin{proof}
+	Para mostrar que um termo no triângulo é um binomial, usaremos indução.
+
+	Base: Se $n$ e $k$ são naturais com $n < k$, então $f(n, k) = 0$, que equivalem aos
+	binomiais cuja classe é maior do que o numerador, que são nulos por definição.
+	Por outro lado, se $k = 0$, então $f(n, k) = 1$, que é equivalente ao
+	binomial de numerador $n$ e classe nula, pois $\binom{n}{0} = 1$.
+
+	Hipótese de Indução: Se $f(n, k)$ é um termo do Triângulo com $n \geq k$, com $k \neq 0$,
+	então suponha que $f(n - 1, k)$ e $f(n - 1, k - 1)$ sejam os números binomiais
+	\[
+	    \binom{n-1}{k} \quad \text{ e } \quad \binom{n-1}{k - 1}
+	\]
+	respectivamente. Como esses números binomiais são consecutivos, então a sua soma
+	é também um binomial pela Relação de Stifel, implicando que
+	\[
+	    f(n, k) = f(n-1, k) + f(n-1,k-1) = \binom{n-1}{k} + \binom{n-1}{k-1} = \binom{n}{k}
+	\]
+	e provando o caso indutivo. Logo, todo termo no Triângulo de Pascal é um número
+	binomial pelo Princípio de Indução.
+
+	Resta mostrar que todo binomial está presente no Triângulo. Isso é trivial uma vez que
+	tenhamos mostrado o caso anterior, pois dele segue que
+	\[
+	    f(n, k) = \frac{n!}{(n-k)!k!} = \binom{n}{k}
+	\]
+	para quaisquer $n$ e $k$ inteiros não negativos com $k \leq n$.
+\end{proof}
+\end{thm:eqvl binomial pascal}
+
+Dizemos que dois binomiais pertencem a mesma linha -- ou nível -- no triângulo se eles possuem os
+mesmos numeradores, de tal modo a ter tantos termos numa mesma linha diferentes de 0 quanto
+for a cardinalidade de $[n]$, em que $n \in \mathbb{N}$ é o índice da linha. Os numeradores
+de uma mesma linha são todos iguais ao índice dela. Dadas duas linhas de índices $n$ e $m$
+respectivamente, dizemos que a linha de índice $n$ é inferior a de índice $m$ se,
+e somente se, $n > m$, pois é convencional construir o triângulo de cima para baixo,
+em que os níveis mais baixos correspondem as linhas de maiores índices.
+
+De forma análoga às linhas, dois termos pertencem a mesma coluna no triângulo se eles
+possuirem a mesma classe. Cada coluna é indexada pela classe correspondente a ela e,
+diferente das linhas, possui infinitos termos diferentes de 0. Uma coluna de índice
+$k$ é dita à direita de uma de índice $\ell$ se, e somente se, $r > \ell$, já que
+se convenciona dispor as colunas correspondentes às classes mais altas nesse sentido.
+
+Por fim, temos as diagonais; dois termos $f(n, k)$ e $f(m, \ell)$ pertencem a mesma
+diagonal caso satisfaçam
+\[
+    |m - n| = |\ell - k|
+\]
+Intuitivamente, dois termos estarão na mesma diagonal caso, a partir de um, é possível
+chegar ao outro sempre deslocando-se, consecutivamente, uma linha abaixo e uma coluna à
+direita, ou uma coluna à esquerda e uma linha acima.
+
+\subsection{Propriedades do Triângulo de Pascal}
+
+Exploraremos agora resultados que dizem a respeito do somatório dos termos que pertencem
+a uma mesma linha, coluna ou diagonal no Triângulo de Pascal, essas que revelam
+intressantes propriedades combinatórias dessas estruturas.
+
+\begin{thm:linha pascal}
+    O somatório de uma linha no triângulo de Pascal é uma potência de 2 com expoente
+    igual ao índice da linha;
+    \[
+        \sum_{k=0}^n \binom{n}{k} = 2^n
+    \]
+\begin{proof}
+	Cada termo de uma mesma linha é igual ao número de subconjuntos de $[n]$
+	cuja classe é igual a coluna. Uma vez que a classe $k$ dos termos satisfaz
+	$0 \leq k \leq n$, então esse problema é equivalente a contar o número de
+	subconjuntos de $[n]$, ou seja, quantas combinações sem reptição
+	$s: [n] \to \mathbb{N}$ existem para $[n]$.
+
+	Todo elemento $x \in [n]$ admite dois valores de imagem em $s$: 0 ou 1.
+	Com efeito, se para cada um dos elementos de um conjunto de cardinalidade $n$
+	existem duas escolhas de imagem, então o número total de combinações sem
+	repetição de $[n]$ deve ser igual a $2^n$ pelo PFC.
+\end{proof}
+\end{thm:linha pascal}
+
+\begin{thm:coluna pascal}
+	A soma de todos os termos da coluna $k$ até a linha $n$ do Triângulo
+	de Pascal é dada por
+	\[
+	    \sum_{m = 1}^n \binom{m}{k} = \binom{n+1}{k+1}
+	\]
+\begin{proof}
+    Para esta demonstração, utilizaremos um argumento de contagem dupla para o número de
+    subconjuntos de classe $k+1$ de $[n+1]$, com $n \ge k$.
+
+    A primeira contagem é direta: o número de subconjuntos de classe $k+1$ de $[n+1]$ é
+    \[
+    \binom{n+1}{k+1}.
+    \]
+
+    Para a segunda contagem, particionaremos esses subconjuntos de acordo com o seu maior
+    elemento. Seja $m \in [n]$. Contaremos quantos subconjuntos de classe $k+1$
+    de $[n+1]$ têm $m+1$ como maior elemento.
+
+    Para que um subconjunto tenha $m+1$ como maior elemento, é necessário e suficiente
+    escolher $k$ elementos entre os $m$ elementos de $[m]$. Portanto, o número desses
+    subconjuntos é
+    \[
+    \binom{m}{k}.
+    \]
+
+    Como cada subconjunto de classe $k+1$ possui um único maior elemento, essa partição é
+    disjunta e cobre todos os casos. Assim, somando sobre todos os valores possíveis de $m$,
+    obtemos
+    \[
+    \sum_{m=0}^{n} \binom{m}{k} = \binom{n+1}{k+1}.
+    \]
+\end{proof}
+\end{thm:coluna pascal}
+
+\begin{thm:diagonal pascal}
+    A soma da uma diagonal de índice $n$ do Triângulo de Pascal até a coluna de índice
+    $k$ é igual a
+    \[
+        \sum_{\ell = 0}^k \binom{n + \ell}{\ell} = \binom{n + k + 1}{k}
+    \]
+\begin{proof}
+	A abordagem para provar esse resultado consistirá em rescrever os termos dessa soma
+	como o seus coeficientes binomiais complementares:
+	\begin{align*}
+		\binom{n}{0} &= \binom{n}{n}\\
+		\binom{n+1}{1} &= \binom{n+1}{n}\\
+		             &\vdots        \\
+		\binom{n+k}{k} &= \binom{n+k}{n}\\
+    \end{align*}
+    Concluimos que o somatório dos termos de diagonal $n$ até a coluna $k$ é igual
+    ao somatório da coluna $n$ até a linha $n+k$, que pode ser dado como
+    \[
+        \sum_{m = 0}^{n+k} \binom{m}{n} = \binom{n+k+1}{n+1} = \binom{n+k+1}{k}
+    \]
+\end{proof}
+\end{thm:diagonal pascal}
