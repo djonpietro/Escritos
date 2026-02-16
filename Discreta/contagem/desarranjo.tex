@@ -1,0 +1,166 @@
+\section{Princípio da Inclusão-Exclusão e Desarranjos}
+
+Quando analisamos os princípio básicos de contagem, havíamos visto que o
+Princípio Aditivo somente vale para determinar a cardinalidade de uma família finita
+de conjuntos finitos caso ela fosse disjunta. Nesta seção, iremos mostrar um resultado
+que permite determinar a cardinalidade de uma união de conjuntos finitos sem a restrição
+de disjunção, chamado de Princípio de Inclusão-Exclusão. Após isso, iremos
+mostrar um novo tipo de sequência chamada de desarranjo, ou permutação caótica.
+
+\subsection{Princípio de Inclusão-Exclusão}
+
+Intuitivamente, o princípio consiste em, ao mesmo tempo em que contamos os elementos
+de cada conjunto para determinar a cardinalidade de sua união, contamos os elementos em suas
+interseções a fim de subtrair contagens repetidas dum mesmo elemento. No entanto, essas
+subtrações podem acabar removendo um elemento da contagem, sendo necessário reincluí-lo.
+O procedimento procede até que tenhamos contado cada elemento exatamente uma vez.
+
+Antes de enunciarmos formalmente o princípio, vajamos o lema;
+
+\begin{lema:pie}
+    Seja $\mathcal{F}$ uma família de conjuntos $\{A_1, \ldots, A_n\}$. Temos que
+    \[
+        \left| \bigcup_{A \in \mathcal{F}} A \right| \leq \sum_{A \in F} |A|
+    \]
+\begin{proof}
+	Caso assim não o fosse, existiria algum elemento $a \in \bigcup_{A \in \mathcal{F}}A$
+	tal que $a \notin A$ para todo $A \in \mathcal{F}$, o que é impossível.
+\end{proof}
+\end{lema:pie}
+
+\begin{thm:pie}
+Se $\mathcal{F}$ uma família de conjuntos $\{A_1, \ldots, A_n\}$, então
+\[
+\left| \bigcup_{A \in \mathcal{F}} A \right| = \sum_{k = 1}^n (-1)^{k+1}
+\sum_{P \in \parts{\mathcal{F}} \land |P| = k}
+\left| \bigcap_{A \in P} A \right|
+\]
+\begin{proof}
+	A demonstração se dará por contagem dupla, mostrando que todo elemento contado no
+	primeiro membro da expressão é contado exatamente uma vez no segundo.
+
+	Seja $v$ um elemento em
+	\[
+	    U = \bigcup_{A \in \mathcal{F}},
+	\]
+	e seja $Q$ o conjunto definido tal como
+	\[
+	    Q = \{A \in \mathcal{F} \mid v \in A\}.
+	\]
+	Presuma que $|Q| = m \geq 1$, e $P \subset \mathcal{F}$, então
+	\[
+	    v \in \bigcap_{A \in P} A \leftrightarrow P \subseteq Q.
+	\]
+	Em outras palavras, $v$ será considerado numa contagem tantas vezes quanto forem
+	os subconjuntos de $Q$. Em especial, para os subconjuntos $P \subset Q$ de classe
+	$k \leq m$, teremos que $v$ será conseiderado
+    \[
+        \sum_{P \in \parts{Q} \land |P| = k} 1 = \binom{m}{k}
+    \]
+    vezes. Disse temos
+    \[
+        \sum_{k = 1}^m (-1)^{k+1} \binom{m}{k} = -\sum_{k = 1}^m (-1)^k \binom{m}{k} =
+        -(-1 + (1-1)^m)
+    \]
+    pelo Binômio de Newton, e, uma vez que $m \geq 1$, então
+    \[
+        -(-1 + (1-1)^m) = -(-1) = 1
+    \]
+    e $v$ é contado exatamente uma vez no segundo membro da expressão sendo demonstrada.
+\end{proof}
+\end{thm:pie}
+
+\subsection{Desarranjos}
+
+Os desarranjos representam uma sequência em que os elmentos estão sempre fora de ordem,
+a qual é definida a partir de uma ordenação prévia dos elementos. Por exemplo, os desarranjos
+da ordenação $[1, 2, 3]$ incluem, $(2, 3, 1)$ e $(3, 1, 2)$, mas não $(1, 3, 2)$ nem
+$(3, 2, 1)$, pois nesses dois últimos $1$ e $2$ ocupam as mesmas posições na ordenação
+base respectivamente.
+
+\begin{def:desarranjo}
+    Se $n \in \mathbb{N}$, chama-se desarranjo toda sequência bijetora $d: [n] \to [n]$
+    tal que
+    \[
+        \forall k \in [n],\ (d(k) \neq k).
+    \]
+    Se $A$ for um conjunto ordenado como $[a_1, \ldots, a_n]$,
+    então chamaremos $\hat d: [n] \to A$ de desarranjo de $A$ caso seja bijeção e
+    satisfaça
+    \[
+        \forall k \in [n],\ (\hat d(k) \neq a_k \leftrightarrow d(k) \neq k).
+    \]
+\end{def:desarranjo}
+Daqui em diante, definiremos desarranjos para conjuntos finitos quaisquer sem
+necessariamente explicitar o desarranjo $d: [n] \to [n]$ subjacente. Também
+facultamos o uso do símbolo $\hat{}$ para denotar esses desarranjos.
+
+Assim como fizemos para outros tipos de estruturas combinatórias -- arranjos, permutações,
+combinações, anagramas, etc. -- iremos determinar o número de maneiras de desarranjar os
+elementos de um conjunto. Isso será dado pelo resultado a seguir.
+
+\begin{thm:enum desarranjo}
+    Se $n \in \mathbb{n}$, então existem
+    \[
+        D(n) = n! \sum_{k = 0}^n \frac{(-1)^k}{k!}
+    \]
+    desarranjos para $[n]$.
+
+\begin{proof}
+	Todo desarranjo é um arranjo sem repetição, sendo, pois, uma função bijetora de $[n]$
+	para $[n]$. Desse modo, a estratégia a ser utilizada será subtrair de todas as bijeções
+	$d: [n] \to [n]$ aquelas em que existe pelo menos um $k \in [n]$ tal que $d(k) = k$.
+
+	O número de bijeções $[n] \to [n]$ é dado por $n!$. Resta então contarmos quantas não
+	são desarranjos. Para tanto, admita que $\mathcal{F} = \{A_1, \ldots, A_n\}$ seja uma
+	família tal que $A_k$, com $k \in [n]$, seja o conjunto das bijeções $d: [n] \to [n]$
+	em que $d(k) = k$. A fim de encontar a cardinalidade da união dos membros de
+	$\mathcal{F}$, precisamos determinar:
+	\[
+	    \sum_{P \in \parts{F} \land |P| = k} \left|\bigcap_{A \in P} A \right|
+	\]
+	para todo $k \in [n]$. Para isso basta contar em quantas bijeções pelo menos $k$
+	elementos têm a sim mesmo como imagem, o que é igual ao número de subconjuntos de
+	classe $k$ de $[n]$ vezes o número de bijeções nas quais os elementos desses
+	subconjuntos possuem a si como imagem. Desse modo,
+	\[
+    \sum_{P \in \parts{F} \land |P| = k} \left|\bigcap_{A \in P} A \right| = \binom{n}{k}\, (n-k)! =
+    \frac{n!}{k!}
+	\]
+	donde segue
+	\[
+        D(n) = n! -\sum_{k=1}^n (-1)^{k+1} \frac{n!}{k!} = n! \left(1 - \sum_{k=1}^n
+        \frac{(-1)^{k+1}}{k!}\right)
+    \]
+    e, finalmente
+    \[
+        D(n) = n! \left(1 + \sum_{k=1}^n  \frac{(-1)^{k}}{k!}\right) =
+        n! \left(\sum_{k=0}^n  \frac{(-1)^{k}}{k!}\right)
+    \]
+\end{proof}
+\end{thm:enum desarranjo}
+
+A fórmula demonstrada no resultado anterior pode ser computacionalmente custosa. No entanto,
+há uma curiosa forma de estimar o número de desarranjos de $[n]$. Do Cálculo e Análise
+Matemática, conhece-se que a função $e^x$, em que $e$ é a constante de Euler, admite um
+definição por uma expansão, chamada Série de Taylor, dada por
+\[
+    e^x = \sum_{k=0}^\infty \frac{x^k}{k!}
+\]
+que equivale a
+\[
+    e^x = \sum_{k=0}^n \frac{x^k}{k!} + \sum_{k=n+1}^\infty \frac{x^k}{k!}
+\]
+Conclui-se então que o número de desarranjos de $[n]$ pode ser estimado por
+\[
+    n! \cdot e^{-1}
+\]
+cujo erro é exatamente
+\[
+    n!\sum_{k=n+1}^\infty \frac{x^k}{k!}
+\]
+É possível mostrar ainda com as ferramentas da análise que a magnitude da última expressão
+não é superior a $1/2$. Em outras palavras,
+\[
+    D(n) \approx n! \cdot e^{-1} .
+\]
