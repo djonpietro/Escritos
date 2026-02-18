@@ -1,0 +1,281 @@
+\section{Axiomas}
+
+Antes de tudo, presumiremos, como princípios lógicos dados, o seguinte:
+\begin{enumerate}
+    \item A relação de igualdade denotada por $=$ que satisfaz
+    \begin{itemize}
+        \item Reflexividade: $x = x$.
+        \item Simetria: se $x = y$, então $y = x$.
+        \item Transitividade: se $x = y$ e $y = z$, então $x = z$
+    \end{itemize}
+    e o seu oposto, denotada por $\neq$.
+	\item A existência de um conjunto de objetos denominados \textbf{Números Naturais},
+	denotado por $\mathbb{N}$ e que satisfaz os seguintes axiomas:
+	\begin{ax:primeiro natural}
+	\label{ax:primeiro natural}
+		O número $0$ é um natural.
+    \end{ax:primeiro natural}
+    \begin{ax:sucessor}
+    \label{ax:sucessor}
+        Existe uma função $S: \mathbb{N} \to \mathbb{N}$ denominada sucessor.
+    \end{ax:sucessor}
+    \begin{ax:sucessor 0}
+    \label{ax:sucessor 0}
+        Não existe um natural cujo sucessor é $0$.
+        \[
+            \forall x \in \mathbb{N},\ (S(x) \neq 0)
+        \]
+    \end{ax:sucessor 0}
+    \begin{ax:unico antecessor}
+    \label{ax:unico sucessor}
+        Dois naturais com mesmo sucessor são iguais
+        \[
+            \forall x_1, x_2 \in \mathbb{N},\ (S(x_1) = S(x_2) \rightarrow x_1 = x_2)
+        \]
+    \end{ax:unico antecessor}
+    \begin{ax:inducao}
+    \label{ax:inducao}
+        Se $\mathfrak{M}$ é um conjunto de números naturais e é satisfeito que
+        \begin{enumerate}
+            \item $1 \in \mathfrak{M}$
+            \item $\forall x \in \mathbb{N},\ (x \in \mathfrak{M} \rightarrow S(x) \in \mathfrak{M})$
+        \end{enumerate}
+        então $\mathbb{N} = \mathfrak{M}$.
+    \end{ax:inducao}
+\end{enumerate}
+
+O axioma \ref{ax:primeiro natural} define que os naturais tem pelo menos um elemento,
+logo é não vazio. Em seguida, os axiomas \ref{ax:sucessor}, \ref{ax:sucessor 0} e
+\ref{ax:unico sucessor} definem uma função injetora cujo único elemento fora da imagem
+é o próprio $0$. Por fim, o axioma \ref{ax:inducao} enuncia o Princípio de Indução
+aplicado aos números naturais.
+
+\section{Adição}
+
+\begin{prop: landau 1}
+    \label{prop:landau 1}
+    Para todo $x$ e $y$ naturais vale que $x \neq y \rightarrow S(x) \neq S(y)$
+\begin{proof}
+	Se $S(x) = S(y)$, então pelo axioma \ref{ax:unico sucessor} teríamos $x = y$.
+\end{proof}
+\end{prop: landau 1}
+
+\begin{prop: landau 2}
+    Todo natural é diferente do seu sucessor
+    \[
+        \forall x \in \mathbb{N},\ (S(x) \neq x)
+    \]
+\begin{proof}
+    Seja $\mathfrak{M}$ o subconjunto dos naturais para os quais a proposição vale.
+	Temos que $0 \neq S(0)$ pelo axioma \ref{ax:sucessor 0}, logo $0 \in \mathfrak{M}$.
+	Suponha que $x \neq S(x)$. Disso segue que $S(x) \neq S(S(x))$ pelo Teorema
+	\ref{prop:landau 1}, e $S(x) \in \mathfrak{M}$, e pelo \ref{ax:inducao} temos que
+	$\mathfrak{M} = \mathbb{N}$.
+\end{proof}
+\end{prop: landau 2}
+
+\begin{prop: landau 3}
+    Todo natural diferente de 0 tem um antecessor, isto é, um segundo elemento cujo
+    sucessor é o primeiro.
+    \[
+        \forall x \in \mathbb{N},\ (x \neq 0 \rightarrow \exists u \in \mathbb{N},\ (S(u) = x))
+    \]
+\begin{proof}
+    Seja $\mathfrak{M}$ o subconjunto dos naturais para os quais a proposição vale.
+    É verdade que $0 \in \mathfrak{M}$ por vacuidade. Supondo que $x \in \mathfrak{M}$,
+    então $S(S(u)) = S(x)$, e $S(x) \in \mathfrak{M}$. Logo $\mathfrak{M} = \mathbb{N}$
+    pelo axioma \ref{ax:inducao}.
+\end{proof}
+\end{prop: landau 3}
+
+O axioma \ref{ax:unico sucessor} garantirá que o antecessor de todo natural é único.
+
+\begin{def:adicao}
+    Chamaremos de adição um operação binária $+: \mathbb{N}^2 \to \mathbb{N}$ tal que
+    $+(x, y) = x + y$ que satisfaz:
+    \begin{enumerate}
+        \item $\forall x \in \mathbb{N},\ (x + 0 = x) $
+        \item $\forall x, y \in \mathbb{N},\ ( x + S(y) = S(x+y) )$
+    \end{enumerate}
+\end{def:adicao}
+
+\begin{prop: landau 5}
+    A operação de adição é associativa, isto é,
+    \[
+        \forall x, y, z \in \mathbb{N},\  (x + y) + z = x + (y + z)
+    \]
+\begin{proof}
+	Fixando $x$ e $y$, seja $\mathfrak{M} \subset \mathbb{N}$ o conjunto dos naturais
+	$z$ para quais a proposição vale.
+	Com efeito
+	\[
+	    (x+y) + 0 = x + y = x + (y+0)
+	\]
+	e $0 \in \mathfrak{M}$. Supondo que $z \in \mathfrak{M}$, segue então
+	\[
+	    (x + y) + z = x + (y+z)
+	\]
+	Consequentemente,
+	\[
+	    (x + y) + S(z) = S((x+y)+z) = S(x + (y+z)) = x + S(y+z) = x + (y + S(z))
+	\]
+	e $S(z) \in \mathfrak{M}$. Logo a proposição vale para todos os naturais, isto é,
+	$\mathbb{N} = \mathfrak{M}$.
+\end{proof}
+\end{prop: landau 5}
+
+\begin{prop:soma 1}
+	O sucessor de todo natural $x$ pode ser escrito como $S(x) = x + S(0)$.
+\begin{proof}
+	\[
+	    x + S(0) = S(x + 0) = S(x)
+	\]
+\end{proof}
+\end{prop:soma 1}
+
+\begin{prop:comuta 0}
+\label{prop:comuta 0}
+	A adição de um natural $x$ e 0 é comutativa
+	\[
+	    x + 0 = 0 + x
+	\]
+\begin{proof}
+	Seja $\mathfrak{M}$ o subconjuntos dos naturais para os quais isso vale.
+	Com efeito, se $x = 0$, então
+	\[
+	    x + 0 = 0 + 0 = 0 + x.
+	\]
+	Supondo que vale para um natural $x$, então
+	\[
+	    S(x) + 0 = S(x) = S(x + 0) = S(0 + x) = 0 + S(x),
+	\]
+	e a proposição vale para $S(x)$, logo $\mathfrak{M} = \mathbb{N}$.
+\end{proof}
+\end{prop:comuta 0}
+
+\begin{prop:comuta 1}
+    A adição de um natural $x$ com $S(0)$ é comutativa.
+\begin{proof}
+    Seja $\mathfrak{M}$ o subconjuntos dos naturais para os quais isso vale.
+	Se $x = 0$, então
+	\[
+	    S(0) + x = S(0) = S(0 + 0) = 0 + S(0) = x + S(0).
+	\]
+	Suponha que vale para $x \in \mathbb{N}$, ou seja, $x + S(0) = S(0) + x$.
+	Disso temos que
+	\[
+	    S(x) + S(0) = x + S(0) + S(0) = S(0) + x + S(0) = S(0) + S(x)
+	\]
+	Logo, a proposição vale para $S(x)$, e para todos os naturais.
+\end{proof}
+\end{prop:comuta 1}
+
+\begin{prop: landau 6}
+    A operação de adição é comutativa, isto é,
+    \[
+        \forall x, y \in \mathbb{N},\  x + y  = y + x
+    \]
+\begin{proof}
+	Fixe $y$ e seja $\mathfrak{M}$ o conjunto dos naturais para os quais a proposição vale.
+	Supondo que $x = 0$, então a comutação segue de \ref{prop:comuta 0}.
+	Suponha que vale para $x$, e teremos então:
+\begin{align*}
+	x + y &= y + x\\
+	S(x + y) &= S(y + x)\\
+	x + S(y) &= y + S(x)\\
+	x + y + S(0) &= y + S(x)\\
+	x + S(0) + y &= y + S(x)\\
+	S(x) + y &= y + S(x)
+\end{align*}
+Conclui-se que $\mathfrak{M} = \mathbb{N}$, já que $S(x) \in \mathfrak{M}$.
+\end{proof}
+\end{prop: landau 6}
+
+\begin{prop: landau 7}
+\label{prop:landau 7}
+    Para quaisquer $x$ e $y$ naturais e com $x \neq 0$, temos que
+    \[
+        y \neq x + y
+    \]
+\begin{proof}
+	Fixe $x$, e seja $\mathfrak{M}$ o conjuntos dos naturais para os quais a proposição
+	vale. Se $y = 0$, então vale que $x \neq y$ por hipótese, e $0 \in \mathfrak{M}$.
+	Suponha que a proposição vale para $y$, e $y \neq x + y$. Logo
+	\begin{align*}
+		S(y) &\neq S(x + y)\\
+		S(y) &\neq x + S(y)\\
+    \end{align*}
+    e $S(y) \in \mathfrak{M}$. Portanto $\mathfrak{M} = \mathbb{N}$.
+\end{proof}
+\end{prop: landau 7}
+
+\begin{prop: landau 8}
+    Se \[ y \neq z,\]então\[x + y \neq x + z\]
+\begin{proof}
+    Fixe $y$ e $z$, e seja \mathfrak{M} o conjunto dos naturais para os quais a proposição
+    vale. Com efeito
+    \begin{gather*}
+        y \neq z\\
+        0 + y \neq 0 + z
+    \end{gather*}
+    e temos $0 \in \mathfrak{M}$. Agora suponha que
+    \[
+        y \neq z \rightarrow x + y \neq x + z.
+    \]
+    Presumindo então que $y \neq z$, segue:
+    \begin{gather*}
+        x + y \neq x + z\\
+        S(x + y) \neq S(x + z)\\
+        S(x) + y \neq S(x) + z\\
+    \end{gather*}
+    e $S(x) \in \mathfrak{M}$. Logo $\mathfrak{M} = \mathbb{N}$.
+\end{proof}
+\end{prop: landau 8}
+
+\begin{prop: landau 9}
+	Sejam $x$ e $y$ naturais com $x \neq 0$. Exatamente uma das proposições abaixo deve
+	ocorrer:
+	\begin{enumerate}
+	    \item $x = y$
+		\item $\exists u,\ ( x = y + u)$, com $x$ e $y$ não ambos nulos.
+		\item $\exists v,\ ( y = x + v)$, com $x$ e $y$ não ambos nulos.
+    \end{enumerate}
+\begin{proof}
+    Nenhuma das proposições podem ocorrer simultaneamente dois a dois visto a proposição
+    \ref{prop:landau 7}. Fixando $x$, seja então $\mathfrak{M}$ o conjunto dos naturais em
+    que ocorre uma, e somente uma, das proposições listadas.
+
+    Se $y = 0$, então
+    \[
+       x = x + 0 = x + y
+    \]
+    que é o caso 2 com $u = x$, e $0 \in \mathfrak{M}$.
+    Suponha que $y \in \mathfrak{M}$, ou seja, que exatamente uma das porposições valem.
+    Temos três casos
+    \begin{enumerate}
+        \item Se $x = y$, então $S(y) = S(x)$ e $S(x) = x + S(0)$. Fazendo $v = S(0)$,
+        temos
+        \[
+            S(y) = x + v
+        \]
+        e a proposição 3 vale para $S(y)$.
+
+        \item Se existe natural $u$ tal que $x = y + u$, então temos outros dois casos
+        \begin{enumerate}
+            \item $u = 0$, e $x = y$, voltando ao caso 1.
+            \item $u \neq 0$, e há natural $w$ tal que $S(w) = u$. Segue então que
+            \[
+                x = y + S(w) = S(y) + w
+            \]
+            e a proposição 2 vale também para $S(y)$.
+        \end{enumerate}
+
+        \item Se existe natural $v$ tal que $y = x + v$, então
+        \[
+            S(y) = S(x + v) = x + S(v)
+        \]
+        e a proposição 3 vale para $S(y)$.
+    \end{enumerate}
+    Visto os casos, podemos dizer então que $S(y) \in \mathfrak{M}$, $\mathfrak{M} = \mathbb{N}$.
+\end{proof}
+\end{prop: landau 9}
