@@ -1,55 +1,3 @@
-\section{Axiomas}
-
-Antes de tudo, presumiremos, como princípios lógicos dados, o seguinte:
-\begin{enumerate}
-    \item A relação de igualdade denotada por $=$ que satisfaz
-    \begin{itemize}
-        \item Reflexividade: $x = x$.
-        \item Simetria: se $x = y$, então $y = x$.
-        \item Transitividade: se $x = y$ e $y = z$, então $x = z$
-    \end{itemize}
-    e o seu oposto, denotada por $\neq$.
-	\item A existência de um conjunto de objetos denominados \textbf{Números Naturais},
-	denotado por $\mathbb{N}$ e que satisfaz os seguintes axiomas:
-	\begin{ax:primeiro natural}
-	\label{ax:primeiro natural}
-		O número $0$ é um natural.
-    \end{ax:primeiro natural}
-    \begin{ax:sucessor}
-    \label{ax:sucessor}
-        Existe uma função $S: \mathbb{N} \to \mathbb{N}$ denominada sucessor.
-    \end{ax:sucessor}
-    \begin{ax:sucessor 0}
-    \label{ax:sucessor 0}
-        Não existe um natural cujo sucessor é $0$.
-        \[
-            \forall x \in \mathbb{N},\ (S(x) \neq 0)
-        \]
-    \end{ax:sucessor 0}
-    \begin{ax:unico antecessor}
-    \label{ax:unico sucessor}
-        Dois naturais com mesmo sucessor são iguais
-        \[
-            \forall x_1, x_2 \in \mathbb{N},\ (S(x_1) = S(x_2) \rightarrow x_1 = x_2)
-        \]
-    \end{ax:unico antecessor}
-    \begin{ax:inducao}
-    \label{ax:inducao}
-        Se $\mathfrak{M}$ é um conjunto de números naturais e é satisfeito que
-        \begin{enumerate}
-            \item $1 \in \mathfrak{M}$
-            \item $\forall x \in \mathbb{N},\ (x \in \mathfrak{M} \rightarrow S(x) \in \mathfrak{M})$
-        \end{enumerate}
-        então $\mathbb{N} = \mathfrak{M}$.
-    \end{ax:inducao}
-\end{enumerate}
-
-O axioma \ref{ax:primeiro natural} define que os naturais tem pelo menos um elemento,
-logo é não vazio. Em seguida, os axiomas \ref{ax:sucessor}, \ref{ax:sucessor 0} e
-\ref{ax:unico sucessor} definem uma função injetora cujo único elemento fora da imagem
-é o próprio $0$. Por fim, o axioma \ref{ax:inducao} enuncia o Princípio de Indução
-aplicado aos números naturais.
-
 \section{Adição}
 
 \begin{prop: landau 1}
@@ -212,7 +160,7 @@ Conclui-se que $\mathfrak{M} = \mathbb{N}$, já que $S(x) \in \mathfrak{M}$.
 \begin{prop: landau 8}
     Se \[ y \neq z,\]então\[x + y \neq x + z\]
 \begin{proof}
-    Fixe $y$ e $z$, e seja \mathfrak{M} o conjunto dos naturais para os quais a proposição
+    Fixe $y$ e $z$, e seja $\mathfrak{M}$ o conjunto dos naturais para os quais a proposição
     vale. Com efeito
     \begin{gather*}
         y \neq z\\
@@ -233,6 +181,7 @@ Conclui-se que $\mathfrak{M} = \mathbb{N}$, já que $S(x) \in \mathfrak{M}$.
 \end{prop: landau 8}
 
 \begin{prop: landau 9}
+\label{prop:landau 9}
 	Sejam $x$ e $y$ naturais com $x \neq 0$. Exatamente uma das proposições abaixo deve
 	ocorrer:
 	\begin{enumerate}
