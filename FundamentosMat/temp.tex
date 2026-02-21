@@ -1,0 +1,69 @@
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+% Fontes
+\usepackage{libertinus}
+\usepackage{calrsfs}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amsthm}
+% Parágrafos
+\usepackage{parskip}
+\usepackage{indentfirst}
+% Colunas
+\usepackage{multicol}
+% Margem
+\usepackage[
+	a4paper,
+	inner=3cm,
+	outer=2cm,
+	top=2.5cm,
+	bottom=2.5cm
+]{geometry}
+% Figuras, Gráficos e Plots
+\usepackage{tikz}
+\usepackage{graphicx}
+\usepackage{caption}
+\usepackage{subcaption}
+\usepackage{float}
+\usepackage{tikz-3dplot}
+% Riscar símbolos
+\usepackage{cancel}
+% Algoritmos
+\usepackage[linesnumbered,ruled,vlined,portuguese]{algorithm2e}
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks,
+    linkcolor={blue!50!black},
+    citecolor={blue!50!black},
+    urlcolor={blue!80!black}
+}
+
+% Tamanho do parágrafo
+\setlength{\parindent}{1.25cm}
+% Níveis de Título no Sumário
+\setcounter{tocdepth}{1}
+
+% Ambiente de Prova
+\renewcommand{\proofname}{Demonstração}
+\renewcommand{\qedsymbol}{\ensuremath{\blacksquare}}
+
+% Redefinir o ambiente proof para desativar a indentação dentro dele
+\makeatletter
+\renewenvironment{proof}[1][\proofname]{\par
+	\pushQED{\qed}%
+	\normalfont\topsep6\p@\@plus6\p@\relax
+	\trivlist
+	\item[\hskip\labelsep
+	\itshape
+	#1\@addpunct{.}]\ignorespaces
+	\setlength{\parindent}{0pt} % Remove indentação
+}{%
+	\popQED\endtrivlist\@endpefalse
+}
+\makeatother
+
+\newcommand{\parts}[1]{\mathcal{P}(#1)}
+\newcommand{\partsnn}[1]{\mathcal{P}^*(#1)}
+\newcommand{\dm}[1]{\mathrm{Dm}(#1)}
+\newcommand{\im}[1]{\mathrm{Im}(#1)}
