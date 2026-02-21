@@ -1,0 +1,92 @@
+\section{Naturais e Inteiros}
+
+\subsection{Axiomas de Peano}
+
+O conjunto dos números naturais, denotado por $\mathbb{N}$, é tradicionalmente definido
+por um esquema de axiomas que especificam sua estrutura e natureza: os Axiomas de Peano,
+propostos pelo matemático italiano Giuseppe Peano em 1889. Os axiomas podem ser divididos
+em duas coleções, aqueles que definem o comportamento de relação de igualdade,
+estebelecendo suas propriedades de reflexividade, simetria e transitividade, e aqueles
+que falam sobre os naturais em si, postulando que:
+
+\begin{enumerate}
+	\item o número $0$ é um natural.
+	\item Existe uma função $S: \mathbb{N} \to \mathbb{N}$ a ser denominada sucessor.
+	\item Não existe natural cujo sucessor é $0$.
+	\item Naturais com os mesmos sucessores são iguais
+	\item Se um subconjunto $\mathfrak{M}$ dos naturais inclui o $0$, e presumindo que
+	$x \in \mathfrak{M}$, pode-se concluir que $S(x) \in \mathfrak{M}$, então $\mathfrak{M}$
+	inclui todos os naturais.
+\end{enumerate}
+
+O primeiro axioma diz que os Naturais são um conjunto não vazio, pois possuem ao menos
+um elemento. Os axiomas de 2 a 4, afirmam a existência de uma aplicação injetora $S$
+cuja imagem não inclui o $0$. O axioma 5 também é conhecido como Princípio de Indução,
+afirmando que, se dado conjunto inclui o $0$, e é possível aplicar a
+função $S$ sucessivamente de modo que os novos elementos também estejam nele,
+então o conjunto trata-se do próprio conjunto dos naturais.
+
+A partir dos axiomas, é possível demonstrar a existência e unicidade das operações de
+adição e multplicação dos naturais, satisfazendo as propriedades típicas, como
+associatividade e comutatividade. A partir deles também define-se uma ordenação por
+meio da relação de ``maior que'', representada por $<$, que satisfaz a definição
+de relação de ordem estrita total, isto é
+\begin{itemize}
+	\item Assimétrica -- $\forall x, y,\ (x < y \rightarrow y \cancel{<} x )$
+	\item Totalidade -- $\forall x, y,\ ( x < y \lor y < x)$
+	\item Não-Reflexiva -- $\forall x,\ ( x \cancel{<} x )$
+	\item Transitiva -- $\forall x, y, z,\ ( x < y \land y < z \rightarrow x < z )$
+\end{itemize}
+Outras ordens também podem ser definidas, como a parcial, que exclui a propriedade
+de assimetria e inclui a reflexiva, isto é, todo elemento está relacionado consigo
+mesmo. Uma vez que os naturais possuem uma ordem total e, nessa ordem, há um menor
+elemento -- o número $0$ -- então dizemos que os naturais estão bem ordenados.
+Formalmente, um conjunto é bem ordenado se para ele existe uma ordem total e qualquer
+um de seus subconjuntos possui um menor elemento nessa ordem.
+
+\subsection{Príncípio de Indução}
+
+O axioma 5, como mencinado, define o famoso Princípio de Indução. No entanto, esse
+enunciado possuem outras formulações que tornam mais prático o seu uso como uma técnica
+de demonstração para provar propreidades sobre elementos que satisfazem uma definição
+recursiva.
+
+Recursão é uma forma de definição que envolve uma coleção de casos bases e regras
+de construção para criar novos casos, chamados de recursivos. Por exemplo, nos Axiomas
+de Peano o único caso base é o $0$, e os casos recursivos são aqueles aplicando-se a
+função sucessor sucessivamente: $S(0) = 1$, $S(S(0)) = 2$, e assim em diante. Uma recursão
+bem definida é aquela que, para qualquer caso recursivo, é possível retornar aos casos
+bases com base nas regras de construção. Logo, definições que precisam passar por
+infinitos casos antes de chegar num caso base ou circulares não são recursões bem
+definidas.
+
+O Princípio de Indução Finita, por sua vez, é normalmente aplicado sobre uma definição
+recursiva para provar uma propriedade $\varphi$ que vale para todos os casos. Para usá-la,
+deve-se provar que $\varphi$ vale para todos os casos bases e, em seguida, supondo que
+vale para um caso recursivo, mostra que deve ser verdade para o próximo caso obtido pelas
+regras de construção. Essa formulação do princípio é mais geral (mas não mais forte) que
+a dada pelo axioma 5, pois pode ser mais facilmente apicada a qualquer conjunto que possa
+ter seus elementos definidos recursivamente em função de alguns elementos ditos base.
+
+\subsection{Números Inteiros}
+
+A primeira extensão dos naturais é a dos chamados números inteiros, denotados por $\mathbb{Z}$.
+A necessidade desses números surge no fato de que os naturais não são fechados sobre subtração;
+temos que $ 5 - 3$ é um natural, mas $3 - 5$ não é, por exemplo. Com isso, uma construção
+comum para os inteiros consiste em definí-los enquanto pares ordenados $(a, b)$, com
+$a$ e $b$ naturais, denotando
+\[
+    a - b.
+\]
+Repare que infinitos pares podem representar o mesmo inteiro, e, por isso, dizemos que
+cada inteiro é uma classe de equivalência desses pares. Exemplo: o inteiro $3$ pode ser
+rperesentado como $5 -2$, $7 -4$ e $10- 7$, enquanto que o inteiro $-2$ possui as
+representações equivalentes de $0 - 2$, $4 - 6$ e $8 - 10$.
+
+Para os inteiros também estão bem definidas as operações de adição, subtração e multiplicação.
+O conjunto $\mathbb{Z}$ também possui uma ordem total -- tanto parcial quanto estrita -- mas
+não são bem ordenados, pois nem todo subconjunto possui um menor elemento, como por exemplo
+\[
+    \{x \in \mathbb{Z} \mid x < 2\}
+\]
+o qual incluirá o $1$, $0$ e todos os números negativos.

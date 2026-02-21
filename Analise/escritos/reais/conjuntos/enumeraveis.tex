@@ -1,0 +1,68 @@
+\section{Conjuntos Enumeráveis}
+
+\subsection{Boa Ordenação}
+
+Como citado brevemente quando discutimos os números naturais, para alguns conjuntos
+é possível explicitar uma ordenação total de seus elementos de modo que qualquer
+subconjunto possua um menor elemento. Essas estruturas -- o conjunto dotado da relação
+de ordem --  são chamadas de boas ordenações, ou conjuntos bem-ordenados.
+
+Na Teoria Axiomática de Conjuntos de Zermelo-Fraenkel com o Axioma da Escolha (ZFC),
+toda boa ordem está associada a um número ordinal, que caracteriza a ordem do conjunto.
+Os números 1, 2, 3, etc., são números ordinais finitos, pois caracterizam a ordem
+de conjuntos finitos; por exemplo: a classe dos conjuntos de ordem 3 são aqueles que, uma
+vez ordenados, terão um primeiro, um segundo e um terceiro elemento. No entanto, conjuntos
+infinitos também estão associados a ordinais, a exemplo de $\mathbb{N}$ associado ao
+ordinal $\omega$, dito o primeiro ordinal transifnito.
+
+Por mais contra-intuitivo que seja, ainda podemos contruir ordens maiores do que $\omega$.
+Por exemplo, se ordenamos os naturais de modo que primeiro listamos todos os pares e todos
+os ímpares em seguida, então o ordinal dessa ordenação é $\omega + \omega$. Seguindo esse
+raciocínio, ainda seria possível definir ordens cada vez maiores com ordinais $\omega^2$,
+$\omega^\omega$, ou $\omega^{\omega^\omega}$.
+
+O Axioma de Escolha da ZFC pode provar o Teorema da Boa Ordenação, o qual diz que
+qualquer conjunto pode ser bem ordenado. Todavia, o resultado apenas enuncia a existência
+de uma boa ordenação, mas não induz qualquer método para a obter.
+
+\subsection{Conjuntos Finitos e Enumeráveis}
+
+A grandeza de uma ordem não implica na quantidade de elementos que há
+originalmente nos conjuntos. Como visto, a depender da ordenação que damos aos naturais,
+podemos obter ordens com ordinais $\omega$ ou $\omega + \omega$, no entato, os naturais
+continuam tendo a mesma quantidade de elementos nos dois casos. A quantidade de membros
+num conjunto é formalizada pela ideia de cardinal, definida como o menor ordinal ao qual
+um conjunto pode ser associado por uma boa ordenação. Dois conjuntos terão mesma
+cardinalidade (ditos equipotentes) se entre eles existe uma bijeção.
+
+Conjuntos finitos são aqueles que possuem uma bijeção com algum subconjunto próprio dos
+naturais. Desse modo, há uma função bijetora $f$ denominada função de contagem que associa
+cada elemento deles a um termo numa sequência de naturais de $1$ até $n$, em que $n$ é
+identificado como a cardinalidade do cojunto.
+
+Uma classe de conjuntos que inclui os finitos são os conjuntos enumeráveis. Esses conjuntos
+consistem naqueles para os quais existe uma bijeção entre eles e qualquer subconjunto dos
+naturais (incluindo o próprio). Dessa forma, um conjunto é enumerável é menor ou tão grande
+quanto o conjunto dos naturais.
+
+\subsection{Conjuntos Não Enumeráveis e os Reais}
+
+Georg Cantor (1845-1918), matemático alemão que inaugurou a Teoria dos Conjuntos,
+provou que a cardinalidade dos naturais, dos inteiros e dos racionais são iguais, ou seja,
+são todos enumeráveis. Ademais, provou que existem conjuntos maiores do que os naturais,
+Seu argumento era simples, mas elegante: crie uma lista de todos os números entre 0 e 1 com
+suas respresentação decimais, e construa um número no mesmo intervalo tal que o enésimo
+decimal do número seja diferente do decimal na mesma posição do enésimo termo na lista.
+Conclui-se que o número construído não fora listado, e não possível listar todos os números
+entre 0 e 1. Esse argumento é conhecido como argumento da diagonalização.
+Tais conjuntos que não podem ser colocados em correspondência um para um com os naturais
+são chamados de não enumeráveis.
+
+Na história da matmática, um dos problemas mais famosos foram os dos Incomensuráveis,
+que eram números que não podiam ser medidos, isto é, não poeria ser dados na forma de uma
+razão entre inteiros $a/b$, como por exemplo a a diagonal do quadrado
+de lado unitário. Modernamente, os Incumensuráveis foram rebatizados de irracionais, e,
+ao longo do tempo, mostrou-se que diversos números são irracionais, como $\sqrt{2}$,
+$\pi$ e a constante euleriana $e$. São justamente os números irracionais que completam
+as lacunas deixadas pelos racionais, e, juntos, foram o conjunto dos números Reais.
+Como visto, os reais possuem cardinalidade maior do que dos números naturais.
