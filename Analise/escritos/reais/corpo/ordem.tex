@@ -1,0 +1,264 @@
+\section{Ordenação e Desigualdades}
+
+\subsection{Ordem}
+
+Presumiremos daqui em diante a existência de um conjunto $\mathbb{P} \subset \mathbb{R}$
+dotado das seguintes propriedades, supondo $a, b$ e $c \in \mathbb{P}$:
+
+\begin{enumerate}
+    \item Fechamaento sob $+$ e $\cdot$
+    \[
+        \forall a, b \in \mathbb{P},\ (\, a + b \in P \text{ e } a \cdot b \in P\,)
+    \]
+    \item Tricotomia
+    \[
+        \forall a \in \mathbb{R},\ (\,a \in \mathbb{P} \lor -a \in \mathbb{P} \lor a = 0\,)
+    \]
+\end{enumerate}
+
+\begin{prop:quadrados positivo}
+	O quadrado de um número real não nulo é membro de $\mathbb{P}$.
+	\[
+	    \forall a \in \mathbb{R},\ (\, a \neq 0 \rightarrow a^2 \in \mathbb{P}\,)
+	\]
+\begin{proof}
+    Se $a \in \mathbb{P}$, então $a^2 \in \mathbb{P}$ por fechamento da multiplicação.
+    Se $a \notin \mathbb{P}$, então $-a \in \mathbb{P}$ por hipótese e tricotomia. Por
+    fechamento, teremos $a^2 \in \mathbb{P}$.
+\end{proof}
+\end{prop:quadrados positivo}
+
+\begin{def:ordem}
+	Dizemos que $a > b$ se, e somente, se, $a-b \in \mathbb{P}$. Ademais, $a < b$ se,
+	e somente se, $b > a$.
+\end{def:ordem}
+
+\begin{prop:maior que zero positivo}
+	Todo real $a > 0$ é membro de $\mathbb{P}$.
+\begin{proof}
+	Por definição, $a - 0 \in \mathbb{P}$, logo $a \in \mathbb{P}$.
+\end{proof}
+\end{prop:maior que zero positivo}
+
+\begin{prop:propriedade ordem}
+	A relação $<$ é uma relação de ordem total estrita em $\mathbb{R}$.
+\begin{proof}
+	Devemos demonstrar que a relação satisfaz irreflexividade, totalidade e transitividade.
+
+	1. A relação é irreflexiva, pois $a - a = 0$, e, por tricotomia, $0 \notin \mathbb{P}$.
+
+	2. Para totalidade, suponha que $a\, \cancel{<}\, b$, o que significa que
+	$b - a \notin \mathbb{P}$, e, por tricotomia, $a - b \in \mathbb{P}$, logo
+	$b < a$. O caso de $b\, \cancel{<}\, a$ é análogo, em que se concluirá que $a < b$.
+
+	3. É verdade que a relação é transitiva. Suponha que $a < b$ e $b < c$, e por definição
+	\[
+	    b - a \in \mathbb{P} \land c - b \in \mathbb{P}.
+	\]
+	Visto que
+	\[
+	    (c - b) + (b - a) = c - a
+	\]
+	então conclui-se que $c - a \in \mathbb{P}$ por fechamento, e $a < c$.
+\end{proof}
+\end{prop:propriedade ordem}
+
+\begin{prop:monotonicidade ordem}
+	A relação $<$ é monótona sob adição e multiplicação por elemento em $\mathbb{P}$. Logo,
+	para quaisquer reais $a$, $b$ e $c$
+	\begin{center}
+    	\begin{multicols}{2}
+    	    $a < b \rightarrow a + c < b + c$
+
+    		$a < b \land c > 0 \rightarrow a \cdot c < b \cdot c$
+        \end{multicols}
+    \end{center}
+\begin{proof}
+	Com efeito, $b - a \in \mathbb{P}$, mas tabmém temos que
+	\[
+	    b - a = b + c - a - c = (b - c) - (a + c)
+	\]
+	donde se conclui que $a + c < b + c$. Ademais, se $c \in \mathbb{P}$, então
+	\[
+	    c(b - a) \in \mathbb{P}
+	\]
+	por fechamento, porém
+	\[
+        c(b - a) = bc - ac
+	\]
+	e $ac < bc$.
+\end{proof}
+\end{prop:monotonicidade ordem}
+
+\begin{cor:mudanca de ordem}
+    Para quaisquer reais $x, y$ e $z$
+    \[
+        a < b \land c < 0 \rightarrow bc < ac
+    \]
+\begin{proof}
+    Por tricotomia, $-c > 0$, e, por fechamento, $-c(b-a) \in \mathbb{P}$. Logo,
+    \[
+        -c(b-a) = ac - bc
+    \]
+    implica que $bc < ac$.
+\end{proof}
+\end{cor:mudanca de ordem}
+
+\subsection{Inclusão dos Naturais e Inteiros}
+
+Na construção dos naturais pelos axiomas de Peano, a adição é definida tal como $0$ é
+o seu elemento neutro, o que está de acordo com que enuciáramos, e $S(x+y) = x + S(y)$
+(lembrando que $S$ é a função sucessor). Em especial, $S(x) = x + S(0)$, e temos que
+$S(0) = 1$, logo, $S(x) = x + 1$. Uma vez que $1 > 0$, então $1 \in \mathbb{P}$. A
+partir dessas conclusões, iremos porvar que os reais incluem os naturais e inteiros.
+
+\begin{thm:reais incluem naturais}
+	O conjunto dos naturais é subconjunto dos reais.
+	\[
+	    \mathbb{N} \subset \mathbb{R}
+	\]
+\begin{proof}
+	A prova se dará por indução. Suponha que $\mathfrak{M}$ seja o subconjunto
+	dos naturais que estejam contidos nos reais. Temos que $0 \in \mathfrak{M}$,
+	pois ele é o elemento neutro da adição nos reais por definição. Suponha que
+	$x$ seja um natural membro do conjunto dos reais. Sabemos que $1$ é um número
+	real por ser o elemento neutro da multiplicação, e também que $1 \in \mathbb{P}$,
+	implicando que $S(x) = x + 1$ deve ser um número real por fechamento,
+	logo $\mathfrak{M} = \mathbb{N}$ pelo Princípio de Indução.
+\end{proof}
+\end{thm:reais incluem naturais}
+
+\begin{thm:reais incluem inteiros}
+    O conjunto dos inteiros é subconjunto dos reais.
+	\[
+	    \mathbb{Z} \subset \mathbb{R}
+	\]
+\begin{proof}
+    Um inteiro $z$ é igual a $z = a - b$ para $a$ e $b$ naturais, logo, reais.
+    Como $-b$ é o inverso aditivo de $b$, então $-b$ é um número real, logo
+    \[
+        z = a-b = a + (-b)
+    \]
+    é um número real, e os inteiros estão inclusos nos reais.
+\end{proof}
+\end{thm:reais incluem inteiros}
+
+\begin{thm:reais incluem racionais}
+    O conjunto dos racionais é subconjunto dos reais.
+   	\[
+   	    \mathbb{Q} \subset \mathbb{R}
+   	\]
+\begin{proof}
+	Seja o racional $a = \frac{p}{q}$, com $p$ e $q$ inteiros e $q \neq 0$.
+	Já que $p, q \in \mathbb{R}$ e $\frac{1}{q}$ é o inverso multiplicativo de $q$,
+	então o $\frac{1}{q}$ deve ser um número real. Como os reais são um corpo, logo
+	fechados sob multiplicação, então $\mathbb{Q} \subset \mathbb{R}$.
+\end{proof}
+\end{thm:reais incluem racionais}
+
+\subsection{Módulo}
+
+\begin{def:modulo}
+	O módulo, ou valor absoluto, de um número real $a$ é definido como
+	\[
+	    |x| = \begin{cases}
+					x,&\text{ se } 0 \leq x\\
+					-x,&\text{ se } x < 0
+					\end{cases}
+	\]
+\end{def:modulo}
+
+\begin{prop:desigualdade triangular}
+	Para quaisquer reais $x$ e $y$ vale que
+	\begin{center}
+		$| x + y | \leq |x| + |y|$
+
+		$ | xy | = |x| \cdot |y|$
+    \end{center}
+\begin{proof}
+    1. Temos que $|x| \geq x$ e $|y| \geq y$, donde segue que $|x| + |y| \geq x + y$. Da
+    mesma forma, $|x| \geq -x$ e $|y| \geq -y$, do qual se conclui que $|x| + |y| \geq -(x+y)$.
+    Dos dois casos segue que
+    \[
+        | x + y | \leq |x| + |y|
+    \]
+
+    2. Para a segunda expressão, basta mostrar ambos os membros da igualdade possuem o
+    mesmo quadrado, já que são ambos maiores que $0$. Temos que $(|xy|)^2 = x^2y^2$
+    independente se $xy$ está em $\mathbb{P}$ ou não. Pelo mesmo argumento, temos que
+    \[
+        |x|^2 \cdot |y|^2 = x^2y^2
+    \]
+    do qual segue a igualdade que queríamos mostrar.
+\end{proof}
+\end{prop:desigualdade triangular}
+
+\begin{prop:desigualdade delta}
+	Para quaisquer reais $x$, $a$ e $\delta$, temos que
+	\[
+	    |x - a| \leq \delta \Longrightarrow a - \delta \leq x \leq a + \delta
+	\]
+\begin{proof}
+	Com efeito, temos que $x-a \leq \delta$ e $-(x-a) \leq \delta$. Da primeira
+	desigualdade, segue que
+   	\[
+        x \leq a + \delta
+    \]
+    enquanto que, da segunda,
+    \begin{gather*}
+        -\delta \leq x - a\\
+        a - \delta \leq x
+    \end{gather*}
+\end{proof}
+\end{prop:desigualdade delta}
+
+\subsection{A Reta Real}
+
+O conjunto denotado por $\mathbb{R}$ até então equivale ao conjunto dos
+números reais positivos, representado por $\mathbb{R}^+$. O complemento
+de $\mathbb{R}^+$ menos o conjunto dos reais nulos, ou seja, o conjunto
+unitário $\{0\}$, equivale ao conjunto dos reais negativos, representado
+por $\mathbb{R}^-$. Dessa forma, temos que
+\[
+    \mathbb{R} = \mathbb{R}^- \cup \{0\} \cup \mathbb{R}^+.
+\]
+
+Iremos admitir também uma notação para definir subconjuntos dos reais,
+chamada de intervalos reais, de modo que
+\begin{center}
+\begin{multicols}{2}
+$[a, b] = \{x \in \mathbb{R} \mid a \leq x \leq b\}$
+
+$(a, b] = \{x \in \mathbb{R} \mid a < x \leq b\}$
+
+$[a, b) = \{x \in \mathbb{R} \mid a \leq x < b\}$
+
+$(a, b) = \{x \in \mathbb{R} \mid a < x < b\}$
+
+$(-\infty, b] = \{x \in \mathbb{R} \mid x \leq b\}$
+
+$(-\infty, b) = \{x \in \mathbb{R} \mid x < b\}$
+
+$[a, \infty) = \{x \in \mathbb{R} \mid a \leq x \}$
+
+$(a, \infty) = \{x \in \mathbb{R} \mid a < x \}$
+\end{multicols}
+\end{center}
+Os intervalos que incluem os seus extremos -- o primeiro listado -- são chamados de de
+fechados, enquanto que os que não incluem pelo menos um de seus extremos são abertos
+(o caso de todos os outros listados).
+
+Uma forma de ilustrar geometricamente os números reais é por meio da
+reta real.  Nesta reta vale que, se $a$ e $b$ são reais atribuídos aos pontos $P$ e $Q$
+respectivamente e $a < b$, então $P$ está à esquerda de $Q$. Tomando um ponto $O$ que seja
+tribuído ao $0$, ponto esse chamado de origem, teremos que todos os pontos à direita de $O$
+constituem os reais positivos, ou seja, $\mathbb{R}^+$ ou $(0, \infty)$. Os pontos à esquerda
+são os reais negativos: $\mathbb{R^-}$ ou $(-\infty, 0)$. Com os mesmos pontos $P$ e $Q$
+de antes, temos que o segmento de reta que tem $P$ e $Q$ inclusos equivale a $[a,b]$. Se
+$P$ e $Q$ não forem os extremos, então esse segmento equivale a $(a, b)$.
+
+Todavia, nada nos garante que é possível associar um número real a \textbf{todo} ponto da
+reta; noutras palavras, que essa reta não possui  ``buracos''. Algebricamente, isso
+equivale ao fato de que nenhumas das propriedades mostradas até então diferencia o conjunto
+dos reais dos números racionais. Explicitar que $\mathbb{Q}$ é um subconjunto próprio de
+$\mathbb{R}$ será a motivação da próima seção.
