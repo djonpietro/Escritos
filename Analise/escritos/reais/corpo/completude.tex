@@ -1,0 +1,86 @@
+\section{Completude}
+
+\subsection{Supremo e Propriedade Arquimediana}
+
+\begin{def:majorante}
+    Um conjunto $X \subset \mathbb{R}$ é dito limitado superiormente caso exista um
+    real $b$, chamado de majorante ou cota superior, tal que
+    \[
+        \forall x \in X, x \leq b.
+    \]
+    O conjunto $X$ será limitado inferiormente se existe real $a$, denominado minorante
+    ou cota inferior, satisfazendo
+    \[
+        \forall x \in X, a \leq x.
+    \]
+\end{def:majorante}
+
+\begin{def:supremo}
+    Se $X \subset \mathbb{R}$ é um conjunto limitado superiormente, então o seu supremo,
+    denotado por $\sup X$, é o menor dos seus majorantes. Alternativamente, se $X$ é
+    limitado inferiormente, então o seu ínfimo, representado por $\inf X$, é o maior
+    dos seus minorantes.
+\end{def:supremo}
+
+Evidentemente, todo subconjunto dos reais limitado superiormente possui um supremo.
+O mesmo vale se ele for limitado inferiormente: terá um ínfimo.
+
+\begin{def:maximo}
+	Se $X \subset \mathbb{R}$ possui um supremo $a$, ele será o máximo de $X$, denotado
+	por $\max X$, se, e somente se, for membro de $X$. Se $b$ for o ínfimo de $X$, então
+	ele será o mínimo de $X$, com notação $\min X$, caso também seja elemento de $X$.
+\end{def:maximo}
+
+\begin{thm:arquimediana}
+\label{thm:arquimediana}
+	São equivalentes as afirmações:
+	\begin{enumerate}
+		\item O conjuntos dos naturais não possui supremo.
+		\item O ínfimo do conjunto $X = \{1/n \in \mathbb{R} \mid n \in \mathbb{N}\}$ é $0$.
+		\item para quaisquer reais positivos $a$ e $b$, existe $n \in \mathbb{N}$ tal que $b < na$.
+    \end{enumerate}
+\begin{proof}
+	(1 $\rightarrow$ 2) Suponha a afirmação (1).
+	Visto que os reais positivos são fechados por multiplicação, então se
+	$x \in X$, segue que $x > 0$, e $0$ é minorante de $X$. Seja $c$ um real positivo,
+	então por hipótese existe um natural $n$ tal que
+	\begin{gather*}
+		\frac{1}{c} < n\\
+		\frac{1}{n} < c
+    \end{gather*}
+    do qual se conclui que $0$ deverá ser o ínfimo de $X$.
+
+    (2 $\rightarrow$ 3) Suponha (2) e, por contradição, que existem $a$ e $b$ reais
+    positivos tal que, para todo natural $n$, tenha-se $na < b$. Dessa desigualdade obtemos
+    que
+    \[
+        \frac{a}{b} < \frac{1}{n}.
+    \]
+    isso implicaria que o lado esquerdo da desigualdade seria um minorante de $X$ e, pelo
+    fechamento dos postivos, o ínfimo de $X$, que contradiz a hipótese, logo um absurdo.
+
+    (3 $\rightarrow$ 1) Suponha (3) e que $m \in \mathbb{N}$ e $s \in \mathbb{R}^+$ tal
+    que $m < s$. Uma vez que são ambos positvos, então existe natural $n$ tal que
+    $n \cdot m < s$. Como $n \cdot m \in \mathbb{N}$, então os naturais não podem ter
+    um supremo.
+\end{proof}
+\end{thm:arquimediana}
+
+\begin{thm:majorante naturais}
+\label{thm:majorante naturais}
+	O conjunto $\mathbb{N}$ não possui um supremo.
+\begin{proof}
+	Suponha por contradição que $s = \sup \mathbb{N}$. Com efeito, $s - 1$ não será
+	supremo de $\mathbb{N}$, o que equivale a dizer que
+	\[
+	    \exists n \in \mathbb{N},\ (\,s - 1 < n\,).
+	\]
+	o que nos leva a $s < n + 1$, mas o lado direito da desigualdade é um natural,
+	contradizendo a suposição de que $s$ é o supremo dos naturais.
+\end{proof}
+\end{thm:majorante naturais}
+
+Sendo o Teorema \ref{thm:majorante naturais} válido e equivalente as demais afirmações no
+teorema \ref{thm:arquimediana}, então todas as afirmações são válidas. Em especial, a
+terceira afirmação do Teorema \ref{thm:arquimediana} é dita como propriedade arquimediana,
+e, por consequência, o conjunto dos reais é arquimediano.
