@@ -104,58 +104,6 @@ dotado das seguintes propriedades, supondo $a, b$ e $c \in \mathbb{P}$:
 \end{proof}
 \end{cor:mudanca de ordem}
 
-\subsection{Inclusão dos Naturais e Inteiros}
-
-Na construção dos naturais pelos axiomas de Peano, a adição é definida tal como $0$ é
-o seu elemento neutro, o que está de acordo com que enuciáramos, e $S(x+y) = x + S(y)$
-(lembrando que $S$ é a função sucessor). Em especial, $S(x) = x + S(0)$, e temos que
-$S(0) = 1$, logo, $S(x) = x + 1$. Uma vez que $1 > 0$, então $1 \in \mathbb{P}$. A
-partir dessas conclusões, iremos porvar que os reais incluem os naturais e inteiros.
-
-\begin{thm:reais incluem naturais}
-	O conjunto dos naturais é subconjunto dos reais.
-	\[
-	    \mathbb{N} \subset \mathbb{R}
-	\]
-\begin{proof}
-	A prova se dará por indução. Suponha que $\mathfrak{M}$ seja o subconjunto
-	dos naturais que estejam contidos nos reais. Temos que $0 \in \mathfrak{M}$,
-	pois ele é o elemento neutro da adição nos reais por definição. Suponha que
-	$x$ seja um natural membro do conjunto dos reais. Sabemos que $1$ é um número
-	real por ser o elemento neutro da multiplicação, e também que $1 \in \mathbb{P}$,
-	implicando que $S(x) = x + 1$ deve ser um número real por fechamento,
-	logo $\mathfrak{M} = \mathbb{N}$ pelo Princípio de Indução.
-\end{proof}
-\end{thm:reais incluem naturais}
-
-\begin{thm:reais incluem inteiros}
-    O conjunto dos inteiros é subconjunto dos reais.
-	\[
-	    \mathbb{Z} \subset \mathbb{R}
-	\]
-\begin{proof}
-    Um inteiro $z$ é igual a $z = a - b$ para $a$ e $b$ naturais, logo, reais.
-    Como $-b$ é o inverso aditivo de $b$, então $-b$ é um número real, logo
-    \[
-        z = a-b = a + (-b)
-    \]
-    é um número real, e os inteiros estão inclusos nos reais.
-\end{proof}
-\end{thm:reais incluem inteiros}
-
-\begin{thm:reais incluem racionais}
-    O conjunto dos racionais é subconjunto dos reais.
-   	\[
-   	    \mathbb{Q} \subset \mathbb{R}
-   	\]
-\begin{proof}
-	Seja o racional $a = \frac{p}{q}$, com $p$ e $q$ inteiros e $q \neq 0$.
-	Já que $p, q \in \mathbb{R}$ e $\frac{1}{q}$ é o inverso multiplicativo de $q$,
-	então o $\frac{1}{q}$ deve ser um número real. Como os reais são um corpo, logo
-	fechados sob multiplicação, então $\mathbb{Q} \subset \mathbb{R}$.
-\end{proof}
-\end{thm:reais incluem racionais}
-
 \subsection{Módulo}
 
 \begin{def:modulo}
