@@ -1,29 +1,12 @@
 \section{Propriedades Algébricas}
 
-% \subsection{Definição de Corpo}
-
-% Na Álgebra Abstrata, chama-se grupo toda estrutura composta por um conjunto, e uma operação
-% que satisfaz as propriedades de fechamento, associatividade, elemento neutro e elemento
-% inverso. Quando a operação do grupo é comutativa, ele é chamado de abelino. Por exemplo,
-% os inteiros com a operação de adição são um grupo abeliano. Por sua vez, os anéis
-% são grupos abelianos dotados de uma segunda operação (normalmente identificada como
-% multiplicação) que é associativa, possui elemento neutro e distribui-se sobre a sobre
-% a primeira operação (geralmente deominada adição). Finalmente, os corpos são estruturas
-% algébricas que consistem de anéis em que todo elemento não nulo possui elemento inverso
-% relativo à operação de multiplicação.
-
-% Os números reais foram um corpo com as operações de $+$ e $\cdot$. Ademais, $(\mathbb{R},
-% +, \cdot)$ consiste dum corpo ordenado pela relação $<$ (ou também $\leq$), pois, além
-% de ser uma ordem total, é satisfeito que
-% \begin{itemize}
-% 	\item $\forall a, b, c \in \mathbb{R}, (a < b  \rightarrow a+c < b+c)$
-% 	\item $\forall a, b \in \mathbb{R}, (0 < a \land 0 < b \rightarrow 0 < ab)$
-% \end{itemize}
-
 \subsection{Propriedades Primitivas}
 
-A seguir, presumiremos as seguintes propriedades das operações algébricas sobre os
-números reais $a$, $b$, $c$ e $d$:
+Assumiremos como primitva a existência de um conjunto $\mathbb{R}$ denominado de conjunto
+dos números reais e dotado das operações de adição e multiplicação, as quais satisfazem as
+propriedades de corpo algébrico. Isso significa que, para quaisuquer elementos
+$a, b, c \in \mathbb{R}$, é suposto que as operações de $+$ e $\cdot$ são fechadas em
+$\mathbb{R}$ e satisfazem:
 
 \begin{enumerate}
     \item Associatividade
@@ -45,7 +28,7 @@ números reais $a$, $b$, $c$ e $d$:
         \end{multicols}
     \end{center}
 
-    \item Elemento neutro
+    \item Existência do Elemento neutro
     \begin{center}
         \begin{multicols}{2}
             $a + 0 = a$
@@ -54,7 +37,7 @@ números reais $a$, $b$, $c$ e $d$:
         \end{multicols}
     \end{center}
 
-    \item Elemento Inverso
+    \item Existência do Elemento Inverso
     \begin{center}
         \begin{multicols}{2}
             $a + (-a) = 0$
@@ -63,7 +46,7 @@ números reais $a$, $b$, $c$ e $d$:
         \end{multicols}
     \end{center}
 
-    \item Distributiva
+    \item Distribuição da Multiplicação sobre Adição
     \begin{center}
         \begin{multicols}{2}
             $a \cdot (b + c) = ab + ac$
@@ -71,7 +54,8 @@ números reais $a$, $b$, $c$ e $d$:
             $a \cdot (b - c) = ab - ac$
         \end{multicols}
     \end{center}
-    \item Propriedades de Igualdade: se $a = b$, então
+
+    \item Princípio de Igualdade: se $a = b$, então
     \begin{center}
         \begin{multicols}{2}
             $a + c = b + c$
@@ -80,12 +64,39 @@ números reais $a$, $b$, $c$ e $d$:
 
             $a - c = b - c$
 
-            $\displaystyle\frac{a}{c} =\frac{b}{c}$
+            $\displaystyle\frac{a}{c} = \displaystyle\frac{b}{c}$
         \end{multicols}
     \end{center}
 \end{enumerate}
 
+Em $\mathbb{R}$ também definiremos os subconjuntos dos naturais $\mathbb{N}$, dos inteiros
+$\mathbb{Z}$ e dos racionais $\mathbb{Q}$. Primeiramente, o conjunto $\mathbb{N}$ satisfaz
+que:
+\begin{enumerate}
+	\item $0 \in \mathbb{N}$.
+
+	\item $x \in \mathbb{N} \rightarrow x + 1 \in \mathbb{N}$.
+\end{enumerate}
+O conjunto dos inteiros é definido como:
+\[
+    \mathbb{Z} = \{z \in \mathbb{R} \mid \exists x, y \in \mathbb{N},\ z = x - y\}
+\]
+Por fim, os racionais são dados são definidos de tal modo que:
+\[
+    \mathbb{Q} = \{a \in \mathbb{R} \mid \exists p, q \in \mathbb{Z},\ a = \frac{p}{q} \land q \neq 0\}
+\]
+Dado que todo natural $x = x - 0$, então $\mathbb{N} \subset \mathbb{Z}$. Outrossim,
+temos que todo inteiro $z = \frac{z}{1}$, de sorte que $\mathbb{Z} \subset \mathbb{Q}$.
+Portanto,
+\[
+    \mathbb{N} \subset \mathbb{Z} \subset \mathbb{Q} \subset \mathbb{R}
+\]
+
 \subsection{Consequências das Propriedades}
+
+A seguir, provaremos alguns dos comportamentos esperados para as operações de adição
+e multiplicação com números reais. A primeira delas trata-se do $0$ ser um elemento
+absorvente na multiplicação.
 
 \begin{prop:mult por 0}
     Para todo real $a$ tem-se $a \cdot 0 = 0$
@@ -101,6 +112,7 @@ números reais $a$, $b$, $c$ e $d$:
 \end{proof}
 \end{prop:mult por 0}
 
+A seguir, veremos que um número real multiplicado por $-1$ deve ser igual ao seu oposto.
 \begin{prop:mult menos 1}
 \label{prop:mult menos 1}
     Para todo real $a$ vale que $a \cdot (-1) = -a$
@@ -114,6 +126,10 @@ números reais $a$, $b$, $c$ e $d$:
 \end{proof}
 \end{prop:mult menos 1}
 
+Com o que foi mostrado na proposição \ref{prop:mult menos 1} segue que: (1) o oposto
+do oposto de um número real é a identidade desse número, e que somar um número com
+seu oposto significa subtrair dele próprio e, consequentemente, a operação de subtração
+$a - b$ equivale a $a + (-b)$.
 \begin{cor:menos com menos}
 	Para todo real $b$, tem-se que $-(-b) = b$
 \begin{proof}
@@ -145,6 +161,7 @@ números reais $a$, $b$, $c$ e $d$:
 \end{proof}
 \end{cor:sub e add}
 
+A seguir, mostraremos a regra de sinais da multiplicação.
 \begin{cor:regra de sinais1}
     Para todos reais $a$ e $b$ tem-se $a \cdot (-b) = - (ab)$
 \begin{proof}
@@ -164,7 +181,10 @@ números reais $a$, $b$, $c$ e $d$:
 \end{proof}
 \end{cor:regra de sinais2}
 
+Uma propriedade útil em alguns contextos é que, dado que o produto de dois números é
+nulo, então pelo menos um dos fatores era nulo.
 \begin{prop:fator 0}
+\label{prop:fator 0}
 	Para quaisquer reais $a$ e $b$, se $ab = 0$, então $a = 0$ ou $b = 0$
 \begin{proof}
 	Suponha por contradição que $ab = 0$, $a \neq 0$ e $b \neq 0$. Então
@@ -176,6 +196,8 @@ números reais $a$, $b$, $c$ e $d$:
 \end{proof}
 \end{prop:fator 0}
 
+Da proposição \ref{prop:fator 0} podemos mostrar que quando dois quadrados são iguais,
+então as bases são iguais ou opostas.
 \begin{cor:quadrados iguais}
     Sejam $a, b \in \mathbb{R}$. Se $a^2 = b^2$, então $a = \pm b$
 \begin{proof}
