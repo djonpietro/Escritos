@@ -1,6 +1,6 @@
 \section{Completude}
 
-\subsection{Supremo e Propriedade Arquimediana}
+\subsection{Axioma do Supremo}
 
 \begin{def:majorante}
     Um conjunto $X \subset \mathbb{R}$ é dito limitado superiormente caso exista um
@@ -17,19 +17,81 @@
 
 \begin{def:supremo}
     Se $X \subset \mathbb{R}$ é um conjunto limitado superiormente, então o seu supremo,
-    denotado por $\sup X$, é o menor dos seus majorantes. Alternativamente, se $X$ é
-    limitado inferiormente, então o seu ínfimo, representado por $\inf X$, é o maior
-    dos seus minorantes.
+    denotado por $\sup X$, será o elemento que satisfaz
+    \begin{enumerate}
+        \item $\sup X$ é majorante de $X$.
+
+        \item $\forall a \in \mathbb{R},\ (a \text{ é majorante de } X \rightarrow \sup X \leq a)$
+    \end{enumerate}
+    Alternativamente, se $X$ é
+    limitado inferiormente, então o seu ínfimo, representado por $\inf X$, é o elemento
+    em $\mathbb{R}$ que satisfaz
+    \begin{enumerate}
+        \item $\inf X$ é minorante de $X$.
+
+        \item $\forall a \in \mathbb{R},\ (a \text{ é minorante de } X \rightarrow a \leq \inf X)$
+    \end{enumerate}
 \end{def:supremo}
 
-Evidentemente, todo subconjunto dos reais limitado superiormente possui um supremo.
-O mesmo vale se ele for limitado inferiormente: terá um ínfimo.
+Sinteticamente, o supremo é o menor dos majorantes, enquanto que o ínfimo é o maior dos
+minorantes. Esses conceitos também são usados para definir formalmente as ideias usuais
+de elemento máximo ou mínimo de um conjunto.
 
 \begin{def:maximo}
 	Se $X \subset \mathbb{R}$ possui um supremo $a$, ele será o máximo de $X$, denotado
 	por $\max X$, se, e somente se, for membro de $X$. Se $b$ for o ínfimo de $X$, então
 	ele será o mínimo de $X$, com notação $\min X$, caso também seja elemento de $X$.
 \end{def:maximo}
+
+Enunciaremos, finalmente, a propriedade que difere os racionais dos reais. Ela é
+conhecida como Axioma da Completude ou do Supremo, o qual define $\mathbb{R}$ como
+um corpo ordenado completo.
+
+\begin{ax:supremo}
+	Todo subconjunto $X \subset \mathbb{R}$ não vazio e limitado superiormente possui
+	um supremo.
+\end{ax:supremo}
+
+Com base nesse axioma, vamos provar um resultado análogo ao enunciado: todo conjunto com
+uma cota inferior deve ter um ínfimo.
+
+\begin{prop:completude infimo}
+    Todo subconjunto $X \subset \mathbb{R}$ não vazio e limitado inferiormente possui
+	um ínfimo.
+\begin{proof}
+	Sendo $X$ um subconjunto dos reais não vazio e com um minorante, digamos que o
+	conjunto $X'$ seja aquele tal que:
+	\[
+	    X' = \{x' \in \mathbb{R} \mid x' = -x \land x \in X \}.
+	\]
+	Da hipótese segue que $X'$ é não vazio e possui, pois, um supremo $s$ pelo Axioma
+	da Completude. Sendo satisfeito que
+	\[
+	    \forall x' \in X',\ (\, x' \leq s\,)
+	\]
+	então deve ser válido que
+	\[
+	    \forall x \in X,\ (\, -s \leq x\,)
+	\]
+	e $-s$ é um minorante de $X$. Ademais, $-s$ deve ser ínfimo, já que, caso contrário,
+	haveria $m \in \mathbb{R}$ tal que $-s < m < x$ para todo $x \in X$, implicando que
+	$x' < -m < s$ para todo $x' \in \mathbb{X'}$, e $s$ não seria supremo.
+\end{proof}
+\end{prop:completude infimo}
+
+\subsection{Propriedade Arquimediana}
+
+A propriedade arquimediana é simples em seu enunciado, mas detém um significado mais
+profundo. Em essência, ela enuncia que não existem elementos ``infinitesimais'' ou
+``infinitos'' no conjunto dos reais, isto é, elementos infinitamente pequenos ou
+grandes, respectivamente, no conjunto dos números reais. Qualquer número real positivo $a$
+que tomarmos, por mais pequeno em magnitude que seja, podemos sempre multiplicá-lo por
+algum outro número positivo cujo resultado será maior que um outro positivo $b$ dado.
+Inversamente, podemos dividir qualquer positivo $b$, por maior que seja, de tal forma que
+o quociente será menor do que um segundo positivo $a$ dado.
+
+Há três modos formais mais comuns de enunciar essa proprieade, e iremos mostrar que todas
+elas são equivalentes.
 
 \begin{thm:arquimediana}
 \label{thm:arquimediana}
@@ -40,15 +102,15 @@ O mesmo vale se ele for limitado inferiormente: terá um ínfimo.
 		\item para quaisquer reais positivos $a$ e $b$, existe $n \in \mathbb{N}$ tal que $b < na$.
     \end{enumerate}
 \begin{proof}
-	(1 $\rightarrow$ 2) Suponha a afirmação (1).
-	Visto que os reais positivos são fechados por multiplicação, então se
-	$x \in X$, segue que $x > 0$, e $0$ é minorante de $X$. Seja $c$ um real positivo,
-	então por hipótese existe um natural $n$ tal que
+	(1 $\rightarrow$ 2) Se os naturais não possuem supremo, então, para todo $c \in \mathbb{R}^+$,
+	temos que $\frac{1}{c}$ não pode ser majorante de $\mathbb{N}$. Existe, desse modo,
+	um $n \in \mathbb{N}$ tal que
 	\begin{gather*}
 		\frac{1}{c} < n\\
-		\frac{1}{n} < c
+		\frac{1}{n} < c.
     \end{gather*}
-    do qual se conclui que $0$ deverá ser o ínfimo de $X$.
+    Como consequência dos fatos que $X$ tem $0$ como minorante e nenhum real positivo pode
+    ser minorante de $X$, então $\inf X = 0$.
 
     (2 $\rightarrow$ 3) Suponha (2) e, por contradição, que existem $a$ e $b$ reais
     positivos tal que, para todo natural $n$, tenha-se $na < b$. Dessa desigualdade obtemos
@@ -56,13 +118,21 @@ O mesmo vale se ele for limitado inferiormente: terá um ínfimo.
     \[
         \frac{a}{b} < \frac{1}{n}.
     \]
-    isso implicaria que o lado esquerdo da desigualdade seria um minorante de $X$ e, pelo
-    fechamento dos postivos, o ínfimo de $X$, que contradiz a hipótese, logo um absurdo.
+    isso implicaria que o lado esquerdo da desigualdade seria um minorante de $X$. Contudo,
+    pela hipótse, teríamos $\frac{a}{b} < 0$, o que contradiz o fechamento dos reais
+    positivos, provando que da afirmação 2 segue a terceira.
 
-    (3 $\rightarrow$ 1) Suponha (3) e que $m \in \mathbb{N}$ e $s \in \mathbb{R}^+$ tal
-    que $m < s$. Uma vez que são ambos positvos, então existe natural $n$ tal que
-    $n \cdot m < s$. Como $n \cdot m \in \mathbb{N}$, então os naturais não podem ter
-    um supremo.
+    (3 $\rightarrow$ 1) Suponha (3) e que os naturais possuam um supremo $s$. Seria
+    verdade então que
+    \[
+        \forall m \in \mathbb{N},\ (\,m < s\,)
+    \]
+    No entanto, da hipótse segue que
+    \[
+        \exists n \in \mathbb{N},\ (\, s < nm\,)
+    \]
+    e $m < s < nm$. Como $n \cdot m \in \mathbb{N}$, $s$ não é supremo,
+    chegando a uma contradição.
 \end{proof}
 \end{thm:arquimediana}
 
@@ -81,6 +151,77 @@ O mesmo vale se ele for limitado inferiormente: terá um ínfimo.
 \end{thm:majorante naturais}
 
 Sendo o Teorema \ref{thm:majorante naturais} válido e equivalente as demais afirmações no
-teorema \ref{thm:arquimediana}, então todas as afirmações são válidas. Em especial, a
-terceira afirmação do Teorema \ref{thm:arquimediana} é dita como propriedade arquimediana,
-e, por consequência, o conjunto dos reais é arquimediano.
+teorema \ref{thm:arquimediana}, então todas as afirmações são válidas. Concluimos que os
+números reais são um conjunto arquimediano.
+
+\subsection{Outras Consequências do Axioma da Completude}
+
+\begin{thm:intervalos encaixados}
+\label{thm:intervalos encaixados}
+    Uma sequência descrescente de intervalos reais $I_1, I_2, \ldots$ encaixados, isto é,
+   \[
+        I_1 \supset I_2 \supset \ldots,
+   \]
+   possui pelo menos um $c \in \mathbb{R}$ satisfazendo
+   \[
+        c \in \bigcap_{k = 1}^\infty I_k
+   \]
+\begin{proof}
+    Seja $I_k = [a_k, b_k]$, temos que
+    \[
+        a_1 \leq a_2 \leq \ldots \leq a_n \leq \ldots \leq b_n \leq \ldots \leq b_2 \leq b_1.
+    \]
+    O conjunto dos extremos inferiores $A = \{a_1, a_2, \ldots\}$, pelo Axioma de Completude,
+    possui um supremo $c$. Esse supremo, por definição, será menor que qualquer majorante
+    $b_k$, para $k \in \mathbb{N}^*$. Por consequência, $c \in I_k$ para todo $k \in \mathbb{N}$.
+\end{proof}
+\end{thm:intervalos encaixados}
+
+\begin{thm:intervalos encaixados e funcao}
+\label{thm:não enumeravel}
+    Toda função $f: \mathbb{N} \to (a, b)$ admite uma sequência decrescente
+    de intervalos encaixados satisfazendo $f(k) \notin I_k$.
+\begin{proof}
+    Para isso, começe fazendo $I_0 = [a_0, b_0]$ tal que
+    \[
+        a < a_0 < b_0 < b
+    \]
+    e $f(0) < a_0$. Depois, com o intervalo $I = [a_k, b_k]$ construído,
+    para $k \in \mathbb{N}^*$, construa $I_{k+1}$ de tal modo que, se $f(k+1) \notin I_n$,
+    então $I_{n+1}$, senão, $f(n+1)$ terá de ser diferente de pelo meno um dos extremos de
+    $I_k$, digamos $a_k$. Desse modo, como $a_k < f(k+1)$, faça $a_{k+1} = a_k$ e
+    \[
+        b_{k+1} = \frac{a_k + f(n+1)}{2}.
+    \]
+\end{proof}
+\end{thm:intervalos encaixados e funcao}
+
+\begin{thm:não enumeravel}
+    Todo intervalo real $(a, b)$, com $a, b \in \mathbb{R}$, é não enumerável.
+\begin{proof}
+    Provemos que uma função $f: \mathbb{N} \to (a, b)$ não pode ser sobrejetiva.
+    Com efeito, essa função admite uma sequência decrescente de intervalos encaixados
+    \[
+        I_0 \supset I_1 \supset \ldots
+    \]
+    satisfazendo $f(k) \notin I_k$. Pelo Teorema \ref{thm:intervalos encaixados},
+    existe $c \in \mathbb{R}$ que pertence a todos esses intervalos e, por construção,
+    não poderia ser imagem de nenhum $n \in \mathbb{N}$. Logo, toda função $f$ de naturais
+    para um intervalo real não pode ser sobrejetora.
+\end{proof}
+\end{thm:não enumeravel}
+
+\begin{cor:reais nao enumeraveis}
+    O conjunto dos números reais é não enumerável.
+\begin{proof}
+	Caso fosse, todo subconjunto seu seria enumerável, o que é absurdo, pois itervalos
+	não o são.
+\end{proof}
+\end{cor:reais nao enumeraveis}
+
+Sendo o conjunto $\mathbb{Q}$ dos números racionais enumerável e $\mathbb{R}$ não
+enumerável, então há um número infinito de elementos, infinito esse maior que dos
+números naturais, que não são racionais. Esses números são chamados de
+irracionais, pois não podem ser escritos como uma fração com numerador e denominador
+inteiros, e seu conjunto é denotado por $\mathbb{I}$. Portanto, conseguimos mostrar que o
+axioma do supremo garante que os números racionais é subconjunto próprio dos números reais
