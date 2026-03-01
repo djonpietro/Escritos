@@ -1,0 +1,140 @@
+\section{Topologia dos Números Reais}
+
+\subsection{Conjuntos Abertos}
+
+Os pontos num intervalo real na forma $(\alpha, \beta)$ possuem a propriedade de que
+qualquer ponto está envolto por infinitos pontos ainda dentro do intervalo nos dois
+sentidos. É essa noção que iremos formalizar como \textbf{pontos interiores}.
+
+\begin{def:interior}
+    Seja $X$ um subconjunto de $\mathbb{R}$. O conjunto dos pontos interiores de $X$,
+    denotado por $\inter X$, é aquele que reúne todos os pontos $a \in \mathbb{R}$ para
+    os quais existe $\epsilon > 0$ tal que
+    \[
+        I = (a - \epsilon, a + \epsilon) \subset X.
+    \]
+\end{def:interior}
+
+Chamaremos um conjunto de aberto quando ele for igual ao conjunto dos seus pontos
+interiores. Dessa forma, qualquer ponto do conjunto está envolto, nos dois sentidos,
+de infinitos outros pontos também interiores ao conjunto.
+
+\begin{def:aberto}
+	Um conjunto $X \subset \mathbb{R}$ é dito aberto se, e somente se, $X = \inter X$.
+\end{def:aberto}
+
+\noindent
+Uma nota importante é que, por não ter elementos, o conjunto vazio é aberto por vacuidade.
+
+A vizinhança $V$ de um ponto $a$ é qualquer aberto $A \subset V$ que tenha o $a$ como
+membro.
+\begin{def:aberto}
+	Seja $a \in \mathbb{R}$ e $V \subset \mathbb{R}$. Diz-se que $V$ é vizinhança para
+	$a$ se existe aberto $A \subset V$ tal que $x \in A$.
+\end{def:aberto}
+\noindent
+Uma consequência direta dessa definição é que todo conjunto aberto é uma vizinhança para
+todos os seus pontos.
+
+Mostremos, agora, que a interseção de quaisquer abertos é um aberto, e que a reunião
+de uma família potencialmente infinita de abertos também é um aberto.
+
+\begin{prop:aberto}
+    Seja $\mathcal{F}$ uma família de conjuntos abertos. É
+    verdade que
+    \begin{enumerate}
+        \item $\forall A_1, A_2 \in \mathcal{F},\ (\, A_1 \cap A_2 \text{ é aberto}\,)$
+        \item $\bigcup_{A \in \mathcal{F}} A$ é aberto
+    \end{enumerate}
+\begin{proof}
+    (1) A conclusão é direta se $A_1 \cap A_2 = \varnothing$. Do contrário, existem
+    $\epsilon_1 > 0$ e $\epsilon_2 > 0$ tais que
+    \[
+        (a - \epsilon_1, a + \epsilon_1) \subset A_1 \quad \text{ e } \quad
+        (a - \epsilon_2, a + \epsilon_2) \subset A_2.
+    \]
+    Sem perda de generalidade, considere que $\epsilon_1 < \epsilon_2$, levando a que
+    \[
+        (a - \epsilon_1, a + \epsilon_1) \subset (a - \epsilon_2, a + \epsilon_2)
+    \]
+    Visto que o intervalo $(a - \epsilon_1, a + \epsilon_1)$ está contido tanto em $A_1$
+    quanto em $A_2$, então esse intervalo está contido em $A_1 \cap A_2$, e $a$ é, pois,
+    um ponto interior desse último.
+
+    (2) Se $a \in A$ e $A \in \mathcal{F}$, então $A$ é vizinhança de $a$. Desse modo,
+    na reunião dos abertos de $\mathcal{F}$, $A$ permanecerá uma vizinhança de $a$. Como
+    vale para todo ponto em algum aberto na reunião, a reunião de abertos também será um
+    aberto.
+\end{proof}
+\end{prop:aberto}
+
+Uma sutileza na proposição é que somente a interseção de um número finito de abertos foi
+demonstrada ser aberto, o que não necessariamente vale quando é feita a interseção de
+infinitos abertos. Por outro lado, a união de um número potencialmente infinito de abertos
+é sim um aberto.
+
+\subsection{Conjuntos Fechados}
+
+Um ponto $a$ é de aderência no conjunto $X$ se ele qualquer intervalo centrado nele
+posssui pontos em comum com $X$.
+
+\begin{def:ponto de aderencia}
+    Seja $a \in \mathbb{R}$ e $X \subset \mathbb{R}$. O ponto $a$ é aderente a $X$,
+    ou é ponto de aderência do conjunto, se, e somente se, toda vizinhança $V$ que contém
+    $a$ é satisfeito que
+    \[
+        V \cap X \neq \varnothing.
+    \]
+\end{def:ponto de aderencia}
+\noindent
+A noção de fecho dum conjunto é dada como a reunião de todos os seus pontos de aderência.
+\begin{def:fecho}
+	Chamamos fecho dum conjunto $X \subset \mathbb{R}$, denotado por $\overline{X}$,
+	o conjunto dos pontos de aderência de $X$.
+\end{def:fecho}
+
+Como nossa definição de aderente não proibiu intervalos degenerados, então temos que
+qualquer ponto de $x$ será aderente a $X$, de modo a implicar que $X \subset \overline{X}$.
+Dessa última, também conlui-se que, se $X \subset Y$, então $\overline{X} \subset \overline{Y}$
+por transitividade da relação de inclusão. O conceito de fecho também serve para definir
+conjuntos fechados.
+
+\begin{def:fechado}
+    Um conjunto $X \subset \mathbb{R}$ é dito fechado se, e somente se, $X = \overline{X}$.
+\end{def:fechado}
+
+\begin{prop:complementar aberto}
+    Um conjunto é fechado se, e somente se, seu complementar é aberto.
+\begin{proof}
+	Suponha que $X$ é fechado e seja $A = \mathbb{R} \setminus X$ seu complementar.
+	Com efeito, se $a \in A$, então $a \notint X$, o que siginifica que $a$ não é
+	ponto de aderência de $X$, e existe vizinhaça $V$ tal que $a \in V$ e
+	$V \cap X = \varnothing$. É verdade que $V \subset A$, pois, senão, teríamos que
+	algum ponto de $V$ pertenceria a $X$, já que esse é complementar de $A$. Portanto,
+	como todo ponto em $A$ admite uma vizinhança, então $A$ é aberto.
+
+	Reciprocamente, se $A$ é aberto, então para todo ponto $a \notin A$, logo $a \in X$,
+	existe uma vizinhança $V$ que não está contida em $A$ que possui, pois,
+	interseção com $X$. Por definição, $a$ é ponto de aderência em $X$ que também é
+	membro desse, e $X$ é fechado.
+\end{proof}
+\end{prop:complementar aberto}
+
+\begin{prop:fechado}
+    Seja $\mathcal{F}$ uma família arbitrária de conjuntos fechados. É verdade que
+    \begin{enumerate}
+    	\item $\forall X_1, X_2 \in \mathcal{F},\ (X_1 \cup X_2 \text{ é fechado })$
+    	\item $\bigcap_{X \in \mathcal{F}} X$ é fechado.
+    \end{enumerate}
+\begin{proof}
+	(1) Suponha que $x$ seja aderente a $U = X_1 \cup X_2$. Nesse caso, toda vizinhança
+	$V$ de $x$ contém pontos de $U$, o que significa que $V$ contém pontos de $X_1$ ou
+	pontos de $X_2$. Por consequência, $x$ deve ser aderente a $X_1$ ou $X_2$, e como
+	ambos são fechados, então $x$ é membro de algum deles, logomembro de $U$, e $U$ é fechado.
+
+	(2) Se $x$ é aderente a $I = \bigcap{X \in \mathcal{F}} X$, e $V$ é vizinhança para
+	$x$, então $V$ não pode ser disjunto de nenhum fechado de $\mathcal{F}$, de sorte que
+	$x$ é aderente a todo conjunto desse último. Como são todos fechados, então $x$
+	pertence a todo $X \in \mathcal{F}$, e $x \in I$.
+\end{proof}
+\end{prop:fechado}
