@@ -107,7 +107,7 @@ normal ou que sejam aproximadamente simétricos. No entanto, os dados do mundo
 real possuem, em grande parte, uma forma assimétrica. A fim de possibilitar
 a aplicação das técnicas para distribuições simétricas, podemos utilizar
 transformações sobre os valores dos dados, de modo a consertar a sua assimetria.
-A família de transformações mais comuns para um variável $X$ são
+Uma família de transformações comuns para um variável $X$ são as de Turkey:
 \[
   T(X, p) = \begin{cases}
     x^p,&\text{ se } p > 0\\
@@ -121,13 +121,12 @@ onde $p$ é um valor empírico geralmente adotado na sequência
 \]
 
 Quanto maior for a assimetria à direita da distribuição, menor deverá ser
-o valor de $p$ a fim de corrigi-la. Para assimetrias à esquerda, valores
-negativos de $p > 1$ provocam uma compressão de valores pequenos e expandem
-os valores maiores. Se a distribuição for levemente assimétrica à direita,
-valores positivos de $p < 1$ provocarão uma correção leve em valores grandes.
-Transformações como a logaritmíca são adequadas para assimetrias à direita
-moderadas, especialmente quando o desvio padrão é proporcional à média, ou
-quando o efeito modelado é multiplicativo invés de aditivo. Já transformações
-com $p < 0$ são aplicadas em assimetrias à direita severas, em que o sinal
-negativo nos valores é usado para preservar a sua ordem.
-
+o valor de $p$ a fim de corrigi-la. .Se a distribuição for levemente
+assimétrica à direita, valores transformações com $ 0 < p < 1$ provocarão uma
+correção leve em valores grandes. Transformações como a logaritmíca são
+adequadas para assimetrias à direita moderadas, especialmente quando o desvio
+padrão é proporcional à média, ou quando o efeito modelado é multiplicativo
+invés de aditivo. Já transformações com $p < 0$ são aplicadas em assimetrias à
+direita severas, em que o sinal negativo nos valores pode ou não ser usado para
+preservar a sua ordem. Para assimetrias à esquerda, valores de $p > 1$ provocam
+uma compressão de valores pequenos e expandem os valores maiores.
