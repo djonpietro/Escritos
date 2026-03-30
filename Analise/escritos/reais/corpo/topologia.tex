@@ -2,69 +2,72 @@
 
 \subsection{Conjuntos Abertos}
 
-Os pontos num intervalo real na forma $(\alpha, \beta)$ possuem a propriedade de que
-qualquer ponto está envolto por infinitos pontos ainda dentro do intervalo nos dois
-sentidos. É essa noção que iremos formalizar como \textbf{pontos interiores}.
-
 \begin{def:interior}
-    Seja $X$ um subconjunto de $\mathbb{R}$. O conjunto dos pontos interiores de $X$,
-    denotado por $\inter X$, é aquele que reúne todos os pontos $a \in \mathbb{R}$ para
-    os quais existe $\epsilon > 0$ tal que
-    \[
-        I = (a - \epsilon, a + \epsilon) \subset X.
-    \]
+Seja $X$ um subconjunto de $\mathbb{R}$. O conjunto dos pontos interiores de $X$,
+denotado por $\inter X$, é aquele que reúne todos os pontos $a \in \mathbb{R}$ para
+os quais existe $\epsilon > 0$ tal que
+\[
+	I = (a - \epsilon, a + \epsilon) \subset X.
+\]
 \end{def:interior}
 
-Chamaremos um conjunto de aberto quando ele for igual ao conjunto dos seus pontos
-interiores. Dessa forma, qualquer ponto do conjunto está envolto, nos dois sentidos,
-de infinitos outros pontos também interiores ao conjunto.
-
 \begin{def:aberto}
-	Um conjunto $X \subset \mathbb{R}$ é dito aberto se, e somente se, $X = \inter X$.
+Um conjunto $X \subset \mathbb{R}$ é dito aberto se, e somente se, $X = \inter X$.
 \end{def:aberto}
 
-\noindent
-Uma nota importante é que, por não ter elementos, o conjunto vazio é aberto por vacuidade.
-
-A vizinhança $V$ de um ponto $a$ é qualquer aberto $A \subset V$ que tenha o $a$ como
-membro.
-\begin{def:aberto}
-	Seja $a \in \mathbb{R}$ e $V \subset \mathbb{R}$. Diz-se que $V$ é vizinhança para
-	$a$ se existe aberto $A \subset V$ tal que $x \in A$.
-\end{def:aberto}
+\begin{def:vizinhanca}
+Seja $a \in \mathbb{R}$ e $V \subset \mathbb{R}$. Diz-se que $V$ é vizinhança para
+$a$ se existe aberto $A \subset V$ tal que $x \in A$.
+\end{def:vizinhanca}
 \noindent
 Uma consequência direta dessa definição é que todo conjunto aberto é uma vizinhança para
 todos os seus pontos.
 
-Mostremos, agora, que a interseção de quaisquer abertos é um aberto, e que a reunião
-de uma família potencialmente infinita de abertos também é um aberto.
+\begin{prop:vizinhanca}
+Um conjunto $X \subset \mathbb{R}$ é aberto se, e somente se, todo ponto $x \in X$
+admite uma vizinhança $V \subset X$.
+\begin{proof}
+	Se $X$ é aberto, então uma vizinhança para $x$ contida em $X$ é o próprio $X$.
+	Reciprocamente, se $V \subset X$ é uma vizinhança para $x \in X$, então existe
+	um aberto $A \subset V$ contido em $X$, e $x \in A$. Por definição de aberto, existirá
+	um $\epsilon > 0$ tal que o intervalo
+	\[
+		I = (x - \epsilon, x + \epsilon)
+	\]
+	está contido $A$, logo no próprio $X$:
+	\[
+		I \subset A \subset V \subset X.
+	\]
+	Conclui-se então que todo ponto $x \in X$ é interior de $X$.
+\end{proof}
+\end{prop:vizinhanca}
 
 \begin{prop:aberto}
-    Seja $\mathcal{F}$ uma família de conjuntos abertos. É
-    verdade que
-    \begin{enumerate}
-        \item $\forall A_1, A_2 \in \mathcal{F},\ (\, A_1 \cap A_2 \text{ é aberto}\,)$
-        \item $\bigcup_{A \in \mathcal{F}} A$ é aberto
-    \end{enumerate}
+Seja $\mathcal{F}$ uma família de conjuntos abertos. É
+verdade que
+\begin{enumerate}
+	\item $\forall A_1, A_2 \in \mathcal{F},\ (\, A_1 \cap A_2 \text{ é aberto}\,)$
+	\item $\bigcup_{A \in \mathcal{F}} A$ é aberto
+\end{enumerate}
 \begin{proof}
-    (1) A conclusão é direta se $A_1 \cap A_2 = \varnothing$. Do contrário, existem
-    $\epsilon_1 > 0$ e $\epsilon_2 > 0$ tais que
-    \[
-        (a - \epsilon_1, a + \epsilon_1) \subset A_1 \quad \text{ e } \quad
-        (a - \epsilon_2, a + \epsilon_2) \subset A_2.
-    \]
-    Sem perda de generalidade, considere que $\epsilon_1 < \epsilon_2$, levando a que
-    \[
-        (a - \epsilon_1, a + \epsilon_1) \subset (a - \epsilon_2, a + \epsilon_2)
-    \]
-    Visto que o intervalo $(a - \epsilon_1, a + \epsilon_1)$ está contido tanto em $A_1$
-    quanto em $A_2$, então esse intervalo está contido em $A_1 \cap A_2$, e $a$ é, pois,
-    um ponto interior desse último.
+	(1) A conclusão é direta se $A_1 \cap A_2 = \varnothing$. Do contrário, existem
+	$\epsilon_1 > 0$ e $\epsilon_2 > 0$ tais que
+	\[
+		(a - \epsilon_1, a + \epsilon_1) \subset A_1 \quad \text{ e } \quad
+		(a - \epsilon_2, a + \epsilon_2) \subset A_2.
+	\]
+	Sem perda de generalidade, considere que $\epsilon_1 < \epsilon_2$, levando a que
+	\[
+		(a - \epsilon_1, a + \epsilon_1) \subset (a - \epsilon_2, a + \epsilon_2)
+	\]
+	Visto que o intervalo $(a - \epsilon_1, a + \epsilon_1)$ está contido tanto em $A_1$
+	quanto em $A_2$, então esse intervalo está contido em $A_1 \cap A_2$, e $a$ é, pois,
+	um ponto interior dessa interseção.
 
-    (2) Se $a \in A$ e $A \in \mathcal{F}$, então $A$ é vizinhança de $a$. Desse modo,
-    na reunião dos abertos de $\mathcal{F}$, $A$ permanecerá uma vizinhança de $a$. Como
-    vale para todo ponto em algum aberto na reunião, a reunião de abertos também será um
-    aberto.
+	(2) Se $a \in A$ e $A \in \mathcal{F}$, então $A$ é vizinhança de $a$. Desse modo,
+	na reunião dos abertos de $\mathcal{F}$, $A$ permanecerá uma vizinhança de $a$. Como
+	vale para todo ponto em algum aberto na reunião, a reunião de abertos também será um
+	aberto.
 \end{proof}
 \end{prop:aberto}
 
@@ -75,66 +78,148 @@ infinitos abertos. Por outro lado, a união de um número potencialmente infinit
 
 \subsection{Conjuntos Fechados}
 
-Um ponto $a$ é de aderência no conjunto $X$ se ele qualquer intervalo centrado nele
-posssui pontos em comum com $X$.
-
 \begin{def:ponto de aderencia}
-    Seja $a \in \mathbb{R}$ e $X \subset \mathbb{R}$. O ponto $a$ é aderente a $X$,
-    ou é ponto de aderência do conjunto, se, e somente se, toda vizinhança $V$ que contém
-    $a$ é satisfeito que
-    \[
-        V \cap X \neq \varnothing.
-    \]
+Seja $a \in \mathbb{R}$ e $X \subset \mathbb{R}$. O ponto $a$ é aderente a $X$,
+ou é ponto de aderência de $X$, se, e somente se, toda vizinhança $V \subset \mathbb{R}$
+para $a$ satisfaz
+\[
+	V \cap X \neq \varnothing.
+\]
 \end{def:ponto de aderencia}
-\noindent
-A noção de fecho dum conjunto é dada como a reunião de todos os seus pontos de aderência.
+
 \begin{def:fecho}
-	Chamamos fecho dum conjunto $X \subset \mathbb{R}$, denotado por $\overline{X}$,
-	o conjunto dos pontos de aderência de $X$.
+Chamamos fecho dum conjunto $X \subset \mathbb{R}$, denotado por $\overline{X}$,
+o conjunto dos pontos de aderência de $X$.
 \end{def:fecho}
 
-Como nossa definição de aderente não proibiu intervalos degenerados, então temos que
-qualquer ponto de $x$ será aderente a $X$, de modo a implicar que $X \subset \overline{X}$.
-Dessa última, também conlui-se que, se $X \subset Y$, então $\overline{X} \subset \overline{Y}$
-por transitividade da relação de inclusão. O conceito de fecho também serve para definir
-conjuntos fechados.
+\begin{prop:fecho e inclusao}
+Sejam $X$ e $Y$ subconjuntos de $\mathbb{R}$. É satisfeito que
+\begin{enumerate}
+	\item $X \subset \overline{X}$
+	\item $X \subset Y \rightarrow \overline{X} \subset \overline{Y}$
+\end{enumerate}
+\begin{proof}
+	(1) Se $x \in X$ e $V$ é uma vizinhança para $x$, então a interseção $V \cap X$ não
+	pode ser vazia, logo $x \in \overline{X}$.
+
+	(2) Se $x\in \overline{X}$, com $X \subset Y$, então toda vizinhança
+	$V$ para $x$ não é disjunta de $X$, donde segue que $V \cap Y$ também não é vazia,
+	pois $x \in Y$. Visto que $Y \subset \overline{Y}$ pela afirmação 1, então
+	$x \in \overline{Y}$.
+\end{proof}
+\end{prop:fecho e inclusao}
 
 \begin{def:fechado}
-    Um conjunto $X \subset \mathbb{R}$ é dito fechado se, e somente se, $X = \overline{X}$.
+Seja $X \subset \mathbb{R}$. O conjunto $X$ é fechado se, e somente, se
+$X = \overline{X}$.
 \end{def:fechado}
+\noindent
 
 \begin{prop:complementar aberto}
-    Um conjunto é fechado se, e somente se, seu complementar é aberto.
+\label{prop:complementar aberto}
+Seja $X \subset \mathbb{R}$. O conjunto $X$ é fechado se, e somente se,
+seu complementar em relação a $\mathbb{R}$ é aberto.
 \begin{proof}
-	Suponha que $X$ é fechado e seja $A = \mathbb{R} \setminus X$ seu complementar.
-	Com efeito, se $a \in A$, então $a \notint X$, o que siginifica que $a$ não é
-	ponto de aderência de $X$, e existe vizinhaça $V$ tal que $a \in V$ e
-	$V \cap X = \varnothing$. É verdade que $V \subset A$, pois, senão, teríamos que
-	algum ponto de $V$ pertenceria a $X$, já que esse é complementar de $A$. Portanto,
-	como todo ponto em $A$ admite uma vizinhança, então $A$ é aberto.
+	Suponha que $X$ seja fechado, e seja $A = \mathbb{R} \setminus X$.
+	Se $a \in A$, então $a \notin X$, e $a$ não pode ser aderente a $X$ pela hipótese
+	desse ser fechado. Dessa maneira, existe uma vizinhança $V$ para $a$ disjunta de $X$.
+	Como $V \subset \mathbb{R}$ e $V \cap X = \varnothing$, então $V \subset A$. Se isso
+	vele para todo ponto de $A$, então ele é aberto.
 
-	Reciprocamente, se $A$ é aberto, então para todo ponto $a \notin A$, logo $a \in X$,
-	existe uma vizinhança $V$ que não está contida em $A$ que possui, pois,
-	interseção com $X$. Por definição, $a$ é ponto de aderência em $X$ que também é
-	membro desse, e $X$ é fechado.
+	Reciprocamente, suponha que $A$ é aberto. Com efeito, há vizinhança $V \subset A$ para
+	$a \in A$, de modo que $V \cap X = \varnothing$. Logo, $a$ não pode ser aderente a $X$.
+	Realiza-se que se $x$ é aderente a $X$, então $x \notin A$, não havendo outra
+	possibilidade a não ser $x \in X$. Portanto, $X$ é fechado.
 \end{proof}
 \end{prop:complementar aberto}
 
 \begin{prop:fechado}
-    Seja $\mathcal{F}$ uma família arbitrária de conjuntos fechados. É verdade que
-    \begin{enumerate}
-    	\item $\forall X_1, X_2 \in \mathcal{F},\ (X_1 \cup X_2 \text{ é fechado })$
-    	\item $\bigcap_{X \in \mathcal{F}} X$ é fechado.
-    \end{enumerate}
+Seja $\mathcal{F}$ uma família arbitrária de conjuntos fechados.
+É verdade que:
+\begin{enumerate}
+	\item $\forall F_1, F_2 \in \mathcal{F},\ (F_1 \cup F_2 \text{ é fechado })$
+	\item $\bigcap_{F \in \mathcal{F}} F$ é fechado.
+\end{enumerate}
 \begin{proof}
-	(1) Suponha que $x$ seja aderente a $U = X_1 \cup X_2$. Nesse caso, toda vizinhança
-	$V$ de $x$ contém pontos de $U$, o que significa que $V$ contém pontos de $X_1$ ou
-	pontos de $X_2$. Por consequência, $x$ deve ser aderente a $X_1$ ou $X_2$, e como
-	ambos são fechados, então $x$ é membro de algum deles, logomembro de $U$, e $U$ é fechado.
+	(1) Seja $A = \mathbb{R} \setminus (F_1 \cup F_2)$, que equivale a
+	\[
+		A = (\mathbb{R} \setminus F_1) \cap (\mathbb{R} \setminus F_2).
+	\]
+	Fazendo $A_1 = \mathbb{R} \setminus F_1$ e $A_2 = \mathbb{R} \setminus F_2$, pela Proposição
+	\ref{prop:complementar aberto} temos que tanto $A_1$ quanto $A_2$ são abertos.
+	Como a interseção de dois abertos é aberto, então $A$ é aberto, e seu complementar --
+	$F_1 \cup F_2$ -- deve ser fechado.
 
-	(2) Se $x$ é aderente a $I = \bigcap{X \in \mathcal{F}} X$, e $V$ é vizinhança para
-	$x$, então $V$ não pode ser disjunto de nenhum fechado de $\mathcal{F}$, de sorte que
-	$x$ é aderente a todo conjunto desse último. Como são todos fechados, então $x$
-	pertence a todo $X \in \mathcal{F}$, e $x \in I$.
+	(2) Seja
+	\[
+		A = \mathbb{R} \setminus \bigcap_{F \in \mathcal{F}} F = \bigcup_{F \in \mathcal{F}}
+		(\mathbb{R} \setminus F).
+	\]
+	Se $F \in \mathcal{F}$ é fechado, então $\mathbb{R} \setminus F$ é aberto pela proposição
+	\ref{prop:complementar aberto}. Como a união de abertos é aberto, então $A$ é aberto,
+	e seu complementar, dado por
+	\[
+		\bigcap_{F \in \mathcal{F}} F,
+	\]
+	é fechado.
 \end{proof}
 \end{prop:fechado}
+
+\begin{def:cisao}
+Seja $X \subset \mathbb{R}$. Uma cisão de $X$ é uma partição $\{A, B\}$ de $X$
+tal que
+\[
+	\overline{A} \cap B = A \cap \overline{B} = \varnothing.
+\]
+\end{def:cisao}
+
+\begin{prop:cisao}
+Seja $X \subset \mathbb{R}$. Se $\mathcal{P} = \{A, B\}$ uma partição de $X$
+com $A$ e $B$ abertos, então $\mathcal{P}$ é uma cisão de $X$.
+\begin{proof}
+	Se $A$ é aberto, então todo ponto $a \in A$ admite uma vizinhança $V \subset A$.
+	Como $V \cap B = \varnothing$, então $a \notin \overline{B}$. Logo,
+	$A \cap \overline{B} = \varnothing$. Analogamente, se $b$ pertence a $B$ aberto,
+	então há uma vizinhança $W \subset B$, que será disjunta de $A$, e
+	$b \notin \overline{A}$. Portanto, $\overline{A} \cap B = \varnothing$, e
+	$\mathcal{P}$ é cisão para $X$.
+\end{proof}
+\end{prop:cisao}
+
+\begin{prop:intervalos e cisao}
+um intervalo na reta admite somente a cisão trivial, i. e., composto dele próprio
+e o vazio.
+\begin{proof}
+	Suponha por contradição que $I$ é um intervalo real que admita uma cisão $\{A, B\}$
+	não trivial. Sejam $a \in A$ e $b \in B$ tal que $a<b$ e $J = (a, b) \subset I$.
+	Construamos o conjunto
+	\[
+		U = \{u \in A \cap J \mid u < b \}
+	\]
+	Já que $a \in U$, então $U \neq \varnothing$ e admite supremo $\sup U = s$. Dessa
+	maneira, é válido que
+	\[
+		\forall u \in U,\ (u < s \leq b)
+	\]
+	Supondo um $t \in J$ tal que $s < t < b$, se $t \in A$, então $t \in U$, e $s$ não
+	seria supremo. Segue que se $t \in (s, b)$, então $t \in B$. Com efeito, sendo $\epsilon > 0$,
+	se $s<s+\epsilon<b$, então $(s,s+\epsilon) \subset B$ pela conclusão anterior.
+	Se $b \leq s+\epsilon$, então $b \in (s-\epsilon, s+\epsilon)$. Obtemos que
+	\[
+		\forall \epsilon > 0,\ ( (s-\epsilon,s+\epsilon) \cap B \neq \varnothing ),
+	\]
+	e $s \in \overline{B}$. Como $s$ é supremo de um subconjunto de $A$, então
+	$s \in \overline{A}$. Temos que $s \in A$ ou $s \in B$. Em ambos os casos, obtém-se
+	uma contradição que $\{A, B\}$ era uma cisão para $I$. A mesma contradição é obtida
+	diretamente do caso $s = b$, que levaria a $\overline{A} \cap B \neq \varnothing$.
+\end{proof}
+\end{prop:intervalos e cisao}
+
+\begin{cor:fechado e aberto}
+Os únicos conjuntos fechados e abertos são $\mathbb{R}$ e $\varnothing$.
+\begin{proof}
+	O conjunto $\mathbb{R}$ admite somente a cisão trivial. Por conseguinte,
+	se $A \subset \mathbb{R}$ é aberto e fechado, então seja $C = \mathbb{R} \setminus A$
+	e temos que: $A = \mathbb{R}$ e $C = \varnothing$ ou $A = \varnothing$ e $C = \mathbb{R}$.
+\end{proof}
+\end{cor:fechado e aberto}
