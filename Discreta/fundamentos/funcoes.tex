@@ -61,7 +61,7 @@ membros de uma dado universo que satisfazem certas restrições. Muitas vezes,
 é possível detectar um padrão nessas estruturas de forma a possibilitar
 a abstração da contagem por meio de uma função que relaciona uma tupla de
 parâmetros característicos da estrutura ao número de objetos que satisfazem as
-restrições impostas. Chamaremos essas relações de funções de contagem, que
+restrições impostas. Chamaremos essas relações de \textbf{funções de contagem}, que
 assumem a forma
 \[
   f: \mathbb{N}^k \to \mathbb{N}
@@ -94,111 +94,155 @@ no universo.
 
 \subsection{Sequências}
 
-As sequências discretas são uma forma de representar uma sucessão de valores,
-que pode ser finita ou infinita, que possuem um primeiro elemento.
-Formalmente, diremos que $S$ é uma sequência se for uma função injetora
-na forma $S: D \to A$ tal que $D$ satisfaz uma das opções a seguir:
-\begin{enumerate}
-  \item $D = [n]^*$, tal que $n \in \mathbb{N}$, caso em que a sequência é dita
-    finita.
+Sequências discretas são uma forma de representar uma sucessão de valores,
+finita ou infinita, que possuem uma ordem natural dada por índices.
+Formalmente, diremos que $S$ é uma sequência se for uma função
+\[
+  S : D \to A
+\]
+em que $A$ é um conjunto qualquer e o domínio $D$ satisfaz uma das opções a
+seguir:
 
-  \item $D = \mathbb{N}$, caso onde a sequência é dita infinita.
+\begin{enumerate}
+  \item $D = [n]^*$, para algum $n \in \mathbb{N}$, caso em que a sequência é
+  dita finita.
+
+  \item $D = \mathbb{N}$, caso em que a sequência é dita infinita.
 \end{enumerate}
-Diremos que $S$ é uma sequência para um conjunto $A$ se ele for o contradomínio
-da sequência.
-Se $S: D \to A$, representaremos essa sequência enquanto uma tupla ordenada
-$(a_1, \ldots, a_n)$ de $A^n$, com $n = |D|$ de modo que
+
+Diremos que $A$ é o conjunto associado à sequência, isto é, o conjunto de
+valores que ela pode assumir.
+
+\subsubsection{Representação e Notação}
+
+Se $S : D \to A$, representaremos essa sequência enquanto uma tupla ordenada
+\[
+  (a_1, \ldots, a_n) \in A^n,
+\]
+com $n = |D|$, tal que
 \[
   a_i = a \Longleftrightarrow S(i) = a.
 \]
-Quando a sequência for infinita, usaremos as reticências, como em
-$(1, 2, \ldots)$. Dessa maneira, conseguiremos tratar sequências e
-tuplas de maneira intercambiável. Rotineiramente, iremos dizer
-que uma sequência é igual a sua tupla correspondente.
 
-Usaremos as sequências também para representar conjuntos cujos elementos estão
-ordenados por idexados por naturais. Resumidamente, se $A$ é enumerável e bem ordenado
-pela relação estrita linear $R$, com menor elemento $a_1$, i.e.,
+Quando a sequência for infinita, utilizaremos reticências para representar
+a sucessão de termos, como em
 \[
-  \forall a \in A,\ ( a \cancel{R} a_1 )
+  (1,2,\ldots).
 \]
-e $S$ for uma sequência para $A$ com $S(1) = a_1$, então representaremos
-$A$ como:
+
+Dessa maneira, conseguiremos tratar sequências e tuplas de maneira
+intercambiável. Rotineiramente, iremos dizer que uma sequência é igual à
+sua tupla correspondente.
+
+\subsubsection{Sequências como Enumeração de Conjuntos}
+
+Usaremos sequências também para representar conjuntos cujos elementos estejam
+ordenados por uma relação estrita linear.
+
+Seja $A$ um conjunto enumerável munido de uma relação estrita linear $R$.
+Suponha que $A$ possua menor elemento $a_1$, isto é,
+\[
+  \forall a \in A,\ ( a \cancel{R} a_1 ).
+\]
+
+Se $S$ for uma sequência em $A$ tal que $S(1)=a_1$, então poderemos utilizar
+a sequência para enumerar os elementos de $A$.
 
 \begin{enumerate}
-  \item A é finito, então seja $a_n$ aquele que statisfaz
-    \[
-      \forall a \in A,\ ( a R a_n ),
-    \]
-    com $|A| = n$ e
-    \[
-      A = [a_1, \ldots, a_n] \Longleftrightarrow \forall i, j \in [n],\ (
-        i < j \leftrightarrow S(i)\ R\ S(j)
-      )
-    \]
-  \item Se A for infinito enumerável, então
-    \[
-      A = [a_1, \ldots] \Longleftrightarrow \forall i, j \in \mathbb{N},\ (
-       i < j \leftrightarrow S(i)\ R\ S(j)
-      )
-    \]
+
+\item Se $A$ for finito, então seja $a_n$ tal que
+\[
+  \forall a \in A,\ ( a\ R\ a_n ),
+\]
+com $|A| = n$. Nesse caso escreveremos
+\[
+  A = [a_1, \ldots, a_n]
+\]
+para denotar que
+\[
+  \forall i,j \in [n],\ (
+    i < j \leftrightarrow S(i)\ R\ S(j)
+  ).
+\]
+
+\item Se $A$ for infinito enumerável, então escreveremos
+\[
+  A = [a_1, \ldots]
+\]
+para denotar que
+\[
+  \forall i,j \in \mathbb{N},\ (
+    i < j \leftrightarrow S(i)\ R\ S(j)
+  ).
+\]
+
 \end{enumerate}
-Omitindo a relação $R$ e a sequência $S$, iremos usar a representação
-de um conjunto enquanto sequência para denotar uma situação em que
-queremos tratar os elementos do conjunto em uma determinada ordem\footnote{
-  Em outros textos é comum denotar os elementos de conjuntos ordenados
-  estando entre parênteses, mas preferiremos os colchetes pela opinião
-de que os primeiros já estão semanticamente sobrecarregados.}.
 
+Omitindo explicitamente a relação $R$ e a sequência $S$, utilizaremos essa
+representação de um conjunto enquanto sequência para indicar que seus
+elementos estão sendo considerados segundo uma determinada ordem\footnote{
+  Em outros textos é comum denotar elementos de conjuntos ordenados
+  entre parênteses; preferiremos os colchetes, pois os primeiros já
+  estão semanticamente bastante sobrecarregados.
+}.
 
-Ainda sobre notações, tomemos a sequência $S: D \to A$ e a função $f: A \to B$.
-Construiremos a sequência $S_f: D \to \im{f}$ como aquela que satisfaz
+\subsubsection{Transformação de Sequências}
+
+Tomemos uma sequência $S : D \to A$ e uma função $f : A \to B$.
+Podemos construir uma nova sequência
 \[
- \forall k \in D\,\forall a \in A,\ ( S(k) = a \leftrightarrow S_f(k) = f(x) )
+  S_f : D \to \im{f}
 \]
-Com essa formalização, iremos admitir que, quando houver uma sequência $S$
-para $A$, e $f$ for uma função com domínio em $A$, então podemos tomar
-a tupla da sequência
+definida por
 \[
-  (a_1, a_2, \ldots)
+  \forall k \in D\,\forall a \in A,\ (
+    S(k) = a \leftrightarrow S_f(k) = f(a)
+  ).
 \]
-e substituir os termos pelas suas respectivas imagens em $f$, obtendo a
-representação em tupla da sequência $S_f$:
+
+Na representação em tupla, se
 \[
-  (f(a_1), f(a_2), \ldots).
+  S = (a_1,a_2,\ldots),
 \]
-Também usaremos essa forma para representar uma função $f$ qualquer, intercalando
-com as formas já mostradas em seções anteriores..
+então a sequência transformada é representada por
+\[
+  S_f = (f(a_1),f(a_2),\ldots).
+\]
 
-Existem três formas principais de definir uma sequência discreta:
+Também utilizaremos essa forma de representação para funções em geral,
+intercalando-a com as notações já introduzidas em seções anteriores.
 
-\subsubsection{Relações de Recorrência}
+\subsubsection{Formas de Definir Sequências}
+
+Existem três formas principais de definir uma sequência discreta.
+
+\paragraph{Relações de Recorrência}
 
 Aplicando as definições recursivas vistas na \ref{sec:recursao},
-as relações de recorrência, ou funções recursivamente definidas, definem sequências
-em que os termos dependem seus anteriores na sequência. Um exemplo clássico
-é a sequência de Fibonacci, em que cada termo é a soma dos outros dois anteriores.
+as relações de recorrência são aquelas em que cada termo da sequência
+é definido em função de termos anteriores.
+
+Um exemplo clássico é a sequência de Fibonacci:
 \[
-  S(n) = \begin{cases}
-    1,               &\text{ se } n = 1\\
-    1,               &\text{ se } n = 2 \\
-    f(n-1) + f(n-2), &\text{ se } n > 2
+  S(n) =
+  \begin{cases}
+    1, &\text{ se } n = 1 \\
+    1, &\text{ se } n = 2 \\
+    S(n-1) + S(n-2), &\text{ se } n > 2.
   \end{cases}
 \]
 
-\subsubsection{Funções de Índice}
+\paragraph{Funções de Índice}
 
-Ao contrário das definições recursivas, as sequências com função do índice são
-aquelas em que cada termo pode ser dado por uma fórmula fechada apenas em termos
-do índice da posição dele na sequência. Em outras palavras, a lei de formação
-de $S$ é expressa numa fórmula apenas em termos de $n$.
+Algumas sequências podem ser definidas por uma fórmula fechada que depende
+apenas do índice. Nesse caso, cada termo pode ser calculado diretamente
+a partir de $n$.
 
-\subsubsection{Propriedade dos Termos}
+\paragraph{Propriedade dos Termos}
 
-Alguns tipos de sequência, em vez de uma lei algébrica -- como nos casos
-anteriores -- utilizam uma determinada propriedade para definir os seus termos.
-Exemplos desse casos incluem: a sequência dos números primos ou a sequência
-do número de divisores de cada natural.
+Em outros casos, a sequência é definida por uma propriedade que caracteriza
+os seus elementos. Exemplos incluem a sequência dos números primos ou a
+sequência que associa a cada natural o número de seus divisores.
 
 \subsection{Princípio da Casa dos Pombos}
 
