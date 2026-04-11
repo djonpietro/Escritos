@@ -1,0 +1,118 @@
+\section{Visão Geral da Estatística e Análise de Dados}
+
+\subsection{Uma Breve História da Estatística}
+
+A palavra estatística deriva dos termos noelatim \textit{statisticum collegium} e italiano
+\textit{statista}, que significam Colégio de Estado e Estadista respectivamente. A palavra
+alemã \textit{Statistik} foi usada modernamente por Gottfried Achenwall em meados do
+século XVIII para designar a coleta de dados políticos, econômicos e sociais de um país,
+cujo equivalente em inglês era \textit{politcal arithmetic}. Posteriormente, através de
+Sir John Sinclair e seus trabalhos no \textit{Statiscal Accounts of Scotland}, a palavra
+ganhou uma conotação mais ampla sobre coleta e classificação de dados.
+
+Como vistos pelas suas raízes etimológicas, a estatística surgiu enquanto a disciplina
+que se preocupava com a coleta, tratamento, classificação e análise de dados sobre
+características polítco-sócio-econômicas de um país a fim de apoiar a formulação de
+políticas públicas.
+
+A Estatística Matemática tem seus fundamentos no desenvolvimento na Teoria das
+Probabilidades, antes, com tratemento mais informal, nos trabalhos de Pierre de Fermat,
+Blaise Pascal e Christian Huygens no século XVII e Thomas Bayes no século XVIII.
+O rigor matemático também se expandiu no século XVIII com as obras \textit{Arj Conjectandi}
+(1713) de Jakob Bernoulli e \textit{The Doctrine of Chances} de Abraham Moivre (1718).
+A formalização matemática rigorosa das probabilidades veio ao auge com Andrei Kolmogorov
+no século XIX.
+
+A disciplina estatística também tem laços com a Teoria de Erros, cujas origens remontam
+a \textit{Opera Miscellanea} de Roger Cottes de 1772, e sua reedição por Thomas Simpson
+em 1755, que aplicou a teoria à erros de observação. A Teoria de Erros ganhou um aspecto
+mais analítico ainda no final do século XVIII e ao longo do XIX nas mãos de Pierre-Simon
+de Laplace, Joseph Louis Lagrange e Daniel Bernoulli. O seminal Método dos Mínimos Quadrados
+(MMQ) foi desenvolvido e publicado independentemente por Adrien-Marie Legendre, Carl
+Friedrich Gauss e Robert Adrain.
+
+Com o desenvolvimento e sotisficação das técnicas estatística, como a amostragem,
+modelagem e inferência, a estatística na virada do século XIX para o XX, expandiu-se
+da esfera do Estado para se tornar uma disciplina aplicada em ciências naturais,
+sociais, administração pública e privada. Neste contexto, figuram nomes George Box,
+Pafnuty Chebtshev, Gertrude Cox, George Dantzig, Edwards Deming, Bruno de Finetti,
+Sir Ronald Fisher, Sir Francis Galton, Aleksandr Lyapunov, Karl Pearson, Charles Spearman
+e John Turkey.
+
+\subsection{Modelos Estatísticos}
+
+A estatítica é um ramo da matemática aplicada e da metodologia científica
+que busca extrair, reduzir, analisar e modelar um conjunto de dados que
+amostram uma população. Para isso, são usadas principalmente as ferramentas
+teóricas providas pela Teoria das Probabilidades, pois entende-se que os
+dados originam-se de fenômenos aleatórios, e, uma vez modelados, geralmente
+dois objetivos visam ser cumpridos: estimar ou predizer o comportamento dos
+dados no futuro, ou realizar inferência, que consiste em detectar os padrões
+embutidos. A inferência pode ser feita por duas abordagens: a inferência
+dedutiva, que aceita determinadas premissas para chegar às conclusões, ou
+a inferência indutiva, que parte de casos particulares para generalizar.
+
+Ainda sobre a inferência estatística, quando tenta-se modelar um determinado
+conjunto de dados, tentamos identificar padrões e tendências de comportamento
+através de modelos estatísticos. Supondo que temos um conjunto de dados $D$,
+e indentificamos que conseguimos ajustar a eles um modelo $M$, teremos então que
+\[
+	D = M + R
+\]
+onde $R$ descreve a parte aleatória dos dados que não pode ser capturada pelo
+modelo, chamada de resíduos. Normalmente, busca-se que resíduos não devam conter nenhuma
+suavidade, pois isso implicaria em padrões que o modelo falhou em capturar, e mais
+suavização por parte de $M$ será necessária.
+
+\subsection{Análise de Dados}
+
+A Análise de Dados consiste na inspeção, limpeza, transformação e modelagem de dados
+com o claro de objetivo de obter informações úteis, informar conclusões ou apoiar a
+tomada de decisão. Em resumo, ela é o processo de extração de dados brutos para
+geração de conhecimento acionável, geralmente feito num ciclo iterativo. As fases desse
+processo podem ser dividas em:
+
+\begin{enumerate}
+	\item Requisitos de Dados: a escolha de dados a serem extraídos dependem das
+	      análises que se deseja realizar. Aqui define-se a \textbf{unidade experimental},
+	      que pode consistir de um indvíduo ou uma população deles, e as \textbf{variáveis}
+	      específicas dessa unidade, como idade e renda para um população de pessoas.
+
+	\item Coleta de Dados: consiste na tarefa de obter os dados de diferentes fontes,
+	      como bancos de dados estruturados ou não-estruturados, sensores físicos, formulários,
+	      uma interface de programação de aplicação (API), arquivos binários ou de textos, entre
+	      muitas outras fontes.
+
+	\item Processamento e Limpeza: inclui tarefas de organizar os dados em formatos
+	      esturutrados, identificar tipos, deduplicar, tratar valores faltantes, incorretos
+	      e desviantes e transformar o formato de dados para outros mais convenientes.
+
+	\item Análise Exploratória: compreende uma gama de técnicas para descrever e resumir
+	      os dados obtidos à procura de informações que ajudem entender relações entre as
+	      variáveis e guie às técnicas a serem aplicadas nas fases posteriores. Aqui
+	      é comumente aplicadas técnicas da Estatística Descritiva e métodos gráficos.
+
+	\item Modelagem: são usados algoritmos e modelos estatísticos para extrair padrões
+	      latentes nos dados, muitas vezes não triviais de serem identificados. As
+	      técnicas de apredizado estatístico são especialmente úteis nessa etapa.
+
+	\item Comunicação e Produto de Dados: a depender do contexto e das finalidade definidas
+	      a priori, busca-se maneiras de comunicar esses dados aos atores interessados na
+	      forma de visualizações e relatórios. Nos últimos anos, a disciplina de
+	      \textbf{Narrativa de Dados} tem se destacado para realizar essa comunicação.
+\end{enumerate}
+
+A Análise de Dados, do ponto de vista da Estatística, poderia ser dividida em
+\begin{enumerate}
+	\item Estatística Descritiva: utilizar medidas de resumo numéricas para os dados
+	      a fim de descrever padrões visiíveis, geralmente respondendo perguntas do tipo
+	      ``o que aconteceu?''.
+
+	\item Análise Exploratória: semelhante a anterior, porém empregando métodos mais
+	      flexíveis e visuais que permitam indentificar padrões mais ocultos, correlações e
+	      anomalias. Ocorre num processo iterativo de formulação de perguntas, exploração
+	      e descobertas.
+
+	\item Análise Confirmatória: aplica as técnicas da inferência estatística para
+	      confirmar ou rejeitar hipóteses existentes das etapas anteriores
+\end{enumerate}

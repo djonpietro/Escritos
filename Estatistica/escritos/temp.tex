@@ -1,6 +1,5 @@
 \usepackage[T1]{fontenc}
 \usepackage[utf8]{inputenc}
-\usepackage{kmath, kerkis}
 \usepackage{amssymb}
 \usepackage{amsmath}
 \usepackage{amsfonts}
@@ -18,10 +17,10 @@
 \usepackage[linesnumbered,ruled,vlined,portuguese]{algorithm2e}
 \usepackage{hyperref}
 \hypersetup{
-    colorlinks,
-    linkcolor={blue!50!black},
-    citecolor={blue!50!black},
-    urlcolor={blue!80!black}
+	colorlinks,
+	linkcolor={blue!50!black},
+	citecolor={blue!50!black},
+	urlcolor={blue!80!black}
 }
 
 \setlength{\parindent}{1.25cm}
@@ -36,16 +35,16 @@
 	\normalfont\topsep6\p@\@plus6\p@\relax
 	\trivlist
 	\item[\hskip\labelsep
-	\itshape
-	#1\@addpunct{.}]\ignorespaces
+	            \itshape
+	            #1\@addpunct{.}]\ignorespaces
 	\setlength{\parindent}{0pt} % Remove indentação
 }{%
 	\popQED\endtrivlist\@endpefalse
 }
 \makeatother
 
-\DeclareMathOperator*{\argmax}{arg\,max}
-\newcommand{\moda}[1]{\mathrm{moda}\left(#1\right)}
-\newcommand{\dm}[1]{\mathrm{dm}\left(#1\right)}
-\newcommand{\var}[1]{\mathrm{Var}\left(#1\right)}
-\newcommand{\std}[1]{\mathrm{std}\left(#1\right)}
+% \DeclareMathOperator*{\argmax}{arg\,max}
+% \newcommand{\moda}[1]{\mathrm{moda}\left(#1\right)}
+% \newcommand{\dm}[1]{\mathrm{dm}\left(#1\right)}
+% \newcommand{\var}[1]{\mathrm{Var}\left(#1\right)}
+% \newcommand{\std}[1]{\mathrm{std}\left(#1\right)}
