@@ -1,0 +1,34 @@
+\section{Tipos de Dados}
+
+A forma comum em estatística de representar dados é por meio de matrizes retangulares
+chamadas de \textbf{tabelas} ou também, modernamente devido aos softwares usados para
+tratá-las, \textbf{quadro de dados} (\textit{Dataframe}). Por padrão, sendo $D$ um quadro
+de dados de dimensões $m \times n$, cada coluna de $D$ corresponde a um \textbf{atributo},
+também chamado de variável ou \textit{feature}, e cada linha corresponde a um registro,
+que representa um indivíduo na amostra na amostra coletada.
+
+Cada atributo possui um domínio de valores possíveis, que embora possam ser os mais
+variados possíveis, podem ser organizados numa taxonomia simples. Os tipos de atributos
+podem ser divididos em dois grande grupos: quantitativos ou qualitativos. O primeiro
+refere-se a dados com domínio num conjunto numérico, sendo dividido em
+
+\paragraph{Discretos:} São atributos que assumem valores em subconjuntos
+dos números inteiros $\mathbb{Z}$, sendo que na maioria dos contextos são não negativos.
+Representam contagens, como número de filhos e idades.
+
+\paragraph{Contínuos:} O domínio do atributo é um intervalo dos números reais $\mathbb{R}$.
+Na prática, pelas limitações ontológicas de representar um número real, a realização desses
+valores se limita a valores aproximados. A diferença fundamental para os discretos é
+que o conjunto de valores possíveis é não enumerável. Exemplos incluem principalmente
+medidas, como preços, alturas e pesos.
+
+Os dados qualitativos representam uma qualidade dentro de um conjunto finito de
+possibilidades chamadas de fatores, sendo dividos em
+
+\paragraph{Ordinais:} os fatores possuem uma ordem natural. Exemplos são graus de uma
+qualidade, como classe social (baixa, média e alta) ou severidade de um exame médico.
+
+\paragraph{Nominais:} os fatores não possuem ordem natural, sendo também chamados
+de categóricos, pois representam categorias. Exemplos são grupos, como sexo ou estado
+cívil. Um tipo especial de variáveis nominais são as dicotômicas, cujos valores possívei
+são apenas dois: sucesso ou fracasso, positivo ou negativo, sim ou não, 0 ou 1.
