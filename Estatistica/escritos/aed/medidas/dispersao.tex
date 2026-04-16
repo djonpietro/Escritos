@@ -1,0 +1,23 @@
+\section{Medidas de Dispersão}
+
+Além de ver onde nossos dados estão centrados, é desejável saber o quanto eles variam,
+geralmente entorno do próprio centro citado. Para esse fim, utiliza-se as medidas de
+dispersão. Como exemplo dessas medidas, poderiámos ter a soma dos desvios entorno da
+média, ou do quadrado deles para acentuar desvios maiores. No entanto, o sinal dos
+desvios pode ocultar sua variabilidade real, pois eles podem somar zero, além também
+de dificultar a comparação da variação entre dois conjuntos de dados distintos. Uma
+alternativa para isso, seria consederar a soma dos desvios absolutos entorno da média,
+apesar dessa medida ser sensível ao tamanho do próprio conjunto.
+
+As medidas de dispersão mais simples que contornam os problemas ditos anteriormente são
+o desvio médio e a variância, dados como
+\[
+	\dm{X} = \frac{1}{n} \sum_{i=1}^n |x_i - \bar x| \quad e \quad
+	\var{X} = \frac{1}{n} \sum_{i=1}^n |x_i - \bar x|^2.
+\]
+Como a variância possui unidade igual ao quadrado da unidade do atributo original,
+então sua interpretação pode ser prejudicada. Dessa forma, define-se o desvio padrão:
+\[
+	\dep{X} = \sqrt{\var{X}},
+\]
+que é equivalente ao ``erro'' cometido ao se subtituir cada observação pela média.

@@ -1,0 +1,36 @@
+\section{Medidas de Posição}
+
+Um grau maior de resumo dos dados pode ser obtido ao se computar determinadas estatísticas
+numéricas que sejam representativas de todo o conjunto, e não somente de agrupamentos
+deles, como é o caso das frequências absolutas e relativas. As medidas a serem apresentadas
+são usualmente usadas em conjunto para evitar uma redução muito drástica dos dados.
+Em especial, as medidas de posição nos dão uma ideia de centralidade dos dados.
+
+A primeira delas, é a moda, definida simplesmente como o valor mais frequente na
+distribuição. Ela pode ser facilmente estimada contando-se o valor mais frequente. Se
+$x_1, \ldots, x_n$ são realizações de uma variável $X$, então a moda é dada como
+\[
+	\mo{X} = \argmax_x f(x),
+\]
+onde $f(x)$ é a frequência de $x$ em $X$. A moda é adequada para atributos qualitativos
+e quantitativos discretos, ao passo que para quantitativos contínuos ela pode ser pouco
+representativa devido ao grande número de possibilidades de realizações, apesar de
+ter uma definição satisfatória para esse caso.
+
+A segunda medida é a mediana, que o valor que acumula 50\% da frequência acumulada da
+distribuição de um atributo. Para determinar a mediana de um vetor de dados $X$, basta
+ordenar as realizações do vetor; caso sua dimensão seja ímpar, então a mediana é o valor
+do índice $\frac{n}{2}$, ao passo que, caso seja par, a mediana é obtida como a média
+entre as realizações de índice $\frac{n}{2}$ e $\frac{n+1}{2}$.
+
+Por fim, a média de um vetor de dados $X$ é o valor $\bar x$ dado como
+\[
+	\bar x = \frac{1}{n} \sum_{i=1}^n x_i,
+\]
+que é equivalente também a
+\[
+	\bar x = \sum_{i=1}^n x_i f(x_i).
+\]
+Tanto a média quanto a mediana são apropriadas apenas à atributos quantitativos. Caso
+estejamos lidando com intervalos discretizados desses valores, então a forma de computar
+essas medidas é por estimativa.
