@@ -1,0 +1,124 @@
+\section{Probabilidades}
+
+\subsection{Fundamentos de Probabilidade}
+Ao observar, registrar ou extrair uma amostra de dados a partir de um fenômeno aleatório,
+isto é, cujo resultado não pode ser deterministicamente previsto, a Estatística, dentre
+outras coisas, procura entender a frequência de ocorrência dos valores amostrados,
+que nos dão diversas opções de como analisar seu comportamento. Essas frequências são
+estimativas das \textbf{probabilidades} dos eventos observados. A partir de hipóteses
+adequadas, podemos modelar as frequências por modelos probabilísticos que, por sua vez,
+são objetos de estudo da Teoria das Probabilidades.
+
+A Teoria de Probabilidades encontra seus fundamentos em alguns campos da matemática pura,
+tais como Matemática Discreta, Análise e Teoria da Medida. No entanto, neste texto,
+estaremos mais interessados na visão da teoria para aplicações estatísticas, como a já
+citada modelagem de frequências e estimação de parâmetros.
+
+A noção primitiva que iremos usar como base será de experimento ou fenômeno aleatório,
+que modela qualquer fenômeno cujos resultados são conhecidos, porém que podem ser
+distintos apesar da repetição de condições iniciais. Com isso, daremos a definição do
+espaço amostral
+
+\subsection{Axiomas de Probabilidade}
+\begin{def:espaco amostral}
+O espaço amostral $\Omega$ de um experimento aleatório é o conjunto de todos os resultados
+possíveis do experimento. Um subconjunto de $\Omega$ é chamado de evento.
+\end{def:espaco amostral}
+Com isso, temos a definição de probabilidade de um resultado, ou subcojunto de resultados.
+\begin{def:probabilidade}
+A probabilidade $P(E)$ de um evento $E$ num espaço amostral $\Omega$ satisfaz:
+\begin{enumerate}
+	\item $P(E) \in [0, 1]$
+
+	\item $P(\Omega) = 1$
+
+	\item Se $E_1, \ldots, E_n$ são eventos disjuntos em $\Omega$, também ditos mutualmente
+	      exclusivos, então
+	      \[
+		      P\left(\bigcup_{i=1}^n E_i\right) = \sum_{i=1}^n P(E_i)
+	      \]
+\end{enumerate}
+\end{def:probabilidade}
+Probabilidades são frequentemente mostradas como porcentagens e são entendidas como as
+chances de um resultado, ou cojunto deles, ser observado num experimento aleatório.
+
+\subsection{Eventos Equiprováveis}
+Numa noção intuitiva de que quando o evento não possui vícios, os seus resultados
+são ditos como equiprováveis, como os lados de um dado ou as faces de uma moeda honestos.
+
+\begin{def:evento equiprovavel}
+Um evento $E \subset \Omega$ é equiprovável se, e somente se, todo subconjunto unitário de
+$E$ possui a mesma probabilidade.
+\end{def:evento equiprovavel}
+
+\begin{prop:equiprovavel}
+A probabilidade de um evento $E$ num espaço $\Omega$ equiprovável
+é igual a
+\[
+	\frac{|E|}{|\Omega|}
+\]
+\begin{proof}
+	Com efeito, temos que
+	\[
+		P(E_1) = \ldots = P(E_n)
+	\]
+	em que $E_i$ são eventos unitários de $\Omega$, tal que $|\Omega| = n$. Como eles são
+	disjuntos, então a soma de suas probabilidades deve ser igual a 1, ou seja,
+	\[
+		\forall i \in [n],\ \left(P(E_i) = \frac{1}{n}\right).
+	\]
+	Segue que
+	\[
+		P(E) = |E| \cdot \frac{1}{n} = \frac{|E|}{|\Omega|}
+	\]
+\end{proof}
+\end{prop:equiprovavel}
+
+\begin{cor:pie}
+Se $\mathcal{F} = \{E_1, \ldots, E_m\}$ é uma família de eventos quaisquer dum espaço
+$\Omega$ equiprovável, então
+\[
+	P\left(\bigcup_{E \in \mathcal{F}}E\right) = \sum_{k=1}^m (-1)^{k+1}
+	\sum_{D \in \Parts{\mathcal{F}}\land |D| = k} P\left(\bigcap_{E \in D} E\right)
+\]
+\begin{proof}
+	A cardinalidade da união dos conjuntos de $\mathcal{F}$ é dado pelo Princípio da
+	Exclusão e Inclusão, ou seja
+	\[
+		\left|\bigcup_{E \in \mathcal{F}}E\right| = \sum_{k=1}^m (-1)^{k+1}
+		\sum_{D \in \Parts{\mathcal{F}} \land |D| = k} \left|\bigcap_{E \in D} E\right|
+	\]
+	Dividindo a expressão acima por $n = |\Omega|$ obtém-se a probabilidade da união dos
+	conjuntos de $\mathcal{F}$. Contudo, uma vez que a interseção de eventos é um evento,
+	então podemos obter a probabilidade da união como
+	\[
+		P\left(\bigcup_{E \in \mathcal{F}}E\right) = \sum_{k=1}^m (-1)^{k+1}
+		\sum_{D \in \Parts{\mathcal{F}}\land |D| = k} \frac{1}{n}\left|\bigcap_{E \in D} E\right|
+	\]
+	que equivale a expressão desejada.
+\end{proof}
+\end{cor:pie}
+
+\subsection{Probabilidade como Função Contínua em um Conjunto}
+
+\begin{def:eventos encaixados}
+Uma sequência ${E_i}_{i \in \mathbb{N}}$ é encaixado se
+\[
+	E_1 \subset E_2 \subset \ldots
+\]
+ou
+\[
+	E_1 \supset E_2 \supset \ldots.
+\]
+O primeiro caso é chamado de crescente, enquanto o segundo de descrescente.
+\end{def:eventos encaixados}
+
+\begin{prop:eventos encaixados}
+Se ${E_i}_{i \in \mathbb{N}}$ eventos encaixados crescentes, então
+\[
+	\lim_{n \to \infty} P(E_n) = P\left(\lim_{n \to \infty} E_n\right)
+\]
+\begin{proof}
+	.
+\end{proof}
+\end{prop:eventos encaixados}
