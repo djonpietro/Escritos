@@ -1,0 +1,99 @@
+\section{Probabilidade Condicional e Independência}
+
+A probabilidade condicional representa o conceito de probabilidade de um evento tal que
+é conhecida a ocorrência de outro; como se tivéssemos reduzido o espaço amostral a um
+conjunto menor de resultados possíveis.
+
+\begin{def:probabilidade condicional}
+Sejam $E$ e $F$ eventos num espaço amostral $\Omega$. A probabilidade condicional
+do evento $E$ dado $F$, denotada por $P(E|F)$, é dada por
+\[
+	P(E|F) = \frac{P(E \cap F)}{P(F)}
+\]
+\end{def:probabilidade condicional}
+
+A probablidade condicional induz uma forma de determinar a probabilidade do evento
+dado como interseção de vários outros, expressão essa denominada \textbf{regra do produto}.
+\begin{prop:regra da multiplicacao}
+Se $\mathcal{F} = \{E_1, \ldots, E_n\}$ uma família de eventos de $\Omega$, então
+\[
+	P\left(\bigcap_{E \in \mathcal{F}} E\right) = \prod_{i=1}^n P\left(E_i\ \middle|\ \bigcap_{j < i} E\right)
+\]
+\begin{proof}
+	A prova será por indução em $n$
+
+	Base: $n = 1$ é trivial.
+
+	Hipótse de Indução: admita que o resultado vale para uma família de $n$ eventos. Se
+	$|\mathcal{F}| = n + 1$, então façamos
+	\[
+		\bigcap_{j < n+1} E_j  = E'
+	\]
+	e obtemos que
+	\[
+		P\left(\bigcap_{E \in \mathcal{F}} E\right) = P(E' \cap E_n) = P(E_n | E') P(E').
+	\]
+	Como a hipótese de indução vale para $E'$, então
+	\[
+		P\left(\bigcap_{E \in \mathcal{F}} E\right) = P\left(E_n\ \middle|\ \bigcap_{j < n+1} E_j\right)
+		\prod_{i=1}^n P\left(E_i\ \middle|\ \bigcap_{j < i} E\right) =
+		\prod_{i=1}^{n+1} P\left(E_i\ \middle|\ \bigcap_{j < i} E\right)
+	\]
+	Uma vez que a proposição vale para $n+1$, então vale para todo $n \in \mathbb{N}$
+	pelo princípio de indução.
+\end{proof}
+\end{prop:regra da multiplicacao}
+
+Eventos independentes são aqueles cuja probabilidade de ocorrência não depende
+da ocorrência de outro. Isso equivale a dizer que, o conhecimento da ocorrência
+de evento não muda a crença da ocorrência de outro.
+\begin{def:independencia}
+Dois eventos $E$ e $F$ dum espaço amostral $\Omega$ são independentes se, e somente
+se
+\[
+	P(A | B) = P(A) \cdot P(B)
+\]
+donde se conclui que
+\[
+	P(A | B) = P(A) \quad \mathit{ e }\quad P(B | A) = P(B)
+\]
+\end{def:independencia}
+
+\begin{prop:independencia}
+Sejam $E$ e $F$ eventos em $\Omega$. Se eles são independentes, então os seguintes
+eventos também o são:
+\begin{enumerate}
+	\item $E^c$ e $F$
+	\item $E$ e $F^c$
+	\item $E^c$ e $F^c$
+\end{enumerate}
+\begin{proof}
+	(1) É verdade que
+	\[
+		(E \cap F) \cap (E \cap F^c) = \varnothing
+	\]
+	e também que
+	\[
+		(E \cap F) \cup (E \cap F^c) =  E
+	\]
+	então
+	\[
+		P(E \cap F) + P(E \cap F^c) = P(E)
+	\]
+	donde segue que
+	\begin{gather*}
+		P(E \cap F^c) = P(E) - P(E \cap F) = P(E) - P(E)P(F) = P(E) \cdot [1 - P(F)] \\
+		P(E \cap F^c) = P(E) \cdot P(F^c)
+	\end{gather*}
+	A expressão (2) é análoga a (1). Por fim, para expressão (3), conclua que
+	\begin{align*}
+		P(E^c \cap F^c) & = P((E \cup F)^c) = 1 - P(E \cup F) \\
+		                & = 1 - P(E) - P(F) + P(E \cap F)     \\
+		                & = P(E^c) - P(F) + P(E) \cdot P(F)   \\
+		                & = P(E^c) - P(F) [1 - P(E)]          \\
+		                & = P(E^c) - P(F) \cdot P(E^c)        \\
+		                & = P(E^c) [1 - P(F)]                 \\
+		                & = P(E^c) \cdot P(F^c)               \\
+	\end{align*}
+\end{proof}
+\end{prop:independencia}
