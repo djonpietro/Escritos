@@ -2,7 +2,8 @@
 
 A probabilidade condicional representa o conceito de probabilidade de um evento tal que
 é conhecida a ocorrência de outro; como se tivéssemos reduzido o espaço amostral a um
-conjunto menor de resultados possíveis.
+conjunto menor de resultados possíveis. Outra interpretação possível é aquela tal que
+associamos uma probabilidade a um evento tendo o conhecimento de uma evidência sobre ele.
 
 \begin{def:probabilidade condicional}
 Sejam $E$ e $F$ eventos num espaço amostral $\Omega$. A probabilidade condicional
@@ -13,11 +14,12 @@ do evento $E$ dado $F$, denotada por $P(E|F)$, é dada por
 \end{def:probabilidade condicional}
 
 A probablidade condicional induz uma forma de determinar a probabilidade do evento
-dado como interseção de vários outros, expressão essa denominada \textbf{regra do produto}.
-\begin{prop:regra da multiplicacao}
+dado como interseção de vários outros.
+\begin{prop:regra da multiplicacao}[Regra do Produto]
 Se $\mathcal{F} = \{E_1, \ldots, E_n\}$ uma família de eventos de $\Omega$, então
 \[
-	P\left(\bigcap_{E \in \mathcal{F}} E\right) = \prod_{i=1}^n P\left(E_i\ \middle|\ \bigcap_{j < i} E\right)
+	P\left(\bigcap_{E \in \mathcal{F}} E\right) =
+	\prod_{i=1}^n P\left(E_i\ \middle|\ \bigcap_{j < i} E_j\right)
 \]
 \begin{proof}
 	A prova será por indução em $n$
@@ -35,9 +37,10 @@ Se $\mathcal{F} = \{E_1, \ldots, E_n\}$ uma família de eventos de $\Omega$, ent
 	\]
 	Como a hipótese de indução vale para $E'$, então
 	\[
-		P\left(\bigcap_{E \in \mathcal{F}} E\right) = P\left(E_n\ \middle|\ \bigcap_{j < n+1} E_j\right)
-		\prod_{i=1}^n P\left(E_i\ \middle|\ \bigcap_{j < i} E\right) =
-		\prod_{i=1}^{n+1} P\left(E_i\ \middle|\ \bigcap_{j < i} E\right)
+		P\left(\bigcap_{E \in \mathcal{F}} E\right) =
+		P\left(E_n\ \middle|\ \bigcap_{j < n+1} E_j\right) \cdot
+		\prod_{i=1}^n P\left(E_i\ \middle|\ \bigcap_{j < i} E_j\right) =
+		\prod_{i=1}^{n+1} P\left(E_i\ \middle|\ \bigcap_{j < i} E_j\right)
 	\]
 	Uma vez que a proposição vale para $n+1$, então vale para todo $n \in \mathbb{N}$
 	pelo princípio de indução.
@@ -45,21 +48,37 @@ Se $\mathcal{F} = \{E_1, \ldots, E_n\}$ uma família de eventos de $\Omega$, ent
 \end{prop:regra da multiplicacao}
 
 Eventos independentes são aqueles cuja probabilidade de ocorrência não depende
-da ocorrência de outro. Isso equivale a dizer que, o conhecimento da ocorrência
-de evento não muda a crença da ocorrência de outro.
+da ocorrência de outro. Isso equivale a dizer que, o conhecimento do acontecimento
+de um evento não muda a crença na ocorrência de outro.
 \begin{def:independencia}
 Dois eventos $E$ e $F$ dum espaço amostral $\Omega$ são independentes se, e somente
 se
 \[
-	P(A | B) = P(A) \cdot P(B)
-\]
-donde se conclui que
-\[
-	P(A | B) = P(A) \quad \mathit{ e }\quad P(B | A) = P(B)
+	P(E \cap F) = P(E) \cdot P(F)
 \]
 \end{def:independencia}
 
 \begin{prop:independencia}
+Se $E$ e $F$ são eventos independentes de $\Omega$, então
+\[
+	P(E | F) = P(E) \quad \mathit{ e }\quad P(F | E) = P(F)
+\]
+\begin{proof}
+	Por definição de probabilidade condicional,
+	\[
+		P(E \cap F) = P(E|F) \cdot P(F)
+	\]
+	mas como $E$ e $F$ são independentes por hipótese,
+	\begin{gather*}
+		P(E) \cdot P(F) = P(E|F) \cdot P(F)\\
+		P(E) = P(E|F)
+	\end{gather*}
+	e o mesmo pode ser mostrado analogamente para $P(F)$.
+\end{proof}
+\end{prop:independencia}
+
+\begin{prop:independencia complementar}
+\label{prop:independencia complementar}
 Sejam $E$ e $F$ eventos em $\Omega$. Se eles são independentes, então os seguintes
 eventos também o são:
 \begin{enumerate}
@@ -96,4 +115,34 @@ eventos também o são:
 		                & = P(E^c) \cdot P(F^c)               \\
 	\end{align*}
 \end{proof}
-\end{prop:independencia}
+\end{prop:independencia complementar}
+
+\begin{thm:probabilidade total}[Teorema de Probablidade Total]
+Seja $\Omega$ um espaço amostral e $\mathcal{F} = \{F_1, \ldots, F_n\}$ uma partição de
+$\Omega$. Se $E$ é um evento de $\Omega$, então
+\[
+	P(E) = \sum_{F \in \mathcal{F}} P(E) \cdot P(E | F)
+\]
+\begin{proof}
+	Para quaisquer $i, j \in [n]$ temos que
+	\[
+		(E \cap F_i) \cap (E \cap F_j)  = \varnothing.
+	\]
+	Com isso,
+	\[
+		P\left(\bigcup_{F \in \mathcal{F}} E \cap F_i \right) = \sum_{F \in \mathcal{F}} P(E \cap F)
+	\]
+	Em vista de que
+	\[
+		\bigcup_{F \in \mathcal{F}} E \cap F_i = E \cap \Omega = E,
+	\]
+	então
+	\[
+		P(E) = \sum_{F \in \mathcal{F}} P(E \cap F),
+	\]
+	e pela Proposição \ref{prop:independencia complementar}, conclui-se que
+	\[
+		P(E) = \sum_{F \in \mathcal{F}} P(E) \cdot P(E | F).
+	\]
+\end{proof}
+\end{thm:probabilidade total}
