@@ -13,6 +13,19 @@ Seja $X$ uma v.a. discreta com f.m.p. $p_X$. A esperança $E[X]$ de $X$ é defin
 \]
 \end{def:esperanca discreta}
 
+A partir do conhecimento da distribuição dos valores de uma variável, é possível ter
+conhecimento da distribuição dos valores de uma função aplicada sobre essa variável.
+Se $X: \Omega \to \mathbb{R}$ e $f: \mathbb{R} \to \mathbb{R}$, então $f(X) = f \circ X$
+é uma variável aleatória por definição. Digamos que $f(X) = Y$, então a massa de
+probabilidade $Y = y$ será a soma das probabilidades de $X = x$ tal que $x \in \Omega_X$
+tem $y$ como imagem em $f$, já que as realizações de uma v.a. são sempre disjuntas.
+\[
+	P(Y = y) = \sum_{\substack{x \in \Omega_X \\ f(x) = y}} P(X = x)
+\]
+\noindent
+Tão logo conhecendo a dsitribuição de $f(X)$ a partir da distribuição de $X$, então poderemos
+expressar a esperança de $f(X)$ em termos da própria f.m.p. de $X$.
+
 \begin{prop:esperanca de funcao}
 Seja $X$ uma v.a. discreta com f.m.p. $p_X$, e $f: \mathbb{R} \to \mathbb{R}$
 uma função. A esperança da variável aleatória definida por $f(X) = f \circ X$ é
@@ -37,27 +50,59 @@ dada por
 \end{proof}
 \end{prop:esperanca de funcao}
 
+A esperança satisfaz as propriedades de linearidade. Isso significa que, se uma v.a.
+é definida como uma constante, como produto de uma v.a. por uma constante ou como a soma de
+outras duas v.a.'s, podemos facilmente obter a esperança da variável derivada a partir das
+variáveis que a compõe. Ressaltemos que constantes podem ser vistas como v.a.'s com
+suporte unitário.
+
 \begin{prop:linearidade da esperanca discreta}
-A esparança é satisfaz:
+Sejam $X$ e $Y$ variáveis aleatórias. A esperança satisfaz:
 \begin{enumerate}
-	\item $E[c] = c$, com $c \in \mathbb{R}$ constante
-	\item $E[\lambda X] = \lambda E[X]$
+	\item se $X$ tem suporte unitário igual a $\{c\}$, então $E[X] = c$.
+	\item $E[\lambda X] = \lambda E[X]$.
+	\item $E[X + Y] = E[X] + E[Y]$.
 \end{enumerate}
 \begin{proof}
-	Para (1), uma constante pode ser vista como um v.a. $X$ que possui apenas uma realização
-	possível igual a $c$, logo $E[X] = c \cdot 1 = c$. Para (2), observe que
+	Para (1), basta observar que $E[X] = c \cdot 1 = c$.
+
+	Para (2),  usemos a definição
+	de esperança:
 	\[
 		E[\lambda X] = \sum_{x \in \Omega_X} \lambda x \cdot  p_X(x)
 		= \lambda \sum_{x \in \Omega_X} x \cdot p_X(x)
-		= \lambda E[X]
+		= \lambda E[X].
+	\]
+	Para provar (3), temos que
+	\[
+		E[X + Y] = \sum_{x \in \Omega_X} \sum_{y \in \Omega_Y} (x+y) P(X = x, Y = y),
+	\]
+	e expandindo,
+	\begin{equation}
+		\label{eq:dem esperanca linear}
+		E[X + Y] =
+		\sum_{x \in \Omega_X} x \sum_{y \in \Omega_Y} P(X = x, Y = y) +
+		\sum_{y \in \Omega_Y} y \sum_{x \in \Omega_X} P(X = x, Y = y) .
+	\end{equation}
+	Já que
+	\[
+		\sum_{y \in \Omega_Y} P(X = x, Y = y) = \sum_{y \in \Omega_Y} P(X = x | Y = y) P(Y = y),
+	\]
+	então pelo Teorema da Probabilidade Total,
+	\[
+		\sum_{y \in \Omega_Y} P(X = x, Y = y) = P(X = x)
+	\]
+	e, de forma análoga,
+	\[
+		\sum_{x \in \Omega_X} P(X = x, Y = y) = P(Y = y),
+	\]
+	então podemos simplificar a expressão \ref{eq:dem esperanca linear} para
+	\[
+		E[X + Y] = \sum_{x \in \Omega_X} x \cdot P(X = x) + \sum_{y \in \Omega_Y} y \cdot P(Y=y),
+	\]
+	e, finalmente
+	\[
+		E[X + Y] = E[X] + E[Y]
 	\]
 \end{proof}
 \end{prop:linearidade da esperanca discreta}
-
-A verdade é que a esperança é linear, isto é, além das propriedades anteriores, elas
-satisfaz também
-\[
-	E[X + Y] = E[X] + E[Y],
-\]
-em que $X$ e $Y$ são v.a.'s. No entanto, deixaremos essa demonstração para o capítulo
-de vetores aleatórios.
