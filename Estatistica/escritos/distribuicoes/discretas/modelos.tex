@@ -1,0 +1,362 @@
+\section{Modelos de Distribuição Discreta}
+
+Muitas características de fenômenos aleatórios podem ser modelados
+como variáveis aleatórias discretas, como determinar se o lançamento
+de uma moeda deu cara, quantas pessoas possuem diploma numa população
+de tamanho conhecido, quantas bolas devemos sortear de uma urna até
+que obtenhamos a que contém a cor desejada, etc.
+
+\subsection{Distribuição Bernoulli}
+
+A distribuição Bernoulli modela experimentos que só podem ter dois resultados
+possíveis: \textit{sucesso} ou \textit{fracasso}. Seu único parâmetro é a probabilidade $p$
+de obter \textit{sucesso} no experimento. Dessa forma, podemos particionar o espaço
+amostral em dois eventos disjuntos: $X = 0$ e $X = 1$. O primeiro é aquele cujos
+resultados são \textit{fracassos}, obtidos com probabilidade $1 - p$, enquanto que no
+segundo são aqueles cujos resultados são \textit{sucessos}, que ocorre com probablidade
+$p$.
+
+\begin{def:bernoulli}
+Suponha que $\Omega$ seja um espaço amostral e $\mathcal{P} = \{F, S\}$ uma partição de
+$\Omega$. A variável $X$ tem distribuição Bernoulli de parâmetro $p$, denotado por
+$X \sim \mathrm{Bernoulli}(p)$, se, e somente se, $X$ é a função indicadora de um membro
+de $\mathcal{P}$ e
+\[
+	P(X = 1) = p.
+\]
+\end{def:bernoulli}
+
+Da definição formal de uma distribuição Bernoulli, segue que seu suporte é o conjunto
+$\{0, 1\}$. Se $S \subset \Omega$ reúne os \textit{sucessos}, então podemos escrever
+\[
+	P(S) = p \quad \text{e} \quad P(F) = 1 - p
+\]
+e, caso $\Omega$ seja equiprovável, então
+\[
+	p = \frac{|S|}{|\Omega|}
+\]
+
+\begin{prop:bernoulli}
+A f.m.p. da distribuição Bernoulli de parâmetro $p$ é dada por
+\[
+	p_X(x) = p^x(1-p)^{1-x}
+\]
+\begin{proof}
+	Temos que
+	\[
+		P(X = x) = \begin{cases}
+			p,   & \text{ se } x = 1 \\
+			1-p, & \text{ se } x = 0 \\
+		\end{cases}
+	\]
+	que equivale à fórmula desejada.
+\end{proof}
+\end{prop:bernoulli}
+
+A esperança de uma Bernoulli é dada como
+\[
+	E[X] = 1 \cdot p + 0 \cdot (1-p) = p.
+\]
+Conclui-se que a taxa de sucessos é a própria probabilidade de obter um sucesso no
+experimento.
+
+\subsection{Distribuição Binomial}
+
+A distribuição binomial é uma versão mais generalizada da Bernoulli, modelando quantos
+sucessos são obtidos num experimento que consiste de $n$ tentativas Bernoulli
+independentes, isto é, uma tentativa não altera no resultado da outra. Exemplo inclui
+quantas caras obtemos ao lançar uma moeda 10 vezes. Os parâmetros dessa distribuição são
+o número de tentativas $n$ e o número de sucessos $p$. Seu suporte será igual aos inteiros
+de 0 a $n$.
+
+Cada uma das $n$ tentativas Bernoulli são v.a.'s $X_k \sim \mathrm{Bernoulli}(p)$,
+com $k \in [n]$, independentes. Logo, a probabilidade de um evento
+$(X_k = x_k)_{k \in [n]}$ com $a$ sucessos, tendo fixado o valor de cada $x_k$,
+deve ser igual a
+\[
+	P((X_k = x_k)_{k \in [n]}) = \prod_{k = 1}^n P(X_k = x_k),
+\]
+mas como há $a$ resultados $x_k = 1$, e $n-a$ resultados $x_k = 0$, então
+\[
+	P((X_k = x_k)_{k \in [n]}) = \prod_{k = 1}^n P(X_k = x_k) = p^{a} (1-p)^{n - a}
+\]
+Como cada uma das sequências de resultados com $a$ sucessos são mutalmente exclusivas,
+então
+\[
+	P(X = a) = m \cdot p^{a} (1-p)^{n - a},
+\]
+onde $m$ é o número de sequências com $a$ sucessos dentre $n$, que equivale a
+escolher $a$ tentativas para serem sucessos dentre $n$ possíveis, logo
+\[
+	P(X = a) = \binom{n}{a} \cdot p^{a} (1-p)^{n - a}
+\]
+
+\begin{def:binomial}
+$
+	X \sim \mathrm{Binomial}(n, p) \longleftrightarrow p_X(a) = \binom{n}{a} p^a (1-p)^{n-a}
+$
+\end{def:binomial}
+
+Se a taxa de sucesso de cada ensaio Bernoulli é $p$, então podemos intuir que o número
+esperado de sucessos em $n$ ensaios deverá ser a fração $p$ do total dos ensaios, ou seja
+que o valor esperado seja $np$.
+
+\begin{prop:esperanca binomial}
+Se $X \sim \mathrm{Binomial}(n, p)$, então \(E[x] = np\).
+\begin{proof}
+	Com efeito,
+	\[
+		E[X] = \sum_{k=0}^n k \cdot \binom{n}{k} p^k (1-p)^{n-k}.
+	\]
+	Utilizando o fato de que
+	\[
+		\binom{n}{k} = \frac{n}{k} \binom{n-1}{k-1},
+	\]
+	reduzimos então a
+	\[
+		E[X] = n\sum_{k=0}^n \binom{n-1}{k-1} p^k (1-p)^{n-k},
+	\]
+	o que nos sugere realizar uma troca de variável em $k$ para que consigamos usar o
+	Teorema Binomial. Para tanto, realizemos que
+	\[
+		n\sum_{k=0}^n \binom{n-1}{k-1} p^k (1-p)^{n-k} = np \sum_{k=1}^n\binom{n-1}{k-1}p^{k-1}(1-p)^{n-k}
+	\]
+	já que somar o termo $k=0$ equivale a somar 0. Fazendo então a troca $j = k - 1$, obtemos
+	\[
+		E[X] = np \sum_{j=0}^n\binom{n-1}{j}p^{j}(1-p)^{(n-1)-j},
+	\]
+	e pelo Teorema Binomial,
+	\[
+		E[X] = np \cdot (p + 1 - p)^{n-1} = np
+	\]
+\end{proof}
+\end{prop:esperanca binomial}
+
+\subsection{Distribuição Geométrica}
+
+Uma variável geométrica modela experimentos que consistem na repetição de ensaios Bernoulli
+independentes até que se obtenha o primeiro sucesso. Um exemplo é repetir o lançamento
+de uma moeda até obter coroa. Para obter a função de massa de probabilidade dessa variável
+para uma realização $n$, basta encontrar a probabilidade de obter $n-1$ fracassos
+consecutivos seguidos de um sucesso. Desse modo, se $(X_k = x_k)_{k \in [n]}$ é
+uma sucessão de $n$ ensaios Bernoulli independentes com parâmetro $p$, então
+\[
+	P((X_k = x_k)_{k \in \mathbb{N}}) = \prod_{k=1}^n P(X_k = x_k),
+\]
+mas como os $n-1$ valores de $x_k$ são fracassos (iguais a 0) obtidos com probabilidade
+$1-p$, e $x_n = 1$ é obtido com probabilidade $p$, então
+\[
+	P((X_k = x_k)_{k \in \mathbb{N}}) = (1-p)^{n-1}p
+\]
+
+\begin{def:geometrica}
+\[
+	X \sim Geo(p) \longleftrightarrow p_X(n) = (1-p)^{n-1}p
+\]
+\end{def:geometrica}
+
+O número esperada de ensaios realizados num experimento até obter o primeiro sucesso
+é o valor esperado da variável geométrica.
+
+\begin{prop:esperanca geometrica}
+Se $X \sim \mathrm{Geo}(p)$, então
+\[
+	E[X] = \frac{1}{p}
+\]
+\begin{proof}
+	Com efeito,
+	\[
+		E[X] = \sum_{k=0}^\infty k (1-p)^{k-1} p = p \sum_{k=0}^\infty k(1-p)^{k-1}.
+	\]
+	O somatório à esquerda é a derivada de uma série geométrica de razão $q = 1-p$,
+	tal que $q < 1$. Observemos que
+	\begin{align*}
+		\frac{d}{dq} \left(\sum_{k=0}^\infty q^k\right) & =
+		\frac{d}{dq} \left(\frac{1}{1 - q}\right)                             \\
+		\sum_{k=0}^\infty k(1-p)^{k-1}                  & = \frac{1}{(1-q)^2}
+	\end{align*}
+	donde conclui-se
+	\[
+		E[X] = \frac{p}{(1 - 1 + p)^2} = \frac{1}{p}
+	\]
+\end{proof}
+\end{prop:esperanca geometrica}
+
+\subsection{Distribuição Binomial Negativa}
+
+A distribuição binomial negativa é similar à geométrica: invés de repetir os ensaios
+Bernoulli independentes até o obter o primeiro sucesso, os ensaios são repetidos até
+que se acumulem $r$ sucessos, sendo esse total um novo parâmetro da distribuição.
+A dedução da f.m.p. para esse modelo de probabilidade é análogo ao da Binomial e da
+Geométrica; fixando uma sequência $((X_k = x_k)_{k \in [n]}$ de ensaios Bernoulli
+independentes com parâmetro $p$, temos que a probabilidade de uma sequência será
+\[
+	\prod_{k=1}^n P(X_k = x_k),
+\]
+de sorte que, sendo $r$ ensaios com $x_k = 1$ e $n-r$ ensaios com $x_k = 0$, então
+\[
+	\prod_{k=1}^n P(X_k = x_k) = (1-p)^{n-r} p^r.
+\]
+Visto que cada sequência de ensaios é mutualmente exclusiva, então a probabilidade
+de obter acumular $n$ ensaios até obter $r$ tentativas equivale ao total de escolhas
+de $r$ ensaios para fixar $x_k = 1$ dentre $n$ possíveis, logo
+\[
+	\binom{n}{r} (1-p)^{n-r} p^r
+\]
+
+\begin{def:binomial negativa}
+\[
+	X \sim \mathrm{BinNeg}(r, p) \longleftrightarrow p_X(n) = \binom{n}{r} (1-p)^{n-r} p^r
+\]
+\end{def:binomial negativa}
+
+Uma binomial negativa pode ser vista como a sucessão de várias geométricas. Desse modo,
+o valor esperado de uma binomial negativa deve ser igual ao valor esperado da soma das
+geométricas que a compõe.
+
+\begin{prop:esperanca binomial negativa}
+Se $X \sim \mathrm{BinNeg}(r, p)$, então
+\[
+	E[X] = \frac{r}{p}
+\]
+\begin{proof}
+	Suponha que $(X_i)_{i \in [r]}$ denote a variável que determina quantos
+	ensaios Bernoulli foram realizados ate se obter um sucesso desde o último. Com efeito,
+	a variável $X_i \sim \mathrm{Geo}(p)$ para todo $i \in [r]$. Além disso, temos que
+	\[
+		X = \sum_{i = 1}^r X_i
+	\]
+	Pela linearidade da esperança, conclui-se que
+	\[
+		E[X] = \sum_{i = 1}^r E[X_i] = \sum_{i=1}^r \frac{1}{p} = \frac{r}{p}
+	\]
+\end{proof}
+\end{prop:esperanca binomial negativa}
+
+\subsection{Distribuição Hipergeométrica}
+
+A distribuição hipergeométrica modela amostragens de tamanho $n$ de um espaço amostral
+equiprovável de tamanho $N$, em que $m$ dos resultados possíveis são considerados
+sucessos. Um exemplo clássico são bolas numa urna, das quais $m$ são azuis, e as demais
+vermelhas. A urna é nosso espaço amostral, as $m$ bolas azuis são os resultados que
+representam sucessos possíveis, caso realizassemos um sorteio de $n$ bolas da urna,
+a variável que nos dá o número de bolas azuis sorteadas é hipergeométrica.
+
+Para obter a função de distribuição para a situação sendo modelada, considere uma população
+de tamanho $N$, com $m$ indivíduos pertencentes ao evento de sucessos, e uma amostra de
+tamanho $n$ dessa população. Para obter a probabilidade de obter $k$ indivíduos na amostra
+que sejam sucessos, supondo que os indivíduos na população são equiprováveis, podemos
+utilizar a proposição \ref{prop:equiprovavel}, considerando $\Omega$ como o universo das
+amostras, e $E$ as amostras que possuem $k$ indivíduos considerados sucessos. O número de
+amostras possíveis equivale a selecionar $n$ indivíduos de $N$ possíveis
+\[
+	|\Omega| = \binom{N}{n}.
+\]
+
+Por sua vez, o número de amostras com $k$ sucessos equivale ao selecionar $k$ indivíduos
+dos $m$ que são sucessos e selecionar outros $n-k$ com que não pertencem a esse grupo dos
+$N-m$ restantes. Por conseguinte
+\[
+	|E| = \binom{m}{k} \cdot \binom{N-m}{n-k}
+\]
+e a probabilidade de uma amostra conter $k$ sucessos será
+\[
+	\frac{\binom{m}{k} \cdot \binom{N-m}{n-k}}{\binom{N}{n}}
+\]
+
+\begin{def:hipergeometrica}
+\[
+	X \sim \mathrm{HG}(N, m, n) \longleftrightarrow p_X(k) =
+	\frac{\binom{m}{k} \cdot \binom{N-m}{n-k}}{\binom{N}{n}}
+\]
+\end{def:hipergeometrica}
+
+A média de uma hipergeométrica pode ser facilmente obtida pelo seguinte
+raciocínio: suponha que já tenhamos selecionado a amostra de tamanho $n$ e temos
+o conhecimento \textit{a priori} de que a população $N$ continha $m$ sucessos,
+implicando que a probabilidade que cada indivíduo da amostra selecionada tenha
+probabilidade $m / N$ de ser um sucesso. Considerando que cada indivíduo na
+amostra é um ensaio Bernoulli de parâmetro $m / N$, então a média de sucessos
+deve ser igual a $\frac{nm}{N}$.
+
+\begin{prop:esperanca hipergeometrica}
+Se $X \sim \mathrm{HG}(N, m, n)$, então
+\[
+	E[X] = n \frac{m}{N}
+\]
+\begin{proof}
+	Presuma que a amostra de tamanho $n$ obtida seja a sequência de eventos
+	$(X_k = x_k)_{k \in [n]}$, em que $X_k: \Omega \to \{0, 1\}$ é a variável indicadora
+	do conjunto dos sucessos $S$. Como $|S| = m$ e $|\Omega| = N$, então
+	\[
+		P(S) = \frac{m}{N}
+	\]
+	e $X_k$ equivale a uma v.a. Bernoulli de parâmetro $m / N$. Logo, o número de
+	sucessos na amostra é uma variável binomial com parâmetros $n$ e $n / N$, e sua
+	média será
+	\[
+		E[X] = n \frac{m}{N}
+	\]
+\end{proof}
+\end{prop:esperanca hipergeometrica}
+
+\subsection{Distribuição de Poisson}
+
+A distrbuição de Poisson modela contagem de eventos que ocorrem dentro de um intervalo
+contínuo -- como o tempo, uma superfície ou volume -- com probabilidade praticamente
+desprezível. Essa distribuição pode ser compreendida como a uma aproximação da Binomial
+quando $n \to \infty$.
+
+Considere que $X \sim \mathrm{Binomial}(n, p)$, logo
+\[
+	p_X(a) = \binom{n}{a} (1-p)^{n-a} p^a
+\]
+Se tomarmos o limite da f.m.p. de $X$ quando $n \to \infty$ e denotamos $np$ por $\lambda$,
+então
+\begin{align*}
+	\lim_{n \to \infty} p_X(a) & = \lim_{n \to \infty} \binom{n}{a} \left(\frac{\lambda}{n}\right)^a \left(1 - \frac{\lambda}{n}\right)^{n-a}                  \\
+	                           & = \lim_{n \to \infty} \frac{n(n-1)\ldots(n-a+1)}{a!}\left(\frac{\lambda}{n}\right)^a \left(1 - \frac{\lambda}{n}\right)^{n-a} \\
+	                           & = \lim_{n \to \infty} \prod_{k=1}^{a-1} \left(1 - \frac{k}{n}\right) \cdot
+	\lim_{n \to \infty} \frac{\lambda^a}{a!} \frac{(1 - \lambda / n)^n}{(1 - \lambda / n)^a}
+\end{align*}
+Como
+\[
+	\lim_{n \to \infty} \prod_{k=1}^{a-1} \left(1 - \frac{k}{n}\right) = 1 \quad
+	\text{e} \quad \lim_{n \to \infty} 1 - (\lambda / n)^a = 1
+\]
+então,
+\[
+	\lim_{n \to \infty} p_X(a) = \lim_{n \to \infty} \frac{\lambda^a}{a!} \left(1 - \frac{\lambda}{n}\right)^n \\
+\]
+Usando o limite exponencial fundamental
+\[
+	\lim_{n \to \infty} \left(1 - \frac{\lambda}{n}\right)^n = e^{-\lambda}
+\]
+obtemos, por fim,
+\[
+	\lim_{n \to \infty} p_X(a) = e^{-\lambda} \frac{\lambda^a}{a!}
+\]
+
+\begin{def:poisson}
+\[
+	X \sim \mathrm{Poisson}(\lambda) \longleftrightarrow p_X(a) = e^{-\lambda} \frac{\lambda^a}{a!}
+\]
+\end{def:poisson}
+
+\begin{prop:esperanca poisson}
+Se $X \sim \mathrm{Poisson}(\lambda)$, então
+\[
+	E[X] = \lambda
+\]
+\begin{proof}
+	Com efeito,
+	\begin{align*}
+		E[X] & = \sum_{k = 0}^\infty k e^{-\lambda} \frac{\lambda^k}{k!}             \\
+		     & = \lambda e^{-\lambda} \sum_{k=1}^\infty \frac{\lambda^{k-1}}{(k-1)!}
+	\end{align*}
+	O somatório equivale ao Polinômio de Taylor de $e^\lambda$, portanto
+	\[
+		E[X] = \lambda e^{-\lambda} e^{\lambda} = \lambda
+	\]
+\end{proof}
+\end{prop:esperanca poisson}
