@@ -14,6 +14,26 @@ de $\Omega$ em $\mathbb{R}$.
 suporte.
 \end{def:va}
 
+Com isso, podemos expressar eventos de um espaço amostral como aqueles que levam a variável
+a ter uma realização específica. Por exemplo, se o experimento consiste em lançar dois
+dados, e $X$ é a soma dos dados, então o evento dos resultados nos quais a soma do lados
+sorteados é igual a 7 pode ser expressa como simplesmente $X = 7$. A proposição a seguir
+justifica esse racioncínio.
+
+\begin{prop:prob va}
+Seja $X: \Omega \to \mathbb{R}$ uma v.a. discreta. Se $E \subset \Omega$ é tal que
+\[
+	E = \{\omega \in \Omega \mid X(\omega) = x\},
+\] então
+\[
+	P(X = x) = P(E)
+\]
+\begin{proof}
+	Temos que $X(\omega) = x$ se, e somente se, $\omega \in E$. Logo, os eventos $X = x$
+	e $E$ são equivalentes e possuem, pois, a mesma probabilidade.
+\end{proof}
+\end{prop:prob va}
+
 As variáveis tem associadas a si uma \textbf{função de probabilidade}. Em síntese,
 uma função de probabilidade nos dá uma ideia do quão frequente é um valor ou intervalos
 de valores de uma variável aleatória, além de poder informar sobre valores centrais e

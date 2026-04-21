@@ -1,39 +1,40 @@
 \section{Definição de Variável Aleatória Discreta}
 
-Uma variável aleatória discreta é aquela cuja imagem é um conjunto que pode ser colocado
-em correspondência de 1 para 1 com os naturais, conjuntos esses chamados de
-\textit{enumeráveis}.
-
 \begin{def:variavel discreta}
 Seja $X$ uma variável aleatória. A variável $X$ é discreta caso $\im{X}$ seja um conjunto
 enumerável.
 \end{def:variavel discreta}
 
 Para as v.a.'s discretas, a função de probabilidade modela a própria probabilidade
-do valor no exeperimento, seja com a interpretação da frequência com a qual ele se
-repetiu ou da crença de que ele será o resultado do experimento. A função é então chamada
-de \textbf{função de massa de probabilidade} (f.m.p.).
+do valor no exeperimento, podendo ser interpretada como a frequência com a qual o evento
+associado à variável se repete, ou como o grau de crença em dado resultado.
+Essa função é chamada de \textbf{função de massa de probabilidade} (f.m.p.), já que ela
+mede a ``quantidade'' de probabilidade associada a um evento.
 
 \begin{def:fmp}
-Seja $X: \Omega \to \mathbb{R}$ uma v.a. discreta. A função de massa de probabilidade
-$p_X: \mathbb{R} \to [0, 1]$ associa todo $x \in \mathbb{R}$ a uma probabilidade.
+Seja $X: \Omega \to \mathbb{R}$ uma v.a. discreta. A função $p_X: \mathbb{R} \to \mathbb{R}$
+é a função de massa de probabilidade de $X$ se, e somente se,
+\[
+	P(X = x) = p_X(x)
+\]
 \end{def:fmp}
 
 As realizações possíveis de $X$, isto é, que possuem probabilidade estritamente maior
-que zero, formam o suporte de $X$.
+que zero, formam o suporte de $X$. No lançamento de um dado, o suporte deve ser os
+inteiros de 1 a 6, pois todos os outros resultados são impossíveis.
 
 \begin{def:suporte discreta}
 Seja $X: \Omega \to \mathbb{R}$ uma v.a. discreta. O suporte de $X$, denotado por $\Omega_X$,
 é o conjunto de todos os valores em $\mathbb{R}$ com probabilidade não nula.
 \[
-	\Omega_X = \{x \in \mathbb{R} \mid p_x(x) > 0 \}
+	\Omega_X = \{x \in \mathbb{R} \mid p_X(x) > 0 \}
 \]
 \end{def:suporte discreta}
 
 Uma vez que $\Omega_X \subset \im{X}$, então o suporte de um v.a. discreta é também
 enumerável. Além disso, é natural pensarmos que, se $\Omega_X$ compreende todos os valores
-ossíveis para $X$, então a probabilidade de que $X$ tenha realização no seu suporte deve
-er igual a 1.
+possíveis para $X$, então a probabilidade de que $X$ tenha realização no seu suporte deve
+ser igual a 1.
 
 \begin{prop:fmp suporte}
 Se $X$ é uma v.a. discreta com f.m.p. igual a $p_X$, então
