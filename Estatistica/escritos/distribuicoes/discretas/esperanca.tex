@@ -1,0 +1,63 @@
+\section{Esperança de Variáveis Discretas}
+
+A esperança de uma variável aleatória é definida matematicamente como a média ponderada
+dos valores assumidos por essa variável. Uma interpretação para esperança é que ela é
+o valor médio de todas as realizações da variável ao se repetir o experimento aleatório
+um número infinito de vezes. Essa interpretação será justificada posteriormente com
+a \textbf{Lei dos Grandes Números}.
+
+\begin{def:esperanca discreta}
+Seja $X$ uma v.a. discreta com f.m.p. $p_X$. A esperança $E[X]$ de $X$ é definida tal como
+\[
+	E[X] = \sum_{x \in \Omega_X} x \cdot p_X(x)
+\]
+\end{def:esperanca discreta}
+
+\begin{prop:esperanca de funcao}
+Seja $X$ uma v.a. discreta com f.m.p. $p_X$, e $f: \mathbb{R} \to \mathbb{R}$
+uma função. A esperança da variável aleatória definida por $f(X) = f \circ X$ é
+dada por
+\[
+	E[f(X)] = \sum_{x \in \Omega_X} f(x) \cdot p_X(x)
+\]
+\begin{proof}
+	Seja $\Omega_f$ o suporte de $f(X)$ e $p_f$ a sua f.m.p.. Temos que
+	\begin{align*}
+		\sum_{x \in \Omega_X} f(x) \cdot p_X(x) & = \sum_{y \in \Omega_f} \sum_{\substack{x \in \Omega_x   \\ f(x) = y}} y \cdot p_X(x)\\
+		                                        & = \sum_{y \in \Omega_f} y \sum_{\substack{x \in \Omega_x \\ f(x) = y}} p_X(x)
+	\end{align*}
+	Fixando $y$, observamos que
+	\[
+		p_f(y) = \sum_{\substack{x \in \Omega_x \\ f(x) = y}} p_X(x).
+	\]
+	Logo
+	\[
+		E[f(X)] = \sum_{y \in \Omega_f} y \cdot p_f(y).
+	\]
+\end{proof}
+\end{prop:esperanca de funcao}
+
+\begin{prop:linearidade da esperanca discreta}
+A esparança é satisfaz:
+\begin{enumerate}
+	\item $E[c] = c$, com $c \in \mathbb{R}$ constante
+	\item $E[\lambda X] = \lambda E[X]$
+\end{enumerate}
+\begin{proof}
+	Para (1), uma constante pode ser vista como um v.a. $X$ que possui apenas uma realização
+	possível igual a $c$, logo $E[X] = c \cdot 1 = c$. Para (2), observe que
+	\[
+		E[\lambda X] = \sum_{x \in \Omega_X} \lambda x \cdot  p_X(x)
+		= \lambda \sum_{x \in \Omega_X} x \cdot p_X(x)
+		= \lambda E[X]
+	\]
+\end{proof}
+\end{prop:linearidade da esperanca discreta}
+
+A verdade é que a esperança é linear, isto é, além das propriedades anteriores, elas
+satisfaz também
+\[
+	E[X + Y] = E[X] + E[Y],
+\]
+em que $X$ e $Y$ são v.a.'s. No entanto, deixaremos essa demonstração para o capítulo
+de vetores aleatórios.
