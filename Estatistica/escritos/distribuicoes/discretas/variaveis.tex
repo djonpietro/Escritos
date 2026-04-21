@@ -34,11 +34,24 @@ Seja $X: \Omega \to \mathbb{R}$ uma v.a. discreta. Se $E \subset \Omega$ é tal 
 \end{proof}
 \end{prop:prob va}
 
-As variáveis tem associadas a si uma \textbf{função de probabilidade}. Em síntese,
-uma função de probabilidade nos dá uma ideia do quão frequente é um valor ou intervalos
-de valores de uma variável aleatória, além de poder informar sobre valores centrais e
-variabilidade da variável. A interpretação bayesiana para essas funções seria como a nossa
-crença modela a confiança \textit{a priori} em cada resultado -- ou intervalo deles --
-possível do experimento. Uma família de funções de probabilidades, cujos membros
-diferenciam-se a menos do valor de um ou mais parâmetros, são chamadas de
-\textbf{distribuições de probabilidade}.
+As variáveis tem associadas a si uma \textbf{função de distribuição de probabilidade}.
+Em síntese, uma função de distribuição de probabilidade nos dá uma ideia do quão
+frequente é um valor ou intervalos de valores de uma variável aleatória, além de poder
+informar sobre valores centrais e variabilidade da variável. A interpretação bayesiana
+para essas funções seria como a nossa crença modela a confiança \textit{a priori} em cada
+resultado -- ou intervalo deles -- possível do experimento. Uma família de funções de
+probabilidades, cujos membros diferenciam-se a menos do valor de um ou mais parâmetros,
+são chamadas de \textbf{distribuições de probabilidade}.
+
+\begin{def:suporte discreta}
+Seja $X: \Omega \to \mathbb{R}$ uma variável aleatória e $f: \mathbb{R} \to \mathbb{R}$ sua
+função de distribuição de probabilidade. O suporte de $X$, denotado por $\Omega_X$, é dado
+por
+\[
+	\Omega_X = \{x \in \mathbb{R} \mid f(x) > 0 \}
+\]
+\end{def:suporte discreta}
+Portanto, o suporte de uma variável aleatória é formada pelos valores que são realizações
+possíveis dessa variável. Por exemplo, no lançamento de um dado de 6 faces, o suporte
+é formado pelos inteiros de 1 a 6; o número de pessoas com diploma numa população não
+pode ser negativo.
