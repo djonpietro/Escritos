@@ -1,0 +1,34 @@
+\section{Variáveis Aleatórias Discretas e Contínuas}
+
+\begin{def:tipo va}
+Uma variável aleatória $X$ é discreta se, e somente se, seu suporte é um conjunto
+enumerável. Ela será contínua se, e somente se, exite uma função $f: \mathbb{R} \to \mathbb{R}$
+tal que
+\[
+	F(x) = \int_{-\infty}^x f(u)du
+\]
+em que $F$ é a função de distribuição acumulada.
+\end{def:tipo va}
+
+\paragraph{Exemplos de variáveis aleatórias discretas}
+\begin{itemize}
+	\item Número de caras obtidas em 10 lançamentos.
+	\item Soma dos lados obtidos no lançamento de dados.
+	\item Número de clientes em uma loja em um dia.
+\end{itemize}
+No primeiro exemplo, as realizações possíveis são os inteiros de 0 a 10. Nos dois seguintes,
+são todos os naturais. Todos esses são conjunto enumeráveis, cujos pontos isoladamente
+concentram massa de probabilidade, isto é, um valor efetivo de probabilidade associado à
+ao evento da variável de ter realização naquele ponto.
+
+\paragraph{Exemplos de variáveis aleatórias contínuas}
+\begin{itemize}
+	\item Tempos de espera em algum serviço.
+	\item Peso ou altura de pessoas numa população.
+	\item Temperatura ao longo de um ano.
+\end{itemize}
+Essas variáveis variam de forma contínua num intervalo de valores, de forma que não possível
+haver valores que concentrem uma massa de probabilidade, sendo essa totalmente dispersada
+pelo intervalo. Em vista disso, a probablidade de que a variável tenha um valor específico
+é zero, o que nos leva ao conceito de densidade de probabilidade sobre intervalos de
+valores.

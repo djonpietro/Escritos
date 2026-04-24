@@ -1,0 +1,92 @@
+\section{Função de Distribuição Acumulada}
+
+A função de distribuição acumulada (FDA) informa, para cada ponto na reta real,
+a probabilidade de que a variável assuma um valor menor ou igual ao do ponto.
+
+\begin{def:cdf}
+Seja $X: \Omega \to \mathbb{R}$ e $F: \mathbb{R} \to [0, 1]$. A função $F$ é uma função
+de distribuição acumulada para $X$ se, e somente se,
+\[
+	P(X \leq x) = F(x)
+\]
+\end{def:cdf}
+
+Para um dada função ser de distribuição acumulada, é necessário e suficente que ela
+cumpra alguns requisitos que definem o seu comportamento: ser não descrescente, ser
+contínua à esquerda e convergir para 0 e 1 no sentido de $-\infty$ e $\infty$
+repectivamente.
+
+\begin{thm:cdf}
+Se $F: \mathbb{R} \to \mathbb{R}$ é uma função de distribuição acumulada de uma
+variável aleatória $X$, então
+\begin{enumerate}
+	\item $\forall x_1, x_2 \in \mathbb{R},\ (x_1 \leq x_2 \rightarrow F(x_1) \leq F(x_2))$
+	\item $\forall x, a \in \mathbb{R},\ (\lim_{x \to a^+} F(x) = F(a) )$
+	\item $\lim_{x \to \infty} F(x) = 1$
+	\item $\lim_{x \to -\infty} F(x) = 0$
+\end{enumerate}
+
+\begin{proof}
+	A afirmação (1) segue do fato de que, se $x_1 \leq x_2$, então
+	\[
+		X = x_1) \subset (X = x_2)
+	\]
+	logo
+	\[
+		P(X = x_1) \leq P(X = x_2) \Longrightarrow F(x_1) \leq F(x_2).
+	\]
+	Seguindo para a afirmação (2),
+	\[
+		\lim_{x \to a^-} F(x) = \lim_{x \to a^+} P(X \leq x)
+	\]
+	Se $x$ descresce até $a$, então os eventos $\{X \leq x\}$, para $x > a$, formam
+	uma sequência descrescente de eventos cuja interseção é $\{X \leq a\}$. Pela
+	continuidade de probabilidades, temos que
+	\[
+		\lim_{x \to a^+} P(X \leq x) = P \left(\lim_{x \to a^+} X \leq x\right)
+		= P (X \leq a) = F(a)
+	\]
+	Para as afirmações (3) e (4), considere a sequência de intervalos encaixados
+	\[
+		I_1 \subset I_2 \subset \ldots
+	\]
+	com extremos inferiores e superiores $a_i$ e $b_i$ respectivamente com $i \in \mathbb{N}$.
+	Os eventos $\{X \leq b_i\}$ formam uma sequência crescente de eventos encaixados tal
+	que
+	\[
+		\lim_{n \to \infty} \{X = b_n\} = \{X \leq \infty\}
+	\]
+	Novamente, pela continuidade da probabilidade,
+	\[
+		\lim_{x \to \infty} F(x) =
+		\lim_{x \to \infty} P(X \leq x) = P\left(\lim_{x \to \infty} X = x\right)
+		= P(X \leq \infty) = 1
+	\]
+	O argumento é replicável para (4): a sequência de eventos $\{X \leq a_i\}$ converge
+	para $\{X \leq -\infty\}$, de sorte que
+	\[
+		\lim_{x \to -\infty} F(x) =
+		\lim_{x \to -\infty} P(X \leq x) = P\left(\lim_{x \to -\infty} X = x\right)
+		= P(X \leq -\infty) = 0
+	\]
+
+\end{proof}
+\end{thm:cdf}
+
+A derivada de uma FDA também é do nosso interesse. Intuitivamente, quanto maior a taxa
+de variação da FDA em um dado ponto $x \in \mathbb{R}$, maior a distribuição sendo
+acmulada em $x$. Uma interpretação possível para isso é que é muito provável observar
+o evento $X = x$ no experimento aleatório. Dessa forma, a derivada $f(x)$ da FDA $F(x)$
+num intervalo onde a FDA é contínua nos mostra a \textbf{distribuição} da frequência
+de uma determinada realização para uma variável $X$. Outrossim, na interpretação bayesiana,
+a derivada nos informa o nível de crença -- que não é necessariamente uma probabilidade,
+já que é possível $f(x) > 1$ -- numa realização.
+
+% \begin{cor:cdf}
+% Seja $F$ uma função de distribuição acumulada contínua no intervalo $(a, b)$.
+% A derivada de $f(x) = F'(x)$ satisfaz
+% \begin{enumerate}
+% 	\item $\forall x \in (a, b),\ (f(x) \geq 0)$
+% 	\item $\int_{a}{} f(x)dx = 1$
+% \end{enumerate}
+% \end{cor:cdf}

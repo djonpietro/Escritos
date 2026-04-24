@@ -1,8 +1,11 @@
 \section{Definição de Variável Aleatória Discreta}
 
 \begin{def:variavel discreta}
-Seja $X$ uma variável aleatória. A variável $X$ é discreta caso $\im{X}$ seja um conjunto
-enumerável.
+Se $X$ é uma variável aleatória, então $X$ é discreta caso a sua FDA seja uma
+função escada, i. e., possui um número enumerável pontos de descontinuidades e
+\[
+	P(X = x) F(x) - \lim_{x \to a^-} F(x)
+\]
 \end{def:variavel discreta}
 
 Para as v.a.'s discretas, a função de probabilidade modela a própria probabilidade
@@ -13,7 +16,7 @@ mede a ``quantidade'' de probabilidade associada a um evento.
 
 \begin{def:fmp}
 Seja $X: \Omega \to \mathbb{R}$ uma v.a. discreta. A função $p_X: \mathbb{R} \to \mathbb{R}$
-é a função de massa de probabilidade de $X$ se, e somente se,
+é a função de massa de probabilidade de $X$
 \[
 	P(X = x) = p_X(x)
 \]
