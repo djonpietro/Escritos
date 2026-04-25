@@ -1,5 +1,8 @@
+\usepackage[extralight]{CrimsonPro}
 \usepackage[T1]{fontenc}
 \usepackage[utf8]{inputenc}
+\let\oldnormalfont\normalfont
+\def\normalfont{\oldnormalfont\mdseries}
 \usepackage{amssymb}
 \usepackage{amsmath}
 \usepackage{amsfonts}
@@ -29,6 +32,7 @@
 \renewcommand{\proofname}{Demonstração}
 \renewcommand{\qedsymbol}{\ensuremath{\blacksquare}}
 
+\theoremstyle{definition}
 % Redefinir o ambiente proof para desativar a indentação dentro dele
 \makeatletter
 \renewenvironment{proof}[1][\proofname]{\par

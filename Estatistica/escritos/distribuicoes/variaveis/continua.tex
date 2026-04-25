@@ -1,0 +1,74 @@
+\section{Variáveis Aleatórias Contínuas}
+
+\begin{def:variavel continua}
+Seja $X$ uma variável aleatória com FDA igual a $F(x)$. A variável será contínua se, e
+somente se,
+\[
+	F(x) = \int_{-\infty}^x f(u)du
+\]
+\end{def:variavel continua}
+
+As variáveis contínuas, diferentes das dicretas, não permitem uma boa definição de uma
+função para a probabilidade de realização da variável em um ponto. Isso porque a
+probabilidade de uma variável contínua ter realização em um ponto $x \in \mathbb{R}$ é
+sempre igual a zero.
+
+\begin{thm:prob 0 continua}
+Se $X$ é uma variável aleatória contínua, então
+\[
+	\forall x \in \mathbb{R},\ (P(X = x) = 0)
+\]
+\begin{proof}
+	Sejam $a, b \in \mathbb{R}$ tal que $a < b$. Disso temos,
+	\begin{align*}
+		P(X = a) & = P(X \leq a) - P(X < a)       \\
+		         & = F(a) - \lim_{x \to a^-} F(a) \\
+	\end{align*}
+	já que a definição de variável contínua implica que $F(x)$ é contínua, então
+	\begin{align*}
+		P(X = a) & = F(a) - \lim_{x \to a^-} F(x) \\
+		         & = F(a) - F(a)                  \\
+		         & = 0
+	\end{align*}
+\end{proof}
+\end{thm:prob 0 continua}
+
+Dessa meneira, a análise da probabilidade de uma realização $x$ para uma variável contínua
+$X$ somente pode ocorrer em vizinhanças de $x$, mas nunca pontualmente. Chamamos a
+probabilidade de $X$ ter realização num intervalo de \textbf{densidade do intervalo}.
+
+\begin{def:fdp}
+Seja $X$ uma variável aleatória contínua. A função $f: \mathbb{R} \to \mathbb{R}$ é uma
+função de desenidade para $X$ se, e somente se,
+\[
+	F(x) = \int_{-\infty}^x f(x)dx
+\]
+\end{def:fdp}
+
+\begin{prop:densidade 1}
+Se $X$ é uma variável aleatória contínua, então
+\[
+	\int_{-\infty}^\infty f(x)dx = 1
+\]
+\begin{proof}
+	Com efeito
+	\[
+		\int_{-\infty}^\infty f(x)dx = \lim_{x \to \infty} F(x) - \lim_{x \to -\infty} F(x) =
+		1 - 0 = 1
+	\]
+\end{proof}
+\end{prop:densidade 1}
+
+Exemplos de variáveis aleatórias contínuas são
+\paragraph{Exemplos de variáveis aleatórias contínuas}
+\begin{itemize}
+	\item Tempos de espera em algum serviço.
+	\item Peso ou altura de pessoas numa população.
+	\item Temperatura ao longo de um ano.
+\end{itemize}
+
+Essas variáveis variam de forma contínua num intervalo de valores, de forma que não possível
+haver valores que concentrem uma massa de probabilidade, sendo essa totalmente dispersada
+pelo intervalo. Em vista disso, a probablidade de que a variável tenha um valor específico
+é zero, o que nos leva ao conceito de densidade de probabilidade sobre intervalos de
+valores.
