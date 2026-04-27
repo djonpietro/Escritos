@@ -1,15 +1,17 @@
 \section{Variáveis Aleatórias Discretas}
 
 \begin{def:variavel discreta}
-Se $X$ é uma variável aleatória, então $X$ é discreta caso a sua FDA seu suporte
+Se $X$ é uma variável aleatória, então $X$ é discreta caso seu suporte
 seja enumerável.
 \end{def:variavel discreta}
 
 Dessa definição, podemos determinar que existe um número contável de pontos
 $x \in \mathbb{R}$ cuja toda vizinhança aberta $U$ centrada neles tenha a propriedade
-de $P(X \in U) > 0$. Esse fato diz que podemos associar a cada ponto uma determinada
-``massa'' de probabilidade. A função que realiza esse mapeamento é chamada de
-\textbf{função de massa de probabilidade}.
+de $P(X \in U) > 0$.
+Esse fato implica que a proabalidade de $X \in U$ se mantém invariante
+independente de quão pequeno seja a vizinhança $U$ centrado em $x$.
+Isso nos permite associar, a cada ponto, uma determinada ``massa'' de probabilidade.
+A função que realiza esse mapeamento é chamada de \textbf{função de massa de probabilidade}.
 
 \begin{def:fmp}
 Seja $X: \Omega \to \mathbb{R}$ uma v.a. discreta. A função $p_X: \mathbb{R} \to \mathbb{R}$
@@ -19,39 +21,36 @@ Seja $X: \Omega \to \mathbb{R}$ uma v.a. discreta. A função $p_X: \mathbb{R} \
 \]
 \end{def:fmp}
 
-\begin{prop:fmp suporte}
-Se $X: \Omega \to \mathbb{R}$ é uma v.a. discreta com f.m.p. igual a $p_X$, então
+\begin{prop:fmp}
+\label{prop:fmp}
+Seja $X: \Omega \to \mathbb{R}$ uma v.a. discreta com f.m.p. igual a $p_X$ e suporte
+$\Omega_X$.
+Se $A \subset \Omega_X$, então
 \[
-	\sum_{x \in \Omega_X} p_X(x) = 1
+	P(X \in A) = \sum_{a \in A} p_X(a)
 \]
 \begin{proof}
-	Como $\Omega_x$ é enumerável, então presuma que $\Omega_X = \{\alpha_1, \ldots, \alpha_n\}$
-	e que $\Parts{\Omega} = \{E_1, \ldots, E_n\}$ seja uma partição de $\Omega$ tal que
+	Como $\Omega_x$ é enumerável, então $A$ também é.
+	Presuma que $A = \{a_1, a_2, \ldots\}$ seja uma ordenação de $A$, de modo que
 	\[
-		\forall i \in [n],\ (P(E_i) = p_X(\alpha_i))
+		P(X \in A) =  P(X \in \{a_1, a_2, \dots\}) = P\left(X \in \bigcup_{a \in A} \{a\} \right),
 	\]
-	Com isso,
+	portanto,
 	\[
-		P\left(\bigcup_{i=1}^n E_i\right) =
-		\sum_{i = 1}^n P(E_i) =
-		\sum_{i = 1}^n p_X(\alpha_i)
-	\]
-	donde se conclui
-	\[
-		\sum_{i = 1}^n p_X(\alpha_i) = 1
+		P(X \in A) = \sum_{a \in A} P(X = a) = \sum_{a \in A} p_X(a)
 	\]
 \end{proof}
-\end{prop:fmp suporte}
+\end{prop:fmp}
 
-Pela definição de variáveis discretas, então digamos que $\{x_1, \ldots, x_n\}$ seja uma
+Pela definição de variáveis discretas, então digamos que $\{x_1, x_2, \ldots\}$ seja uma
 ordenação de $\Omega_X$ de tal modo
 \[
 	F(X) = \begin{cases}
-		0,          & \text{ se } x < x_1              \\
-		F(x_1),     & \text{ se } x_1 \leq x < x_2     \\
-		\vdots                                         \\
-		F(x_{n-1}), & \text{ se } x_{n-1} \leq x < x_n \\
-		1,          & \text{ se } x_n \leq x           \\
+		0,      & \text{ se } x < x_1              \\
+		F(x_1), & \text{ se } x_1 \leq x < x_2     \\
+		\vdots                                     \\
+		F(x_i), & \text{ se } x_i \leq x < x_{i+1} \\
+		\vdots                                     \\
 	\end{cases}.
 \]
 A função $F$ é, pois, uma função constante por partes que sempre incluem a extremidade

@@ -1,0 +1,81 @@
+\section{Transformações}
+
+\begin{def:transformacao}
+Uma transformação de uma variável aleatória $X: \Omega \to \mathbb{R}$ com imagem $\mathcal{X}$
+é toda função $f: \mathcal{X} \to \mathbb{R}$.
+\end{def:transformacao}
+
+Toda transformação define uma nova variável aleatória.
+Isso porque a função composta $f \circ X: \Omega \to \mathbb{R}$ é, por definição,
+uma variável alaeatória.
+
+\begin{def:variavel derivada}
+Se $X: \Omega \to \mathbb{R}$ é uma variável aleatória e $f$ é uma transformação de $X$,
+então $f(X)$ equivale à variável definida por
+\[
+	f \circ X
+\]
+\end{def:variavel derivada}
+
+A transformação não necessariamente é bijetora, o que nos leva a ter de tratar sobre a
+sua distribuição de probabilidade a partir da distribuição de $X$ com um pouco mais de
+cuidado. Antes de tudo, iremos definir uma generalização de uma função inversa para
+$f$.
+
+\begin{def:generalizacao inversa}
+Se $f: D \to \mathbb{R}$ é uma função real, então $f^\dagger: \Parts{\mathbb{R}} \to \Parts{D}$ é
+tal que
+\[
+	f^\dagger(A) = \{x \in D \mid f(x) \in A\}.
+\]
+Em especial, se $y \in \mathbb{R}$, então
+\[
+	f^\dagger(y) = f^\dagger(\{y\})
+\]
+\end{def:generalizacao inversa}
+
+\begin{prop:prob transformacao}
+\label{prop:prob transformacao}
+Seja $X$ uma variável aleatória, $f$ uma transformação e $A \subset \mathbb{R}$.
+\[
+	P(f(X) \in A) = P(X \in f^\dagger(A))
+\]
+\begin{proof}
+	\begin{align*}
+		P(f(X) \in A) & = P(\{x \in \mathbb{R} \mid f(x) \in A\}) \\
+		              & = P(X \in f^\dagger(A))
+	\end{align*}
+\end{proof}
+\end{prop:prob transformacao}
+
+\subsection{Transformação de Variáveis Discretas}
+\begin{thm:prob transformacao discreta}
+Seja $X$ uma variável discreta com suporte $\Omega_X$, f.m.p. igual a $p_X$,
+$f$ uma transformação de $X$ e $Y = f(X)$.
+A variável $Y$ é discreta e sua f.m.p é dada por
+\[
+	p_Y(y) = \sum_{x \in f^\dagger(y)} p_X(x)
+\]
+\begin{proof}
+	De \ref{prop:prob transformacao} sabemos que
+	\[
+		P(Y \in A) > 0 \Longleftrightarrow P(X \in f^\dagger(A)) > 0,
+	\]
+	o que ocorre também se, e somente se, $A \cap \Omega_X \neq \varnothing$.
+	Essa afirmação é verdade somente quando há $x \in \mathbb{R}$ que satisfaz $f(x) \in A$
+	e $x \in \Omega_X$.
+	Portanto, $y \in \Omega_Y$ ocorre somente quando $y = f(x)$ e $x \in \Omega_X$, ou
+	seja, $\Omega_Y$ é a imagem de $\Omega_X$ sobre $f$, sendo, pois, enumerável.
+
+	O resultado sobre a f.m.p. de $Y$ segue do fato de que
+	\[
+		p_Y(y) = P(Y = y) = P(X \in f^\dagger(y))
+	\]
+	e pela proposição \ref{prop:fmp}, temos que
+	\[
+		p_Y(y) = \sum_{x \in f^\dagger(y)} p_x(X)
+	\]
+\end{proof}
+\end{thm:prob transformacao discreta}
+
+\subsection{Transformação de Variáveis Contínuas}
