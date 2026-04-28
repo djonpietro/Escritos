@@ -79,3 +79,72 @@ A variável $Y$ é discreta e sua f.m.p é dada por
 \end{thm:prob transformacao discreta}
 
 \subsection{Transformação de Variáveis Contínuas}
+
+Para transformações de variáveis contínuas, concentramos-nos, primeiramente, nas
+transformações mńótonas, pois essas são bijetoras, e compõem casos mais simples para
+se analisar.
+
+É possível obter a FDA de uma transformação monótona $Y = g(X)$ de uma variável $X$ apenas
+em termos da própria FDA de $X$ e da inversa da transformação.
+
+\begin{thm:fda transformacao continua}
+Seja $X$ uma variável aleatória com FDA igual a $F_X$ e suporte $\Omega_X$.
+Seja também $Y=g(X)$ uma transformação monótona com suporte $\Omega_Y$.
+Se $g$ for crescente, então
+\[
+	\forall x \in \Omega_{X} \forall y \in \Omega_{Y},\ F_{Y}(y) =  F_{X}(g^{-1}(y)).
+\]
+Se for decrescente, então
+\[
+	\forall x \in \Omega_{X} \forall y \in \Omega_{Y},\ F_{Y}(y) = 1 - F_{X}(g^{-1}(y)).
+\]
+\end{thm:fda transformacao continua}
+
+Por sua vez, a densidade de transformações $Y=g(X)$ em casos em que a densidade de $X$
+é contínua, pode ser obtidas via a Regra da Cadeia do Cálculo Diferencial, com a
+condição de que a inversa de $g$ seja também contínua em $\Omega_Y$.
+Caso a densidade de $X$ nem a inversa da transoformação sejam contínuas em $\Omega_X$ e
+$\Omega_Y$ respectivamente, a regra da cadeia não poderia ser aplicada, complexificando
+a determinação da densidade de $Y$.
+
+\begin{thm:fdp transformacao continua}
+\label{thm:fdp transformacao continua}
+Seja $X$ uma variável aleatória com f.d.p. igual a $f_X$.
+Seja $Y=g(X)$ uma variável obtida pela transformação $g$ e com suporte $\Omega_Y$.
+Se $g$ é monótona, $f_X$ é contínua em $\Omega_X$ e $g^{-1}$ tem derivada contínua em
+$\Omega_Y$, então a f.d.p. de $Y$ é dada por
+\[
+	f_{Y}(y) = \begin{cases}
+		f_{X}(g^{-1}(y)) \cdot \left| \frac{d}{dy} g^{-1}(y)\right|, & \text{ se } y \in \Omega_{Y} \\
+		0, \text{ caso contrário.}
+	\end{cases}
+\]
+\end{thm:fdp transformacao continua}
+
+O teorema \ref{thm:fdp transformacao continua} permite-nos a generalizar a obtenção da
+densidade de probabilidade de transformações não monótonas que podem ser decompostas em
+partes monótonas. Um exemplo clássico é a função $g(x) = x^2$ definida em $\mathbb{R}$.
+Essa função não é monótona, porém suas partes definidas separadamente em $(-\infty, 0)$ e
+$[0, \infty)$ serão.
+A densidade da variável definida pela transformação poderá, portanto, ser obtida pelo
+resultado a seguir
+
+\begin{thm:fdp transformacao nao monotona continua}
+Seja $X$ uma variável aleatória com f.d.p. igual a $f_X$.
+Seja $Y=g(X)$ uma variável obtida pela transformação $g$ e com suporte $\Omega_Y$.
+Se $\Omega_X$ admite partição $\{A_1, \ldots, A_n\}$ sendo possível definir a família
+de funções $\{g_i: A_i \to \mathbb{R}\}_{i \in [n]}$ tal que
+\begin{enumerate}
+	\item[i] $g_i(x) = g(x)$
+	\item[ii] $g_i(x)$ é monótona em $A_i$
+	\item[iii] $\Omega_Y$ é o mesmo para todo $i \in [n]$.
+	\item[iv] $g_i^{-1}$ tem derivada contínua em $\Omega_Y$ para todo $i \in [n]$.
+\end{enumerate}
+e $f_X$ contínua em cada $A_i$, então a f.d.p. de $Y$ é dada por
+\[
+	f_{Y}(y) = \begin{cases}
+		\sum_{i=1}^nf_{X}(g_i^{-1}(y)) \cdot \left| \frac{d}{dy} g_i^{-1}(y)\right|, & \text{ se } y \in \Omega_{Y} \\
+		0, \text{ caso contrário.}
+	\end{cases}
+\]
+\end{thm:fdp transformacao nao monotona continua}
