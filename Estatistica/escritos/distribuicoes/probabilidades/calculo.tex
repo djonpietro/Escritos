@@ -1,0 +1,82 @@
+\section{Cálculo das Probablidades}
+
+Para espaços amostrais enumeráveis, ao associar a cada resultado individual
+um número em $[0, 1]$, então a soma dos pesos dos resultados presentes num evento
+é a probablidade desse evento.
+
+\begin{thm:soma prob}
+\label{thm:soma prob}
+Seja $\Omega = \{\omega_i\}_{\mathbb{N}}$ um espaço amostral enumerável, e $\mathcal{B}$ uma
+$\sigma$-Álgebra de $\Omega$.
+Seja $(p_i)_\mathbb{N}$ uma sequência de números não negativos cuja a soma é $1$.
+Presuma também que, se $A \in \mathcal{B}$, então
+\[
+	P(A) = \sum_{w_i \in A} p_i.
+\]
+A tripla $(\Omega, \mathcal{B}, P)$ é um espaço de probabilidade.
+\begin{proof}
+	Precisamos provar que $P$ é uma medida de probabilidade que satisfaz os Axiomas de
+	Kolmogorov.
+
+	\paragraph{Não negatividade} a soma de números não negativos é não negativa, então
+	para todo $A$ em $\mathcal{B}$ vale que $P(A) \geq 0$.
+
+	\paragraph{Probablidade do espaço amostral} A série $\sum_{i=1}^\infty$ deve coicidir
+	com a probabilidade de $\Omega$, série essa que será igual a $1$ por hipotese.
+
+	\paragraph{Soma de eventos disjuntos} Seja $\{A_j\}_{\mathbb{N}}$ uma família
+	disjunta de eventos de $\mathcal{B}$ tal que
+	\[
+		A_j = \{\omega_i \mid i \in I_j\}
+	\]
+	em que $I_j$ é um conjunto de índices. Tão logo obtemos
+	\[
+		P\left(\bigcup_{j=1}^\infty A_j\right) = \sum_{j=1}^\infty \sum_{i \in I_j} p_{ji}
+		= \sum_{j=1}^\infty P(A_j)
+	\]
+\end{proof}
+\end{thm:soma prob}
+
+Esse resultado é útil para computar a probablidade de uma vasta gama de
+experimentos aleatórios na prática. Um exemplo é o lançamento de um dado de 6
+faces; se acreditamos que o dado é honesto, isto é, que o dado não é viciado em
+nenhuma de suas faces, então podemos associar $1/6$ a cada face do dado. Se por
+exemplo, deseja-se saber a probabilidade de obtermos um número menor ou igual a
+3, basta somar as faces que satisfazem essa condição, obtendo uma probablidade
+de $0.5$.
+Experimentos os quais acreditamos não conterem vícios são chamados de equiprováveis.
+
+As $\sigma$-Álgebras que equivalem ao conjunto das partes do espaço amostral são
+chamadas de $\sigma$-Álgebra potência.
+Quando o espaço amostral do experimento é enumerável, ocorre que cada subconjunto unitário
+do espaço amostral -- um resultado individual -- é um evento do experimento. Se o
+experimento é equiprovável, então todos os resultados são eventos de mesma probablidade.
+
+\begin{def:evento equiprovavel}
+Seja o espaço $(\Omega, \mathcal{B}, P)$ com $\Omega$ finito, $\mathcal{B} = \Parts{\Omega}$
+e $P$ definido como no Teorema \ref{thm:soma prob}.
+Chama-se esse espaço de equiprovável se, e somente se,
+\[
+	\forall i \in [n], P(\omega_i) = \frac{1}{n}
+\]
+onde $n = |\Omega|$.
+\end{def:evento equiprovavel}
+
+A probablidade de eventos em experimentos com resultados equiprováveis destaca-se
+por ser intuitiva de calcular. A probablidade de evento será, simplesmente, a
+fração dos resultados presentes nele. Esse resultado será enunciado como Corolário
+do Teorema \ref{thm:soma prob}.
+
+\begin{cor:equiprovavel}
+\label{prop:equiprovavel}
+A probabilidade de um evento $A \in \Parts{\Omega}$ num espaço $(\Omega, \Parts{\Omega}, P)$
+equiprovável é igual a
+\[
+	\frac{|A|}{|\Omega|}
+\]
+\begin{proof}
+	\[
+		P(A) = |A| \cdot \frac{1}{|\Omega|} = \frac{|A|}{|\Omega|}
+	\]
+\end{proof}
+\end{cor:equiprovavel}
