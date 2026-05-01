@@ -80,3 +80,75 @@ equiprovável é igual a
 	\]
 \end{proof}
 \end{cor:equiprovavel}
+
+Esperamos que todo experimento aleatório tenha um resultado, ou seja, que o vazio
+seja um resultado impossível do experimento e que deve, pois, ter probabilidade igual a
+$0$.
+Também, se pudermos seprar o espaço amostral em dois eventos disjuntos, então pelo
+Axioma III de Kolmogorov, esperamos que a soma de suas probabilidades seja igual a
+do espaço, ou seja, $1$.
+Por fim, esperamos que a probablidade máxima a ser associada a um evento seja $1$.
+
+\begin{thm:base calc prob}
+Seja $P$ uma medida de probabilidade.
+Seja $A$ um evento de uma $\sigma$-Álgebra $\mathcal{B}$ do espaço $\Omega$.
+A medida $P$ e o eventos $A$ satsifazem:
+\begin{enumerate}
+	\item[i.] $P(\varnothing) = 0$
+	\item[ii.] $P(A^c) = 1 - P(A)$
+	\item[iii.] $P(A) \leq 1$
+\end{enumerate}
+\begin{proof}
+	Para (i), considere os Axiomas II e III de Kolmogorov, tal que $P(\Omega) = 1$ e
+	$\Omega \cap \varnothing = \varnothing$, logo
+	\begin{gather*}
+		P(\Omega) + P(\varnothing) = P(\Omega \cup \varnothing) \\
+		1 + P(\varnothing) = 1 \\
+		P(\varnothing) = 0
+	\end{gather*}
+	Para (ii), temos que $A \cup A^c = \Omega$, então usando os mesmos axiomas citados,
+	\begin{gather*}
+		P(A) + P(A^c) = P(\Omega) \\
+		P(A^c) = P(\Omega) - P(A)
+	\end{gather*}
+	A afirmação (iii) segue de (ii) e do Axioma I de Kolmogorov,
+	\begin{gather*}
+		P(A^c) \geq 0 \Longrightarrow 1 - P(A) \geq 0 \Longrightarrow P(A) \leq 1
+	\end{gather*}
+\end{proof}
+\end{thm:base calc prob}
+
+\begin{thm:base2 calc prob}
+Seja $P$ uma medida de probabilidade.
+Sejam $A$ e $B$ eventos de uma $\sigma$-Álgebra $\mathcal{B}$ do espaço $\Omega$.
+A medida $P$ e os eventos $A$ e $B$ satisfazem
+\begin{enumerate}
+	\item[i] $P(B \cap A^c) = P(B) - P(B \cap A)$
+	\item[ii] $P(A \cup B) = P(A) + P(B) - P(A \cap B)$
+	\item[iii] $A \subset B \rightarrow P(A) \leq P(B)$
+\end{enumerate}
+\begin{proof}
+	Para (i), considere primeiramente que
+	\[
+		(B \cap A) \cup (B \cap A^c) = B
+	\]
+	e como $(B \cap A) \cup (B \cap A^c) = \varnothing$, então podemos usar o Axioma II
+	de Kolmogorov,
+	\begin{gather*}
+		P(B \cap A) + P(B \cap A^c) = P(B) \\
+		P(B \cap A^c) = P(B) - P(B \cap A)
+	\end{gather*}
+	Para provar (ii), a probabilidade do complementar a a afirmação (i)
+	\begin{align*}
+		P(A \cup B) & = 1 - P(A^c \cap B^c)          \\
+		            & = 1 - [P(A^c) - P(A^c \cap B)] \\
+		            & = P(A) + P(A^c \cap B)         \\
+		            & = P(A) + P(B) - P(A \cap B)
+	\end{align*}
+	Na demonstração de (iii), presuma que $B = A \cup C$ e que $A \cap C = \varnothing$.
+	Sabemos pelo Axioma III que $P(C) = P(B) - P(A)$, e pelo Axioma I segue
+	\[
+		P(B) - P(A) \geq 0 \Longrightarrow P(A) \leq P(B)
+	\]
+\end{proof}
+\end{thm:base2 calc prob}
