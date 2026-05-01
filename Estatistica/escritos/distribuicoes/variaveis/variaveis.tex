@@ -1,49 +1,70 @@
 \section{Variáveis Aleatórias}
 
-Variáveis aleatórias (v.a) são representações de características numéricas de
-experimentos aleatórios. Essa visão extende-se desde dos casos mais simples, a exemplo de
-quando o próprio resultado é o atributo numérico de interesse, quanto a características
-mais complexas, como a soma dos lados de dados, quantas vezes lançamos uma moeda até
-obtermos duas caras ou o número de peças defeituosas produzidas após um dia de trabalho.
-As v.a's podem ser formalizadas como funções que associam cada resultado do
-espaço amostral a um número real.
+Variáveis aleatórias (v.a.) são representações de características numéricas de
+experimentos aleatórios.
+Exemplos são a quantidade de caras obtidas no lançamento de uma moeda, a soma dos lados de
+um dado, número de erros num livro, tempo até a um equipamento apresentar falha, entre
+muitos outros.
+
+A definição de v.a.'s devem levar em conta que, dado um intervalo de valores, os
+resultados cujo valor da característica medida por $X$ se encontram no intervalo
+devem formar um evento do experimento.
+Com isso, uma formalização para variáveis aleatórias necessita do conceito de
+Álgebras de Borel para os números reais, que é a menor $\sigma$-Álgebra na topologia
+usual de $\mathbb{R}$.
+
+\begin{def:borel}
+Seja \(\mathcal{G} = \{(-\infty, x] \mid x \in \mathbb{R}\}\). A $\sigma$-álgebra gerada por
+\(\mathcal{G}\) é chamada $\sigma$-álgebra de Borel em \(\mathbb{R}\) e é denotada por
+\(\mathcal{B}(\mathbb{R})\).
+\end{def:borel}
+
+A $\sigma$-álgebra da definição inclui todos os intervalos de $\mathbb{R}$: abertos,
+semiabertos, fechados e degenerados. Com isso, podemos agora criar uma correspondência
+entre intervalos das características de uma variável aleatória, isto é, um $A \in \borel$,
+e um evento de um espaço amostral.
 
 \begin{def:va}
-Se $\Omega$ é um espaço amostral, então uma variável aleatória $X$ é uma aplicação
-de $\Omega$ em $\mathbb{R}$.
+Seja $(\Omega, \mathcal{B}, P)$ um espaço de probabilidade.
+A aplicação $X: \Omega \to \mathbb{R}$ é uma variável aleatória se, e somente se,
+\[
+	\forall A \in \borel, X^{-1}(A) \in \mathcal{B}
+\]
 \end{def:va}
 
-% É razoável presumir que a probabilidade de uma variável assumir uma realização específica
-% é igual à probabilidade do evento que reune os resultados que levam a variável a ter
-% essa realização. Por exemplo, se o experimento consiste em lançar dois
-% dados, e $X$ é a soma dos dados, então a probabilidade da variável ter realização 7, que
-% denotaremos por $X = 7$, deve ser igual à probabilidade do evento dos resultados em que a soma
-% dos lados é 7, ou seja, do evento $\{(1, 6), (2, 5), (4, 3), (5, 2), (6, 1)\}$.
+\begin{prop:eqv def va}
+Seja $(\Omega, \mathcal{B}, P)$ um espaço de probabilidade.
+A aplicação $X: \Omega \to \mathbb{R}$ é uma variável aleatória se, e somente se,
+\[
+	\forall x \in \mathbb{R}, \{\omega \in \Omega \mid X(\omega) \leq x\} \in \borel
+\]
+\end{prop:eqv def va}
 
-Introduzamos uma forma que nos permite definir eventos a partir de variáveis aleatórias
-e os valores que elas mapeiam um determinado resultado no espaço amostral.
+
+A fim de facilitar a notação para o tratamento de variáveis aleatórias, iremos introduzir
+um notação para denotar eventos de um espaço amostral a partir da variável que mede
+o evento.
 
 \begin{def:evento va}
-Seja $X: \Omega \to \mathbb{R}$ uma variável aleatória. Se $A \subset \mathbb{R}$, então
-o evento denotado por $\{X \in A\}$ é equivalente a
-\[
-	\{\omega \in \Omega \mid X(\omega) \in A\}
-\]
+Seja $X: \Omega \to \mathbb{R}$ uma variável aleatória. Se $A \in \borel$, então
+o evento denotado por $\{X \in A\}$ é equivalente a $X^{-1}(A)$.
 \end{def:evento va}
 
-Um caso especial dessa forma de definir eventos por meio de variáveis são as realizações,
-que representam os casos em que queremos dizer qual foi o valor ao qual a variável mapeou
-o resultado do experimento aleatório.
+Se uma variável aleatória mede uma característica do experimento, então podemos
+medir a probabilidade de uma premissa sobre a realização do valor dessa característica.
+Em outras palvras, uma variável aleatória induz um novo espaço de probabilidade.
 
-\begin{def:realizacao}
-Seja $X: \Omega \to \mathbb{R}$ uma variável aleatória. Chamamos de realização de
-$X$ igual a $x$ o evento definido por $\{\omega \in \Omega \mid X(\omega) = x\}$.
-\end{def:realizacao}
-
-Muitos outros predicados podem ser úteis para sintetizar eventos em termos dos valores
-assumidos por uma variável. Por exemplo, para dizer que uma variável $X$ teve realização
-menor do que $x$, então representamos por $\{X < x\}$. Ou que a realização de $X$ está
-no intervalo $[a, b]$, denotamos por $\{X \in [a, b]\}$.
+\begin{def:espaço induzido}
+Seja $(\Omega, \mathcal{B}, P)$ um espaço de probabilidade e $X: \Omega \to \mathbb{R}$
+uma variável aleatória.
+Defini-se o espaço de probabilidade $(\mathbb{R}, \borel, P_X)$ induzido por $X$ tal que,
+se $A \in \borel$, então
+\[
+	P_X(A) = P(X \in A)
+\]
+\end{def:espaço induzido}
+Para facilitar a notação, iremos representar a medida do espaço original e do induzido
+pelos mesmo símbolos, e.g., $P_X(A) = P(A)$.
 
 O conjunto dos valores cuja probabilidade da realização é não nula é chamado de suporte.
 Por exemplo, no lançamento de um dado, as realizações possíveis são os inteiros de 1
@@ -54,36 +75,7 @@ corporal de uma população, o suporte é, em tese, qualquer valor positivo.
 Seja $X: \Omega \to \mathbb{R}$ uma variável aleatória.
 O suporte de $X$ é o conjunto
 \[
-	\Omega_X = \{x \in \mathbb{R} \mid \forall U \text{ vizinhança aberta de } x, P(X \in U) > 0 \}
+	\Omega_X = \{x \in \mathbb{R} \mid
+	\forall a, b \in \mathbb{R},\ (x \in (a, b) \rightarrow P(X \in (a, b)) > 0) \}
 \]
-
 \end{def:suporte}
-% As variáveis tem associadas a si uma \textbf{função de distribuição de probabilidade}.
-% Em síntese, uma função de distribuição de probabilidade nos dá uma ideia do quão
-% frequente é um valor ou intervalos de valores de uma variável aleatória, além de poder
-% informar sobre valores centrais e variabilidade da variável. A interpretação bayesiana
-% para essas funções seria como a nossa crença modela a confiança \textit{a priori} em cada
-% resultado -- ou intervalo deles -- possível do experimento.
-
-% \begin{def:funcao de probabilidade}
-% Seja $X: \Omega \to \mathbb{R}$ e $f: \mathbb{R} \to \mathbb{R}$. Dizemos que $f$ é uma
-% função de probabilidade para
-% \end{def:funcao de probabilidade}
-
-
-% Uma família de funções de
-% probabilidades, cujos membros diferenciam-se a menos do valor de um ou mais parâmetros,
-% são chamadas de \textbf{distribuições de probabilidade}.
-
-% \begin{def:suporte discreta}
-% Seja $X: \Omega \to \mathbb{R}$ uma variável aleatória e $f: \mathbb{R} \to \mathbb{R}$ sua
-% função de distribuição de probabilidade. O suporte de $X$, denotado por $\Omega_X$, é dado
-% por
-% \[
-% 	\Omega_X = \{x \in \mathbb{R} \mid f(x) > 0 \}
-% \]
-% \end{def:suporte discreta}
-% Portanto, o suporte de uma variável aleatória é formada pelos valores que são realizações
-% possíveis dessa variável. Por exemplo, no lançamento de um dado de 6 faces, o suporte
-% é formado pelos inteiros de 1 a 6; o número de pessoas com diploma numa população não
-% pode ser negativo.
