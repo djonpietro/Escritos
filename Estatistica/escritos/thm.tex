@@ -13,7 +13,6 @@
 % Proposições
 \newtheorem{prop:base-prob}{Proposição}[chapter]
 \newtheorem{prop:demorgan}{Proposição}[chapter]
-\newtheorem{prop:equiprovavel}[prop:base-prob]{Proposição}
 \newtheorem{prop:eventos encaixados}[prop:base-prob]{Proposição}
 \newtheorem{prop:probabilidade condicional}[prop:base-prob]{Proposição}
 \newtheorem{prop:regra da multiplicacao}[prop:base-prob]{Proposição}
@@ -21,7 +20,9 @@
 \newtheorem{prop:independencia complementar}[prop:base-prob]{Proposição}
 % Teorema
 \newtheorem{thm:base-prob}{Teorema}[chapter]
-\newtheorem{thm:soma prob}{Teorema}[chapter]
+\newtheorem{thm:soma prob}[thm:base-prob]{Teorema}
+\newtheorem{thm:base calc prob}[thm:base-prob]{Teorema}
+\newtheorem{thm:base2 calc prob}[thm:base-prob]{Teorema}
 \newtheorem{thm:probabilidade total}[thm:base-prob]{Teorema}
 \newtheorem{thm:bayes}[thm:base-prob]{Teorema}
 % Corolário

@@ -1,22 +1,26 @@
 \section{Probabilidade Condicional e Independência}
 
-A probabilidade condicional representa o conceito de probabilidade de um evento tal que
-é conhecida a ocorrência de outro; como se tivéssemos reduzido o espaço amostral a um
-conjunto menor de resultados possíveis. Outra interpretação possível é aquela tal que
-associamos uma probabilidade a um evento tendo o conhecimento de uma evidência sobre ele.
+Em experimentos aleatórios, um determinado evento pode ser mais ou menos frequente a
+depender do conhecimento da ocorrência de outro evento. Nesse caso, dizemos que um evento
+está condicionado a outro.
 
 \begin{def:probabilidade condicional}
-Sejam $E$ e $F$ eventos num espaço amostral $\Omega$. A probabilidade condicional
-do evento $E$ dado $F$, denotada por $P(E|F)$, é dada por
+Seja $(\Omega, \mathcal{B}, P)$ um espaço de probabilidade.
+Sejam $E$ e $F$ eventos de $\mathcal{B}$.
+A probablidade condicional do evento $E$ dado $F$, denotada por $P(E|F)$, é dada por
 \[
 	P(E|F) = \frac{P(E \cap F)}{P(F)}
 \]
 \end{def:probabilidade condicional}
 
+Quando a interseção entre dois eventos é vazia, então teremos que a probablidade
+condicional será $0$.
 A probablidade condicional induz uma forma de determinar a probabilidade do evento
 dado como interseção de vários outros.
+
 \begin{prop:regra da multiplicacao}[Regra do Produto]
-Se $\mathcal{F} = \{E_1, \ldots, E_n\}$ uma família de eventos de $\Omega$, então
+Seja $\mathcal{F} = \{E_i\}_n$ uma família de eventos disjuntos de um
+espaço de probabilidade $(\Omega, \mathcal{B}, P)$.
 \[
 	P\left(\bigcap_{E \in \mathcal{F}} E\right) =
 	\prod_{i=1}^n P\left(E_i\ \middle|\ \bigcap_{j < i} E_j\right)
@@ -51,15 +55,15 @@ Eventos independentes são aqueles cuja probabilidade de ocorrência não depend
 da ocorrência de outro. Isso equivale a dizer que, o conhecimento do acontecimento
 de um evento não muda a crença na ocorrência de outro.
 \begin{def:independencia}
-Dois eventos $E$ e $F$ dum espaço amostral $\Omega$ são independentes se, e somente
-se
+Dois eventos $E$ e $F$ de um espaço $(\Omega, \mathcal{B}, P)$ são independentes se, e
+somente se
 \[
 	P(E \cap F) = P(E) \cdot P(F)
 \]
 \end{def:independencia}
 
 \begin{prop:independencia}
-Se $E$ e $F$ são eventos independentes de $\Omega$, então
+Se $E$ e $F$ são eventos independentes de $(\Omega, \mathcal{B}, P)$, então
 \[
 	P(E | F) = P(E) \quad \mathit{ e }\quad P(F | E) = P(F)
 \]
@@ -79,31 +83,20 @@ Se $E$ e $F$ são eventos independentes de $\Omega$, então
 
 \begin{prop:independencia complementar}
 \label{prop:independencia complementar}
-Sejam $E$ e $F$ eventos em $\Omega$. Se eles são independentes, então os seguintes
-eventos também o são:
+Sejam $E$ e $F$ eventos em $(\Omega, \mathcal{B}, P)$.
+Se eles são independentes, então os seguintes eventos também o são:
 \begin{enumerate}
-	\item $E^c$ e $F$
 	\item $E$ e $F^c$
+	\item $E^c$ e $F$
 	\item $E^c$ e $F^c$
 \end{enumerate}
 \begin{proof}
-	(1) É verdade que
-	\[
-		(E \cap F) \cap (E \cap F^c) = \varnothing
-	\]
-	e também que
-	\[
-		(E \cap F) \cup (E \cap F^c) =  E
-	\]
-	então
-	\[
-		P(E \cap F) + P(E \cap F^c) = P(E)
-	\]
-	donde segue que
-	\begin{gather*}
-		P(E \cap F^c) = P(E) - P(E \cap F) = P(E) - P(E)P(F) = P(E) \cdot [1 - P(F)] \\
-		P(E \cap F^c) = P(E) \cdot P(F^c)
-	\end{gather*}
+	Para (1), é verdade que
+	\begin{align*}
+		P(E \cap F^c) & = P(E) - P(E \cap F) \\
+		              & = P(E) [1 - P(F)]    \\
+		              & = P(E) P(F^c)
+	\end{align*}
 	A expressão (2) é análoga a (1). Por fim, para expressão (3), conclua que
 	\begin{align*}
 		P(E^c \cap F^c) & = P((E \cup F)^c) = 1 - P(E \cup F) \\
@@ -118,13 +111,15 @@ eventos também o são:
 \end{prop:independencia complementar}
 
 \begin{thm:probabilidade total}[Teorema de Probablidade Total]
-Seja $\Omega$ um espaço amostral e $\mathcal{F} = \{F_1, \ldots, F_n\}$ uma partição de
-$\Omega$. Se $E$ é um evento de $\Omega$, então
+Seja o espaço de probabilidade $(\Omega, \mathcal{B}, P)$.
+Seja $\mathcal{F} = \{F_i\}_\mathbb{N}$, com $\mathcal{F} \subset \mathcal{B}$, uma partição de
+$\Omega$.
+Se $E \in \mathcal{B}$, então
 \[
 	P(E) = \sum_{F \in \mathcal{F}} P(E) \cdot P(E | F)
 \]
 \begin{proof}
-	Para quaisquer $i, j \in [n]$ temos que
+	Para quaisquer $i, j \in \mathbb{N}$ temos que
 	\[
 		(E \cap F_i) \cap (E \cap F_j)  = \varnothing.
 	\]

@@ -1,6 +1,7 @@
 \section{Teorema de Bayes}
 \begin{thm:bayes}[Teorema de Bayes]
-Se $E$ e $F$ são eventos de um espaço amostral $\Omega$, então
+Seja $(\Omega, \mathcal{B}, P)$ um espaço de probabilidade.
+Se $E$ e $F$ são eventos, então
 \[
 	P(E | F) = P(F | E) \frac{P(E)}{P(F)}
 \]
@@ -25,8 +26,9 @@ uma evidência $F$, é plausível questionar em qual hipótese deveríamos depos
 crença visto a evidência. Conseideremos então o corolário:
 
 \begin{cor:formula de bayes}[Fórmula de Bayes]
-Seja $\mathcal{E} = \{E_1, \ldots, E_n\}$ uma partição de um espaço amostral $\Omega$.
-Se $E$ é um evento de $\Omega$, então
+Seja $\mathcal{E} = \{E_i\}_\mathbb{N}$ uma partição de eventos de um espaço amostral
+$\Omega$.
+Se $F$ é um evento de $\Omega$, então
 \[
 	P(E_i | F) = \frac{P(F | E_i) P(E_i) }{\sum_{E \in \mathcal{E}} P(E) P(F | E)}
 \]
