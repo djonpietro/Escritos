@@ -40,7 +40,6 @@ A aplicação $X: \Omega \to \mathbb{R}$ é uma variável aleatória se, e somen
 \]
 \end{prop:eqv def va}
 
-
 A fim de facilitar a notação para o tratamento de variáveis aleatórias, iremos introduzir
 um notação para denotar eventos de um espaço amostral a partir da variável que mede
 o evento.
@@ -49,6 +48,12 @@ o evento.
 Seja $X: \Omega \to \mathbb{R}$ uma variável aleatória. Se $A \in \borel$, então
 o evento denotado por $\{X \in A\}$ é equivalente a $X^{-1}(A)$.
 \end{def:evento va}
+
+\noindent
+Perceba que se $A \in \mathcal{B}$, então temos três formas de denotar o mesmo evento
+\[
+	X^{-1}(A) = \{X \in A\} = \{\omega \in \Omega \mid X(\omega) \in A\}
+\]
 
 Se uma variável aleatória mede uma característica do experimento, então podemos
 medir a probabilidade de uma premissa sobre a realização do valor dessa característica.
@@ -63,6 +68,7 @@ se $A \in \borel$, então
 	P_X(A) = P(X \in A)
 \]
 \end{def:espaço induzido}
+\noindent
 Para facilitar a notação, iremos representar a medida do espaço original e do induzido
 pelos mesmo símbolos, e.g., $P_X(A) = P(A)$.
 
