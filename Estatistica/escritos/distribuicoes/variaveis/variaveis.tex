@@ -85,3 +85,30 @@ O suporte de $X$ é o conjunto
 	\forall a, b \in \mathbb{R},\ (x \in (a, b) \rightarrow P(X \in (a, b)) > 0) \}
 \]
 \end{def:suporte}
+
+Uma propriedade útil do suporte de uma variável é que a probabilidade de $X$ ter
+realização em seu suporte é igual a $1$. Visto isso, o suporte pode ser interpretado
+como o conjunto de valores possíveis os quais uma variável pode assumir.
+
+\begin{prop:prob suporte}
+Se $X$ é uma variável aleatória com suporte $\Omega_X$, então $P_X(\Omega_X) = 1$.
+
+\begin{proof}
+	Definamos $S = \mathbb{R} \setminus \Omega_X$, de modo que
+	\[
+		x \in S \leftrightarrow \exists a, b \in \real, x \in (a, b) \land P_X((a, b)) = 0.
+	\]
+	Pelo fato de $\mathbb{Q}$ ser denso em $\real$, existem $p, q \in \mathbb{Q}$ tais
+	que $ x \in (p, q)$, $(p, q) \subset (a, b)$ e $P_X((p, q)) = 0$. Podemos afirmar
+	que
+	\[
+		S \subset \bigcup_{(p,q) \in I} (p, q),
+	\]
+	onde $I \subset \mathbb{Q}^2$ é uma família enumerável de intervalos. Por consequência,
+	\[
+		P_X(S) \leq P_X\left(\bigcup_{(p,q) \in I} (p, q)\right) \leq \bigcup_{(p,q) \in I} P_X((p, q))
+		= 0.
+	\]
+	Se $0 \leq P_X(S) \leq 0$, então $P_X(S) = 0$. Conclui-se que $P_X(\Omega_X) = 1$.
+\end{proof}
+\end{prop:prob suporte}
