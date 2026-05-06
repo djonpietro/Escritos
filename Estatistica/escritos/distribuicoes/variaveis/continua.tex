@@ -1,66 +1,149 @@
 \section{Variáveis Aleatórias Contínuas}
 
-\begin{def:variavel continua}
-Seja $X$ uma variável aleatória com FDA igual a $F(x)$. A variável será contínua se, e
-somente se,
+\begin{def:absolutamente continua}
+Uma função $f$ é absolutamente contínua num intervalo $[a, b]$ se, para todo
+$\epsilon > 0$, existe $\delta > 0$ tal que, para toda coleção finita de subsintervalos
+disjuntos $\{(a_i, b_i)\}_n$ é satisfeito
 \[
-	F(x) = \int_{-\infty}^x f(u)du
+	\sum_{i=1}^n (b_i - a_i) < \delta \Longrightarrow \sum_{i=1}^n | f(b_i) - f(a_i) | < \epsilon
 \]
+\end{def:absolutamente continua}
+
+\begin{def:variavel continua}
+A variável $X$ será contínua se a sua medida induzida $P_X$ é absolutamente contínua em
+relação a medida de Lesbergue $\lambda$, i.e., $P_X \ll \lambda$
 \end{def:variavel continua}
 
-As variáveis contínuas, diferentes das dicretas, não permitem uma boa definição de uma
-função para a probabilidade de realização da variável em um ponto. Isso porque a
-probabilidade de uma variável contínua ter realização em um ponto $x \in \mathbb{R}$ é
-sempre igual a zero.
-
-\begin{thm:prob 0 continua}
-Se $X$ é uma variável aleatória contínua, então
+\begin{thm:radon-nikodym}[Radon-Nikodym]
+\label{thm:radon-nikodym}
+Se $X$ é uma variável contínua e $P_X$ é sua medida induzida, então existe
+$f \in L^1(\real)$ com $f(x) \ge 0$ para todo $x \in \real$ tal que
 \[
-	\forall x \in \mathbb{R},\ (P(X = x) = 0)
+	\forall A \in \borel, P_X(A) = \int_A f(x)dx
 \]
-\begin{proof}
-	Sejam $a, b \in \mathbb{R}$ tal que $a < b$. Disso temos,
-	\begin{align*}
-		P(X = a) & = P(X \leq a) - P(X < a)       \\
-		         & = F(a) - \lim_{x \to a^-} F(a) \\
-	\end{align*}
-	já que a definição de variável contínua implica que $F(x)$ é contínua, então
-	\begin{align*}
-		P(X = a) & = F(a) - \lim_{x \to a^-} F(x) \\
-		         & = F(a) - F(a)                  \\
-		         & = 0
-	\end{align*}
-\end{proof}
-\end{thm:prob 0 continua}
-
-Dessa meneira, a análise da probabilidade de uma realização $x$ para uma variável contínua
-$X$ somente pode ocorrer em vizinhanças de $x$, mas nunca pontualmente. Chamamos a
-probabilidade de $X$ ter realização num intervalo de \textbf{densidade do intervalo}.
+\end{thm:radon-nikodym}
 
 \begin{def:fdp}
-Seja $X$ uma variável aleatória contínua. A função $f: \mathbb{R} \to \mathbb{R}$ é uma
-função de desenidade para $X$ se, e somente se,
+Seja $X$ uma variável aleatória contínua com medida induzida $P_X$. A função
 \[
-	F(x) = \int_{-\infty}^x f(x)dx
+	f = \frac{d}{d\lambda}P_X
 \]
+é chamada de densidade de probabilidade de $X$.
 \end{def:fdp}
 
-\begin{prop:densidade 1}
-Se $X$ é uma variável aleatória contínua, então
+\begin{prop:fdp e fda}
+\label{prop:fdp e fda}
+Se $X$ é uma variável contínua com densidade $f$ e distribuição $F$, então
 \[
-	\int_{-\infty}^\infty f(x)dx = 1
+	F(x) = \int_{-\infty}^x f(t)\,dt
 \]
 \begin{proof}
-	Com efeito
+	Por definição de distribuição,
 	\[
-		\int_{-\infty}^\infty f(x)dx = \lim_{x \to \infty} F(x) - \lim_{x \to -\infty} F(x) =
-		1 - 0 = 1
+		F(x) = P_X((-\infty, x])
+	\]
+	e usando o Teorema de \nameref{thm:radon-nikodym}.
+	\[
+		F(x) = \int_{-\infty}^x f(t)\,dt
+	\]
+\end{proof}
+\end{prop:fdp e fda}
+
+\begin{prop:continuidade fda}
+Se $X$ é uma v.a. contínua, então a sua distribuição $F$ é absolutamente contínua.
+\end{prop:continuidade fda}
+
+\begin{thm:prob continua}
+Se $X$ é uma variável aleatória contínua com densidade $f$,
+então para todo $x, a, b \in \real$
+\begin{enumerate}
+	\item[i.] $P(a < X \leq b) = \int_a^b f(t)\,dt$
+	\item[ii.] $P(X = x) = 0$
+	\item[iii.] $P(X \leq x) = P(X < x)$
+	\item[iv.] $P(X \geq x) = P(X > x)$
+\end{enumerate}
+\begin{proof}
+	\[
+		P(a < X \le b) = P(X \le b) - P(X \le a) = F(b) - F(a)
+	\]
+	e pela Proposição \ref{prop:fdp e fda}
+	\[
+		P(a < X \le b) = \int_{-\infty}^b f(t)\,dt - \int_{-\infty}^a f(t)\,dt = \int_a^b f(t)\,dt
+	\]
+	provando (i).
+
+	A afirmação (ii) é consequência direta,
+	\[
+		P(X = x) = \int_x^x f(t)\,dt = 0.
+	\]
+	Uma vez que
+	\[
+		P(X \leq x) = P(X = x) + P(X < x) \quad \text{e} \quad P(X \ge x) = P(X = x) + P(X > x)
+	\]
+	então (iii) e (iv) são consequências de (ii).
+\end{proof}
+\end{thm:prob continua}
+
+\begin{prop:densidade 1}
+\label{prop:densidade 1}
+Se $X$ é uma variável aleatória contínua com densidade $f$ e suporte $\Omega_X$, então
+\[
+	\int_{\Omega_X} f(t)\,dt = \int_\real f(t)\,dt = 1
+\]
+\begin{proof}
+	Se $P_X$ é a medida induzida por $X$, então pelo Teorema de \nameref{thm:radon-nikodym},
+	\[
+		P_X(\Omega_X) = \int_{\Omega_X} f(x)\,dx,
+	\]
+	mas pela Proposição \ref{prop:suporte}
+	\[
+		P_X(\Omega_X) = 1,
+	\]
+	donde segue
+	\[
+		\int_{\Omega_X} f(t)\,dt = 1
+	\]
+	O Teorema de \nameref{thm:radon-nikodym} também implica que
+	\[
+		P_X(\real) = \int_\real f(t)\,dt
+	\]
+	e pelo axioma II de Kolmogorov aplicado ao espaço $(\real, \borel, P_X)$ induzido
+	por $X$ temos
+	\[
+		\int_\real f(t)\,dt = 1
 	\]
 \end{proof}
 \end{prop:densidade 1}
 
+\begin{lem:qs lesbergue}
+\label{lem:qs lesbergue}
+Temos $\qs{f=0}{A}$ se, e somente se, $f > 0$ e $\int_A f\,d\lambda = 0$.
+\end{lem:qs lesbergue}
+
+\begin{prop:densidade fora suporte}
+Se $X$ é uma variável contínua com densidade $f$ e suporte $\Omega_X$, então
+\[
+	\qs{f(x) = 0}{x \notin \Omega_X}
+\]
+\begin{proof}
+	Seja $A = \real \setminus \Omega_X$.
+	Se provarmos que $\forall x, f(x) \ge 0$ e $\int_A f(x)\,dx = 0$, então poderemos
+	aplicar o lema \ref{lem:qs lesbergue}.
+	A não negatividade de $f(x)$ vale pelo Teorema de \nameref{thm:radon-nikodym}.
+	Outrossim,
+	\[
+		\int_{\Omega_X} f(x)\,dx + \int_{A} f(x)\,dx = \int_\real f(x)\,dx
+	\]
+	então
+	\[
+		\int_A f(x)\,dx = 0.
+	\]
+	Segue, então, do lema \ref{lem:qs lesbergue} que $f(x) = 0$ em quase todo ponto
+	fora de $\Omega_X$.
+\end{proof}
+\end{prop:densidade fora suporte}
+
 Exemplos de variáveis aleatórias contínuas são
-\paragraph{Exemplos de variáveis aleatórias contínuas}
 \begin{itemize}
 	\item Tempos de espera em algum serviço.
 	\item Peso ou altura de pessoas numa população.

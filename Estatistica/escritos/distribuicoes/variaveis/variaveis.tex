@@ -28,29 +28,23 @@ e um evento de um espaço amostral.
 Seja $(\Omega, \mathcal{B}, P)$ um espaço de probabilidade.
 A aplicação $X: \Omega \to \mathbb{R}$ é uma variável aleatória se, e somente se,
 \[
-	\forall A \in \borel, X^{-1}(A) \in \mathcal{B}
+	\forall A \in \borel, (X^{-1}(A) \in \mathcal{B})
 \]
 \end{def:va}
-
-\begin{prop:eqv def va}
-Seja $(\Omega, \mathcal{B}, P)$ um espaço de probabilidade.
-A aplicação $X: \Omega \to \mathbb{R}$ é uma variável aleatória se, e somente se,
-\[
-	\forall x \in \mathbb{R}, \{\omega \in \Omega \mid X(\omega) \leq x\} \in \borel
-\]
-\end{prop:eqv def va}
 
 A fim de facilitar a notação para o tratamento de variáveis aleatórias, iremos introduzir
 um notação para denotar eventos de um espaço amostral a partir da variável que mede
 o evento.
 
 \begin{def:evento va}
-Seja $X: \Omega \to \mathbb{R}$ uma variável aleatória. Se $A \in \borel$, então
-o evento denotado por $\{X \in A\}$ é equivalente a $X^{-1}(A)$.
+Seja $(\Omega, \mathcal{B}, P)$ um espaço de probabilidade e $X: \Omega \to \real$ uma
+variável aleatória.
+Se $A \in \borel$, então o evento denotado por $\{X \in A\}$ é equivalente a $X^{-1}(A) \in \mathcal{B}$.
 \end{def:evento va}
 
 \noindent
-Perceba que se $A \in \mathcal{B}$, então temos três formas de denotar o mesmo evento
+Perceba que se $A \in \borel$, então temos três formas de denotar o mesmo evento de
+$\mathcal{B}$.
 \[
 	X^{-1}(A) = \{X \in A\} = \{\omega \in \Omega \mid X(\omega) \in A\}
 \]
@@ -62,15 +56,12 @@ Em outras palvras, uma variável aleatória induz um novo espaço de probabilida
 \begin{def:espaço induzido}
 Seja $(\Omega, \mathcal{B}, P)$ um espaço de probabilidade e $X: \Omega \to \mathbb{R}$
 uma variável aleatória.
-Defini-se o espaço de probabilidade $(\mathbb{R}, \borel, P_X)$ induzido por $X$ tal que,
-se $A \in \borel$, então
+A tripla $(\mathbb{R}, \borel, P_X)$ é o espaço de probabilidade induzido por $X$ se
+para todo $A \in \borel$ é satisfeito
 \[
 	P_X(A) = P(X \in A)
 \]
 \end{def:espaço induzido}
-\noindent
-Para facilitar a notação, iremos representar a medida do espaço original e do induzido
-pelos mesmo símbolos, e.g., $P_X(A) = P(A)$.
 
 O conjunto dos valores cuja probabilidade da realização é não nula é chamado de suporte.
 Por exemplo, no lançamento de um dado, as realizações possíveis são os inteiros de 1
@@ -78,33 +69,39 @@ a 6, enquanto os demais inteiros tem probabilidade nula. Coletando dados sobre o
 corporal de uma população, o suporte é, em tese, qualquer valor positivo.
 
 \begin{def:suporte}
-Seja $X: \Omega \to \mathbb{R}$ uma variável aleatória.
-O suporte de $X$ é o conjunto
+O suporte de uma variável aleatória $X$ é o conjunto
 \[
 	\Omega_X = \{x \in \mathbb{R} \mid
-	\forall a, b \in \mathbb{R},\ (x \in (a, b) \rightarrow P(X \in (a, b)) > 0) \}
+	\forall \epsilon > 0,\ P(x - \epsilon < X < x + \epsilon) > 0 \}
 \]
 \end{def:suporte}
 
-Uma propriedade útil do suporte de uma variável é que a probabilidade de $X$ ter
-realização em seu suporte é igual a $1$. Visto isso, o suporte pode ser interpretado
-como o conjunto de valores possíveis os quais uma variável pode assumir.
+Um fato útil é que a probabilidade de $X$ ter realização em seu suporte é igual a $1$.
+Visto isso, o suporte pode ser interpretado como o conjunto de valores possíveis os quais
+uma variável pode assumir.
 
 \begin{prop:prob suporte}
+\label{prop:suporte}
 Se $X$ é uma variável aleatória com suporte $\Omega_X$, então $P_X(\Omega_X) = 1$.
 
 \begin{proof}
-	Definamos $S = \mathbb{R} \setminus \Omega_X$, de modo que
+	Se $S = \mathbb{R} \setminus \Omega_X$, então
 	\[
 		x \in S \leftrightarrow \exists a, b \in \real, x \in (a, b) \land P_X((a, b)) = 0.
 	\]
 	Pelo fato de $\mathbb{Q}$ ser denso em $\real$, existem $p, q \in \mathbb{Q}$ tais
-	que $ x \in (p, q)$, $(p, q) \subset (a, b)$ e $P_X((p, q)) = 0$. Podemos afirmar
 	que
+	\begin{enumerate}
+		\item[i.] $ x \in (p, q)$
+		\item[ii.] $(p, q) \subset (a, b)$
+		\item[iii.] $P_X((p, q)) = 0$
+	\end{enumerate}
+	De (i) segue que
 	\[
 		S \subset \bigcup_{(p,q) \in I} (p, q),
 	\]
-	onde $I \subset \mathbb{Q}^2$ é uma família enumerável de intervalos. Por consequência,
+	onde $I \subset \mathbb{Q}^2$ é uma família enumerável de intervalos.
+	Por (ii) e (iii) tem-se
 	\[
 		P_X(S) \leq P_X\left(\bigcup_{(p,q) \in I} (p, q)\right) \leq \bigcup_{(p,q) \in I} P_X((p, q))
 		= 0.

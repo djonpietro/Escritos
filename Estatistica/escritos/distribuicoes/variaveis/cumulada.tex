@@ -1,17 +1,18 @@
 \section{Função de Distribuição Acumulada}
 
 \begin{prop:eqv def va}
+\label{prop:eqv def va}
 Seja $(\Omega, \mathcal{B}, P)$ um espaço de probabilidade.
 A aplicação $X: \Omega \to \mathbb{R}$ é uma variável aleatória se, e somente se,
 \[
-	\forall x \in \mathbb{R}, \{X \leq x\} \in \mathcal{B}
+	\forall x \in \mathbb{R}, \{X \leq x\} \in \borel
 \]
 \end{prop:eqv def va}
 
 A proposição permite-nos definir uma função que informa, para cada ponto na reta real,
 a probabilidade de uma variável ter realização menor igual a daquele ponto.
 Isso equivale a probabilidade que é acumulada por aquele ponto.
-Essa função é chamada de \textbf{Fumção de Distribuição Acumulada} (FDA).
+Essa função é chamada de \textbf{Função de Distribuição Acumulada} (FDA).
 
 \begin{def:cdf}
 Sejam $\Omega$ um espaço amostral e $P$ uma medida de um espaço de probabilidade e $X$
@@ -26,19 +27,23 @@ e somente se,
 Um consequência imediata da definição é que se $P_X$ é a medida do espaço induzido por
 $X$, então
 \[
-	F(x) = P_X((-\infty, x)).
+	F(x) = P_X((-\infty, x]).
 \]
+Além disso, pela Proposição \ref{prop:eqv def va}, o intervalo $(-\infty, x]$ é mensurável
+por $P_X$ para todo $x \in \real$, ou seja, $F$ está bem definida em todo ponto de $\real$.
+
 Outros fatos devem ser satisfeitos para determinada função ser de probabilidade acumulada.
 Temos que $F(x)$ equivale a uma medida de probabilidade, então ela deve ser limitada
 superiormente por 1 e inferiormente por 0.
 Pelo princípio de que $A \subset B$ implica $P(A) \leq P(B)$, então se $x < y$, teríamos
-$P(X \leq x) \leq P(X \leq y)$.
+$P(X \leq x) \leq P(X \leq y)$, e a FDA é monótona.
 Por fim, se a partir de um ponto $x$ nos aproximamos de um ponto $a$ pela direita, então
-estamos aproximando o evento $(-\infty, x]$ do evento $(\-infty, a]$, o que significa que
+estamos aproximando o evento $(-\infty, x]$ do evento $(-\infty, a]$, o que significa que
 essa a distribuição acumulada deve ser contínua à direita, visto que o primeiro evento
 inclui o segundo.
 
 \begin{thm:cdf}
+\label{thm:cdf}
 Se $F: \mathbb{R} \to \mathbb{R}$ é uma função de distribuição acumulada de uma
 variável aleatória $X$, então
 \begin{enumerate}
@@ -50,11 +55,11 @@ variável aleatória $X$, então
 \begin{proof}
 	A afirmação (1) segue do fato de que, se $x_1 \leq x_2$, então
 	\[
-		(X \leq x_1) \subset (X \leq x_2)
+		(X \leq x_1) \subset (X \leq x_2),
 	\]
-	logo
+	e pelo Teorema \ref{thm:base2 calc prob},
 	\[
-		P(X = x_1) \leq P(X = x_2) \Longrightarrow F(x_1) \leq F(x_2).
+		P(X \le x_1) \leq P(X \le x_2) \Longrightarrow F(x_1) \leq F(x_2).
 	\]
 	Seguindo para a afirmação (2),
 	\[

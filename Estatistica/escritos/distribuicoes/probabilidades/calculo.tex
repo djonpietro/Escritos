@@ -29,7 +29,7 @@ A tripla $(\Omega, \mathcal{B}, P)$ é um espaço de probabilidade.
 	\[
 		A_j = \{\omega_i \mid i \in I_j\}
 	\]
-	em que $I_j$ é um conjunto de índices. Tão logo obtemos
+	em que $I_j$ é um conjunto de índices. Pelo Axioma III de Kolmogorov,
 	\[
 		P\left(\bigcup_{j=1}^\infty A_j\right) = \sum_{j=1}^\infty \sum_{i \in I_j} p_{ji}
 		= \sum_{j=1}^\infty P(A_j)
@@ -48,9 +48,10 @@ Experimentos os quais acreditamos não conterem vícios são chamados de equipro
 
 As $\sigma$-Álgebras que equivalem ao conjunto das partes do espaço amostral são
 chamadas de $\sigma$-Álgebra potência.
-Quando o espaço amostral do experimento é enumerável, ocorre que cada subconjunto unitário
-do espaço amostral -- um resultado individual -- é um evento do experimento. Se o
-experimento é equiprovável, então todos os resultados são eventos de mesma probablidade.
+Quando o espaço amostral do experimento é enumerável e a sua $\sigma$-álgebra é a potência,
+ocorre que cada subconjunto unitário do espaço amostral -- um resultado individual -- é um
+evento do experimento.
+Se o experimento é equiprovável, então todos os resultados são eventos de mesma probablidade.
 
 \begin{def:evento equiprovavel}
 Seja o espaço $(\Omega, \mathcal{B}, P)$ com $\Omega$ finito, $\mathcal{B} = \Parts{\Omega}$
@@ -119,6 +120,7 @@ A medida $P$ e o eventos $A$ satsifazem:
 \end{thm:base calc prob}
 
 \begin{thm:base2 calc prob}
+\label{thm:base2 calc prob}
 Seja $P$ uma medida de probabilidade.
 Sejam $A$ e $B$ eventos de uma $\sigma$-Álgebra $\mathcal{B}$ do espaço $\Omega$.
 A medida $P$ e os eventos $A$ e $B$ satisfazem
@@ -138,7 +140,7 @@ A medida $P$ e os eventos $A$ e $B$ satisfazem
 		P(B \cap A) + P(B \cap A^c) = P(B) \\
 		P(B \cap A^c) = P(B) - P(B \cap A)
 	\end{gather*}
-	Para provar (ii), a probabilidade do complementar a a afirmação (i)
+	Para provar (ii), usaremos a probabilidade do complementar a a afirmação (i)
 	\begin{align*}
 		P(A \cup B) & = 1 - P(A^c \cap B^c)          \\
 		            & = 1 - [P(A^c) - P(A^c \cap B)] \\

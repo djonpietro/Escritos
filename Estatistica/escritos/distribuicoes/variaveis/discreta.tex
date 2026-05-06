@@ -1,17 +1,39 @@
 \section{Variáveis Aleatórias Discretas}
 
 \begin{def:variavel discreta}
-Se $X$ é uma variável aleatória, então $X$ é discreta caso seu suporte
+Se $X$ é uma variável aleatória, então $X$ é discreta se, e somente se, seu suporte
 seja enumerável.
 \end{def:variavel discreta}
 
-Dessa definição, podemos determinar que existe um número contável de pontos
-$x \in \mathbb{R}$ cuja toda vizinhança aberta $U$ centrada neles tenha a propriedade
-de $P(X \in U) > 0$.
-Esse fato implica que a proabalidade de $X \in U$ se mantém invariante
-independente de quão pequeno seja a vizinhança $U$ centrado em $x$.
-Isso nos permite associar, a cada ponto, uma determinada ``massa'' de probabilidade.
-A função que realiza esse mapeamento é chamada de \textbf{função de massa de probabilidade}.
+% Adcionar um desenvolvimento do suporte de X enquanto um conjunto discreto
+%
+\begin{prop:ep discreto}
+Seja $X$ uma variável aleatória com suporte $\Omega_X$.
+Se $\Omega_X$ é enumerável e $p_X: \mathbb{R} \to \mathbb{R}$ é tal que
+\[
+	p_X(x) = P(X = x),
+\]
+então $(\Omega_X, \Parts{\Omega_X}, p_X)$ é um espaço de probabilidade.
+\begin{proof}
+	Com efeito, basta provarmos que para todo $x \in \Omega_X$ temos $p_x(x) \geq 0$ e
+	$\sum_{x \in \Omega_X} p_X(x) = 1$, permitindo-nos aplicar o Teorema \ref{thm:soma prob}.
+	A não negatividade é satisfeita pela definição de $p_X$.
+	Ademais, para todo $x$, os eventos $\{X = x\}$ são disjuntos, e pelo Axioma III de
+	Kolmogorov
+	\[
+		\sum_{x \in \Omega_X} p_X(x) = P_X(\Omega_X)
+	\]
+	e pela Proposição \ref{prop:suporte}
+	\[
+		\sum_{x \in \Omega_X} p_X(x) = 1
+	\]
+\end{proof}
+\end{prop:ep discreto}
+
+Observemos então que o espaço induzido por uma variável aleatória discreta equivale
+a $(\Omega_X, \Parts{\Omega_X}, p_X)$, onde a medida $p_X$ é chamada de \textbf{função
+	de massa de probabilidade}, pois ela associa a cada ponto no suporte da variável uma
+medida da probabilidade da variável assumir tal valor.
 
 \begin{def:fmp}
 Seja $X: \Omega \to \mathbb{R}$ uma v.a. discreta. A função $p_X: \mathbb{R} \to \mathbb{R}$
@@ -20,32 +42,33 @@ Seja $X: \Omega \to \mathbb{R}$ uma v.a. discreta. A função $p_X: \mathbb{R} \
 	P(X = x) = p_X(x)
 \]
 \end{def:fmp}
-
-\begin{prop:fmp}
-\label{prop:fmp}
-Seja $X: \Omega \to \mathbb{R}$ uma v.a. discreta com f.m.p. igual a $p_X$ e suporte
-$\Omega_X$.
-Se $A \subset \Omega_X$, então
+\begin{prop:fda discreto}
+Se $X: \Omega \to \mathbb{R}$ é uma v.a. discreta com FMP igual a $p_X$ e suporte $\Omega_X$,
+então a FDA de $X$ é
 \[
-	P(X \in A) = \sum_{a \in A} p_X(a)
+	F_X(x) = \sum_{\substack{a \in \Omega_X \\ a \leq x}} p_X(a)
 \]
 \begin{proof}
-	Como $\Omega_x$ é enumerável, então $A$ também é.
-	Presuma que $A = \{a_1, a_2, \ldots\}$ seja uma ordenação de $A$, de modo que
+	Suponha que $\{a_i\}_\nat$ seja uma ordenação de $\Omega_X$ tal que $x = a_k$.
+	Por definição de FDA,
 	\[
-		P(X \in A) =  P(X \in \{a_1, a_2, \dots\}) = P\left(X \in \bigcup_{a \in A} \{a\} \right),
+		F_X(x) = P(X \leq x) = P\left(\bigcup_{i=1}^k \{X = a_i\}\right)
 	\]
-	portanto,
+	Como a família de eventos $\{X = x_i\}$ é disjunta, então pelo Axioma III de Kolmogrov,
 	\[
-		P(X \in A) = \sum_{a \in A} P(X = a) = \sum_{a \in A} p_X(a)
+		F_X(x) = \sum_{i=1}^k P(X = a_i) = \sum_{i=1}^k p_X(a_i)
+	\]
+	que pode ser rescrita como
+	\[
+		F_X(x) = \sum_{\substack{a \in \Omega_X \\ a \leq x}} p_X(a)
 	\]
 \end{proof}
-\end{prop:fmp}
+\end{prop:fda discreto}
 
-Pela definição de variáveis discretas, então digamos que $\{x_1, x_2, \ldots\}$ seja uma
-ordenação de $\Omega_X$ de tal modo
+Com isso, se $S = \{x \in \real \mid p_X(x) > 0\} \subseteq \Omega_X$, então seja
+$\{x_i\}_\nat$ uma ordenação de $S$ de tal modo
 \[
-	F(X) = \begin{cases}
+	F(x) = \begin{cases}
 		0,      & \text{ se } x < x_1              \\
 		F(x_1), & \text{ se } x_1 \leq x < x_2     \\
 		\vdots                                     \\
