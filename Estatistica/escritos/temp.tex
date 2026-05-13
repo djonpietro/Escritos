@@ -1,17 +1,17 @@
+% Fonte
 \usepackage[extralight]{CrimsonPro}
-\usepackage[T1]{fontenc}
-\usepackage[utf8]{inputenc}
 \let\oldnormalfont\normalfont
 \def\normalfont{\oldnormalfont\mdseries}
-\usepackage{amssymb}
-\usepackage{amsmath}
-\usepackage{amsfonts}
-\usepackage{amsthm}
+
+% Língua
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[brazil]{babel}
+
+% Matemárica
+\usepackage{amsmath, amssymb, amsthm, amsfonts}
 \usepackage{calrsfs}
-\usepackage{parskip}
-\usepackage{indentfirst}
 \usepackage{bookmark}
-\usepackage{geometry}
 \usepackage{tikz}
 \usepackage{graphicx}
 \usepackage{caption}
@@ -19,6 +19,33 @@
 \usepackage{float}
 \usepackage{tikz-3dplot}
 \usepackage[linesnumbered,ruled,vlined,portuguese]{algorithm2e}
+
+% layout
+\usepackage[
+	a4paper,
+	top=3cm, bottom=3cm,
+	inner=3.5cm, outer=2.5cm,   % margens assimétricas para livro
+	headsep=1cm
+]{geometry}
+
+% —— Cabeçalho e rodapé ——
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[LE]{\small\nouppercase{\leftmark}}   % capítulo na pág. par
+\fancyhead[RO]{\small\nouppercase{\rightmark}}  % seção na pág. ímpar
+\fancyfoot[LE,RO]{\thepage}
+\renewcommand{\headrulewidth}{0.4pt}
+
+% —— Espaçamento e tipografia ——
+\usepackage{microtype}              % kerning e hifenização refinados
+\usepackage{setspace}
+\onehalfspacing                     % 1,5 — confortável para leitura
+\usepackage{parskip}
+\usepackage{indentfirst}
+\setlength{\parindent}{1.25cm}
+
+% —— Referências cruzadas e links ——
 \usepackage{hyperref}
 \hypersetup{
 	colorlinks,
@@ -26,8 +53,6 @@
 	citecolor={blue!50!black},
 	urlcolor={blue!80!black}
 }
-
-\setlength{\parindent}{1.25cm}
 
 \renewcommand{\proofname}{Demonstração}
 \renewcommand{\qedsymbol}{\ensuremath{\blacksquare}}

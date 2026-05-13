@@ -6,7 +6,6 @@
 
 \input{thm}
 
-\makeglossary
 
 \begin{document}
 
@@ -14,14 +13,18 @@
 
 \pagebreak
 
+\frontmatter
+
 \input{intro/visao-geral.tex}
 
 \tableofcontents
 
+\mainmatter
 
 \part{Distribuições}
 
 \chapter{Probabilidades}
+\input{distribuicoes/probabilidades/medida.tex}
 \input{distribuicoes/probabilidades/probabilidades.tex}
 \input{distribuicoes/probabilidades/calculo.tex}
 \input{distribuicoes/probabilidades/condicional.tex}
@@ -34,9 +37,10 @@
 \input{distribuicoes/variaveis/continua.tex}
 \input{distribuicoes/variaveis/transformacoes.tex}
 \input{distribuicoes/variaveis/esperanca.tex}
+
+\chapter{Modelos de Distribuição de Probabilidade}
 \input{distribuicoes/variaveis/modelos.tex}
 
-\chapter{Variáveis Aleatórias Contínuas}
 \chapter{Variáveis Aleatórias Multidimensionais}
 \chapter{Simulação}
 
