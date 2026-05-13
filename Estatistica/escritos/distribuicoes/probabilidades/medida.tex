@@ -1,0 +1,235 @@
+\section{Noções de Medida}
+
+A moderna Teoria das Probabilidades é fundamenta utilizando-se conceitos da Teoria
+da Medida, um ramo da Análise que generaliza as noções de comprimento, área e volume
+para espaços abstratos associando-os a uma ``medida'', a partir da qual também
+estende-se uma Teoria de Integração para esses espaços. Probabilidades são vistas,
+portanto, como medidas das chances de ocorrência de um subconjunto de eventos
+dentro de um universo de resultados possíveis.
+
+Nesta seção, será realizada uma breve exposição dos principais enunciados sobre medida
+a fim de somente fundamentar o desenvolvimento posterior dos conceitos associados à
+Teoria de Probabilidades, que, por sua vez, garante a fundamentação da teoria e
+prática estatística.
+
+\subsection{Adendos de Análise}
+
+O conceito de continuidade, estudado dentro da Análise, está atrelado à ideia de
+poder aproximar uma função real a um determinado valor variando suavemente seu
+argumento.
+
+\begin{def:pontualmente continua}
+Um função $f: \real \to \real$ é uniformemente contínua em $a \in \real$ se
+\[
+	\forall \epsilon > 0\, \exists \delta \in \real\, \forall x \in \real\,,
+	| x - a | < \delta \rightarrow | f(x) - f(a) | < \epsilon
+\]
+\end{def:pontualmente continua}
+
+Outra forma equivalente de definição de continuidade é
+\[
+	\lim_{x \to a} f(x) = \lim_{x \to a^+} f(x) = \lim_{x \to a^-} f(x) = f(a).
+\]
+Funções que não são contínuas em determinado ponto signfica que, a depender de onde nos
+aproximamos, o valor para o qual a função converge se diferencia.
+
+\begin{exp:pontualmente contínua}
+A função $f(x) = x^2$ é contínua em todo ponto de seu domínio, já que
+\[
+	\lim_{x \to a} x^2 = a^2
+\]
+\end{exp:pontualmente contínua}
+
+\begin{exp:pontualmente contínua neg}
+Funções escadas são exemplo de funções não contínuas.
+\end{exp:pontualmente contínua neg}
+
+A próxima definição é uma versão mais forte da anterior.
+A continuidade uniforme signigica que, independente da escolha de limite de erro $\epsilon$
+para o valor da função, há um único $\delta$ tal que em qualquer lugar observa-se que,
+se $|x - a| < \delta$, então $|f(x) - f(a)| < \epsilon$.
+
+\begin{def:uniformemente continua}
+Uma função $f: \real \to \real$ é uniformemente contínua se
+\[
+	\forall \epsilon > 0\, \exists \delta \in \real\, \forall x,a \in \real\,,
+	| x - a | < \delta \rightarrow | f(x) - f(a) | < \epsilon
+\]
+\end{def:uniformemente continua}
+
+Uma função que não é uniformemente contínua pode ter variações muita abruptas em alguns
+intervalos, e mais suaves em outros.
+
+\begin{exp:uniformemente contínua}
+As funções $\sin x$, $\cos x$ e funções lineares são exemplos de absolutamente contínuas,
+pois suas taxas de variação não se tornam infinitamente grandes conforme a função se
+aproxima de qualquer ponto.
+\end{exp:uniformemente contínua}
+
+\begin{exp:uniformemente contínua neg}
+A função $f(x) = 1/x$ não é uniformemente contínua, pois conforme se aproxima de $0$,
+a sua variação se torna infinitamente grande.
+\end{exp:uniformemente contínua neg}
+
+\begin{thm:heine}
+Seja $f$ uma função pontualmente contínua em $X$. Se $X$ é
+compacto (fechado e limitado), então $f$ é uniformemente contínua em $X$.
+\end{thm:heine}
+
+\subsection{Introdução à Medida}
+
+Antes de podermos medir determinados conjuntos, precisamos entender que tipos de
+conjuntos podem ser medidos.
+Com esse propósito, introduz-se o conceito de $\sigma$-álgebras, que define uma álgebra
+sobre uma coleção de partes de um conjunto cujas operações definem conjuntos
+\textbf{mensuráveis}.
+
+\begin{def:sigma algebra}
+Seja $\Omega$ um conjunto e $\mathcal{B} \subset \Parts{\Omega}$.
+O conjunto $\mathcal{B}$ é uma $\sigma$-álgebra de $\Omega$ se, e somente se,
+\begin{enumerate}
+	\item[i] $\varnothing \in \mathcal{B}$.
+	\item[ii] $\forall A \in \mathcal{B}, A^c \in \mathcal{B}$.
+	\item[iii] $\forall A \in \mathcal{B},\ \bigcup_{i=1}^\infty A_i \in \mathcal{B}$.
+\end{enumerate}
+Se $\Omega$ é um espaço amostral, então $A \in \mathcal{B}$ é denominado evento de
+$\Omega$.
+\end{def:sigma algebra}
+
+\begin{def:medida nula}
+Um conjunto é dito de medida nula se para todo $\epsilon > 0$ existe uma cobertura
+enumerável $\{I_k\}_1^n$ tal que a soma dos comprimentos de cada intervalo $I_k$ é
+menor que $\epsilon$.
+\end{def:medida nula}
+
+\begin{def:mensuravel}
+O par $(\Omega, \mathcal{B})$ é dito mensurável se $\mathcal{B}$ for uma $\sigma$-álgebra
+de $\Omega$.
+A função \(\mu: \mathcal{B} \to [0, + \infty)\) é uma medida para $(\Omega, \mathcal{B})$
+	se satisfaz
+	\begin{equation*}
+		\mu(\varnothing) = 0 \quad \text{e} \quad \mu\left(\bigsqcup_{i = 1}^\infty A_i\right) = \sum_{i=1}^\infty \mu(A_i)
+	\end{equation*}
+	A tripla $(\Omega, \mathcal{B}, \mu)$ é chamado de espaço de medida.
+	\end{def:mensuravel}
+
+	\begin{def:medida de lesbergue}
+	A medida $\lambda$ de Lesbergue para $(\real, \borel)$ satisfaz
+	\[
+	\lambda((a, b]) = b - a
+\]
+\end{def:medida de lesbergue}
+
+\begin{thm:calculo medida}
+Se $(\Omega, \mathcal{B}, \mu)$ é uma espaço de medida e $\{A_n\}$ é uma família
+enumerável de elementos de $\mathcal{B}$, então
+\begin{enumerate}
+	\item[i.] Se $A_1 \subset A_2 \subset \ldots$, então
+	      \[
+		      \mu\left(\bigcup_{n=1}^\infty A_n\right) = \lim_{n \to \infty} \mu(A_n)
+	      \]
+	\item[ii.] Se $A_1 \supset A_2 \supset \ldots$, então
+	      \[
+		      \mu\left(\bigcap_{n=1}^\infty A_n\right) = \lim_{n \to \infty} \mu(A_n)
+	      \]
+	\item[iii.]
+	      \[
+		      \mu\left(\bigcup_{n=1}^\infty A_n\right) \le \sum_{n=1}^\infty \mu(A_n)
+	      \]
+\end{enumerate}
+\end{thm:calculo medida}
+
+\begin{def:medida completa}
+Uma medida $\mu$ para $(\Omega, \mathcal{B})$ é dita completa se
+\[
+	\forall S \in \mathcal{B}\, \forall A\,, \mu(S) = 0 \land (A \subset S \rightarrow A \in \mathcal{B})
+\]
+A medida $\mu$ é dita $\sigma$-finita se
+\[
+	\Omega = \bigcup_{n=1}^\infty A_n
+\]
+com $\mu(A_n) < \infty$ para todo $n \in \nat$.
+\end{def:medida completa}
+
+\begin{thm:lesbergue sigma finita}
+A medida de Lesbergue é $\sigma$-finita.
+\end{thm:lesbergue sigma finita}
+
+\begin{def:funcao mensuravel}
+Sejam $(\Omega, \mathbb{B})$ e $(\Omega', \mathbb{B}')$	espaços de medida. Uma função
+$f: \Omega \to \Omega'$ é mensurável -- ou $(\mathcal{B}, \mathcal{B}')$-mensurável --
+se
+\[
+	\forall B \in \mathcal{B}', f^{-1}(B) \in \mathcal{B}
+\]
+onde $f^{-1}$ denota a pré-imagem de $f$.
+\end{def:funcao mensuravel}
+
+\begin{thm:funcoes mensuraveis}
+São verdadeiras as seguintes afirmações:
+\begin{enumerate}
+	\item[i.] Toda função contínua é mensurável.
+	\item[ii.] Se $f$ e $g$ são funções mensuráveis, então são mensuráveis
+	      \[
+		      f \circ g, \quad f \cdot g, \quad \frac{f}{g}, g \ne 0
+	      \]
+	\item[iii.] Se $\{f_n\}$ é uma sequência de funções mensuráveis, então são mensuráveis
+	      \[
+		      \lim \sup f_n, \quad \lim \inf f_n, \quad \sup f_n, \quad \inf f_n
+	      \]
+	\item[iv.] O limite pontual de uma função mensurável é mensurável.
+\end{enumerate}
+\end{thm:funcoes mensuraveis}
+
+\subsection{Integral de Lesbergue}
+
+\begin{def:integral de lesbergue}
+Seja $f$ uma função. A integral de Lesbergue de $f$ é definida por
+\[
+	\int f\, d \lambda = \int_\real f(x) \cdot I_A(x)\, dx
+\]
+\end{def:integral de lesbergue}
+
+\begin{thm:integral de lesbergue}
+A integral de Lesbergue satisfaz
+\begin{enumerate}
+	\item[i.] Linearidade
+	      \[
+		      \int (a f + b g)\, d \lambda = a \int f\, d \lambda + b \int g\, d\lambda
+	      \]
+	\item[ii.] Monotonicidade
+	      \[
+		      f \le g \rightarrow \int f\, d\lambda \le \int g\, d\lambda
+	      \]
+	\item[iii.]
+	      \[
+		      f \ge 0 \rightarrow \int_A f\, d\lambda \ge 0
+	      \]
+	\item[iv.] Se $A \cap B = \varnothing$, então
+	      \[
+		      \int_{A \cup B} f\, d\lambda = \int_A f\, d\lambda + \int_B f\, d\lambda
+	      \]
+	\item[v.]
+	      \[
+		      \int_A f\, d \lambda  = \int f I_A\, d\lambda
+	      \]
+\end{enumerate}
+\end{thm:integral de lesbergue}
+
+\begin{def:quase sempre}
+Uma proposição $\varphi(x)$ vale quase sempre (q.s.) num conjunto mensurável $A$ se
+\[
+	\lambda(\{x \in A \mid \neg \varphi(x)\} = 0
+\]
+\end{def:quase sempre}
+
+\begin{thm:0 quase sempre}
+Temos $f = 0$ q.s. em $A$ se, e somente se, $f \ge 0$ e $\int_A f\, d\lambda = 0$.
+\end{thm:0 quase sempre}
+
+\begin{thm:riemann}
+Se $f$ é Riemann integrável, então
+\[
+	\int_{[a,b]} f \, d \lambda = \int_a^b f(x)\, dx
+\]
+\end{thm:riemann}
