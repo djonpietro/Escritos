@@ -6,18 +6,21 @@ está condicionado a outro.
 
 \begin{def:probabilidade condicional}
 Seja $(\Omega, \mathcal{B}, P)$ um espaço de probabilidade.
-Sejam $E$ e $F$ eventos de $\mathcal{B}$.
+Sejam $E$ e $F$ eventos de $\mathcal{B}$ com $P(F) \ne 0$.
 A probablidade condicional do evento $E$ dado $F$, denotada por $P(E|F)$, é dada por
 \[
 	P(E|F) = \frac{P(E \cap F)}{P(F)}
 \]
 \end{def:probabilidade condicional}
 
+% Mostrar que probabilidade condicional é uma medida de probabilidade
+
 Quando a interseção entre dois eventos é vazia, então teremos que a probablidade
 condicional será $0$.
 A probablidade condicional induz uma forma de determinar a probabilidade do evento
 dado como interseção de vários outros.
 
+% Consertar a prova para conjuntos enumeráveis
 \begin{prop:regra da multiplicacao}[Regra do Produto]
 Seja $\mathcal{F} = \{E_i\}_n$ uma família de eventos disjuntos de um
 espaço de probabilidade $(\Omega, \mathcal{B}, P)$.
@@ -116,28 +119,28 @@ Seja $\mathcal{F} = \{F_i\}_\mathbb{N}$, com $\mathcal{F} \subset \mathcal{B}$, 
 $\Omega$.
 Se $E \in \mathcal{B}$, então
 \[
-	P(E) = \sum_{F \in \mathcal{F}} P(E) \cdot P(E | F)
+	P(E) = \sum_{F \in \mathcal{F}} P(E | F) \cdot P(F)
 \]
 \begin{proof}
 	Para quaisquer $i, j \in \mathbb{N}$ temos que
 	\[
 		(E \cap F_i) \cap (E \cap F_j)  = \varnothing.
 	\]
-	Com isso, podemos usar o Axioma III de Kolmogorov,
+	Com isso, podemos usar aditividade enumerável disjunta,
 	\[
-		P\left(\bigcup_{F \in \mathcal{F}} E \cap F_i \right) = \sum_{F \in \mathcal{F}} P(E \cap F).
+		P\left(\bigcup_{F \in \mathcal{F}} (E \cap F) \right) = \sum_{F \in \mathcal{F}} P(E \cap F).
 	\]
 	Em vista de que
 	\[
-		\bigcup_{F \in \mathcal{F}} E \cap F_i = E \cap \Omega = E,
+		\bigcup_{F \in \mathcal{F}} (E \cap F) = E \cap \Omega = E,
 	\]
 	então
 	\[
 		P(E) = \sum_{F \in \mathcal{F}} P(E \cap F),
 	\]
-	e pela Proposição \ref{prop:independencia complementar}, conclui-se que
+	e pela definição de probabilidade condicional,
 	\[
-		P(E) = \sum_{F \in \mathcal{F}} P(E) \cdot P(E | F).
+		P(E) = \sum_{F \in \mathcal{F}} P(E | F) \cdot P(F).
 	\]
 \end{proof}
 \end{thm:probabilidade total}
