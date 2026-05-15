@@ -103,6 +103,7 @@ menor que $\epsilon$.
 \end{def:medida nula}
 
 \begin{def:mensuravel}
+\label{def:mensuravel}
 O par $(\Omega, \mathcal{B})$ é dito mensurável se $\mathcal{B}$ for uma $\sigma$-álgebra
 de $\Omega$.
 A função \(\mu: \mathcal{B} \to [0, + \infty)\) é uma medida para $(\Omega, \mathcal{B})$
@@ -138,6 +139,14 @@ enumerável de elementos de $\mathcal{B}$, então
 	      \]
 \end{enumerate}
 \end{thm:calculo medida}
+
+\begin{thm:medida de subconjunto}
+\label{thm:medida de subconjunto}
+Seja $(\Omega, \mathcal{B}, \mu)$ espaço de medida, e $A$ e $B$ elemetos de $\mathcal{B}$.
+\[
+	A \subset B \rightarrow \mu(A) \le \mu(B)
+\]
+\end{thm:medida de subconjunto}
 
 \begin{def:medida completa}
 Uma medida $\mu$ para $(\Omega, \mathcal{B})$ é dita completa se

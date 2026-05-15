@@ -1,178 +1,14 @@
-\section{Probabilidades}
-
-\subsection{A Teoria de Probabilidades}
-Ao observar, registrar ou extrair uma amostra de dados a partir de um fenômeno aleatório,
-isto é, cujo resultado não pode ser deterministicamente previsto, a Estatística, dentre
-outras coisas, procura entender o comportamento das frequências de ocorrência dos valores
-amostrados.
-Essas frequências são estimativas das \textbf{probabilidades} dos eventos observados.
-A partir de hipóteses adequadas, podemos modelar as frequências por modelos probabilísticos
-que, por sua vez, são objetos de estudo da Teoria das Probabilidades.
-
-A Teoria de Probabilidades encontra seus fundamentos em alguns campos da matemática pura,
-tais como a Matemática Discreta, Análise e Teoria da Medida.
-No entanto, neste texto, estaremos mais interessados na visão da teoria para aplicações
-estatísticas, como a já a modelagem de frequências e estimação de parâmetros de modelos.
-
-Probabilidades são frequentemente representadas como porcentagens e são muitas vezes
-entendidas como a frequência de um evento quando se repete o experimento um número
-suficiente de vezes. Por exemplo, dizer que 16\% da população possui diploma de
-graduação significaria que se escolhermos aleatoriamente 100 pessoas dessa população,
-cerca de 16 delas teriam diploma teriam diploma de graduação. Essa abordagem é chamada
-de \textbf{frequentista}, sendo a mais amplamente adotada em aplicações estatísticas
-clássicas.
-
-Outra abordagem para compreender probabilidades é enquanto o grau de crença numa hipótese,
-como ao dizer que se tem 80\% de certeza em dizer que irá chover, visto as evidências do
-céu nublado e ventos frios. Essa é uma visão mais intuitiva e moderna de probabilidades,
-sendo chamada de \textbf{Bayesiana}, sendo a base da Inferência Bayesiana.
-
-\subsection{$\sigma$-Álgebras}
-
-A noção primitiva que iremos usar como base será de experimento ou fenômeno aleatório,
-que modela qualquer fenômeno cujos resultados são conhecidos, porém podem ser
-distintos apesar da repetição de condições iniciais.
-
-\begin{def:espaco amostral}
-O espaço amostral $\Omega$ de um experimento aleatório é o conjunto de todos os resultados
-possíveis do experimento.
-\end{def:espaco amostral}
-
-Alguns subconjuntos de um espaço amostral compõe um \textbf{evento} do experimento
-aleatório.
-Intuitivamente, para serem ``bem-comportados'', os eventos devem satisfazer
-algumas regras que possibilitem determinar outros eventos ``bem comportados''.
-Formalmente, os eventos devem compor uma $\sigma$-Álgebra.
-
-\begin{def:sigma algebra}
-Seja $\Omega$ um conjunto e $\mathcal{B} \subset \Parts{\Omega}$.
-O conjunto $\mathcal{B}$ é uma $\sigma$-Álgebra de $\Omega$ se, e somente se,
-\begin{enumerate}
-	\item[i] $\varnothing \in \mathcal{B}$.
-	\item[ii] $\forall A \in \mathcal{B}, A^c \in \mathcal{B}$.
-	\item[iii] $\forall A \in \mathcal{B},\ \bigcup_{i=1}^\infty A_i \in \mathcal{B}$.
-\end{enumerate}
-Se $\Omega$ é um espaço amostral, então $A \in \mathcal{B}$ é denominado evento de
-$\Omega$.
-\end{def:sigma algebra}
-
-Em resumo, (i) diz que a ausência de resultados é um evento, (ii) afirma que
-os resultados possíveis que não estão num determinado evento compõem um evento,
-e (iii) afirma que a reunião de uma lista -- possivelmente infinita -- de eventos
-forma um evento.
-
-\begin{prop:demorgan}
-Se $\mathcal{B}$ é uma $\sigma$-Álgebra do espaço amostral $\Omega$, e
-$\{A_1, A_2, \ldots\} \subset \mathcal{B}$, então
-\[
-	\bigcap_{i = 1}^\infty A_i \in \mathcal{B}
-\]
-\begin{proof}
-	\[
-		\bigcup_{i = 1}^\infty A_i^c \in \mathcal{B} \Longleftrightarrow \left(\bigcap_{i=1}^\infty A_i\right)^c
-		\in \mathcal{B}
-	\]
-	o que leva a
-	\[
-		\bigcap_{i=1}^\infty A_i \in \mathcal{B}
-	\]
-\end{proof}
-\end{prop:demorgan}
-
-\subsection{Axiomas de Kolmogorov}
-
-Para cada evento de um espaço amostral podemos associar uma probabilidade, que consiste
-numa medida do evento.
-Iremos requerer que essa medida seja não negativa e no máximo 1, de modo a se adequar
-a nossa intuição de probabilidade como um número entre 0 e 1.
-Além disso, se esperamos que o experimento tenha algum evento, então é razoável presumir
-que a probabilidade do próprio espaço amostral é igual a 1.
-
-\begin{def:probabilidade}[Axiomas de Kolmogorov]
-Seja $\mathcal{B}$ uma $\sigma$-Álgebra de um conjunto $\Omega$.
-Uma medida de probabilidade $P: \mathcal{B} \to \mathbb{R}$ satisfaz:
-\begin{enumerate}
-	\item[i] $\forall E \in \mathcal{B}, P(E) \geq 0$
-
-	\item $P(\Omega) = 1$
-
-	\item Se $\{E_1, E_2, \ldots\}$ são eventos disjuntos em $\Omega$, então
-	      \[
-		      P\left(\bigcup_{i=1}^\infty E_i\right) = \sum_{i=1}^\infty P(E_i)
-	      \]
-\end{enumerate}
-\end{def:probabilidade}
-
-Num experimento aleatório, dados os resultados conhecidos, as coleções desses resultados
-que compõem eventos e uma medida da probabilidade desses eventos, obtemos, então,
-o espaço de probabilidade do experimento.
+\section{Cálculo das Probabilidades}
 
 \begin{def:espaco de probabilidade}
-A tripla $(\Omega, \mathcal{B}, P)$ é um espaço de probabilidade se, e somente se,
-\begin{enumerate}
-	\item[i] $\Omega$ é um espaço amostral
-	\item[ii] $\mathcal{B}$ é uma $\sigma$-Álgebra de $\Omega$
-	\item[iii] $P: \mathcal{B} \to \mathbb{R}$ é uma medida de probabilidade.
-\end{enumerate}
+Um espaço de medida \(\Omega, \mathcal{F}, P\) é um espaço de probabilidade se é satisfeito
+que
+\[
+	P(\Omega) = 1.
+\]
+Os elementos $A \in \mathcal{F}$ são chamados de eventos.
+O conjunto $\Omega$ é denominado espaço amostral.
 \end{def:espaco de probabilidade}
-
-% \subsection{Eventos Equiprováveis}
-% Numa noção intuitiva de que quando o evento não possui vícios, os seus resultados
-% são ditos como equiprováveis, como os lados de um dado ou as faces de uma moeda honestos.
-
-% \begin{def:evento equiprovavel}
-% Um evento $E \subset \Omega$ é equiprovável se, e somente se, todo subconjunto unitário de
-% $E$ possui a mesma probabilidade.
-% \end{def:evento equiprovavel}
-
-% \begin{prop:equiprovavel}
-% \label{prop:equiprovavel}
-% A probabilidade de um evento $E$ num espaço $\Omega$ equiprovável
-% é igual a
-% \[
-% 	\frac{|E|}{|\Omega|}
-% \]
-% \begin{proof}
-% 	Com efeito, temos que
-% 	\[
-% 		P(E_1) = \ldots = P(E_n)
-% 	\]
-% 	em que $E_i$ são eventos unitários de $\Omega$, tal que $|\Omega| = n$. Como eles são
-% 	disjuntos, então a soma de suas probabilidades deve ser igual a 1, ou seja,
-% 	\[
-% 		\forall i \in [n],\ \left(P(E_i) = \frac{1}{n}\right).
-% 	\]
-% 	Segue que
-% 	\[
-% 		P(E) = |E| \cdot \frac{1}{n} = \frac{|E|}{|\Omega|}
-% 	\]
-% \end{proof}
-% \end{prop:equiprovavel}
-
-% \begin{cor:pie}
-% Se $\mathcal{F} = \{E_1, \ldots, E_m\}$ é uma família de eventos quaisquer dum espaço
-% $\Omega$ equiprovável, então
-% \[
-% 	P\left(\bigcup_{E \in \mathcal{F}}E\right) = \sum_{k=1}^m (-1)^{k+1}
-% 	\sum_{D \in \Parts{\mathcal{F}}\land |D| = k} P\left(\bigcap_{E \in D} E\right)
-% \]
-% \begin{proof}
-% 	A cardinalidade da união dos conjuntos de $\mathcal{F}$ é dado pelo Princípio da
-% 	Exclusão e Inclusão, ou seja
-% 	\[
-% 		\left|\bigcup_{E \in \mathcal{F}}E\right| = \sum_{k=1}^m (-1)^{k+1}
-% 		\sum_{D \in \Parts{\mathcal{F}} \land |D| = k} \left|\bigcap_{E \in D} E\right|
-% 	\]
-% 	Dividindo a expressão acima por $n = |\Omega|$ obtém-se a probabilidade da união dos
-% 	conjuntos de $\mathcal{F}$. Contudo, uma vez que a interseção de eventos é um evento,
-% 	então podemos obter a probabilidade da união como
-% 	\[
-% 		P\left(\bigcup_{E \in \mathcal{F}}E\right) = \sum_{k=1}^m (-1)^{k+1}
-% 		\sum_{D \in \Parts{\mathcal{F}}\land |D| = k} \frac{1}{n}\left|\bigcap_{E \in D} E\right|
-% 	\]
-% 	que equivale a expressão desejada.
-% \end{proof}
-% \end{cor:pie}
 
 % \subsection{Probabilidade como Função Contínua em um Conjunto}
 
@@ -197,3 +33,140 @@ A tripla $(\Omega, \mathcal{B}, P)$ é um espaço de probabilidade se, e somente
 % 	.
 % \end{proof}
 % \end{prop:eventos encaixados}
+
+\begin{thm:base calc prob}
+Se $(\Omega, \mathcal{F}, P)$ é espaço de probabilidade, então
+\begin{enumerate}
+	\item[i.] $P(A^c) = 1 - P(A)$
+	\item[ii.] $P(A) \leq 1$
+\end{enumerate}
+\begin{proof}
+	Para (i), temos que $A \cup A^c = \Omega$, então pela propriedade de aditividade
+	contável disjunta de medidas,
+	\begin{gather*}
+		P(A) + P(A^c) = P(\Omega) \\
+		P(A^c) = P(\Omega) - P(A) = 1 - P(A)
+	\end{gather*}
+	A afirmação (iii) segue de (ii) e da propriedade de imagem não negativa
+	de medida:
+	\begin{gather*}
+		P(A^c) \geq 0 \Longrightarrow 1 - P(A) \geq 0 \Longrightarrow P(A) \leq 1.
+	\end{gather*}
+\end{proof}
+\end{thm:base calc prob}
+
+\begin{thm:base2 calc prob}
+\label{thm:base2 calc prob}
+Se $(\Omega, \mathcal{F}, P)$ é espaço de probabilidade, e $A$ e $B$ são eventos, então
+\begin{enumerate}
+	\item[i] $P(B \cap A^c) = P(B) - P(B \cap A)$.
+	\item[ii] $P(A \cup B) = P(A) + P(B) - P(A \cap B)$.
+\end{enumerate}
+\begin{proof}
+	Para (i), considere primeiramente que
+	\[
+		(B \cap A) \cup (B \cap A^c) = B
+	\]
+	e como $(B \cap A) \cap (B \cap A^c) = \varnothing$, então podemos usar aditividade
+	de medidas:
+	\begin{gather*}
+		P(B \cap A) + P(B \cap A^c) = P(B) \\
+		P(B \cap A^c) = P(B) - P(B \cap A).
+	\end{gather*}
+	Para provar (ii), usaremos a probabilidade do complementar e a afirmação (i):
+	\begin{align*}
+		P(A \cup B) & = 1 - P(A^c \cap B^c)          \\
+		            & = 1 - [P(A^c) - P(A^c \cap B)] \\
+		            & = P(A) + P(A^c \cap B)         \\
+		            & = P(A) + P(B) - P(A \cap B).
+	\end{align*}
+\end{proof}
+\end{thm:base2 calc prob}
+
+Para espaços amostrais enumeráveis, ao associar a cada resultado individual
+um número em $[0, 1]$, de modo que a soma dos pesos resulte em 1, a soma dos pesos dos
+resultados presentes num evento será a probablidade desse evento.
+
+\begin{thm:soma prob}
+\label{thm:soma prob}
+Seja $\Omega = \{\omega_i\}_{\mathbb{N}}$ um conjunto enumerável, e $\mathcal{B}$ uma
+$\sigma$-Álgebra de $\Omega$.
+Seja $\{\delta_i\}_\nat$ uma família de funções tal que
+\begin{align*}
+	 & \delta_i(x) = \begin{cases}
+		                 p_i, & \text{ se }  x = \omega_i \\
+		                 0,   & \text{ caso contrário }
+	                 \end{cases} \\
+	 & \sum_{i=1}^\infty \delta_i(x) = 1
+\end{align*}
+Presuma também que, se $A \in \mathcal{B}$, então
+\[
+	P(A) = \sum_{\omega_i \in A} \delta_i(\omega_i)
+\]
+A tripla $(\Omega, \mathcal{B}, P)$ é um espaço de probabilidade.
+\begin{proof}
+	Precisamos provar que $P$ é uma medida de probabilidade que satisfaz os Axiomas de
+	Medida.
+
+	\paragraph{Não negatividade} a soma de números não negativos é não negativa, então
+	para todo $A$ em $\mathcal{B}$ vale que $P(A) \geq 0$.
+
+	\paragraph{Probablidade do espaço amostral} a série $\sum_{i=1}^\infty \delta_i(x)$
+	deve coicidir com a probabilidade de $\Omega$, o que é satisfeito por hipótese.
+
+	\paragraph{Soma de eventos disjuntos} seja $\{A_j\}_{\mathbb{N}}$ uma família
+	disjunta de eventos de $\mathcal{B}$ tal que
+	\[
+		A_j = \{\omega_i \mid i \in I_j\}
+	\]
+	em que $I_j$ é um conjunto de índices. Desenvolvendo,
+	\[
+		P\left(\bigcup_{j=1}^\infty A_j\right) = \sum_{j=1}^\infty \sum_{i \in I_j} p_{ji}
+		= \sum_{j=1}^\infty P(A_j)
+	\]
+\end{proof}
+\end{thm:soma prob}
+
+Esse resultado é útil para computar a probablidade de uma vasta gama de
+experimentos aleatórios na prática. Um exemplo é o lançamento de um dado de 6
+faces; se acreditamos que o dado é honesto, isto é, que o dado não é viciado em
+nenhuma de suas faces, então podemos associar $1/6$ a cada face do dado. Se por
+exemplo, deseja-se saber a probabilidade de obtermos um número menor ou igual a
+3, basta somar as faces que satisfazem essa condição, obtendo uma probablidade
+de $0.5$.
+Experimentos os quais acreditamos não conterem vícios são chamados de equiprováveis.
+
+As $\sigma$-Álgebras que equivalem ao conjunto das partes do espaço amostral são
+chamadas de $\sigma$-Álgebra potência.
+Quando o espaço amostral do experimento é enumerável e a sua $\sigma$-álgebra é a potência,
+ocorre que cada subconjunto unitário do espaço amostral -- um resultado individual -- é um
+evento do experimento.
+Se o experimento é equiprovável, então todos os resultados são eventos de mesma probablidade.
+
+\begin{def:evento equiprovavel}
+Seja o espaço $(\Omega, \mathcal{B}, P)$ com $\Omega$ finito, $\mathcal{B} = \Parts{\Omega}$
+e $P$ definido como no Teorema \ref{thm:soma prob}.
+Chama-se esse espaço de equiprovável se, e somente se,
+\[
+	\forall \omega \in \Omega, P(\omega) = \frac{1}{|\Omega|}.
+\]
+\end{def:evento equiprovavel}
+
+A probablidade de eventos em experimentos com resultados equiprováveis destaca-se
+por ser intuitiva de calcular. A probablidade de evento será, simplesmente, a
+fração dos resultados presentes nele. Esse resultado será enunciado como Corolário
+do Teorema \ref{thm:soma prob}.
+
+\begin{cor:equiprovavel}
+\label{prop:equiprovavel}
+A probabilidade de um evento $A \in \Parts{\Omega}$ num espaço $(\Omega, \Parts{\Omega}, P)$
+equiprovável é igual a
+\[
+	\frac{|A|}{|\Omega|}
+\]
+\begin{proof}
+	\[
+		P(A) = |A| \cdot \frac{1}{|\Omega|} = \frac{|A|}{|\Omega|}
+	\]
+\end{proof}
+\end{cor:equiprovavel}
