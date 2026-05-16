@@ -1,12 +1,5 @@
 \section{Noções de Medida}
 
-A moderna Teoria das Probabilidades é fundamenta utilizando-se conceitos da Teoria
-da Medida, um ramo da Análise que generaliza as noções de comprimento, área e volume
-para espaços abstratos associando-os a uma ``medida'', a partir da qual também
-estende-se uma Teoria de Integração para esses espaços. Probabilidades são vistas,
-portanto, como medidas das chances de ocorrência de um subconjunto de eventos
-dentro de um universo de resultados possíveis.
-
 Nesta seção, será realizada uma breve exposição dos principais enunciados sobre medida
 a fim de somente fundamentar o desenvolvimento posterior dos conceitos associados à
 Teoria de Probabilidades, que, por sua vez, garante a fundamentação da teoria e
@@ -208,11 +201,42 @@ São verdadeiras as seguintes afirmações:
 
 \subsection{Integral de Lesbergue}
 
-\begin{def:integral de lesbergue}
-Seja $f$ uma função. A integral de Lesbergue de $f$ é definida por
+\begin{def:funcao simples}
+A aplicação $\phi: \Omega \to \real$ é uma função simples se pode ser expressa
+com
 \[
-	\int_A f\, d \lambda = \int_\real f(x) \cdot I_A(x)\, dx
+	\phi(x) = \sum_{i=1}^n a_i \cdot I_{A_i}(x)
 \]
+onde $a_i \in \real$ e $\{A_i\}_1^n \subset \borel$ são dois a dois disjuntos.
+\end{def:funcao simples}
+
+\begin{thm:aproximacao monotona}
+Para toda função $f \ge 0$ há uma sequência $\{\phi_i\}_\nat$ não negativa e monótona de
+funções simples tal que $\phi \to f$ pontualmente, e uniformemente se $f$ for limitada.
+\end{thm:aproximacao monotona}
+
+\begin{def:integral de lesbergue}
+Dada a medida $\lambda$ de Lesbergue, a integral de Lesbergue, denotada por
+\[
+	\int f\, d\lambda
+\]
+satisfaz
+\begin{enumerate}
+	\item[i.] Se $f$ é simples, então
+	      \[
+		      \int f\, d\lambda = \sum_{i=1}^n a_i \cdot \lambda(A_i)
+	      \]
+	\item[ii.] sendo $f$ é mensurável e $\{\phi\}_\nat$ tal que $\phi_n \to f$, então
+	      \[
+		      \int f\, d\lambda = \lim_{n \to \infty} \int \phi_n\, d\lambda
+	      \]
+	      e o limite existe e não depende da sequência $\{\phi\}_\nat$.
+	\item[iii.] Se $f = f^+ - f^-$, onde $f^+ = \max(0, f)$ e $f^- = \max(0, -f)$, então
+	      \[
+		      \int f\, d\lambda = \int f^+\, d\lambda + \int f^-\, d\lambda
+	      \]
+	      desde que $\int |f|\, d\lambda < \infty$.
+\end{enumerate}
 \end{def:integral de lesbergue}
 
 \begin{thm:integral de lesbergue}
@@ -224,37 +248,118 @@ A integral de Lesbergue satisfaz
 	      \]
 	\item[ii.] \textbf{Monotonicidade:}
 	      \[
-		      f \le g \rightarrow \int f\, d\lambda \le \int g\, d\lambda
+		      f \le g \qs \rightarrow \int f\, d\lambda \le \int g\, d\lambda
 	      \]
-	\item[iii.]
-	      \[
-		      f \ge 0 \rightarrow \int_A f\, d\lambda \ge 0
-	      \]
-	\item[iv.] \textbf{Aditividade em Conjuntos:} Se $A \cap B = \varnothing$, então
+	\item[iii.] \textbf{Aditividade:} Se $A \cap B = \varnothing$, então
 	      \[
 		      \int_{A \cup B} f\, d\lambda = \int_A f\, d\lambda + \int_B f\, d\lambda
 	      \]
-	\item[v.]
+	\item[iv.] \textbf{Nulidade:}
 	      \[
-		      \int_A f\, d \lambda  = \int f I_A\, d\lambda
+		      \forall A \in \borel, \int_A f\, d\lambda = 0 \leftrightarrow f = 0 \qs \text{ em } A
+	      \]
+	\item[v.] \textbf{Desigualdade de Módulo:}
+	      \[
+		      \left| \int f\, d\lambda\right| \le \int |f|\, d\lambda
+	      \]
+	\item[vi.] \textbf{Riemann:}
+	      \[
+		      \int_{[a,b]} f \, d \lambda = \int_a^b f(x)\, dx
 	      \]
 \end{enumerate}
 \end{thm:integral de lesbergue}
 
-\begin{def:quase sempre}
-Uma proposição $\varphi(x)$ vale quase sempre (q.s.) num conjunto mensurável $A$ se
-\[
-	\lambda(\{x \in A \mid \neg \varphi(x)\} = 0
-\]
-\end{def:quase sempre}
+% \begin{def:quase sempre}
+% Uma proposição $\varphi(x)$ vale quase sempre (q.s.) num conjunto mensurável $A$ se
+% \[
+% 	\lambda(\{x \in A \mid \neg \varphi(x)\} = 0
+% \]
+% \end{def:quase sempre}
 
-\begin{thm:0 quase sempre}
-Temos $f = 0$ q.s. em $A$ se, e somente se, $f \ge 0$ e $\int_A f\, d\lambda = 0$.
-\end{thm:0 quase sempre}
+% \begin{thm:0 quase sempre}
+% Temos $f = 0$ q.s. em $A$ se, e somente se, $f \ge 0$ e $\int_A f\, d\lambda = 0$.
+% \end{thm:0 quase sempre}
 
-\begin{thm:riemann}
-Se $f$ é Riemann integrável, então
+\begin{thm:convergencia monotona}[Convergência Monótona]
+Se $\{f_n\}_\nat$ é uma sequêcia não negativa e monótona de funções mensuráveis e
+$f_n \to f \qs$, então
 \[
-	\int_{[a,b]} f \, d \lambda = \int_a^b f(x)\, dx
+	\lim_{n \to \infty} \int f_n\, d\lambda = \int f\, d\lambda
 \]
-\end{thm:riemann}
+\end{thm:convergencia monotona}
+
+\begin{lem:fatou}[de Fatou]
+Se $f_n \le 0$ são mensuráveis, então
+\[
+	\int \lim \inf f_n\, d\lambda \le \lim \inf \int f_n\, d\lambda
+\]
+\end{lem:fatou}
+
+\begin{thm:convergencia dominada}
+Se $f_n \to f \qs$ e existe $g \in L^1(\lambda)$ tal que $|f_n| \le g \qs$ para todo $n$,
+então
+\[
+	\lim_{n \to \infty} \int f_n\, d\lambda = \int f\, d\lambda
+\]
+\end{thm:convergencia dominada}
+
+\begin{thm:toneli}
+Para $f \le 0$ mensurável em
+\[
+	(\Omega_1 \times \Omega_2, \mathcal{A}_1 \otimes \mathcal{A}_2, \mu_1 \otimes \mu_2)
+\]
+vale que
+\[
+	\int \int f\, d(\mu_1 \otimes \mu_2) = \int \left(f\, d\mu_1\right)\,d\mu_2 = \int \left(f\, d\mu_2\right)\,d\mu_1
+\]
+\end{thm:toneli}
+
+\begin{thm:fubini}
+Se
+\[
+	\int |f|\, d(\mu_1 \otimes \mu_2) < \infty
+\]
+então as integrais iteradas existem $\qs$ e são iguais às integrais duplas.
+\end{thm:fubini}
+
+\subsection{Espaços $L^p$}
+
+\begin{def:lp}
+Para $1 \le p \le \infty$,
+\[
+	L^p(\mu) = \left\{f \text{ mensurável}\, \middle|\, \int |f|^p\, d\mu < \infty\right\}
+\]
+e
+\[
+	\norm{f}_{p} = \left(\int |f|^p\, d\mu\right)^{\frac{1}{p}}
+\]
+Se $p = \infty$,
+\[
+	\norm{f}_\infty = \esssup |f|
+\]
+\end{def:lp}
+
+\begin{thm:holder}[de Hölder]
+\[
+	\int (fg)\, d\mu = \norm{f}_p \cdot \norm{g}_q
+\]
+onde
+\[
+	\frac{1}{p} + \frac{1}{q} = 1.
+\]
+\end{thm:holder}
+
+Se $p = q = 2$, então o Teorema de Hölder equivale à Desigualdade de Cauchy-Schwartz.
+
+\begin{thm:minkowski}
+\[
+	\norm{f+g}_p \le \norm{f}_p + \norm{g}_p
+\]
+\end{thm:minkowski}
+
+Logo, todos os espaços $L^p$ são normados e completos (de Banach).
+Em especial, $L^2$ é um espaço de Hilbert.
+
+\begin{thm:consq holder}
+Se $\mu(\Omega) < \infty$ e $p \le q$, então $L^p(\Omega) \subset L^q(\Omega)$
+\end{thm:consq holder}
