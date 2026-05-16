@@ -96,6 +96,12 @@ Se $\Omega$ é um espaço amostral, então $A \in \mathcal{B}$ é denominado eve
 $\Omega$.
 \end{def:sigma algebra}
 
+\begin{def:borel}
+Seja \(\mathcal{G} = \{(-\infty, x] \mid x \in \mathbb{R}\}\). A $\sigma$-álgebra gerada por
+\(\mathcal{G}\) é chamada $\sigma$-álgebra de Borel em \(\mathbb{R}\) e é denotada por
+\(\mathcal{B}(\mathbb{R})\).
+\end{def:borel}
+
 \begin{def:medida nula}
 Um conjunto é dito de medida nula se para todo $\epsilon > 0$ existe uma cobertura
 enumerável $\{I_k\}_1^n$ tal que a soma dos comprimentos de cada intervalo $I_k$ é
@@ -108,15 +114,25 @@ O par $(\Omega, \mathcal{B})$ é dito mensurável se $\mathcal{B}$ for uma $\sig
 de $\Omega$.
 A função \(\mu: \mathcal{B} \to [0, + \infty)\) é uma medida para $(\Omega, \mathcal{B})$
 	se satisfaz
-	\begin{equation*}
-		\mu(\varnothing) = 0 \quad \text{e} \quad \mu\left(\bigsqcup_{i = 1}^\infty A_i\right) = \sum_{i=1}^\infty \mu(A_i)
-	\end{equation*}
+	\begin{enumerate}
+		\item[i.] $\mu(\varnothing) = 0$
+		\item[ii. ] $\sigma-$aditividade: $\mu\left(\bigsqcup_{i = 1}^\infty A_i\right) = \sum_{i=1}^\infty \mu(A_i)$
+	\end{enumerate}
 	A tripla $(\Omega, \mathcal{B}, \mu)$ é chamado de espaço de medida.
 	\end{def:mensuravel}
 
-	\begin{def:medida de lesbergue}
-	A medida $\lambda$ de Lesbergue para $(\real, \borel)$ satisfaz
+	\begin{thm:mensuravel real}
+	\label{thm:mensuravel real}
+	Dados espaços mensuráveis $(\Omega, \mathcal{B})$ e $(\real, \borel)$, uma função
+	real $f: \Omega \to \real$ é mensurável se, e somente, se
 	\[
+	\forall x \in \real, f^{-1}((-\infty, x]) \in \mathcal{B}.
+\]
+\end{thm:mensuravel real}
+
+\begin{def:medida de lesbergue}
+A medida $\lambda$ de Lesbergue para $(\real, \borel)$ satisfaz
+\[
 	\lambda((a, b]) = b - a
 \]
 \end{def:medida de lesbergue}
@@ -125,15 +141,15 @@ A função \(\mu: \mathcal{B} \to [0, + \infty)\) é uma medida para $(\Omega, \
 Se $(\Omega, \mathcal{B}, \mu)$ é uma espaço de medida e $\{A_n\}$ é uma família
 enumerável de elementos de $\mathcal{B}$, então
 \begin{enumerate}
-	\item[i.] Se $A_1 \subset A_2 \subset \ldots$, então
+	\item[i.] \textbf{continuidade por baixo:} Se $A_1 \subset A_2 \subset \ldots$, então
 	      \[
 		      \mu\left(\bigcup_{n=1}^\infty A_n\right) = \lim_{n \to \infty} \mu(A_n)
 	      \]
-	\item[ii.] Se $A_1 \supset A_2 \supset \ldots$, então
+	\item[ii.] \textbf{continuidade por cima:} Se $A_1 \supset A_2 \supset \ldots$, então
 	      \[
 		      \mu\left(\bigcap_{n=1}^\infty A_n\right) = \lim_{n \to \infty} \mu(A_n)
 	      \]
-	\item[iii.]
+	\item[iii.] \textbf{Sub-aditividade}
 	      \[
 		      \mu\left(\bigcup_{n=1}^\infty A_n\right) \le \sum_{n=1}^\infty \mu(A_n)
 	      \]
@@ -195,18 +211,18 @@ São verdadeiras as seguintes afirmações:
 \begin{def:integral de lesbergue}
 Seja $f$ uma função. A integral de Lesbergue de $f$ é definida por
 \[
-	\int f\, d \lambda = \int_\real f(x) \cdot I_A(x)\, dx
+	\int_A f\, d \lambda = \int_\real f(x) \cdot I_A(x)\, dx
 \]
 \end{def:integral de lesbergue}
 
 \begin{thm:integral de lesbergue}
 A integral de Lesbergue satisfaz
 \begin{enumerate}
-	\item[i.] Linearidade
+	\item[i.] \textbf{Linearidade:}
 	      \[
 		      \int (a f + b g)\, d \lambda = a \int f\, d \lambda + b \int g\, d\lambda
 	      \]
-	\item[ii.] Monotonicidade
+	\item[ii.] \textbf{Monotonicidade:}
 	      \[
 		      f \le g \rightarrow \int f\, d\lambda \le \int g\, d\lambda
 	      \]
@@ -214,7 +230,7 @@ A integral de Lesbergue satisfaz
 	      \[
 		      f \ge 0 \rightarrow \int_A f\, d\lambda \ge 0
 	      \]
-	\item[iv.] Se $A \cap B = \varnothing$, então
+	\item[iv.] \textbf{Aditividade em Conjuntos:} Se $A \cap B = \varnothing$, então
 	      \[
 		      \int_{A \cup B} f\, d\lambda = \int_A f\, d\lambda + \int_B f\, d\lambda
 	      \]
