@@ -1,57 +1,30 @@
 \section{Variáveis Aleatórias}
 
-Variáveis aleatórias (v.a.) são representações de características numéricas de
-experimentos aleatórios.
-Exemplos são a quantidade de caras obtidas no lançamento de uma moeda, a soma dos lados de
-um dado, número de erros num livro, tempo até a um equipamento apresentar falha, entre
-muitos outros.
-
-A definição de v.a.'s devem levar em conta que, dado um intervalo de valores, os
-resultados cujo valor da característica medida por $X$ se encontram no intervalo
-devem formar um evento do experimento.
-Com isso, uma formalização para variáveis aleatórias necessita do conceito de
-Álgebras de Borel para os números reais, que é a menor $\sigma$-Álgebra na topologia
-usual de $\mathbb{R}$.
-
-\begin{def:borel}
-Seja \(\mathcal{G} = \{(-\infty, x] \mid x \in \mathbb{R}\}\). A $\sigma$-álgebra gerada por
-\(\mathcal{G}\) é chamada $\sigma$-álgebra de Borel em \(\mathbb{R}\) e é denotada por
-\(\mathcal{B}(\mathbb{R})\).
-\end{def:borel}
-
-A $\sigma$-álgebra da definição inclui todos os intervalos de $\mathbb{R}$: abertos,
-semiabertos, fechados e degenerados. Com isso, podemos agora criar uma correspondência
-entre intervalos das características de uma variável aleatória, isto é, um $A \in \borel$,
-e um evento de um espaço amostral.
-
 \begin{def:va}
-Seja $(\Omega, \mathcal{B}, P)$ um espaço de probabilidade.
-A aplicação $X: \Omega \to \mathbb{R}$ é uma variável aleatória se, e somente se,
+Seja $(\Omega, \mathcal{F}, P)$ um espaço de probabilidade.
+A aplicação $X: \Omega \to \mathbb{R}$ é uma variável aleatória se for
+$(\mathcal{F}, \borel)$-mensurável, i.e.,
 \[
-	\forall A \in \borel, (X^{-1}(A) \in \mathcal{B})
+	\forall A \in \borel, (X^{-1}(A) \in \mathcal{F})
 \]
 \end{def:va}
 
-A fim de facilitar a notação para o tratamento de variáveis aleatórias, iremos introduzir
-um notação para denotar eventos de um espaço amostral a partir da variável que mede
-o evento.
+A fim de facilitar o tratamento de variáveis aleatórias, iremos introduzir
+uma notação para denotar eventos de um espaço amostral a partir da variável
 
 \begin{def:evento va}
-Seja $(\Omega, \mathcal{B}, P)$ um espaço de probabilidade e $X: \Omega \to \real$ uma
+Seja $(\Omega, \mathcal{F}, P)$ um espaço de probabilidade e $X: \Omega \to \real$ uma
 variável aleatória.
-Se $A \in \borel$, então o evento denotado por $\{X \in A\}$ é equivalente a $X^{-1}(A) \in \mathcal{B}$.
+Se $A \in \borel$, então o evento denotado por $\{X \in A\}$ é equivalente a
+$X^{-1}(A) \in \mathcal{B}$.
 \end{def:evento va}
 
 \noindent
 Perceba que se $A \in \borel$, então temos três formas de denotar o mesmo evento de
-$\mathcal{B}$.
+$\mathcal{F}$.
 \[
 	X^{-1}(A) = \{X \in A\} = \{\omega \in \Omega \mid X(\omega) \in A\}
 \]
-
-Se uma variável aleatória mede uma característica do experimento, então podemos
-medir a probabilidade de uma premissa sobre a realização do valor dessa característica.
-Em outras palvras, uma variável aleatória induz um novo espaço de probabilidade.
 
 \begin{def:espaço induzido}
 Seja $(\Omega, \mathcal{B}, P)$ um espaço de probabilidade e $X: \Omega \to \mathbb{R}$
@@ -63,10 +36,7 @@ para todo $A \in \borel$ é satisfeito
 \]
 \end{def:espaço induzido}
 
-O conjunto dos valores cuja probabilidade da realização é não nula é chamado de suporte.
-Por exemplo, no lançamento de um dado, as realizações possíveis são os inteiros de 1
-a 6, enquanto os demais inteiros tem probabilidade nula. Coletando dados sobre o peso
-corporal de uma população, o suporte é, em tese, qualquer valor positivo.
+% Provar que P_X(\real) = 1
 
 \begin{def:suporte}
 O suporte de uma variável aleatória $X$ é o conjunto
@@ -76,14 +46,9 @@ O suporte de uma variável aleatória $X$ é o conjunto
 \]
 \end{def:suporte}
 
-Um fato útil é que a probabilidade de $X$ ter realização em seu suporte é igual a $1$.
-Visto isso, o suporte pode ser interpretado como o conjunto de valores possíveis os quais
-uma variável pode assumir.
-
-\begin{prop:prob suporte}
-\label{prop:suporte}
+\begin{thm:prob suporte}
+\label{thm:prob suporte}
 Se $X$ é uma variável aleatória com suporte $\Omega_X$, então $P_X(\Omega_X) = 1$.
-
 \begin{proof}
 	Se $S = \mathbb{R} \setminus \Omega_X$, então
 	\[
@@ -103,9 +68,31 @@ Se $X$ é uma variável aleatória com suporte $\Omega_X$, então $P_X(\Omega_X)
 	onde $I \subset \mathbb{Q}^2$ é uma família enumerável de intervalos.
 	Por (ii) e (iii) tem-se
 	\[
-		P_X(S) \leq P_X\left(\bigcup_{(p,q) \in I} (p, q)\right) \leq \bigcup_{(p,q) \in I} P_X((p, q))
+		P_X(S) \leq P_X\left(\bigcup_{(p,q) \in I} (p, q)\right) \leq \sum_{(p,q) \in I} P_X((p, q))
 		= 0.
 	\]
 	Se $0 \leq P_X(S) \leq 0$, então $P_X(S) = 0$. Conclui-se que $P_X(\Omega_X) = 1$.
 \end{proof}
-\end{prop:prob suporte}
+\end{thm:prob suporte}
+
+\begin{prop:intersecao suporte}
+\label{prop:intersecao suporte}
+Seja $X$ uma variável aleatória e $S \in \borel$ com $P_X(S) = 1$.
+Se $A \in \borel$ e $P(X \in A) \ne 0$, então $A \cap S \ne \varnothing$.
+\begin{proof}
+	Suponha que $A \cap S = \varnothing$, e por $\sigma$-aditividade,
+	\[
+		P(A \cup S) = P(A) + P(S) = P(A) + 1
+	\]
+	Mas pelo Teorema \ref{thm:base calc prob},
+	\begin{gather*}
+		P(A) + 1 \le 1\\
+		P(A) \le 0
+	\end{gather*}
+	Por não negatividade,
+	\begin{gather*}
+		0 \le P(A) \le 0\\
+		P(A) = 0
+	\end{gather*}
+\end{proof}
+\end{prop:intersecao suporte}

@@ -1,18 +1,13 @@
 \section{Função de Distribuição Acumulada}
 
-\begin{prop:eqv def va}
-\label{prop:eqv def va}
-Seja $(\Omega, \mathcal{B}, P)$ um espaço de probabilidade.
-A aplicação $X: \Omega \to \mathbb{R}$ é uma variável aleatória se, e somente se,
-\[
-	\forall x \in \mathbb{R}, \{X \leq x\} \in \borel
-\]
-\end{prop:eqv def va}
-
-A proposição permite-nos definir uma função que informa, para cada ponto na reta real,
+Do Teorema \ref{thm:mensuravel real}, temos que se $X$ é uma variável aleatória e
+$(\Omega, \mathcal{F}, P)$ espaço de medida, então $\{X \le x\} \in \mathcal{F}$
+para todo $x \in \real$.
+Esse fato permite-nos definir uma função que informa, para cada ponto na reta real,
 a probabilidade de uma variável ter realização menor igual a daquele ponto.
 Isso equivale a probabilidade que é acumulada por aquele ponto.
-Essa função é chamada de \textbf{Função de Distribuição Acumulada} (FDA).
+Essa função é chamada de \textbf{Função de Distribuição Acumulada}, ou distribuição
+apenas.
 
 \begin{def:cdf}
 Sejam $\Omega$ um espaço amostral e $P$ uma medida de um espaço de probabilidade e $X$
@@ -29,8 +24,6 @@ $X$, então
 \[
 	F(x) = P_X((-\infty, x]).
 \]
-Além disso, pela Proposição \ref{prop:eqv def va}, o intervalo $(-\infty, x]$ é mensurável
-por $P_X$ para todo $x \in \real$, ou seja, $F$ está bem definida em todo ponto de $\real$.
 
 Outros fatos devem ser satisfeitos para determinada função ser de probabilidade acumulada.
 Temos que $F(x)$ equivale a uma medida de probabilidade, então ela deve ser limitada
@@ -57,7 +50,7 @@ variável aleatória $X$, então
 	\[
 		(X \leq x_1) \subset (X \leq x_2),
 	\]
-	e pelo Teorema \ref{thm:base2 calc prob},
+	e pelo Teorema \ref{thm:medida de subconjunto},
 	\[
 		P(X \le x_1) \leq P(X \le x_2) \Longrightarrow F(x_1) \leq F(x_2).
 	\]

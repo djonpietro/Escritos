@@ -1,66 +1,131 @@
 \section{Variáveis Aleatórias Discretas}
 
 \begin{def:variavel discreta}
-Se $X$ é uma variável aleatória, então $X$ é discreta se, e somente se, seu suporte
-seja enumerável.
+Se $X$ é uma variável aleatória, então $X$ é discreta se, e somente se, existe um
+conjunto $S \subset \real$ enumerável tal que
+\[
+	P(X \in S) = 1
+\]
 \end{def:variavel discreta}
 
-% Adcionar um desenvolvimento do suporte de X enquanto um conjunto discreto
-%
-\begin{prop:ep discreto}
-Seja $X$ uma variável aleatória com suporte $\Omega_X$.
-Se $\Omega_X$ é enumerável e $p_X: \mathbb{R} \to \mathbb{R}$ é tal que
-\[
-	p_X(x) = P(X = x),
-\]
-então $(\Omega_X, \Parts{\Omega_X}, p_X)$ é um espaço de probabilidade.
+\begin{thm:suporte discreta}
+O suporte $\Omega_X$ de uma variável aleatória $X$ é enumerável se, e somente se,
+$X$ é enumerável.
 \begin{proof}
-	Com efeito, basta provarmos que para todo $x \in \Omega_X$ temos $p_x(x) \geq 0$ e
-	$\sum_{x \in \Omega_X} p_X(x) = 1$, permitindo-nos aplicar o Teorema \ref{thm:soma prob}.
-	A não negatividade é satisfeita pela definição de $p_X$.
-	Ademais, para todo $x$, os eventos $\{X = x\}$ são disjuntos, e pelo Axioma III de
-	Kolmogorov
+	Sendo $\Omega_X$ enumerável, então pelo Teorema \ref{thm:prob suporte} segue que $X$
+	é discreta. Por outro lado, supondo $X$ discreta, então seja $S$ tal que $P_X(S) = 1$.
+	Sendo $x \in \Omega_X$, então
 	\[
-		\sum_{x \in \Omega_X} p_X(x) = P_X(\Omega_X)
+		\forall \epsilon > 0, P(|X - x| < \epsilon) > 0
 	\]
-	e pela Proposição \ref{prop:suporte}
+	mas se $x \notin S$, segue da Proposição \ref{prop:intersecao suporte} que
 	\[
-		\sum_{x \in \Omega_X} p_X(x) = 1
+		\forall \epsilon > 0, S \cap (x-\epsilon, x+\epsilon) \ne \varnothing,
 	\]
+	concluindo-se que todo ponto em $\Omega_X \setminus S$ é de acumulação em $S$.
+	Definamos
+	\[
+		A = S \cup \{x \in \real \setminus S \mid x \text{ é ponto de acumulação de } S\}
+	\]
+	donde teremos $\Omega_X \subset A$.
+	Como $S$ é enumerável, então o conjunto de seus pontos de acumulação também será, assim
+	como $A$.
+	Uma vez que $\Omega_X$ é subconjunto de um enumerável, então ele próprio é enumerável.
 \end{proof}
-\end{prop:ep discreto}
-
-Observemos então que o espaço induzido por uma variável aleatória discreta equivale
-a $(\Omega_X, \Parts{\Omega_X}, p_X)$, onde a medida $p_X$ é chamada de \textbf{função
-	de massa de probabilidade}, pois ela associa a cada ponto no suporte da variável uma
-medida da probabilidade da variável assumir tal valor.
+\end{thm:suporte discreta}
 
 \begin{def:fmp}
-Seja $X: \Omega \to \mathbb{R}$ uma v.a. discreta. A função $p_X: \mathbb{R} \to \mathbb{R}$
+Seja $X: \Omega \to \mathbb{R}$ uma v.a. discreta. A função $p_X: \mathbb{R} \to [0, 1]$
 é a função de massa de probabilidade de $X$ se, e somente se,
 \[
 	P(X = x) = p_X(x)
 \]
 \end{def:fmp}
+
+\begin{prop:fmp}
+Seja $(\Omega,\mathcal F,P)$ um espaço de probabilidade e seja $X$ uma variável aleatória
+discreta tal que $P(X \in S)=1$, onde $S \subset \mathbb R$. Defina
+\begin{gather*}
+	p_X:\mathbb R \to [0,1]\\
+	x \mapsto P(X = x)
+\end{gather*}
+Então a aplicação
+\begin{gather*}
+	\mu_X:\mathcal P(S)\to [0,1]\\
+	A \mapsto \sum_{x\in A} p_X(x)
+\end{gather*}
+é uma medida de probabilidade em $(S,\mathcal P(S))$.
+\begin{proof}
+	Para todo $A\subset S$,
+	\[
+		\mu_X(A) = \sum_{x\in A} p_X(x) = \sum_{x\in A} P(X=x).
+	\]
+
+	Como os eventos $\{X=x\}$, com $x\in A$, são dois a dois disjuntos,
+	segue da $\sigma$-aditividade de $P$ que
+	\[
+		\mu_X(A) = P(X\in A).
+	\]
+
+	Em particular,
+	\[
+		\mu_X(S) = P(X\in S) = 1.
+	\]
+
+	Logo, $\mu_X$ é uma medida de probabilidade em
+	$(S,\mathcal P(S))$.
+\end{proof}
+\end{prop:fmp}
+
+\begin{lem:prob conjunto enumeravel}
+\label{lem:prob conjunto enumeravel}
+Se $X$ é variável discreta e $A \in \borel$ é enumerável, então
+\[
+	P(X \in A) = \sum_{x \in A} p_X(x)
+\]
+\begin{proof}
+	Por $\sigma$-aditividade,
+	\[
+		P(X \in A) = \sum_{x \in A} P(X = x) = \sum_{x \in A} p_X(x)
+	\]
+\end{proof}
+\end{lem:prob conjunto enumeravel}
+
 \begin{prop:fda discreto}
-Se $X: \Omega \to \mathbb{R}$ é uma v.a. discreta com FMP igual a $p_X$ e suporte $\Omega_X$,
-então a FDA de $X$ é
+Se $X: \Omega \to \mathbb{R}$ é uma v.a. discreta com função de massa igual a $p_X$ e
+suporte $\Omega_X$, então a distribuição de $X$ é
 \[
 	F_X(x) = \sum_{\substack{a \in \Omega_X \\ a \leq x}} p_X(a)
 \]
 \begin{proof}
-	Suponha que $\{a_i\}_\nat$ seja uma ordenação de $\Omega_X$ tal que $x = a_k$.
-	Por definição de FDA,
+	Suponha $A = \{a \in \Omega_X \mid a \le x\}$ e $I = (-\infty, x]$.
+	Observe que,
 	\[
-		F_X(x) = P(X \leq x) = P\left(\bigcup_{i=1}^k \{X = a_i\}\right)
+		P(X \le x) = P(X \in I)
 	\]
-	Como a família de eventos $\{X = x_i\}$ é disjunta, então pelo Axioma III de Kolmogrov,
+	e como $A \subset I$, então por $\sigma$-aditividade,
 	\[
-		F_X(x) = \sum_{i=1}^k P(X = a_i) = \sum_{i=1}^k p_X(a_i)
+		P(X \le x) = P(X \in A) + P(X \in I \setminus A)
 	\]
-	que pode ser rescrita como
+	Suponha por contradição que $P(X \in I \setminus A) \ne 0$, e pela proposição
+	\ref{prop:intersecao suporte}, $(I \setminus A) \cap \Omega_X \ne \varnothing$,
+	o que equivale a
 	\[
-		F_X(x) = \sum_{\substack{a \in \Omega_X \\ a \leq x}} p_X(a)
+		I \cap (\Omega_X \setminus A) \ne \varnothing
+	\]
+	mas $\Omega_X \setminus A = \{a \in \Omega_X \mid a > x\}$, o que contradiz
+	a hipotese anterior.
+	Portanto,
+	\[
+		P(X \le x) = P(X \in A),
+	\]
+	e pelo lema \ref{lem:prob conjunto enumeravel},
+	\[
+		F_X(x) = \sum_{x \in A} p_X(x),
+	\]
+	que equivale a
+	\[
+		F_X(x) = \sum_{\substack{a \in \Omega_X \\ a \leq x}} p_X(a).
 	\]
 \end{proof}
 \end{prop:fda discreto}
@@ -77,22 +142,11 @@ $\{x_i\}_\nat$ uma ordenação de $S$ de tal modo
 	\end{cases}.
 \]
 A função $F$ é, pois, uma função constante por partes que sempre incluem a extremidade
-esquerda de seu domínio devido à propriedade necessária de uma FDA sempre ser contínua
+esquerda de seu domínio devido à propriedade necessária de uma distribuição sempre ser contínua
 à direita. Uma vez que
 \begin{gather*}
 	P(X = x_i) = P(X \leq x_i) - P(X < x_i)\\
 	P(X = x_i) = F(x_i) - \lim_{x \to x_i^-} F(x)\\
 	P(X = x_i) = F(x_i) - F(x_{i-1}),
 \end{gather*}
-então $p_X(x_i)$ é o salto entre duas partes consecutivas da FDA de $X$.
-
-Exemplos de variáveis aleatórias discretas incluem
-\begin{itemize}
-	\item Número de caras obtidas em 10 lançamentos.
-	\item Soma dos lados obtidos no lançamento de dados.
-	\item Número de clientes em uma loja em um dia.
-\end{itemize}
-No primeiro exemplo, as realizações possíveis são os inteiros de 0 a 10. Nos dois seguintes,
-são todos os naturais. Todos esses são conjunto enumeráveis, cujos pontos isoladamente
-concentram massa de probabilidade, isto é, um valor efetivo de probabilidade associado à
-ao evento da variável de ter realização naquele ponto.
+então $p_X(x_i)$ é o salto entre duas partes consecutivas da distribuição de $X$.
