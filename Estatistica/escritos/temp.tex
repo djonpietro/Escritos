@@ -1,88 +1,169 @@
-% Fonte
-\usepackage[extralight]{CrimsonPro}
-\let\oldnormalfont\normalfont
-\def\normalfont{\oldnormalfont\mdseries}
-
-% Língua
+% ================================================================
+%  Língua e codificação
+% ================================================================
 \usepackage[T1]{fontenc}
 \usepackage[utf8]{inputenc}
 \usepackage[brazil]{babel}
 
-% Matemárica
-\usepackage{amsmath, amssymb, amsthm, amsfonts}
-\usepackage{calrsfs}
-\usepackage{bookmark}
-\usepackage{tikz}
-\usepackage{graphicx}
-\usepackage{caption}
-\usepackage{subcaption}
-\usepackage{float}
-\usepackage{tikz-3dplot}
-\usepackage[linesnumbered,ruled,vlined,portuguese]{algorithm2e}
+% ================================================================
+%  Fonte — Palatino com matemática Pazo
+%  (padrão de livros Springer clássicos: Rudin, Lang, etc.)
+% ================================================================
+\usepackage[osf,sc]{mathpazo}   % old-style figures + versalete
+\linespread{1.08}               % Palatino pede entrelinha ligeiramente maior
 
-% layout
+% ================================================================
+%  Matemática
+% ================================================================
+\usepackage{amsmath, amssymb, amsthm, amsfonts}
+\usepackage{mathtools}
+\usepackage{calrsfs}
+
+% ================================================================
+%  Layout de página
+% ================================================================
 \usepackage[
-	a4paper,
-	top=3cm, bottom=3cm,
-	inner=3.5cm, outer=2.5cm,   % margens assimétricas para livro
-	headsep=1cm
+	b4paper,
+	top    = 3.2cm,
+	bottom = 3.8cm,
+	inner  = 3.8cm,
+	outer  = 2.8cm,
+	headsep = 1.2cm
 ]{geometry}
 
-% —— Cabeçalho e rodapé ——
+% ================================================================
+%  Tipografia refinada
+% ================================================================
+\usepackage{microtype}
+
+% Parágrafo clássico: recuo sem espaço extra entre parágrafos
+\usepackage{indentfirst}
+\setlength{\parindent}{1.3em}
+\setlength{\parskip}{0pt plus 0.5pt}
+
+% ================================================================
+%  Estilo de capítulo — clássico, centrado, com filete
+% ================================================================
+\usepackage{titlesec}
+
+% Comando auxiliar: esconde os colchetes de \titlerule[0.4pt]
+% do parser dos argumentos do \titleformat — evita conflitos.
+\newcommand{\capfilete}{\titlerule[0.4pt]}
+
+% Capítulo
+\titleformat{\chapter}[display]
+{\normalfont\centering}
+{\normalsize\scshape\chaptertitlename\ \thechapter}
+{0.6em}
+{\capfilete\vspace{0.7em}\huge\bfseries}
+[\vspace{0.7em}\capfilete]
+
+\titlespacing*{\chapter}{0pt}{3cm}{2.5cm}
+
+% Seção
+\titleformat{\section}
+{\normalfont\large\bfseries}
+{\thesection}{1em}{}
+
+% Subseção — itálico discreto
+\titleformat{\subsection}
+{\normalfont\normalsize\bfseries\itshape}
+{\thesubsection}{1em}{}
+
+% Parte — majestosa e centrada
+\titleformat{\part}[display]
+{\normalfont\centering\Huge\scshape}
+{\large Parte\ \thepart}
+{1em}
+{}
+
+% ================================================================
+%  Cabeçalho e rodapé — estilo clássico em versalete
+% ================================================================
 \usepackage{fancyhdr}
 \pagestyle{fancy}
 \fancyhf{}
-\fancyhead[LE]{\small\nouppercase{\leftmark}}   % capítulo na pág. par
-\fancyhead[RO]{\small\nouppercase{\rightmark}}  % seção na pág. ímpar
-\fancyfoot[LE,RO]{\thepage}
-\renewcommand{\headrulewidth}{0.4pt}
+\fancyhead[LE]{\small\scshape\nouppercase{\leftmark}}   % capítulo (pág. par)
+\fancyhead[RO]{\small\scshape\nouppercase{\rightmark}}  % seção (pág. ímpar)
+\fancyfoot[C]{\small\thepage}
+\renewcommand{\headrulewidth}{0.3pt}
+\renewcommand{\footrulewidth}{0pt}
 
-% —— Espaçamento e tipografia ——
-\usepackage{microtype}              % kerning e hifenização refinados
-\usepackage{setspace}
-\onehalfspacing                     % 1,5 — confortável para leitura
-\usepackage{parskip}
-\usepackage{indentfirst}
-\setlength{\parindent}{1.25cm}
-
-% —— Referências cruzadas e links ——
-\usepackage{hyperref}
-\hypersetup{
-	colorlinks,
-	linkcolor={blue!50!black},
-	citecolor={blue!50!black},
-	urlcolor={blue!80!black}
+% Páginas de capítulo: só número centralizado
+\fancypagestyle{plain}{%
+	\fancyhf{}
+	\fancyfoot[C]{\small\thepage}
+	\renewcommand{\headrulewidth}{0pt}
 }
 
-\renewcommand{\proofname}{Demonstração}
+% ================================================================
+%  Figuras, tabelas e floats
+% ================================================================
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{caption}
+\usepackage{subcaption}
+\usepackage{float}
+\captionsetup{
+	font        = small,
+	labelfont   = {sc},
+	format      = plain,
+	margin      = 1.2cm,
+	labelsep    = period
+}
+
+% ================================================================
+%  TikZ e algoritmos
+% ================================================================
+\usepackage{tikz}
+\usepackage{tikz-3dplot}
+\usepackage[linesnumbered,ruled,vlined,portuguese]{algorithm2e}
+
+% ================================================================
+%  Hyperlinks — discretos e clássicos (sem cor)
+% ================================================================
+\usepackage{bookmark}
+\usepackage{hyperref}
+\hypersetup{
+	colorlinks = true,
+	linkcolor  = black,
+	citecolor  = black,
+	urlcolor   = black,
+}
+
+% ================================================================
+%  Demonstração e QED
+% ================================================================
+\renewcommand{\proofname}{Demonstra\c{c}\~{a}o}
 \renewcommand{\qedsymbol}{\ensuremath{\blacksquare}}
 
-\theoremstyle{definition}
-% Redefinir o ambiente proof para desativar a indentação dentro dele
 \makeatletter
-\renewenvironment{proof}[1][\proofname]{\par
+\renewenvironment{proof}[1][\proofname]{%
+	\par
 	\pushQED{\qed}%
 	\normalfont\topsep6\p@\@plus6\p@\relax
 	\trivlist
-	\item[\hskip\labelsep
-	            \itshape
-	            #1\@addpunct{.}]\ignorespaces
-	\setlength{\parindent}{0pt} % Remove indentação
+	\item[\hskip\labelsep\itshape #1\@addpunct{.}]\ignorespaces
+	\setlength{\parindent}{0pt}
 }{%
 	\popQED\endtrivlist\@endpefalse
 }
 \makeatother
 
+% ================================================================
+%  Operadores e macros matemáticas
+% ================================================================
 \DeclareMathOperator*{\argmax}{arg\,max}
-\newcommand{\mo}[1]{\mathrm{moda}\left(#1\right)}
-\newcommand{\dm}[1]{\mathrm{dm}\left(#1\right)}
-\newcommand{\var}[1]{\mathrm{Var}\left(#1\right)}
-% \newcommand{\std}[1]{\mathrm{std}\left(#1\right)}
-\newcommand{\dep}[1]{\mathrm{dp}\left(#1\right)}
-\newcommand{\Parts}[1]{\mathcal{P}\left(#1\right)}
+\newcommand{\mo}[1]{\mathrm{moda}\!\left(#1\right)}
+\newcommand{\dm}[1]{\mathrm{dm}\!\left(#1\right)}
+\newcommand{\var}[1]{\mathrm{Var}\!\left(#1\right)}
+\newcommand{\dep}[1]{\mathrm{dp}\!\left(#1\right)}
+\newcommand{\Parts}[1]{\mathcal{P}\!\left(#1\right)}
 \newcommand{\borel}{\mathcal{B}(\mathbb{R})}
 \newcommand{\real}{\mathbb{R}}
 \newcommand{\nat}{\mathbb{N}}
-\newcommand{\im}[1]{\mathrm{Im}\left(#1\right)}
-\newcommand{\qs}[2]{\,#1 \,\, \lambda-\mathrm{q.s} \,\, #2\,}
+\newcommand{\im}[1]{\mathrm{Im}\!\left(#1\right)}
+\newcommand{\norm}[1]{\lVert#1\rVert}
+\newcommand{\qs}{\;\;\mathrm{q.s.}\;}
+\newcommand{\esssup}{\mathrm{ess}\sup}
 \renewcommand{\vec}{\mathbf}

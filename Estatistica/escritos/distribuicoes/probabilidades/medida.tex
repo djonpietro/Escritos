@@ -69,6 +69,18 @@ Seja $f$ uma função pontualmente contínua em $X$. Se $X$ é
 compacto (fechado e limitado), então $f$ é uniformemente contínua em $X$.
 \end{thm:heine}
 
+\begin{def:absolutamente continua}
+Uma função $f$ é absolutamente contínua em $[a, b]$ se para todo $\epsilon > 0$ existe
+$\delta \in \real$ tal que, para quaisquer intervalos disjuntos
+\[
+	(a_k, b_k) \subset [a, b]
+\]
+tem-se
+\[
+	\sum_k (b_k - a_k) < \delta \Longrightarrow \sum_k |f(b_k) - f(a_k)| < \epsilon
+\]
+\end{def:absolutamente continua}
+
 \subsection{Introdução à Medida}
 
 Antes de podermos medir determinados conjuntos, precisamos entender que tipos de
@@ -123,12 +135,12 @@ A função \(\mu: \mathcal{B} \to [0, + \infty)\) é uma medida para $(\Omega, \
 \]
 \end{thm:mensuravel real}
 
-\begin{def:medida de lesbergue}
-A medida $\lambda$ de Lesbergue para $(\real, \borel)$ satisfaz
+\begin{def:medida de lebesgue}
+A medida $\lambda$ de Lebesgue para $(\real, \borel)$ satisfaz
 \[
 	\lambda((a, b]) = b - a
 \]
-\end{def:medida de lesbergue}
+\end{def:medida de lebesgue}
 
 \begin{thm:calculo medida}
 Se $(\Omega, \mathcal{B}, \mu)$ é uma espaço de medida e $\{A_n\}$ é uma família
@@ -169,9 +181,18 @@ A medida $\mu$ é dita $\sigma$-finita se
 com $\mu(A_n) < \infty$ para todo $n \in \nat$.
 \end{def:medida completa}
 
-\begin{thm:lesbergue sigma finita}
-A medida de Lesbergue é $\sigma$-finita.
-\end{thm:lesbergue sigma finita}
+\begin{thm:lebesgue sigma finita}
+A medida de Lebesgue é $\sigma$-finita.
+\end{thm:lebesgue sigma finita}
+
+\begin{def:medida absolutamente continua}
+Seja $(\Omega, \mathcal{B})$ um espaço mensurável por medidas $\nu$ e $\mu$.
+Dizemos que $\nu$ é absolutamente contínua em relação a $\mu$, denotado por
+$\nu \ll \mu$, se
+\[
+	\forall A \in \mathcal{B}, \mu(A) = 0 \Longrightarrow \nu(A) = 0.
+\]
+\end{def:medida absolutamente continua}
 
 \begin{def:funcao mensuravel}
 Sejam $(\Omega, \mathbb{B})$ e $(\Omega', \mathbb{B}')$	espaços de medida. Uma função
@@ -199,7 +220,22 @@ São verdadeiras as seguintes afirmações:
 \end{enumerate}
 \end{thm:funcoes mensuraveis}
 
-\subsection{Integral de Lesbergue}
+\begin{def:steltjes}
+Se $f: \real \to \real$ é uma função mensurável monótona crescente e contínua à direita,
+então a medida induzida de Steltjes por $f$, denotada por $\mu_f$, satisfaz
+\[
+	\mu_f((a, b]) = f(b) - f(a)
+\]
+\end{def:steltjes}
+
+\begin{thm:medida steltjes}
+\label{thm:medida steltjes}
+Seja $\mu_f$ a medida de Steltjes induzida por $f$.
+A função $f$ é absulotamente contínua se, e somente se, $\mu_f \ll \lambda$, onde $\lambda$
+é a medida de Lebesgue.
+\end{thm:medida steltjes}
+
+\subsection{Integral de Lebesgue}
 
 \begin{def:funcao simples}
 A aplicação $\phi: \Omega \to \real$ é uma função simples se pode ser expressa
@@ -215,8 +251,8 @@ Para toda função $f \ge 0$ há uma sequência $\{\phi_i\}_\nat$ não negativa 
 funções simples tal que $\phi \to f$ pontualmente, e uniformemente se $f$ for limitada.
 \end{thm:aproximacao monotona}
 
-\begin{def:integral de lesbergue}
-Dada a medida $\lambda$ de Lesbergue, a integral de Lesbergue, denotada por
+\begin{def:integral de lebesgue}
+Dada a medida $\lambda$ de Lebesgue, a integral de Lebesgue, denotada por
 \[
 	\int f\, d\lambda
 \]
@@ -237,10 +273,10 @@ satisfaz
 	      \]
 	      desde que $\int |f|\, d\lambda < \infty$.
 \end{enumerate}
-\end{def:integral de lesbergue}
+\end{def:integral de lebesgue}
 
-\begin{thm:integral de lesbergue}
-A integral de Lesbergue satisfaz
+\begin{thm:integral de lebesgue}
+A integral de Lebesgue satisfaz
 \begin{enumerate}
 	\item[i.] \textbf{Linearidade:}
 	      \[
@@ -254,7 +290,7 @@ A integral de Lesbergue satisfaz
 	      \[
 		      \int_{A \cup B} f\, d\lambda = \int_A f\, d\lambda + \int_B f\, d\lambda
 	      \]
-	\item[iv.] \textbf{Nulidade:}
+	\item[iv.] \textbf{Nulidade:} Se $f \ge 0$ mensurável,
 	      \[
 		      \forall A \in \borel, \int_A f\, d\lambda = 0 \leftrightarrow f = 0 \qs \text{ em } A
 	      \]
@@ -267,7 +303,7 @@ A integral de Lesbergue satisfaz
 		      \int_{[a,b]} f \, d \lambda = \int_a^b f(x)\, dx
 	      \]
 \end{enumerate}
-\end{thm:integral de lesbergue}
+\end{thm:integral de lebesgue}
 
 % \begin{def:quase sempre}
 % Uma proposição $\varphi(x)$ vale quase sempre (q.s.) num conjunto mensurável $A$ se
@@ -363,3 +399,19 @@ Em especial, $L^2$ é um espaço de Hilbert.
 \begin{thm:consq holder}
 Se $\mu(\Omega) < \infty$ e $p \le q$, então $L^p(\Omega) \subset L^q(\Omega)$
 \end{thm:consq holder}
+
+\subsection{Teorema de Radon-Nikodym}
+
+\begin{thm:radon nikodym}[de Radon-Nikodym]
+\label{thm:radon nikodym}
+Seja $(S, \mathcal{B})$ um espaço mensurável por medidas $\mu$ e $\nu$.
+Se $\mu$ é $\sigma$-finita e $\nu \ll \mu$, então existe uma função mensurável não
+negativa $f \in L^1(\mu)$ tal que
+\[
+	f = \frac{d\nu}{d\mu}
+\]
+Ademais, se a função $g$ satisfaz a expressão anterior, então
+\[
+	g = \frac{d\nu}{d\mu} \Longleftrightarrow f = g \qs
+\]
+\end{thm:radon nikodym}

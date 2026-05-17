@@ -25,6 +25,7 @@ $X$, então
 	F(x) = P_X((-\infty, x]).
 \]
 
+
 Outros fatos devem ser satisfeitos para determinada função ser de probabilidade acumulada.
 Temos que $F(x)$ equivale a uma medida de probabilidade, então ela deve ser limitada
 superiormente por 1 e inferiormente por 0.
@@ -92,3 +93,25 @@ variável aleatória $X$, então
 	\]
 \end{proof}
 \end{thm:cdf}
+
+\begin{prop:steltjes e fda}
+\label{prop:steltjes e fda}
+Se $X$ é variável aleatória e $\mu_F$ é a medida de Steltjes induzida por $F$, então
+$P_X = \mu_F$.
+\begin{proof}
+	Para quaisquer $a, b \in \real$, temos
+	\[
+		(-\infty, a] \cup (a, b] = (-\infty, b] \qquad (-\infty, a] \cap (a, b] = \varnothing
+	\]
+	e por $\sigma$-aditividade
+	\begin{gather*}
+		P_X((-\infty, a]) + P_X((a, b]) = P((\infty, b]) \\
+		P_X((a, b]) = P_X((\infty, b]) - P_X((-\infty, a])\\
+		P_X((a, b]) = F(b) - F(a)
+	\end{gather*}
+	Logo,
+	\[
+		P_X((a,b]) = \mu_F((a, b])
+	\]
+\end{proof}
+\end{prop:steltjes e fda}

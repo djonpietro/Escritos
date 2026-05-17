@@ -1,27 +1,24 @@
 \section{Variáveis Aleatórias Contínuas}
 
-\begin{def:absolutamente continua}
-Uma função $f$ é absolutamente contínua num intervalo $[a, b]$ se, para todo
-$\epsilon > 0$, existe $\delta > 0$ tal que, para toda coleção finita de subsintervalos
-disjuntos $\{(a_i, b_i)\}_n$ é satisfeito
-\[
-	\sum_{i=1}^n (b_i - a_i) < \delta \Longrightarrow \sum_{i=1}^n | f(b_i) - f(a_i) | < \epsilon
-\]
-\end{def:absolutamente continua}
-
 \begin{def:variavel continua}
-A variável $X$ será contínua se a sua medida induzida $P_X$ é absolutamente contínua em
-relação a medida de Lesbergue $\lambda$, i.e., $P_X \ll \lambda$
+A variável aleatória $X$ será contínua se $P_X \ll \lambda$.
 \end{def:variavel continua}
 
-\begin{thm:radon-nikodym}[Radon-Nikodym]
-\label{thm:radon-nikodym}
-Se $X$ é uma variável contínua e $P_X$ é sua medida induzida, então existe
-$f \in L^1(\real)$ com $f(x) \ge 0$ para todo $x \in \real$ tal que
+\begin{prop:existencia fdp}
+Toda variável aleatória contínua $X$ admite uma função real mensurável não negativa
+$f \in L^1(\lambda)$ tal que
 \[
-	\forall A \in \borel, P_X(A) = \int_A f(x)dx
+	f = \frac{d}{d\lambda} P_X
 \]
-\end{thm:radon-nikodym}
+\begin{proof}
+	Se $X$ é contínua, então $P_X \ll \lambda$. Como $\lambda$ é $\sigma$-finita, então
+	pelo Teorema \nameref{thm:radon nikodym} existe $f \in L^1(\lambda)$ não negativa
+	tal que
+	\[
+		f = \frac{d}{d\lambda} P_X
+	\]
+\end{proof}
+\end{prop:existencia fdp}
 
 \begin{def:fdp}
 Seja $X$ uma variável aleatória contínua com medida induzida $P_X$. A função
@@ -38,20 +35,22 @@ Se $X$ é uma variável contínua com densidade $f$ e distribuição $F$, então
 	F(x) = \int_{-\infty}^x f(t)\,dt
 \]
 \begin{proof}
-	Por definição de distribuição,
 	\[
-		F(x) = P_X((-\infty, x])
-	\]
-	e usando o Teorema de \nameref{thm:radon-nikodym}.
-	\[
-		F(x) = \int_{-\infty}^x f(t)\,dt
+		F(x) = P_X((-\infty, x]) = \int_{(-\infty, x]} f\, d\lambda = \int_{-\infty}^x f(t)\, dt
 	\]
 \end{proof}
 \end{prop:fdp e fda}
 
 \begin{prop:continuidade fda}
-Se $X$ é uma v.a. contínua, então a sua distribuição $F$ é absolutamente contínua.
+A variável $X$ é contínua se, e somente se, sua distribuição $F$ é absolutamente contínua.
 \end{prop:continuidade fda}
+\begin{proof}
+	Supondo que $X$ é contínua, então $P_X \ll \lambda$.
+	Pela Proposição \ref{prop:steltjes e fda} e pelo Teorema \ref{thm:medida steltjes},
+	concluiremos que $F$ é absolutamente contínua.
+	Por outro lado, se $F$ é absolutamente contínua, então $\mu_F = P_X \ll \lambda$ e,
+	por definição, a variável $X$ será contínua.
+\end{proof}
 
 \begin{thm:prob continua}
 Se $X$ é uma variável aleatória contínua com densidade $f$,
@@ -88,70 +87,36 @@ então para todo $x, a, b \in \real$
 \label{prop:densidade 1}
 Se $X$ é uma variável aleatória contínua com densidade $f$ e suporte $\Omega_X$, então
 \[
-	\int_{\Omega_X} f(t)\,dt = \int_\real f(t)\,dt = 1
+	\int_{\Omega_X} f\,d\lambda = \int_\real f\,\lambda = 1
 \]
 \begin{proof}
-	Se $P_X$ é a medida induzida por $X$, então pelo Teorema de \nameref{thm:radon-nikodym},
+	Com efeito,
 	\[
-		P_X(\Omega_X) = \int_{\Omega_X} f(x)\,dx,
+		P_X(\Omega_X) = 1 \Longrightarrow \int_{\Omega_X}f\, d\lambda = 1.
 	\]
-	mas pela Proposição \ref{thm:prob suporte}
+	Ademais, se $(\real, \borel, P_X)$ é o espaço de probabilidade induzido por
+	$X$, então
 	\[
-		P_X(\Omega_X) = 1,
-	\]
-	donde segue
-	\[
-		\int_{\Omega_X} f(t)\,dt = 1
-	\]
-	O Teorema de \nameref{thm:radon-nikodym} também implica que
-	\[
-		P_X(\real) = \int_\real f(t)\,dt
-	\]
-	e pelo axioma II de Kolmogorov aplicado ao espaço $(\real, \borel, P_X)$ induzido
-	por $X$ temos
-	\[
-		\int_\real f(t)\,dt = 1
+		P_X(\real) = P(\Omega) = 1 \Longrightarrow \int_\real f\, d\lambda = 1
 	\]
 \end{proof}
 \end{prop:densidade 1}
 
-\begin{lem:qs lesbergue}
-\label{lem:qs lesbergue}
-Temos $\qs{f=0}{A}$ se, e somente se, $f > 0$ e $\int_A f\,d\lambda = 0$.
-\end{lem:qs lesbergue}
-
 \begin{prop:densidade fora suporte}
 Se $X$ é uma variável contínua com densidade $f$ e suporte $\Omega_X$, então
 \[
-	\qs{f(x) = 0}{x \notin \Omega_X}
+	f = 0 \qs \text{ em } \real \setminus \Omega_X
 \]
 \begin{proof}
-	Seja $A = \real \setminus \Omega_X$.
-	Se provarmos que $\forall x, f(x) \ge 0$ e $\int_A f(x)\,dx = 0$, então poderemos
-	aplicar o lema \ref{lem:qs lesbergue}.
-	A não negatividade de $f(x)$ vale pelo Teorema de \nameref{thm:radon-nikodym}.
-	Outrossim,
+	Seja $A = \real \setminus \Omega_X$. Observe que
 	\[
-		\int_{\Omega_X} f(x)\,dx + \int_{A} f(x)\,dx = \int_\real f(x)\,dx
+		\int_{A} f\, d\lambda + \int_{\Omega_X} f\, d\lambda = \int_\real f\, d\lambda
 	\]
-	então
+	e pela Proposição \ref{prop:densidade 1}, conclui-se
 	\[
-		\int_A f(x)\,dx = 0.
+		\int_A f\, d\lambda = 0.
 	\]
-	Segue, então, do lema \ref{lem:qs lesbergue} que $f(x) = 0$ em quase todo ponto
-	fora de $\Omega_X$.
+	Como um função de densidade é mensurável e não negativa, então por nulidade
+	da integral de Lebesgue, obtém-se que $f = 0 \qs$ em $A$.
 \end{proof}
 \end{prop:densidade fora suporte}
-
-Exemplos de variáveis aleatórias contínuas são
-\begin{itemize}
-	\item Tempos de espera em algum serviço.
-	\item Peso ou altura de pessoas numa população.
-	\item Temperatura ao longo de um ano.
-\end{itemize}
-
-Essas variáveis variam de forma contínua num intervalo de valores, de forma que não possível
-haver valores que concentrem uma massa de probabilidade, sendo essa totalmente dispersada
-pelo intervalo. Em vista disso, a probablidade de que a variável tenha um valor específico
-é zero, o que nos leva ao conceito de densidade de probabilidade sobre intervalos de
-valores.

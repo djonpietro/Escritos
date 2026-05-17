@@ -2,24 +2,63 @@
 % ------------------------- Capítulo I -----------------------------
 % Dfinições
 \newtheorem{def:base-prob}{Definição}[chapter]
-\newtheorem{def:espaco amostral}[def:base-prob]{Definição}
+\newtheorem{def:pontualmente continua}[def:base-prob]{Definição}
+\newtheorem{def:uniformemente continua}[def:base-prob]{Definição}
+\newtheorem{def:absolutamente continua}[def:base-prob]{Definição}
+\newtheorem{def:medida nula}[def:base-prob]{Definição}
+\newtheorem{def:mensuravel}[def:base-prob]{Definição}
+\newtheorem{def:medida}[def:base-prob]{Definição}
+\newtheorem{def:medida de lebesgue}[def:base-prob]{Definição}
+\newtheorem{def:medida completa}[def:base-prob]{Definição}
+\newtheorem{def:medida absolutamente continua}[def:base-prob]{Definição}
+\newtheorem{def:funcao mensuravel}[def:base-prob]{Definição}
+\newtheorem{def:steltjes}[def:base-prob]{Definição}
+\newtheorem{def:funcao simples}[def:base-prob]{Definição}
+\newtheorem{def:integral de lebesgue}[def:base-prob]{Definição}
+\newtheorem{def:lp}[def:base-prob]{Definição}
+\newtheorem{def:quase sempre}[def:base-prob]{Definição}
+\newtheorem{def:espaco de probabilidade}[def:base-prob]{Definição}
 \newtheorem{def:sigma algebra}[def:base-prob]{Definição}
 \newtheorem{def:probabilidade}[def:base-prob]{Definição}
-\newtheorem{def:espaco de probabilidade}[def:base-prob]{Definição}
 \newtheorem{def:evento equiprovavel}[def:base-prob]{Definição}
 \newtheorem{def:eventos encaixados}[def:base-prob]{Definição}
 \newtheorem{def:probabilidade condicional}[def:base-prob]{Definição}
 \newtheorem{def:independencia}[def:base-prob]{Definição}
+% Definições
+\newtheorem{exp:base-prob}{Exemplo}[chapter]
+\newtheorem{exp:pontualmente contínua}[exp:base-prob]{Exemplo}
+\newtheorem{exp:pontualmente contínua neg}[exp:base-prob]{Exemplo}
+\newtheorem{exp:uniformemente contínua}[exp:base-prob]{Exemplo}
+\newtheorem{exp:uniformemente contínua neg}[exp:base-prob]{Exemplo}
 % Proposições
 \newtheorem{prop:base-prob}{Proposição}[chapter]
-\newtheorem{prop:demorgan}{Proposição}[chapter]
 \newtheorem{prop:eventos encaixados}[prop:base-prob]{Proposição}
 \newtheorem{prop:probabilidade condicional}[prop:base-prob]{Proposição}
 \newtheorem{prop:regra da multiplicacao}[prop:base-prob]{Proposição}
 \newtheorem{prop:independencia}[prop:base-prob]{Proposição}
 \newtheorem{prop:independencia complementar}[prop:base-prob]{Proposição}
+% Lema
+\newtheorem{lem:base-prob}{Lema}[chapter]
+\newtheorem{lem:fatou}[lem:base-prob]{Lema}
 % Teorema
 \newtheorem{thm:base-prob}{Teorema}[chapter]
+\newtheorem{thm:heine}[thm:base-prob]{Teorema}
+\newtheorem{thm:mensuravel real}[thm:base-prob]{Teorema}
+\newtheorem{thm:calculo medida}[thm:base-prob]{Teorema}
+\newtheorem{thm:medida de subconjunto}[thm:base-prob]{Teorema}
+\newtheorem{thm:lebesgue sigma finita}[thm:base-prob]{Teorema}
+\newtheorem{thm:funcoes mensuraveis}[thm:base-prob]{Teorema}
+\newtheorem{thm:medida steltjes}[thm:base-prob]{Teorema}
+\newtheorem{thm:aproximacao monotona}[thm:base-prob]{Teorema}
+\newtheorem{thm:integral de lebesgue}[thm:base-prob]{Teorema}
+\newtheorem{thm:convergencia monotona}[thm:base-prob]{Teorema}
+\newtheorem{thm:convergencia dominada}[thm:base-prob]{Teorema}
+\newtheorem{thm:toneli}[thm:base-prob]{Teorema}
+\newtheorem{thm:fubini}[thm:base-prob]{Teorema}
+\newtheorem{thm:holder}[thm:base-prob]{Teorema}
+\newtheorem{thm:minkowski}[thm:base-prob]{Teorema}
+\newtheorem{thm:consq holder}[thm:base-prob]{Teorema}
+\newtheorem{thm:radon nikodym}[thm:base-prob]{Teorema}
 \newtheorem{thm:soma prob}[thm:base-prob]{Teorema}
 \newtheorem{thm:base calc prob}[thm:base-prob]{Teorema}
 \newtheorem{thm:base2 calc prob}[thm:base-prob]{Teorema}
@@ -41,7 +80,6 @@
 \newtheorem{def:suporte}[def:base-va]{Definição}
 \newtheorem{def:variavel discreta}[def:base-va]{Definição}
 \newtheorem{def:fmp}[def:base-va]{Definição}
-\newtheorem{def:absolutamente continua}[def:base-va]{Definição}
 \newtheorem{def:variavel continua}[def:base-va]{Definição}
 \newtheorem{def:fdp}[def:base-va]{Definição}
 \newtheorem{def:transformacao}[def:base-va]{Definição}
@@ -50,11 +88,13 @@
 \newtheorem{def:esperanca discreta}[def:base-va]{Definição}
 % Proposições
 \newtheorem{prop:base-va}{Proposição}[chapter]
-\newtheorem{prop:eqv def va}[prop:base-va]{Proposição}
-\newtheorem{prop:prob suporte}[prop:base-va]{Proposição}
+\newtheorem{prop:intersecao suporte}[prop:base-va]{Proposição}
 \newtheorem{prop:ep discreto}[prop:base-va]{Proposição}
+\newtheorem{prop:fmp}[prop:base-va]{Proposição}
 \newtheorem{prop:fda discreto}[prop:base-va]{Proposição}
+\newtheorem{prop:existencia fdp}[prop:base-va]{Proposição}
 \newtheorem{prop:fdp e fda}[prop:base-va]{Proposição}
+\newtheorem{prop:steltjes e fda}[prop:base-va]{Proposição}
 \newtheorem{prop:continuidade fda}[prop:base-va]{Proposição}
 \newtheorem{prop:densidade 1}[prop:base-va]{Proposição}
 \newtheorem{prop:densidade fora suporte}[prop:base-va]{Proposição}
@@ -63,12 +103,14 @@
 \newtheorem{prop:linearidade da esperanca discreta}[prop:base-va]{Proposição}
 % Lema
 \newtheorem{lem:base-va}{Lema}[chapter]
-\newtheorem{lem:qs lesbergue}[lem:base-va]{Lema}
+\newtheorem{lem:prob conjunto enumeravel}[lem:base-va]{Lema}
 % Teoremas
 \newtheorem{thm:base-va}{Teorema}[chapter]
+\newtheorem{thm:suporte discreta}[thm:base-va]{Teorema}
 \newtheorem{thm:cdf}[thm:base-va]{Teorema}
-\newtheorem{thm:radon-nikodym}[thm:base-va]{Teorema}
 \newtheorem{thm:prob continua}[thm:base-va]{Teorema}
+\newtheorem{thm:prob suporte}[thm:base-va]{Teorema}
+\newtheorem{thm:existencia fdp}[thm:base-va]{Teorema}
 \newtheorem{thm:prob transformacao discreta}[thm:base-va]{Teorema}
 \newtheorem{thm:fda transformacao continua}[thm:base-va]{Teorema}
 \newtheorem{thm:fdp transformacao continua}[thm:base-va]{Teorema}
