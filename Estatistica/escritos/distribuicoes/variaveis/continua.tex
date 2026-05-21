@@ -21,9 +21,10 @@ $f \in L^1(\lambda)$ tal que
 \end{prop:existencia fdp}
 
 \begin{def:fdp}
-Seja $X$ uma variável aleatória contínua com medida induzida $P_X$. A função
+Seja $X$ uma variável aleatória contínua com medida induzida $P_X$. A função $f$
+que satisfaz
 \[
-	f = \frac{d}{d\lambda}P_X
+	f = \frac{d}{d\lambda}P_X \Longleftrightarrow P_X = \int f\, d\lambda
 \]
 é chamada de densidade de probabilidade de $X$.
 \end{def:fdp}
@@ -53,6 +54,7 @@ A variável $X$ é contínua se, e somente se, sua distribuição $F$ é absolut
 \end{proof}
 
 \begin{thm:prob continua}
+\label{thm:prob continua}
 Se $X$ é uma variável aleatória contínua com densidade $f$,
 então para todo $x, a, b \in \real$
 \begin{enumerate}
@@ -71,10 +73,12 @@ então para todo $x, a, b \in \real$
 	\]
 	provando (i).
 
-	A afirmação (ii) é consequência direta,
+	Observemos agora que
 	\[
-		P(X = x) = \int_x^x f(t)\,dt = 0.
+		\lambda(\{x\}) = 0 \Longrightarrow \int_{\{x\}} f\, d\lambda = 0 \Longrightarrow P(X = x) = 0
 	\]
+	provando (ii).
+
 	Uma vez que
 	\[
 		P(X \leq x) = P(X = x) + P(X < x) \quad \text{e} \quad P(X \ge x) = P(X = x) + P(X > x)
@@ -120,3 +124,77 @@ Se $X$ é uma variável contínua com densidade $f$ e suporte $\Omega_X$, então
 	da integral de Lebesgue, obtém-se que $f = 0 \qs$ em $A$.
 \end{proof}
 \end{prop:densidade fora suporte}
+
+\begin{lem:densidade continua}
+\label{lem:densidade continua}
+Seja $X$ variável contínua com densidade $f$ e suporte $\Omega_X$.
+Se $f$ é contínua em $x \in \real$, então $x \in \Omega_X$.
+\begin{proof}
+	Suponha que $0 < \epsilon < f(x)$. Por continuidade em $x$, existe $\delta > 0$ tal que
+	\[
+		\forall a \in \real, |x-a| < \delta \Longrightarrow |f(x)-f(a)| < \epsilon
+	\]
+	Suponha por contradição que $x \notin \Omega_X$.
+	Com efeito, exista uma vizinhança $V = (x-\nu, x+\nu)$, com $\nu > 0$
+	tal que $P(X \in V) = 0$, que equivale a $f=0 \qs$ em $V$.
+	Existe, pois, $y \in V$ tal que
+	\[
+		|x-y| < \delta \quad \text{e} \quad f(y) = 0
+	\]
+	de modo que
+	\[
+		|f(x) - f(y)| < \epsilon \Longrightarrow |f(x)| < \epsilon,
+	\]
+	e sendo $f$ densidade, $f > 0$ e $|f(x)| = f(x)$.
+	Por conseguinte,
+	\[
+		f(x) < \epsilon
+	\]
+	contradizendo a afirmação que $\epsilon < f(x)$.
+	Conclui-se que $x \in \Omega_X$.
+\end{proof}
+\end{lem:densidade continua}
+
+\begin{thm:suporte continua}
+\label{thm:suporte continua}
+Se $X$ é variável aleatória densidade $f$ contínua em
+\[
+	\{x \in \real \mid f(x) > 0\}
+\]
+então
+\[
+	\Omega_X = \overline{\{x \in \real \mid f(x) > 0\}}
+\]
+\begin{proof}
+	Seja
+	\[
+		E = \{x \in \real \mid f(x) > 0\}.
+	\]
+	Mostremos que $\Omega_X \subset \overline E$.
+	Para tanto, suponha que $x \notin \overline E$.
+	Existe, então, vizinhança $V = (x-\delta, x+\delta)$, com $\delta > 0$, tal que
+	\[
+		V \cap E = \varnothing
+	\]
+	Então para todo $a \in V$, $f(a) = 0$, o que equivale a dizer que $f = 0 \qs$ em $V$.
+	Por consequência, $P(X \in V) = 0$, e $x \notin \Omega_X$.
+
+	Demonstremos agora que $\overline E \subset \Omega_X$.
+	Do Lema \ref{lem:densidade continua}, temos que $E \subset \Omega_X$.
+	Resta mostrar que todo ponto de acumulação $x \notin E$ é membro de $\Omega_X$.
+	Se $x \in \overline E$, então
+	\[
+		\forall \nu > 0, (x-\nu, x+\nu) \cap E \ne \varnothing.
+	\]
+	Isso equivale a dizer que para toda vizinhança $V$ de $x$ existe contém pelo menos
+	um ponto com densidade positiva e, por consequência do Lema \ref{lem:densidade continua},
+	que é membro do suporte.
+	Se tivéssemos $x \notin \Omega_X$, então haveria uma vizinhança $U$
+	centrada em $x$ tal que $P(X \in U) = 0$, e teríamos
+	\[
+		\forall a \in U, a \notin \Omega_X
+	\]
+	contradizendo a afirmação que toda vizinhança de $x$ tem um membro do suporte.
+	Portanto, $\overline E \subset \Omega_X$.
+\end{proof}
+\end{thm:suporte continua}

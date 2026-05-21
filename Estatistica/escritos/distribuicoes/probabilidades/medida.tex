@@ -400,18 +400,30 @@ Em especial, $L^2$ é um espaço de Hilbert.
 Se $\mu(\Omega) < \infty$ e $p \le q$, então $L^p(\Omega) \subset L^q(\Omega)$
 \end{thm:consq holder}
 
-\subsection{Teorema de Radon-Nikodym}
-
 \begin{thm:radon nikodym}[de Radon-Nikodym]
 \label{thm:radon nikodym}
 Seja $(S, \mathcal{B})$ um espaço mensurável por medidas $\mu$ e $\nu$.
 Se $\mu$ é $\sigma$-finita e $\nu \ll \mu$, então existe uma função mensurável não
 negativa $f \in L^1(\mu)$ tal que
 \[
-	f = \frac{d\nu}{d\mu}
+	f = \frac{d\nu}{d\mu} \Longleftrightarrow \forall A \in \mathcal{B}, \nu(A) = \int_A f\, d\mu
 \]
 Ademais, se a função $g$ satisfaz a expressão anterior, então
 \[
 	g = \frac{d\nu}{d\mu} \Longleftrightarrow f = g \qs
 \]
 \end{thm:radon nikodym}
+
+\begin{thm:radon nikodym2}
+\label{thm:radon nikodym2}
+Se $F$ é uma função absolutamente contínua, então existe $f \in L^1(\lambda)$ tal que
+\[
+	F(x) = F(a) + \int_a^x f\, d\lambda
+\]
+onde dizemos que $f = F' \qs$
+\end{thm:radon nikodym2}
+
+\begin{thm:tfc qs}
+\label{thm:tfc qs}
+Se $f = F' \qs$ e $f$ é contínua em $x$, então $f(x) = F'(x)$.
+\end{thm:tfc qs}

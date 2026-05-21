@@ -1,18 +1,18 @@
 \section{Transformações}
 
 \begin{def:transformacao}
-Uma transformação de uma variável aleatória $X$ com imagem $\mathcal{X}$ é toda função
-$f: \mathcal{X} \to \mathbb{R}$.
+Uma transformação de uma variável aleatória $X$ é toda função $f: \real \to \real$.
 \end{def:transformacao}
 
 \begin{def:variavel derivada}
-Se $X: \Omega \to \mathbb{R}$ é uma variável aleatória e $f$ é uma transformação de $X$,
-então $f(X) = f \circ X$ é uma variável aleatória se, e somente se,
+Seja $X$ uma variável aleatória.
+Se $f$ for uma transformação mensurável, então $f(X)$ é a variável aleatória definida
+por $f \circ X$.
 \end{def:variavel derivada}
 
 \begin{prop:prob transformacao}
 \label{prop:prob transformacao}
-Seja $X$ uma variável aleatória, $f$ uma transformação e $A \in \borel$.
+Se $X$ é uma variável aleatória e $f$ uma transformação mensurável, então
 \[
 	P_X(f(X) \in A) = P(X \in f^{-1}(A))
 \]
@@ -32,30 +32,36 @@ $(\real, \borel, P_f)$ onde
 
 \subsection{Transformação de Variáveis Discretas}
 \begin{thm:prob transformacao discreta}
-Seja $X$ uma variável discreta com suporte $\Omega_X$, FMP igual a $p_X$,
-$f$ uma transformação de $X$ e $Y = f(X)$.
-A variável $Y$ é discreta e sua FMP é dada por
+Seja $X$ uma variável discreta com suporte $\Omega_X$, função de massa igual a $p_X$ e
+$f$ uma transformação mensurável de $X$ tal que $Y = f(X)$.
+A variável $Y$ é discreta e sua função de massa é dada por
 \[
 	p_Y(y) = \sum_{x \in f^{-1}(y)} p_X(x)
 \]
 \begin{proof}
-	De \ref{prop:prob transformacao} sabemos que
+	Para $Y$ ser discreto, seu suporte $\Omega_Y$ deve ser enumerável.
+	Da Proposição \ref{prop:prob transformacao} sabemos que
 	\[
-		P(Y \in A) > 0 \Longleftrightarrow P(X \in f^{-1}(A)) > 0,
+		P_Y(A) > 0 \leftrightarrow P(X \in f^{-1}(A)) > 0,
 	\]
-	o que ocorre também se, e somente se, $A \cap \Omega_X \neq \varnothing$.
-	Essa afirmação é verdade somente quando há $x \in \mathbb{R}$ que satisfaz $f(x) \in A$
-	e $x \in \Omega_X$.
-	Portanto, $y \in \Omega_Y$ ocorre somente quando $y = f(x)$ e $x \in \Omega_X$, ou
-	seja, $\Omega_Y$ é a imagem de $\Omega_X$ sobre $f$, sendo, pois, enumerável.
+	e pela Proposição \ref{prop:intersecao suporte},
+	\[
+		f^{-1}(A) \cap \Omega_X \neq \varnothing.
+	\]
+	donde segue
+	\[
+		\forall y \in \Omega_Y \exists x \in \Omega_X, (f(x) = y \land y \in A)
+	\]
+	Logo, $\Omega_Y$ é a imagem de $\Omega_X$ sobre $f$, sendo, pois, enumerável.
 
-	O resultado sobre a FMP de $Y$ segue do fato de que
+	Para a afirmação sobre a função de massa de $Y$, a Proposição \ref{prop:prob transformacao}
+	mostra que
 	\[
-		p_Y(y) = P(Y = y) = P(X \in f^{-1}(y))
+		p_Y(y) = P_X(Y = y) = P(X \in f^{-1}(y)),
 	\]
-	e temos que
+	e, pelo Lema \ref{lem:prob conjunto enumeravel},
 	\[
-		p_Y(y) = \sum_{x \in f^{-1}(y)} p_x(X)
+		p_Y(y) = \sum_{x \in f^{-1}(y)} p_X(x).
 	\]
 \end{proof}
 \end{thm:prob transformacao discreta}
@@ -63,32 +69,49 @@ A variável $Y$ é discreta e sua FMP é dada por
 \subsection{Transformação de Variáveis Contínuas}
 
 Para transformações de variáveis contínuas, concentramos-nos, primeiramente, nas
-transformações mńótonas, pois essas são bijetoras, e compõem casos mais simples para
+transformações monótonas, pois essas são bijetoras, e compõem casos mais simples para
 se analisar.
 
-É possível obter a FDA de uma transformação monótona $Y = g(X)$ de uma variável $X$ apenas
-em termos da própria FDA de $X$ e da inversa da transformação.
-
 \begin{thm:fda transformacao continua}
-Seja $X$ uma variável aleatória com FDA igual a $F_X$ e suporte $\Omega_X$.
-Seja também $Y=g(X)$ uma transformação monótona com suporte $\Omega_Y$.
+\label{thm:fda transformacao continua}
+Seja $X$ uma variável aleatória contínua com distribuição $F_X$ e suporte $\Omega_X$.
+Seja também $Y=g(X)$ com suporte $\Omega_Y$, em que $g$ é uma transformação monótona.
 Se $g$ for crescente, então
 \[
-	\forall x \in \Omega_{X} \forall y \in \Omega_{Y},\ F_{Y}(y) =  F_{X}(g^{-1}(y)).
+	F_{Y}(y) =  F_{X}(g^{-1}(y)).
 \]
-Se for decrescente, então
+Caso contrário,
 \[
-	\forall x \in \Omega_{X} \forall y \in \Omega_{Y},\ F_{Y}(y) = 1 - F_{X}(g^{-1}(y)).
+	F_{Y}(y) = 1 - F_{X}(g^{-1}(y)).
 \]
 \begin{proof}
-	Com efeito,
+	Com efeito, da Proposição \ref{prop:prob transformacao} segue que,
 	\[
-		F_Y(y) = P(Y \leq y) = P(X \leq g^{-1} (-\infty, y) )
+		F_Y(y) = P_X(Y \leq y) = P(X \leq g^{-1} ((-\infty, y]).
 	\]
-	Sendo $g$ monótona crescente crescente, $g^{-1}$ também será, de modo que
+	A função $g^{-1}$ tem a mesma monotonicidade de $g$.
+	Se $g$ for crescente, então
 	\[
-		F_Y(y) = P(\{x \in \mathcal{X} \mid x \leq g^{-1}(y)\}) = \int_{-\infty}^{g^{-1}(y)} f(x)dx = F_X(g^{-1}(y))
+		\{X \in g^{-1}((-\infty, y])\} = \{X \le g^{-1}(y)\}
 	\]
+	implicando em
+	\[
+		F_Y(y) = F_X(g^{-1}(y)).
+	\]
+	Se $g$ for decrescente, obtém-se
+	\[
+		\{X \in g^{-1}((-\infty, y])\} = \{X \ge g^{-1}(y)\}
+	\]
+	e
+	\[
+		F_Y(y) = P(X \ge g^{-1}(y))
+	\]
+	mas pelo Teorema \ref{thm:prob continua},
+	\begin{align*}
+		F_Y(y) & = P(X > g^{-1}(y))       \\
+		       & = 1 - P(X \le g^{-1}(y)) \\
+		       & = 1 - F_X(g^{-1}(y))
+	\end{align*}
 \end{proof}
 \end{thm:fda transformacao continua}
 
@@ -103,14 +126,52 @@ a determinação da densidade de $Y$.
 \label{thm:fdp transformacao continua}
 Seja $X$ uma variável aleatória com f.d.p. igual a $f_X$.
 Seja $Y=g(X)$ uma variável obtida pela transformação $g$ e com suporte $\Omega_Y$.
-Se $g$ é monótona, $f_X$ é contínua em $\Omega_X$ e $g^{-1}$ tem derivada contínua em
-$\Omega_Y$, então a f.d.p. de $Y$ é dada por
+Se $g$ é monótona, $f_X$ é contínua em $\Omega_X$ e $g^{-1}$ tem
+derivada contínua em $\Omega_Y$, então a densiade $f_Y$ de $Y$ é dada por
 \[
 	f_{Y}(y) = \begin{cases}
 		f_{X}(g^{-1}(y)) \cdot \left| \frac{d}{dy} g^{-1}(y)\right|, & \text{ se } y \in \Omega_{Y} \\
 		0, \text{ caso contrário.}
 	\end{cases}
 \]
+\begin{proof}
+	Do Teorema \ref{thm:radon nikodym2},
+	\[
+		f_Y(y) = F_Y'(y) \qs
+	\]
+	Se $g$ é crescente, então
+	\[
+		F_Y(y) = F_X(g^{-1}(y))
+	\]
+	e, por consequência,
+	\[
+		f_Y(y) = [F_X(g^{-1}(y))]' \qs
+	\]
+	Por hipótese, $g^{-1}$ ter derivada contínua em $\Omega_Y$ implica que $g^{-1}$ é
+	contínua em $\Omega_Y$. Ademais, toda distribuição é absolutamente contínua.
+	Pela Regra da Cadeia, obtemos então
+	\[
+		f_Y(y) = F_X'(g^{-1}(y)) \cdot \frac{d}{dy}g^{-1}(y) \qs \text{ se } y \in \Omega_Y
+	\]
+	Por outro lado, se $g$ é decrescente, então por um desenvolvimento análogo chega-se
+	a
+	\[
+		f_Y(y) = - F_X'(g^{-1}(y)) \cdot \frac{d}{dy}g^{-1}(y) \qs \text{ se } y \in \Omega_Y
+	\]
+	Como $\frac{d}{dy}g^{-1} \le 0$ nesse caso, então podemos sintetizar esse e o caso
+	anterior em
+	\[
+		f_Y(y) = F_X'(g^{-1}(y)) \cdot \left|\frac{d}{dy}g^{-1}(y)\right| \qs \text{ se } y \in \Omega_Y
+	\]
+	Se $y \in \Omega_Y \Longrightarrow g^{-1}(y) \in \Omega_X$ e $f_X$ é contínua
+	em $\Omega_X$ por hipótese, então $f_X$ é contínua em $g^{-1}(y)$.
+	Além disso, pela hipótese de $g^{-1}$ ter derivada contínua em $\Omega_Y$, então
+	$f_Y$ será contínua em $\Omega_Y$, e pelo Teorema \ref{thm:tfc qs},
+	\[
+		f_Y(y) = f_X(g^{-1}(y)) \cdot \left|\frac{d}{dy}g^{-1}(y)\right| \text{ se } y \in \Omega_Y
+	\]
+	Se $y \notin \Omega_Y$, então, pelo Teorema \ref{thm:suporte continua}, $f_Y(y) = 0$.
+\end{proof}
 \end{thm:fdp transformacao continua}
 
 O teorema \ref{thm:fdp transformacao continua} permite-nos a generalizar a obtenção da
@@ -122,21 +183,48 @@ A densidade da variável definida pela transformação poderá, portanto, ser ob
 resultado a seguir
 
 \begin{thm:fdp transformacao nao monotona continua}
-Seja $X$ uma variável aleatória com f.d.p. igual a $f_X$.
-Seja $Y=g(X)$ uma variável obtida pela transformação $g$ e com suporte $\Omega_Y$.
-Se $\Omega_X$ admite partição $\{A_1, \ldots, A_n\}$ sendo possível definir a família
-de funções $\{g_i: A_i \to \mathbb{R}\}_{i \in [n]}$ tal que
+Seja $X$ uma variável aleatória com densidade igual a $f_X$ contínua em $\Omega_X$.
+Seja $Y=g(X)$ a variável obtida pela transformação $g$ e com suporte $\Omega_Y$.
+Se $\Omega_X$ admite uma partição em intervalos $\{A_i\}_{i=1}^n$ que torne possível
+definir a família de funções $\{g_i: A_i \to \mathbb{R}\}_{i=1}^n$ tal que
 \begin{enumerate}
 	\item[i] $g_i(x) = g(x)$
 	\item[ii] $g_i(x)$ é monótona em $A_i$
-	\item[iii] $\Omega_Y$ é o mesmo para todo $i \in [n]$.
+	\item[iii] $g_i(A_i) = \Omega_Y$ para todo $i \in [n]$.
 	\item[iv] $g_i^{-1}$ tem derivada contínua em $\Omega_Y$ para todo $i \in [n]$.
 \end{enumerate}
-e $f_X$ contínua em cada $A_i$, então a f.d.p. de $Y$ é dada por
+então a densidade $f_Y$ de $Y$ é dada por
 \[
 	f_{Y}(y) = \begin{cases}
 		\sum_{i=1}^nf_{X}(g_i^{-1}(y)) \cdot \left| \frac{d}{dy} g_i^{-1}(y)\right|, & \text{ se } y \in \Omega_{Y} \\
 		0, \text{ caso contrário.}
 	\end{cases}
 \]
+\begin{proof}
+	Com efeito, $f_Y = F_Y'$ e também
+	\[
+		F_Y(y) = P(Y \le y) = P(X \le g^{-1}((-\infty, y]))
+	\]
+	Mas pelo \nameref{thm:probabilidade total},
+	\[
+		F_Y(y) = \sum_{i=1}^n P(X \le g^{-1}((-\infty, y]) \mid X \in A_i) \cdot P(X \in A_i)
+	\]
+	e tomando $f(y) = F_Y'(y) \qs$,
+	\[
+		f_Y(y) = \sum_{i=1}^n \frac{d}{dy} F_X(g_i^{-1}(y)) + \sum_{i=1}^n \frac{d}{dy} P(X \in A_i) \qs
+	\]
+	como $P(X \in A_i)$ não depende de $y$, $\frac{d}{dy} P(X \in A_i) = 0$ para todo $i \in [n]$.
+	Além disso, pela hipótese (iv.) e o fato de que $F_X$ é absolutamente contínua,
+	se $y \in \Omega_Y$, então a equação $F_X(g_i^{-1}(y))$ será contínua em $y$.
+	Da Regra da Cadeia obtemos,
+	\[
+		f_Y(y) = \sum_{i=1}^n f_X(g_i^{-1}(y)) \cdot \left|\frac{d}{dy}g_i^{-1}(y)\right| \qs \text{ se } y \in \Omega_Y
+	\]
+	Pelos Teoremas \ref{thm:tfc qs} e \ref{thm:fdp transformacao continua}, seguirá então,
+	\[
+		f_Y(y) = \sum_{i=1}^n f_X(g_i^{-1}(y)) \cdot \left|\frac{d}{dy}g_i^{-1}(y)\right| \text{ se } y \in \Omega_Y
+	\]
+	Noutro caso de $y \notin \Omega_Y$, o Teorema \ref{thm:suporte continua} implicará que
+	$f_Y(y) = 0$.
+\end{proof}
 \end{thm:fdp transformacao nao monotona continua}
