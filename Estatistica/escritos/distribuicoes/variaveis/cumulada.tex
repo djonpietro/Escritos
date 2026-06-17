@@ -1,13 +1,10 @@
 \section{Função de Distribuição Acumulada}
 
-Do Teorema \ref{thm:mensuravel real}, temos que se $X$ é uma variável aleatória e
-$(\Omega, \mathcal{F}, P)$ espaço de medida, então $\{X \le x\} \in \mathcal{F}$
-para todo $x \in \real$.
-Esse fato permite-nos definir uma função que informa, para cada ponto na reta real,
-a probabilidade de uma variável ter realização menor igual a daquele ponto.
-Isso equivale a probabilidade que é acumulada por aquele ponto.
-Essa função é chamada de \textbf{Função de Distribuição Acumulada}, ou distribuição
-apenas.
+Se para cada ponto da reta real conseguimos informar qual a probabilidade de uma variável
+ter realização menor ou igual a esse ponto, então temos de informções de como está
+distribuída a probabilidade da variável.
+Essa função especial ajuda a caracterizar a variável e é chamada de Função de Distribuição
+Acumulda, ou distribuição apenas.
 
 \begin{def:cdf}
 Sejam $\Omega$ um espaço amostral e $P$ uma medida de um espaço de probabilidade e $X$
@@ -25,12 +22,11 @@ $X$, então
 	F(x) = P_X((-\infty, x]).
 \]
 
-
-Outros fatos devem ser satisfeitos para determinada função ser de probabilidade acumulada.
-Temos que $F(x)$ equivale a uma medida de probabilidade, então ela deve ser limitada
-superiormente por 1 e inferiormente por 0.
+Outros fatos devem ser satisfeitos para determinada função ser uma distribuição.
+Primeiro, ela deve ser limitada superiormente por 1 e inferiormente por 0, já que
+são os valores máximo e mínimo de probabilidade que um ponto pode assumir.
 Pelo princípio de que $A \subset B$ implica $P(A) \leq P(B)$, então se $x < y$, teríamos
-$P(X \leq x) \leq P(X \leq y)$, e a FDA é monótona.
+$P(X \leq x) \leq P(X \leq y)$, e a distribuição é monótona.
 Por fim, se a partir de um ponto $x$ nos aproximamos de um ponto $a$ pela direita, então
 estamos aproximando o evento $(-\infty, x]$ do evento $(-\infty, a]$, o que significa que
 essa a distribuição acumulada deve ser contínua à direita, visto que o primeiro evento
@@ -93,6 +89,11 @@ variável aleatória $X$, então
 	\]
 \end{proof}
 \end{thm:cdf}
+
+Portanto, o Teorema \ref{thm:cdf} garante que há uma medida induzida de Steljes para a
+distribuição $F$ (ver Definição \ref{def:steljes}).
+Sendo $\mu_F$ a medidade de Steltjes induzida por $F$, então essa equivale a medida
+imagem $P_X$.
 
 \begin{prop:steltjes e fda}
 \label{prop:steltjes e fda}

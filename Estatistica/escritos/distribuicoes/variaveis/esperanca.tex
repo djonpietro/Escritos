@@ -1,108 +1,130 @@
-\section{Esperança de Variáveis Discretas}
+\section{Esperança e Momentos}
 
-A esperança de uma variável aleatória é definida matematicamente como a média ponderada
-dos valores assumidos por essa variável. Uma interpretação para esperança é que ela é
-o valor médio de todas as realizações da variável ao se repetir o experimento aleatório
-um número infinito de vezes. Essa interpretação será justificada posteriormente com
-a \textbf{Lei dos Grandes Números}.
-
-\begin{def:esperanca discreta}
-Seja $X$ uma v.a. discreta com f.m.p. $p_X$. A esperança $E[X]$ de $X$ é definida tal como
+\begin{def:esperanca}
+Seja $X$ uma variável aleatória e $(\Omega, \mathcal{F}, P)$ espaço de probabilidade.
+Defini-se esperança de $X$, ou valor esperado, denotada por $\ev{X}$, como
 \[
-	E[X] = \sum_{x \in \Omega_X} x \cdot p_X(x)
+	\ev{X} = \int_\Omega X\, dP
 \]
-\end{def:esperanca discreta}
+% \[
+% 	\ev{X} = \begin{cases}
+% 		\int_\Omega X\, dP,               & \text{ se } $X$ \text{ é contínua}  \\
+% 		\sum_{x \in \Omega_X} x P(X = x), & \text{ se }  $X$ \text{ é discreta} \\
+% 	\end{cases}
+% \]
+\end{def:esperanca}
 
-A partir do conhecimento da distribuição dos valores de uma variável, é possível ter
-conhecimento da distribuição dos valores de uma função aplicada sobre essa variável.
-Se $X: \Omega \to \mathbb{R}$ e $f: \mathbb{R} \to \mathbb{R}$, então $f(X) = f \circ X$
-é uma variável aleatória por definição. Digamos que $f(X) = Y$, então a massa de
-probabilidade $Y = y$ será a soma das probabilidades de $X = x$ tal que $x \in \Omega_X$
-tem $y$ como imagem em $f$, já que as realizações de uma v.a. são sempre disjuntas.
+\begin{thm:esperanca de transformacao}
+Seja $X$ variável aleatória e $g: \real \to \real$ uma transformação mensurável.
+A esperança da variável $g(X)$ é dada por
 \[
-	P(Y = y) = \sum_{\substack{x \in \Omega_X \\ f(x) = y}} P(X = x)
-\]
-\noindent
-Tão logo conhecendo a dsitribuição de $f(X)$ a partir da distribuição de $X$, então poderemos
-expressar a esperança de $f(X)$ em termos da própria f.m.p. de $X$.
-
-\begin{prop:esperanca de funcao}
-Seja $X$ uma v.a. discreta com f.m.p. $p_X$, e $f: \mathbb{R} \to \mathbb{R}$
-uma função. A esperança da variável aleatória definida por $f(X) = f \circ X$ é
-dada por
-\[
-	E[f(X)] = \sum_{x \in \Omega_X} f(x) \cdot p_X(x)
+	\ev{g(X)} = \begin{cases}
+		\int_{-\infty}^\infty g(x) f(x)\, dx, & \text{ se } $X$ \text{ é contínua}  \\
+		\sum_{x \in \Omega_X} g(x) P(X = x),  & \text{ se }  $X$ \text{ é discreta} \\
+	\end{cases}
 \]
 \begin{proof}
-	Seja $\Omega_f$ o suporte de $f(X)$ e $p_f$ a sua f.m.p.. Temos que
-	\begin{align*}
-		\sum_{x \in \Omega_X} f(x) \cdot p_X(x) & = \sum_{y \in \Omega_f} \sum_{\substack{x \in \Omega_x   \\ f(x) = y}} y \cdot p_X(x)\\
-		                                        & = \sum_{y \in \Omega_f} y \sum_{\substack{x \in \Omega_x \\ f(x) = y}} p_X(x)
-	\end{align*}
-	Fixando $y$, observamos que
+	Considere o espaço de medida $(\Omega, \mathcal{F}, P)$, tal que
+	$g(X): \Omega \to \real$ e
 	\[
-		p_f(y) = \sum_{\substack{x \in \Omega_x \\ f(x) = y}} p_X(x).
+		\ev{g(X)} = \int_\Omega g(X)\, dP
 	\]
-	Logo
+	mas pelo Teorema \ref{thm:mudanca de variavel}, uma vez que $g(X) = g \circ X$, então
 	\[
-		E[f(X)] = \sum_{y \in \Omega_f} y \cdot p_f(y).
+		\ev{g(X)} = \int_\real g(x)\, dP_x
+	\]
+	Se $X$ for contínua, então $f(x) = \frac{d}{d\lambda}P_X$ é densidade de $X$ e fazendo
+	a substituição
+	$dP_X = f(x) d\lambda$, obtemos
+	\[
+		\ev{g(X)} = \int_\real g(x) f(x)\, d\lambda = \int_{-\infty}^\infty g(x)f(x)\, dx
 	\]
 \end{proof}
-\end{prop:esperanca de funcao}
+\end{thm:esperanca de transformacao}
 
-A esperança satisfaz as propriedades de linearidade. Isso significa que, se uma v.a.
-é definida como uma constante, como produto de uma v.a. por uma constante ou como a soma de
-outras duas v.a.'s, podemos facilmente obter a esperança da variável derivada a partir das
-variáveis que a compõe. Ressaltemos que constantes podem ser vistas como v.a.'s com
-suporte unitário.
-
-\begin{prop:linearidade da esperanca discreta}
-Sejam $X$ e $Y$ variáveis aleatórias. A esperança satisfaz:
+\begin{thm:propriedades esperanca}
+\label{thm:propriedades esperanca}
+Seja $X$ variável aleatória, e $g_1$ e $g_2$ transformações mensuráveis.
+O operador de esperança satisfaz:
 \begin{enumerate}
-	\item se $X$ tem suporte unitário igual a $\{c\}$, então $E[X] = c$.
-	\item $E[\lambda X] = \lambda E[X]$.
-	\item $E[X + Y] = E[X] + E[Y]$.
+	\item $\ev{ag_1(X) + bg_2(X)} = a \ev{g_1(X)} + b \ev{g_2(X)}$
+	\item $\forall x \in \Omega_X, (g_1(x) \ge 0) \rightarrow \ev{g_1(X)} \ge 0$
+	\item $\forall x \in \Omega_X,\ (g_1(x) \ge g_2(x)) \rightarrow \ev{g_1(X)} \ge \ev{g_2(X)}$
+	\item $\forall x \in \Omega_X, (a \le g_1(x) \le b) \rightarrow a \le \ev{g_1(X)} \le b$
 \end{enumerate}
 \begin{proof}
-	Para (1), basta observar que $E[X] = c \cdot 1 = c$.
-
-	Para (2),  usemos a definição
-	de esperança:
-	\[
-		E[\lambda X] = \sum_{x \in \Omega_X} \lambda x \cdot  p_X(x)
-		= \lambda \sum_{x \in \Omega_X} x \cdot p_X(x)
-		= \lambda E[X].
-	\]
-	Para provar (3), temos que
-	\[
-		E[X + Y] = \sum_{x \in \Omega_X} \sum_{y \in \Omega_Y} (x+y) P(X = x, Y = y),
-	\]
-	e expandindo,
-	\begin{equation}
-		\label{eq:dem esperanca linear}
-		E[X + Y] =
-		\sum_{x \in \Omega_X} x \sum_{y \in \Omega_Y} P(X = x, Y = y) +
-		\sum_{y \in \Omega_Y} y \sum_{x \in \Omega_X} P(X = x, Y = y) .
-	\end{equation}
-	Já que
-	\[
-		\sum_{y \in \Omega_Y} P(X = x, Y = y) = \sum_{y \in \Omega_Y} P(X = x | Y = y) P(Y = y),
-	\]
-	então pelo Teorema da Probabilidade Total,
-	\[
-		\sum_{y \in \Omega_Y} P(X = x, Y = y) = P(X = x)
-	\]
-	e, de forma análoga,
-	\[
-		\sum_{x \in \Omega_X} P(X = x, Y = y) = P(Y = y),
-	\]
-	então podemos simplificar a expressão \ref{eq:dem esperanca linear} para
-	\[
-		E[X + Y] = \sum_{x \in \Omega_X} x \cdot P(X = x) + \sum_{y \in \Omega_Y} y \cdot P(Y=y),
-	\]
-	e, finalmente
-	\[
-		E[X + Y] = E[X] + E[Y]
-	\]
+	A propriedade 1 segue da linearidade dos operadores de integral, no caso contínuo, e
+	de somatório no caso discreto.
+	A propriedade 2 advém da nulidade para o contínuo e  do fechamento dos reais não
+	negativos sob adição nos discretos.
+	As propriedades 3 e 4 vêm da monotonicidade das integrais e da propriedade aditiva das
+	desigualdades.
 \end{proof}
-\end{prop:linearidade da esperanca discreta}
+\end{thm:propriedades esperanca}
+
+\begin{def:momento}
+Seja $n \in \nat$ e $X$ variável aleatória com esperança $\mu$.
+O enésimo momento de $X$, denotado $\mm_(\mu)'$, é definido como
+\[
+	\mm_n(\mu)' = \ev{X^n}
+\]
+O enésimo momento central, denotado $\mm_n(\mu)$, é dado por
+\[
+	\mm_n(\mu) = \ev{(X - \mu)^n}
+\]
+onde $\mu = \ev{X}$.
+\end{def:momento}
+
+\begin{def:momentos importantes}
+Se $X$ uma variável aleatória com esperança $\mu$, então estão definidos:
+\begin{enumerate}
+	\item Variância: $\var{X} = \mm_2(\mu)$
+	\item Desvio-padrão: $\dep{X} = \sqrt{\var{X}}$
+	\item Assimetria: $\frac{\mm_3(\mu)}{\dep{X}^3}$
+	\item Curtose: $\frac{\mm_4(\mu)}{\dep{X}^4} - 3   $
+\end{enumerate}
+\end{def:momentos importantes}
+
+\begin{thm:propriedades variancia}
+Seja $X$ variável aleatória com esperança $\mu$ e $a \in \real$.
+Vale que
+\begin{enumerate}
+	\item $\var X = \ev X^2 - \mu^2$
+	\item $\var{aX} = a^2 \var{X}$
+	\item $\var{X + a} = \var{X}$
+\end{enumerate}
+\begin{proof}
+	Com efeito, do Teorema \ref{thm:propriedades esperanca} segue que
+	\begin{align*}
+		\var{X} & = \ev{(X - \mu)^2}               \\
+		        & = \ev{X^2 - 2X\mu + \mu^2}       \\
+		        & = \ev{X^2} - 2\mu \ev{X} + \mu^2 \\
+		        & = \ev{X^2} - 2 \mu^2 + \mu^2     \\
+		        & = \ev X^2 - \mu^2
+	\end{align*}
+	provando 1.
+	Usando isso para 2,
+	\begin{align*}
+		\var{aX} & = \ev{(aX)^2} - \ev{aX}^2             \\
+		         & = \ev{a^2X^2} - \ev{aX} \cdot \ev{aX} \\
+		         & = a^2 \ev{X^2} - a^2 \ev{X}^2         \\
+		         & = a^2 \var{X}
+	\end{align*}
+	E a aquela ainda pode ser usada para obter 3:
+	\begin{align*}
+		\var{X + a} & = \ev{(X + a)^2} - \ev{X + a}^2                           \\
+		            & = \ev{X^2} + 2a \ev{X} + a^2 - (\ev{X} + a)(\ev X + a)    \\
+		            & = \ev{X^2} + 2a \ev{X} + a^2 - \ev{X}^2 - 2a \ev{X} - a^2 \\
+		            & = \ev{X^2} - \ev{X}^2                                     \\
+		            & = \var{X}
+	\end{align*}
+\end{proof}
+\end{thm:propriedades variancia}
+
+\begin{def:mgf}
+A função geradora de momentos (mgf) da variável $X$ é
+\begin{gather*}
+	M_X: \nat \to \real \\
+	M_X(t) = \ev{e^{tX}}
+\end{gather*}
+\end{def:mgf}

@@ -1,11 +1,10 @@
 \section{Noções de Medida}
 
-Nesta seção, será realizada uma breve exposição dos principais enunciados sobre medida
-a fim de somente fundamentar o desenvolvimento posterior dos conceitos associados à
-Teoria de Probabilidades, que, por sua vez, garante a fundamentação da teoria e
-prática estatística.
+Nesta seção, será realizada uma breve exposição dos principais enunciados sobre a Teoria
+da Medida a fim de fundamentar o desenvolvimento posterior dos conceitos associados à
+Teoria de Probabilidades, que, por sua vez, garante a fundamentação da teoria estatística.
 
-\subsection{Adendos de Análise}
+\subsection{Análise}
 
 O conceito de continuidade, estudado dentro da Análise, está atrelado à ideia de
 poder aproximar uma função real a um determinado valor variando suavemente seu
@@ -64,12 +63,24 @@ A função $f(x) = 1/x$ não é uniformemente contínua, pois conforme se aproxi
 a sua variação se torna infinitamente grande.
 \end{exp:uniformemente contínua neg}
 
+Conjuntos que podem ser inteiramente contidos em um aberto e que possuem todos os seus
+pontos de acumulação são ditos compactos. Quando uma função é contínua em cada ponto
+de um compacto, então é seguro dizer que ela será uniformemente contínuo ao longo de
+todo o conjunto.
+
 \begin{thm:heine}
 Seja $f$ uma função pontualmente contínua em $X$. Se $X$ é
 compacto (fechado e limitado), então $f$ é uniformemente contínua em $X$.
 \end{thm:heine}
 
+A continuidade uniforme é uma restrição avaliada a cada par de pontos dentro de um
+intervalo. Já a continuidade absoluta significa que podemos tomar tantos intervalos
+quanto pudermos enumerar e somar seus comprimentos de forma que, a soma dos comprimentos
+dos intervalos no domínio levam a pequenas somas de intervalos na imagem, não estando
+mais estrita a pontos somente.
+
 \begin{def:absolutamente continua}
+\label{def:absolutamente continua}
 Uma função $f$ é absolutamente contínua em $[a, b]$ se para todo $\epsilon > 0$ existe
 $\delta \in \real$ tal que, para quaisquer intervalos disjuntos
 \[
@@ -87,7 +98,7 @@ Antes de podermos medir determinados conjuntos, precisamos entender que tipos de
 conjuntos podem ser medidos.
 Com esse propósito, introduz-se o conceito de $\sigma$-álgebras, que define uma álgebra
 sobre uma coleção de partes de um conjunto cujas operações definem conjuntos
-\textbf{mensuráveis}.
+\textbf{mensuráveis}, i.e., que podem ser medidos em certo sentido.
 
 \begin{def:sigma algebra}
 Seja $\Omega$ um conjunto e $\mathcal{B} \subset \Parts{\Omega}$.
@@ -101,6 +112,13 @@ Se $\Omega$ é um espaço amostral, então $A \in \mathcal{B}$ é denominado eve
 $\Omega$.
 \end{def:sigma algebra}
 
+O caso dos números reais será especial a nós.
+Comumente, nos referimos à \textbf{topologia usual} dos reais como a coleção de todos
+os intervalos -- abertos e fechados -- e conjuntos enumeráveis de números reais.
+A $\sigma$-álgebra de Borel para $\real$ é aquela que, a partir de um conjunto de
+geradores na forma  $(-\infty, x]$, com $x \in \real$, consegue criar a topologia
+usual dos reais.
+
 \begin{def:borel}
 Seja \(\mathcal{G} = \{(-\infty, x] \mid x \in \mathbb{R}\}\). A $\sigma$-álgebra gerada por
 \(\mathcal{G}\) é chamada $\sigma$-álgebra de Borel em \(\mathbb{R}\) e é denotada por
@@ -113,27 +131,43 @@ enumerável $\{I_k\}_1^n$ tal que a soma dos comprimentos de cada intervalo $I_k
 menor que $\epsilon$.
 \end{def:medida nula}
 
+Ao especificar um universo de elementos e as suas partes que podem ser ``medidas'',
+então chegamos a um espaço mensurável.
+Se encontrarmos uma função, chamada de \textbf{medida}, que satisfaça hipóteses de
+o vazio tem medida $0$ e que a medida da soma de partes disjuntas é a soma das medidas,
+então essa medida, junto com o universo e a sua $\sigma$-álgebra, formam um espaço de
+medida.
+
 \begin{def:mensuravel}
 \label{def:mensuravel}
 O par $(\Omega, \mathcal{B})$ é dito mensurável se $\mathcal{B}$ for uma $\sigma$-álgebra
 de $\Omega$.
-A função \(\mu: \mathcal{B} \to [0, + \infty)\) é uma medida para $(\Omega, \mathcal{B})$
-	se satisfaz
-	\begin{enumerate}
-		\item[i.] $\mu(\varnothing) = 0$
-		\item[ii. ] $\sigma-$aditividade: $\mu\left(\bigsqcup_{i = 1}^\infty A_i\right) = \sum_{i=1}^\infty \mu(A_i)$
-	\end{enumerate}
-	A tripla $(\Omega, \mathcal{B}, \mu)$ é chamado de espaço de medida.
-	\end{def:mensuravel}
+A função \(\mu: \mathcal{B} \to \real_+\) é uma medida para $(\Omega, \mathcal{B})$
+se satisfaz
+\begin{enumerate}
+	\item[i.] $\mu(\varnothing) = 0$
+	\item[ii. ] $\sigma-$aditividade: $\mu\left(\bigsqcup_{i = 1}^\infty A_i\right) = \sum_{i=1}^\infty \mu(A_i)$
+\end{enumerate}
+A tripla $(\Omega, \mathcal{B}, \mu)$ é chamado de espaço de medida.
+\end{def:mensuravel}
 
-	\begin{thm:mensuravel real}
-	\label{thm:mensuravel real}
-	Dados espaços mensuráveis $(\Omega, \mathcal{B})$ e $(\real, \borel)$, uma função
-	real $f: \Omega \to \real$ é mensurável se, e somente, se
-	\[
-	\forall x \in \real, f^{-1}((-\infty, x]) \in \mathcal{B}.
-\]
-\end{thm:mensuravel real}
+
+% 	\begin{thm:mensuravel real}
+% 	\label{thm:mensuravel real}
+% 	Dados espaços mensuráveis $(\Omega, \mathcal{B})$ e $(\real, \borel)$, uma função
+% 	real $f: \Omega \to \real$ é mensurável se, e somente, se
+% 	\[
+% 	\forall x \in \real, f^{-1}((-\infty, x]) \in \mathcal{B}.
+% \]
+% \end{thm:mensuravel real}
+Sem a restrição sobre a pré-imagem de $f$, haveriam conjuntos na imagem que podem ser
+medidos cujas contrapartes não o poderiam.
+
+Dentre todas as medidas, a de maior destaque é a de Lebesgue, que define uma forma
+``canônica'' de medir intervalos reais, podendo ser generalizada para medir retângulos
+em qualquer dimensão.
+Essa medida se comporta analogamente a uma régua, pois ela satisfaz que a medida do
+intervalo é o comprimento dele.
 
 \begin{def:medida de lebesgue}
 A medida $\lambda$ de Lebesgue para $(\real, \borel)$ satisfaz
@@ -141,6 +175,20 @@ A medida $\lambda$ de Lebesgue para $(\real, \borel)$ satisfaz
 	\lambda((a, b]) = b - a
 \]
 \end{def:medida de lebesgue}
+
+Outra medida importante é a de contagem, que associa cada conjunto à sua cardinalidade.
+Em especial, para conjunto finitos, isso representa a quantidade de elementos no conjunto.
+
+\begin{def:medida de contagem}
+Se a medida $\mu$ satisfaz
+\[
+	\mu(A) = \begin{cases}
+		|A|,      & \text{ se } $A$ \text{ for finito} \\
+		|\infty|, & \text{ caso contrário }
+	\end{cases}
+\]
+então $\mu$ é medida de contagem.
+\end{def:medida de contagem}
 
 \begin{thm:calculo medida}
 Se $(\Omega, \mathcal{B}, \mu)$ é uma espaço de medida e $\{A_n\}$ é uma família
@@ -161,6 +209,9 @@ enumerável de elementos de $\mathcal{B}$, então
 \end{enumerate}
 \end{thm:calculo medida}
 
+Desejamos que, quando um conjunto está contido em outro, então sua medida deve ser menor
+ou igual ao do conjunto que contém. Isso expressa-se no próximo Teorema.
+
 \begin{thm:medida de subconjunto}
 \label{thm:medida de subconjunto}
 Seja $(\Omega, \mathcal{B}, \mu)$ espaço de medida, e $A$ e $B$ elemetos de $\mathcal{B}$.
@@ -168,6 +219,12 @@ Seja $(\Omega, \mathcal{B}, \mu)$ espaço de medida, e $A$ e $B$ elemetos de $\m
 	A \subset B \rightarrow \mu(A) \le \mu(B)
 \]
 \end{thm:medida de subconjunto}
+
+Há dois tipos de medida que valem serem citadas.
+As medidas completas são aquelas que qualquer subconjunto de um outro que tenha medida
+nula também terá medida nula.
+Por sua vez, as $\sigma$-finitas são aquelas que permite particionar o universo em
+enumeráveis partes de medida finita.
 
 \begin{def:medida completa}
 Uma medida $\mu$ para $(\Omega, \mathcal{B})$ é dita completa se
@@ -182,10 +239,12 @@ com $\mu(A_n) < \infty$ para todo $n \in \nat$.
 \end{def:medida completa}
 
 \begin{thm:lebesgue sigma finita}
-A medida de Lebesgue é $\sigma$-finita.
+\label{thm:sigma finita}
+A medida de Lebesgue e de contagem são $\sigma$-finitas.
 \end{thm:lebesgue sigma finita}
 
 \begin{def:medida absolutamente continua}
+\label{def:medida absolutamente continua}
 Seja $(\Omega, \mathcal{B})$ um espaço mensurável por medidas $\nu$ e $\mu$.
 Dizemos que $\nu$ é absolutamente contínua em relação a $\mu$, denotado por
 $\nu \ll \mu$, se
@@ -194,7 +253,15 @@ $\nu \ll \mu$, se
 \]
 \end{def:medida absolutamente continua}
 
+Funções, sob certas circuntâncias apropriadas, podem ser compreendidas como transformações
+de um espaço.
+Quando aplicamos uma função $f$ com domínio no univero $\Omega$ de um espaço mensurável
+e obtemos um novo universo que pode ser medido, então essa função será mensurável caso,
+para todo conjunto ``medível'' na imagem, sua contraparte no domínio também é um conjunto
+que pode ser medido.
+
 \begin{def:funcao mensuravel}
+\label{def:funcao mensuravel}
 Sejam $(\Omega, \mathbb{B})$ e $(\Omega', \mathbb{B}')$	espaços de medida. Uma função
 $f: \Omega \to \Omega'$ é mensurável -- ou $(\mathcal{B}, \mathcal{B}')$-mensurável --
 se
@@ -205,6 +272,7 @@ onde $f^{-1}$ denota a pré-imagem de $f$.
 \end{def:funcao mensuravel}
 
 \begin{thm:funcoes mensuraveis}
+\label{thm:funcoes mensuraveis}
 São verdadeiras as seguintes afirmações:
 \begin{enumerate}
 	\item[i.] Toda função contínua é mensurável.
@@ -220,13 +288,21 @@ São verdadeiras as seguintes afirmações:
 \end{enumerate}
 \end{thm:funcoes mensuraveis}
 
+Quando temos uma função $f$ mensurável, pode ser desejável trabalhar como uma versão
+dela que se comporte tal como uma medida, mas especialmente como a medida de Lebesgue.
+Com esse fim, defini-se a medida de Steltjes, que mede intervalos como, por exemplo,
+a distância vertical entre dois pontos no gráfico de uma função real.
+
 \begin{def:steltjes}
+\label{def:steljes}
 Se $f: \real \to \real$ é uma função mensurável monótona crescente e contínua à direita,
 então a medida induzida de Steltjes por $f$, denotada por $\mu_f$, satisfaz
 \[
 	\mu_f((a, b]) = f(b) - f(a)
 \]
 \end{def:steltjes}
+
+O próximo resultado mostra uma propriedade fundamental das medidas de Steltjes.
 
 \begin{thm:medida steltjes}
 \label{thm:medida steltjes}
@@ -237,19 +313,32 @@ A função $f$ é absulotamente contínua se, e somente se, $\mu_f \ll \lambda$,
 
 \subsection{Integral de Lebesgue}
 
+A integral de Riemann falha ao tentarmos integrar a maioria das funções.
+A fim de estender a integração para uma classe maior de funções, a Teoria da Medida
+expandiu o conceito de integral enquanto uma generalização da medida de comprimentos
+de comprimentos, áreas, volumes, etc.
+Esse desenvolvimento culminou na própria moderna Teoria de Medida, tendo como uma de
+suas bases a integração de Lebesgue.
+
 \begin{def:funcao simples}
 A aplicação $\phi: \Omega \to \real$ é uma função simples se pode ser expressa
 com
 \[
 	\phi(x) = \sum_{i=1}^n a_i \cdot I_{A_i}(x)
 \]
-onde $a_i \in \real$ e $\{A_i\}_1^n \subset \borel$ são dois a dois disjuntos.
+onde $a_i \in \real$ e $\{A_i\}_{i=1}^n \subset \borel$ são dois a dois disjuntos.
 \end{def:funcao simples}
 
+As funções simples designam uma classe de funções que assumem um conjunto finito de valores.
+Sua importância encontra-se no Teorema a seguir, o qual enuncia que qualquer função
+não negativa pode ser aproximado por uma seqência de funções simples.
+
 \begin{thm:aproximacao monotona}
-Para toda função $f \ge 0$ há uma sequência $\{\phi_i\}_\nat$ não negativa e monótona de
+Para toda função $f \ge 0$ há uma sequência $\{\phi_i\}_\nat$ não negativa e crescente de
 funções simples tal que $\phi \to f$ pontualmente, e uniformemente se $f$ for limitada.
 \end{thm:aproximacao monotona}
+
+Com isso, estamos prontos para definir a importante Integral de Lebesgue,
 
 \begin{def:integral de lebesgue}
 Dada a medida $\lambda$ de Lebesgue, a integral de Lebesgue, denotada por
@@ -317,7 +406,7 @@ A integral de Lebesgue satisfaz
 % \end{thm:0 quase sempre}
 
 \begin{thm:convergencia monotona}[Convergência Monótona]
-Se $\{f_n\}_\nat$ é uma sequêcia não negativa e monótona de funções mensuráveis e
+Se $\{f_n\}_\nat$ é uma sequêcia não negativa e crescente de funções mensuráveis e
 $f_n \to f \qs$, então
 \[
 	\lim_{n \to \infty} \int f_n\, d\lambda = \int f\, d\lambda
@@ -325,7 +414,7 @@ $f_n \to f \qs$, então
 \end{thm:convergencia monotona}
 
 \begin{lem:fatou}[de Fatou]
-Se $f_n \le 0$ são mensuráveis, então
+Se $f_n \ge 0$ são mensuráveis, então
 \[
 	\int \lim \inf f_n\, d\lambda \le \lim \inf \int f_n\, d\lambda
 \]
@@ -339,8 +428,14 @@ então
 \]
 \end{thm:convergencia dominada}
 
+O Teorema de Toneli é um importante resultado do cálculo integral.
+Ele enuncia que dada uma função não negativa e desejamos integrá-la
+num espaço de medida dado como produto de outros dois, podemos
+integrar individualmente em relação a cada espaço individualemente
+de forma iterada.
+
 \begin{thm:toneli}
-Para $f \le 0$ mensurável em
+Para $f \ge 0$ mensurável em
 \[
 	(\Omega_1 \times \Omega_2, \mathcal{A}_1 \otimes \mathcal{A}_2, \mu_1 \otimes \mu_2)
 \]
@@ -350,6 +445,10 @@ vale que
 \]
 \end{thm:toneli}
 
+No cálculo integral multivariável tradicional, esse resulta se torna especialmente últil,
+pois justifica a integração iterada em cada variável de forma independente.
+Desse modo, enuncia-se o Teorema de Fubini:
+
 \begin{thm:fubini}
 Se
 \[
@@ -358,7 +457,33 @@ Se
 então as integrais iteradas existem $\qs$ e são iguais às integrais duplas.
 \end{thm:fubini}
 
+Logo, toda função integrável permite a integração (quase sempre) iterada de cada
+variável.
+
+\begin{thm:integrcao contagem}
+\label{thm:integracao contagem}
+Seja $(\Omega, \mathcal{A}, \mu)$ espaço mensurável onde $\mu$ é de contagem, e
+$f$ uma função não negativa mensurável.
+Para todo mensurável $A \in \mathcal{A}$,
+\[
+	\int_A f\, d\mu = \sup \left\{\sum_{x \in F} f(x) \mid F \subseteq A, F \text{ finito }\right\}
+\]
+Em especial, se
+\[
+	\int_A |f|\, d\mu < \infty
+\]
+então
+\[
+	\int_A f\, d\mu = \sum_{x \in A} f(x)
+\]
+tal que a série à direita é absolutamente convergente.
+\end{thm:integrcao contagem}
+
 \subsection{Espaços $L^p$}
+
+Os espaços $L^p$ são espaços funcionais de aplicações mensuráveis e integráveis.
+Através deles, podemos definir noção de ``norma'' para funções, a qual utiliza
+a integração em relação a uma medida.
 
 \begin{def:lp}
 Para $1 \le p \le \infty$,
@@ -375,6 +500,9 @@ Se $p = \infty$,
 \]
 \end{def:lp}
 
+O Teorema de Hölder é uma generalização da famosa Desigualdade Cauchy-Schwartz para funções
+em espaços $L^p$ distos conjugados.
+
 \begin{thm:holder}[de Hölder]
 \[
 	\int (fg)\, d\mu = \norm{f}_p \cdot \norm{g}_q
@@ -386,6 +514,7 @@ onde
 \end{thm:holder}
 
 Se $p = q = 2$, então o Teorema de Hölder equivale à Desigualdade de Cauchy-Schwartz.
+O próximo teorema generaliza a desigualdade triangular para espaços $L^p$.
 
 \begin{thm:minkowski}
 \[
@@ -427,3 +556,28 @@ onde dizemos que $f = F' \qs$
 \label{thm:tfc qs}
 Se $f = F' \qs$ e $f$ é contínua em $x$, então $f(x) = F'(x)$.
 \end{thm:tfc qs}
+
+\begin{def:medida imagem}
+\label{def:medida imagem}
+Sejam $(\Omega, \mathcal{B}, \mu)$ um espaço de medida, $(\Omega', \mathcal{B}')$ um espaço
+mensurável e $T: \Omega \to \Omega'$ uma função mensurável.
+Dizemos que $\nu$ é a medida imagem obtida ao impulsionar $\mu$ por $T$, denotado por
+\[
+	\nu = T \cdot \mu,
+\]
+se
+\[
+	\forall B \in \mathcal{B}',\ \nu(B) = \mu(T^{-1}(B))
+\]
+onde $T^{-1}$ denota a pré-imagem de $T$.
+\end{def:medida imagem}
+
+\begin{thm:mudanca de variavel}
+\label{thm:mudanca de variavel}
+Sejam $(\Omega, \mathcal{B}, \mu)$ e $(\Omega', \mathcal{B}', \nu)$ espaços de medida,
+onde $\nu$ é a medida imagem de $\mu$ impulsionada por $T: \Omega \to \Omega'$ mensurável.
+Se $f: \Omega' \to \real$ é mensurável e não negativa, então
+\[
+	\int_{\Omega'} f\, d\nu = \int_\Omega (f \circ T)\, d\mu
+\]
+\end{thm:mudanca de variavel}

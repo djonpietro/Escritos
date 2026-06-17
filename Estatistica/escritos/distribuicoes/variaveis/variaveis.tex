@@ -1,5 +1,11 @@
 \section{Variáveis Aleatórias}
 
+Apesar do nome, a definição formal desse conceito não os trata como variáveis, mas
+sim como funções mensuráveis (ver Definição \ref{def:funcao mensuravel}).
+Logo, a variável consiste numa associação de eventos à realizações de
+grandezas numéricas, de modo que todo conjunto de valores pode ter
+a sua probabilidade medida.
+
 \begin{def:va}
 Seja $(\Omega, \mathcal{F}, P)$ um espaço de probabilidade.
 A aplicação $X: \Omega \to \mathbb{R}$ é uma variável aleatória se for
@@ -26,15 +32,32 @@ $\mathcal{F}$.
 	X^{-1}(A) = \{X \in A\} = \{\omega \in \Omega \mid X(\omega) \in A\}
 \]
 
+Mais do que associações a características numéricas, as variáveis aleatórias
+transportam um espaço de probabilidade para o espaço de medida dos reais e sua topologia
+usual.
+Logo, para medir a probabilidade de obter um conjunto de valores num experimento aleatório,
+não necessariamene precisamos explicitar a função de probabilidade do espaço de origem,
+pois podemos induzir uma nova medida de prbabilidade para $(\real, \borel)$, obtendo,
+então, um novo espaço de probabilidade que consiste no espaço de resltados do experimento.
+
 \begin{def:espaço induzido}
 Seja $(\Omega, \mathcal{F}, P)$ um espaço de probabilidade e $X: \Omega \to \mathbb{R}$
 uma variável aleatória.
 A tripla $(\mathbb{R}, \borel, P_X)$ é o espaço de probabilidade induzido por $X$ se
 para todo $A \in \borel$ é satisfeito
 \[
-	P_X(A) = P(X \in A)
+	P_X(A) = P(X \in A) \Longleftrightarrow \forall A \in \borel,\ P_X(A) = P(X^{-1}(A))
 \]
 \end{def:espaço induzido}
+
+Em outras palavras, $P_X$ é a medida imagem de $P$ impulsionada por $X$ no espaço
+$(\real, \borel)$ (ver Definição \ref{def:medida imagem}).
+
+A especificação de variáveis aleatórias costuma vir acompanhada de um conjunto de valores
+chamado \textbf{suporte}, que modela a noção de valores possíveis que a variável pode
+assumir no experimento.
+Um determinado valor $x$ está no suporte de $X$ se um conjunto quaisquer conjuntos de valores
+suficientemente próximos de $x$ tem probabilidade não nula.
 
 \begin{def:suporte}
 O suporte de uma variável aleatória $X$ é o conjunto
@@ -43,6 +66,9 @@ O suporte de uma variável aleatória $X$ é o conjunto
 	\forall \epsilon > 0,\ P(x - \epsilon < X < x + \epsilon) > 0 \}
 \]
 \end{def:suporte}
+
+Se o suporte modela os valores possíveis, é razoável considerar que a probabilidade
+do próprio deve ser igual a $1$.
 
 \begin{thm:prob suporte}
 \label{thm:prob suporte}
@@ -72,6 +98,16 @@ Se $X$ é uma variável aleatória com suporte $\Omega_X$, então $P_X(\Omega_X)
 	Se $0 \leq P_X(S) \leq 0$, então $P_X(S) = 0$. Conclui-se que $P_X(\Omega_X) = 1$.
 \end{proof}
 \end{thm:prob suporte}
+
+Com isso, quando for conveniente, podemos, em vez de trabalhar com $(\real, \borel)$,
+usar o espaço $(\Omega_X, \mathcal{A})$, onde
+\[
+	\mathcal{A} = \{\Omega_X \cap B \mid B \in \borel \}
+\]
+que é chamada de $\sigma$-álgebra traço de $\borel$.
+
+Outro resultado interessante é que todo evento no espaço de resultados com probabilidade
+não nula contém pelo menos um elemento do suporte.
 
 \begin{prop:intersecao suporte}
 \label{prop:intersecao suporte}

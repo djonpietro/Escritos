@@ -1,67 +1,82 @@
 \section{Transformações}
 
+
 \begin{def:transformacao}
-Uma transformação de uma variável aleatória $X$ é toda função $f: \real \to \real$.
+Uma transformação de uma variável aleatória $X$ é toda função $g: \real \to \real$.
 \end{def:transformacao}
+
+Em experimentos aleatórios, comumente defini-se variáveis aleatórias a partir
+de outras variáveis.
+Dizemos então que a variável derivada é obtida por uma transformação da variável
+original, consistindo da composição de uma função real mensurável, essa que, pelo
+Teorema \ref{thm:funcoes mensuraveis}, também será mensurável, sendo, então,
+uma variável aleatória.
 
 \begin{def:variavel derivada}
 Seja $X$ uma variável aleatória.
-Se $f$ for uma transformação mensurável, então $f(X)$ é a variável aleatória definida
-por $f \circ X$.
+Se $g$ for uma transformação mensurável, então $g(X)$ é a variável aleatória definida
+por $g \circ X$.
 \end{def:variavel derivada}
+
+Da nossa definição, a probabilidade de uma variável $g(X)$ assumir valores num conjunto $A$
+deve ser o mesmo da imagem de valores de $g$ aplicada sobre realizações de $X$ pertencerem
+a $A$.
+De outro modo, podemos dizer que $P(g(X) \in A)$ é igual a probabilidade da pré-imagem
+de $g$ em relação a $A$.
 
 \begin{prop:prob transformacao}
 \label{prop:prob transformacao}
-Se $X$ é uma variável aleatória e $f$ uma transformação mensurável, então
+Se $X$ é uma variável aleatória e $g$ uma transformação mensurável, então
 \[
-	P_X(f(X) \in A) = P(X \in f^{-1}(A))
+	P_X(g(X) \in A) = P(X \in g^{-1}(A))
 \]
 \begin{proof}
 	\begin{align*}
-		P_X(f(X) \in A) & = P_X(\{x \in \mathbb{R} \mid f(x) \in A\}) \\
-		                & = P(X \in f^{-1}(A))
+		P_X(g(X) \in A) & = P_X(\{x \in \mathbb{R} \mid g(x) \in A\}) \\
+		                & = P(X \in g^{-1}(A))
 	\end{align*}
 \end{proof}
 \end{prop:prob transformacao}
 
 Com essa proposição, uma transformação induz um novo espaço de probabilidade
-$(\real, \borel, P_f)$ onde
+$(\real, \borel, P_g)$ onde
 \[
-	P_f(A) = P_X(f^{-1}(A)) = P(X \in f^{-1}(A))
+	P_g(A) = P_X(g^{-1}(A)) = P(X \in g^{-1}(A))
 \]
 
 \subsection{Transformação de Variáveis Discretas}
+
 \begin{thm:prob transformacao discreta}
 Seja $X$ uma variável discreta com suporte $\Omega_X$, função de massa igual a $p_X$ e
-$f$ uma transformação mensurável de $X$ tal que $Y = f(X)$.
+$g$ uma transformação mensurável de $X$ tal que $Y = g(X)$.
 A variável $Y$ é discreta e sua função de massa é dada por
 \[
-	p_Y(y) = \sum_{x \in f^{-1}(y)} p_X(x)
+	p_Y(y) = \sum_{x \in g^{-1}(y)} p_X(x)
 \]
 \begin{proof}
 	Para $Y$ ser discreto, seu suporte $\Omega_Y$ deve ser enumerável.
 	Da Proposição \ref{prop:prob transformacao} sabemos que
 	\[
-		P_Y(A) > 0 \leftrightarrow P(X \in f^{-1}(A)) > 0,
+		P_Y(A) > 0 \leftrightarrow P(X \in g^{-1}(A)) > 0,
 	\]
 	e pela Proposição \ref{prop:intersecao suporte},
 	\[
-		f^{-1}(A) \cap \Omega_X \neq \varnothing.
+		g^{-1}(A) \cap \Omega_X \neq \varnothing.
 	\]
 	donde segue
 	\[
-		\forall y \in \Omega_Y \exists x \in \Omega_X, (f(x) = y \land y \in A)
+		\forall y \in \Omega_Y \exists x \in \Omega_X, (g(x) = y \land y \in A)
 	\]
-	Logo, $\Omega_Y$ é a imagem de $\Omega_X$ sobre $f$, sendo, pois, enumerável.
+	Logo, $\Omega_Y$ é a imagem de $\Omega_X$ sobre $g$, sendo, pois, enumerável.
 
 	Para a afirmação sobre a função de massa de $Y$, a Proposição \ref{prop:prob transformacao}
 	mostra que
 	\[
-		p_Y(y) = P_X(Y = y) = P(X \in f^{-1}(y)),
+		p_Y(y) = P_X(Y = y) = P(X \in g^{-1}(y)),
 	\]
-	e, pelo Lema \ref{lem:prob conjunto enumeravel},
+	e, pelo Lema
 	\[
-		p_Y(y) = \sum_{x \in f^{-1}(y)} p_X(x).
+		p_Y(y) = \sum_{x \in g^{-1}(y)} p_X(x).
 	\]
 \end{proof}
 \end{thm:prob transformacao discreta}
@@ -69,8 +84,7 @@ A variável $Y$ é discreta e sua função de massa é dada por
 \subsection{Transformação de Variáveis Contínuas}
 
 Para transformações de variáveis contínuas, concentramos-nos, primeiramente, nas
-transformações monótonas, pois essas são bijetoras, e compõem casos mais simples para
-se analisar.
+transformações monótonas, pois essas compõem uma classe mais fácil de se analisar.
 
 \begin{thm:fda transformacao continua}
 \label{thm:fda transformacao continua}

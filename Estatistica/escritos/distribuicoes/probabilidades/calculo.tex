@@ -1,5 +1,25 @@
 \section{Cálculo das Probabilidades}
 
+A Teoria de Probabilidades fundamenta-se em três princípio primitivos conhecidos
+como Axiomas de Kolmogorov.
+Dado um univero de possibilidades $\Omega$, chamado de espaço amostral, e cujas as
+partes são chamadas de eventos, enuncia-se que
+\begin{enumerate}
+	\item[\textbf{Axioma 1.}] A probabilidade é uma função não negativa
+	\item[\textbf{Axioma 2.}] A probabilidade do espaço amostral é $1$.
+	\item[\textbf{Axioma 3.}] A probabilidade de eventos disjuntos é a soma de suas
+	      respectivas probabilidades.
+\end{enumerate}
+
+Podemos traduzir esses axiomas na nomenclatura de medida.
+O espaço amostral trata-se do universo de um espaço de medida, de sorte que os eventos
+são os elementos de uma $\sigma$-álgebra desse universo.
+A função de probabilidade é, portanto, uma medida para os eventos que pode ser interpretada
+como o quão provável é obter os elementos do evento num experimento aleatório.
+Uma vez que medidas satisfazem não negatividade e $\sigma$-aditividade por definição,
+para resumir os axiomas basta então impor que a medidad aplicada a totalidade do universo
+é igual a $1$.
+
 \begin{def:espaco de probabilidade}
 Um espaço de medida \(\Omega, \mathcal{F}, P\) é um espaço de probabilidade se é satisfeito
 que
@@ -33,6 +53,9 @@ O conjunto $\Omega$ é denominado espaço amostral.
 % 	.
 % \end{proof}
 % \end{prop:eventos encaixados}
+
+Os Teoremas \ref{thm:base calc prob} e \ref{thm:base2 calc prob} nos ajudarão
+a facilitar a avaliação e, futuramente, a computação de probabilidades
 
 \begin{thm:base calc prob}
 \label{thm:base calc prob}

@@ -8,9 +8,17 @@ conjunto $S \subset \real$ enumerável tal que
 \]
 \end{def:variavel discreta}
 
+Sob essa definição, existe um conjunto enumerável de valores cujas probabilidades pontuais
+são suficiente para obter a probabilidade total do espaço de probabilidade.
+Como vimos no Teorema \ref{thm:prob suporte}, com o suporte reunindo os valores possíveis
+da variável, então os valores pontuais que acumulam massas de probabilidade devem estar
+todos reunidos nele.
+Isso sugere que o suporte é possivelmente um conjunto enumerável, o que é provado no
+Teorema a seguir.
+
 \begin{thm:suporte discreta}
 O suporte $\Omega_X$ de uma variável aleatória $X$ é enumerável se, e somente se,
-$X$ é enumerável.
+$X$ é discreta.
 \begin{proof}
 	Sendo $\Omega_X$ enumerável, então pelo Teorema \ref{thm:prob suporte} segue que $X$
 	é discreta. Por outro lado, supondo $X$ discreta, então seja $S$ tal que $P_X(S) = 1$.
@@ -34,6 +42,45 @@ $X$ é enumerável.
 \end{proof}
 \end{thm:suporte discreta}
 
+
+\begin{prop:existencia fmp}
+\label{prop:existencia fmp}
+Toda variável discreta $X$ com medida induzida $P_X$ admite uma função $p_X \in L^1(\mu)$
+com contradomínio em $[0, 1]$ satisfazendo
+\[
+	p_X = \frac{d}{d\mu} P_X \Longleftrightarrow P_X(A) = \sum_{x \in A} p_X(x)
+\]
+onde $\mu$ é a medida de contagem.
+\begin{proof}
+	A medida de contagem, pelo Teorema \ref{thm:sigma finita}, é $\sigma$-finita.
+	Ademais,
+	\[
+		\forall B \in \borel, \mu(B) = 0 \Longleftrightarrow B = \varnothing,
+	\]
+	implicando que $P_X$ é absolutamente contínua em relação a $\mu$ pela Definição
+	\ref{def:medida absolutamente continua}.
+	Pelo Teorema \nameref{thm:radon nikodym}, segue que existe $p_X \in L^1(\mu)$ tal que
+	\[
+		p_X = \frac{d}{d\mu} P_X \Longleftrightarrow P_X = \int p_X\, d\mu
+	\]
+	o que equivale a, pelo Teorema \ref{thm:integracao contagem},
+	\[
+		\forall A \in \borel, P_X(A) = \sum_{x \in A} p_X(x).
+	\]
+	Uma vez que para todo $x \in \real$, tem-se $0 < P(X = x) < 1$, e
+	\[
+		P(X = x) = P_X(\{x\}) = \sum_{a \in \{x\}} p_X(a) = p_X(x)
+	\]
+	então $p_X \in [0, 1]$.
+\end{proof}
+\end{prop:existencia fmp}
+
+Temos então que toda a massa de probabilidade de realizações de uma variável discreta está
+concentrada num conjunto enumerável de pontos.
+Para essas variáveis será garantida a existência de uma função que associa a cada um desses
+a probabilidade concentrada nele.
+A essa função damos o nome de \textbf{função de massa de probabilidade}.
+
 \begin{def:fmp}
 Seja $X: \Omega \to \mathbb{R}$ uma v.a. discreta. A função $p_X: \mathbb{R} \to [0, 1]$
 é a função de massa de probabilidade de $X$ se, e somente se,
@@ -42,54 +89,59 @@ Seja $X: \Omega \to \mathbb{R}$ uma v.a. discreta. A função $p_X: \mathbb{R} \
 \]
 \end{def:fmp}
 
-\begin{prop:fmp}
-Seja $(\Omega,\mathcal F,P)$ um espaço de probabilidade e seja $X$ uma variável aleatória
-discreta tal que $P(X \in S)=1$, onde $S \subset \mathbb R$. Defina
-\begin{gather*}
-	p_X:\mathbb R \to [0,1]\\
-	x \mapsto P(X = x)
-\end{gather*}
-Então a aplicação
-\begin{gather*}
-	\mu_X:\mathcal P(S)\to [0,1]\\
-	A \mapsto \sum_{x\in A} p_X(x)
-\end{gather*}
-é uma medida de probabilidade em $(S,\mathcal P(S))$.
-\begin{proof}
-	Para todo $A\subset S$,
-	\[
-		\mu_X(A) = \sum_{x\in A} p_X(x) = \sum_{x\in A} P(X=x).
-	\]
+% O próximo resultado diz que quando definimos uma função que mapeia todo evento do
+% experimento à soma das probabilidades pontuais das massas de probabilidade dos pontos
+% no evento, então essa função é uma medida de probabilidade.
 
-	Como os eventos $\{X=x\}$, com $x\in A$, são dois a dois disjuntos,
-	segue da $\sigma$-aditividade de $P$ que
-	\[
-		\mu_X(A) = P(X\in A).
-	\]
+% \begin{prop:fmp}
+% Seja $X$ uma variável aleatória discreta tal que $P(X \in S)=1$, onde $S \subset \mathbb R$,
+% e $p_X$ a função de massa de probabilidade.
+% A aplicação
+% \begin{gather*}
+% 	\mu_X: \mathcal{F} \to [0,1]\\
+% 	A \mapsto \sum_{x\in A} p_X(x)
+% \end{gather*}
+% é uma medida de probabilidade para $(S,\mathcal{F})$.
+% \begin{proof}
+% 	Para todo $A\subset S$,
+% 	\[
+% 		\mu_X(A) = \sum_{x\in A} p_X(x) = \sum_{x\in A} P(X=x).
+% 	\]
 
-	Em particular,
-	\[
-		\mu_X(S) = P(X\in S) = 1.
-	\]
+% 	Como os eventos $\{X=x\}$, com $x\in A$, são dois a dois disjuntos,
+% 	segue da $\sigma$-aditividade de $P$ que
+% 	\[
+% 		\mu_X(A) = P(X\in A).
+% 	\]
 
-	Logo, $\mu_X$ é uma medida de probabilidade em
-	$(S,\mathcal P(S))$.
-\end{proof}
-\end{prop:fmp}
+% 	Em particular,
+% 	\[
+% 		\mu_X(S) = P(X\in S) = 1.
+% 	\]
 
-\begin{lem:prob conjunto enumeravel}
-\label{lem:prob conjunto enumeravel}
-Se $X$ é variável discreta e $A \in \borel$ é enumerável, então
-\[
-	P(X \in A) = \sum_{x \in A} p_X(x)
-\]
-\begin{proof}
-	Por $\sigma$-aditividade,
-	\[
-		P(X \in A) = \sum_{x \in A} P(X = x) = \sum_{x \in A} p_X(x)
-	\]
-\end{proof}
-\end{lem:prob conjunto enumeravel}
+% 	Logo, $\mu_X$ é uma medida de probabilidade em
+% 	$(S,\mathcal P(S))$.
+% \end{proof}
+% \end{prop:fmp}
+
+% A consequência direta dessa proposição é que a probabilidade de um evento no espaço de
+% resultados pode ser dada simplesmente por meio da função de massa de probabilidade.
+
+% \begin{lem:prob conjunto enumeravel}
+% \label{lem:prob conjunto enumeravel}
+% Se $X$ é variável discreta e $A \in \borel$ é enumerável, então
+% \[
+% 	P(X \in A) = \sum_{x \in A} p_X(x)
+% \]
+% \begin{proof}
+% 	Por $\sigma$-aditividade,
+% 	\[
+% 		P(X \in A) = \sum_{x \in A} P(X = x) = \sum_{x \in A} p_X(x)
+% 	\]
+% \end{proof}
+% \end{lem:prob conjunto enumeravel}
+
+Enunciemos agora como obter a distribuição $F$ de uma variável aleatória discreta.
 
 \begin{prop:fda discreto}
 Se $X: \Omega \to \mathbb{R}$ é uma v.a. discreta com função de massa igual a $p_X$ e
@@ -119,7 +171,7 @@ suporte $\Omega_X$, então a distribuição de $X$ é
 	\[
 		P(X \le x) = P(X \in A),
 	\]
-	e pelo lema \ref{lem:prob conjunto enumeravel},
+	e pela Proposição \ref{prop:existencia fmp},
 	\[
 		F_X(x) = \sum_{x \in A} p_X(x),
 	\]

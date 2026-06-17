@@ -1,8 +1,22 @@
 \section{Variáveis Aleatórias Contínuas}
 
+Variáveis aleatória discretas caracterizam-se por uma lista enumerável de pontos
+concentrarem massas probabilidades.
+Outrossim, variáveis aleatórias contínuas são aquelas em que nenhum ponto real
+acumula qualquer massa de probabilidade, estando essa distribuída ao longo de suas
+vizinhanças.
+Formalmente, teremos que qualquer conjunto de pontos de medida nula (como pontos contáveis)
+terá probabilidade desprezível, caracterizando a medida de probablidade da variável como
+absolutamente contínua em relação a medida de Lebesgue
+(ver Definição \ref{def:medida absolutamente continua}).
+
 \begin{def:variavel continua}
 A variável aleatória $X$ será contínua se $P_X \ll \lambda$.
 \end{def:variavel continua}
+
+O Teorema \nameref{thm:radon nikodym} garante a existência de uma função especial
+-- mensurável, não negativa e Lebesgue-integrável -- associada a medida de probablidade
+induzida $P_X$ de $X$.
 
 \begin{prop:existencia fdp}
 Toda variável aleatória contínua $X$ admite uma função real mensurável não negativa
@@ -20,6 +34,11 @@ $f \in L^1(\lambda)$ tal que
 \end{proof}
 \end{prop:existencia fdp}
 
+Se interpretarmos a probabilidade como uma massa distribuída em espaço (neste caso,
+em $\real$) e que quanto maior a extensão do intervalo avaliado, maior a probabilidade
+da variável assumir realizações nele, então podemos interpretar a função $f$ como
+uma \textbf{densidade} de probabilidade.
+
 \begin{def:fdp}
 Seja $X$ uma variável aleatória contínua com medida induzida $P_X$. A função $f$
 que satisfaz
@@ -28,6 +47,12 @@ que satisfaz
 \]
 é chamada de densidade de probabilidade de $X$.
 \end{def:fdp}
+
+A função de densidade pode ser então usada para medir a probabilidade de uma variável
+contínua assumir realizações num intervalo de valores reais.
+Isso é feito avaliando a integral da função sobre o intervalo desejado.
+A relação mais direta entre as funções de distribuição e de densidade é dada pela
+Proposição a seguir.
 
 \begin{prop:fdp e fda}
 \label{prop:fdp e fda}
@@ -42,6 +67,15 @@ Se $X$ é uma variável contínua com densidade $f$ e distribuição $F$, então
 \end{proof}
 \end{prop:fdp e fda}
 
+A distribuições de variáveis discretas tem a forma de uma função constante por partes,
+pois entre um ponto e outro temos um ``salto'' que representa a probabilidade acumulada
+por um dos pontos.
+Em contraste, como para variáveis contínuas nenhum ponto acumula massa de probabilidade,
+a sua distrbiuição deve variar suavemente ao longo de qualquer intervalo, ou de maneira mais
+forte, em qualquer conjunto disjunto de intervalso
+Isso caracteriza a distribuição como absolutamente contínua (ver Definição
+\ref{def:absolutamente continua}).
+
 \begin{prop:continuidade fda}
 A variável $X$ é contínua se, e somente se, sua distribuição $F$ é absolutamente contínua.
 \end{prop:continuidade fda}
@@ -52,6 +86,10 @@ A variável $X$ é contínua se, e somente se, sua distribuição $F$ é absolut
 	Por outro lado, se $F$ é absolutamente contínua, então $\mu_F = P_X \ll \lambda$ e,
 	por definição, a variável $X$ será contínua.
 \end{proof}
+
+Como qualquer conjunto de pontos isolados terá probabilidade nula, então é intuitivo
+pensar que o intervalo $(a, b]$ terá a mesma probabilidade do que $(a, b)$.
+A formalização dessas ideias é dada pelo Teorema a seguir.
 
 \begin{thm:prob continua}
 \label{thm:prob continua}
@@ -186,7 +224,7 @@ então
 	\[
 		\forall \nu > 0, (x-\nu, x+\nu) \cap E \ne \varnothing.
 	\]
-	Isso equivale a dizer que para toda vizinhança $V$ de $x$ existe contém pelo menos
+	Isso equivale a dizer que para toda vizinhança $V$ de $x$ contém pelo menos
 	um ponto com densidade positiva e, por consequência do Lema \ref{lem:densidade continua},
 	que é membro do suporte.
 	Se tivéssemos $x \notin \Omega_X$, então haveria uma vizinhança $U$
