@@ -4,12 +4,12 @@ A Teoria de Probabilidades fundamenta-se em três princípio primitivos conhecid
 como Axiomas de Kolmogorov.
 Dado um univero de possibilidades $\Omega$, chamado de espaço amostral, e cujas as
 partes são chamadas de eventos, enuncia-se que
-\begin{enumerate}
-	\item[\textbf{Axioma 1.}] A probabilidade é uma função não negativa
-	\item[\textbf{Axioma 2.}] A probabilidade do espaço amostral é $1$.
-	\item[\textbf{Axioma 3.}] A probabilidade de eventos disjuntos é a soma de suas
+\begin{itemize}
+	\item \textbf{Axioma 1.} A probabilidade é uma função não negativa
+	\item \textbf{Axioma 2.} A probabilidade do espaço amostral é $1$.
+	\item \textbf{Axioma 3.} A probabilidade de eventos disjuntos é a soma de suas
 	      respectivas probabilidades.
-\end{enumerate}
+\end{itemize}
 
 Podemos traduzir esses axiomas na nomenclatura de medida.
 O espaço amostral trata-se do universo de um espaço de medida, de sorte que os eventos
@@ -54,11 +54,11 @@ O conjunto $\Omega$ é denominado espaço amostral.
 % \end{proof}
 % \end{prop:eventos encaixados}
 
-Os Teoremas \ref{thm:base calc prob} e \ref{thm:base2 calc prob} nos ajudarão
-a facilitar a avaliação e, futuramente, a computação de probabilidades
+Os Teoremas \ref{prop:base calculo probabilidades} e \ref{prop:base calculo probabilidades 2}
+nos ajudarão a facilitar a avaliação e, futuramente, a computação de probabilidades
 
-\begin{thm:base calc prob}
-\label{thm:base calc prob}
+\begin{prop:base calculo probabilidades}
+\label{prop:base calculo probabilidades}
 Se $(\Omega, \mathcal{F}, P)$ é espaço de probabilidade, então
 \begin{enumerate}
 	\item[i.] $P(A^c) = 1 - P(A)$
@@ -76,10 +76,10 @@ Se $(\Omega, \mathcal{F}, P)$ é espaço de probabilidade, então
 		P(A^c) \geq 0 \Longrightarrow 1 - P(A) \geq 0 \Longrightarrow P(A) \leq 1.
 	\end{gather*}
 \end{proof}
-\end{thm:base calc prob}
+\end{prop:base calculo probabilidades}
 
-\begin{thm:base2 calc prob}
-\label{thm:base2 calc prob}
+\begin{prop:base calculo probabilidades 2}
+\label{prop:base calculo probabilidades 2}
 Se $(\Omega, \mathcal{F}, P)$ é espaço de probabilidade, e $A$ e $B$ são eventos, então
 \begin{enumerate}
 	\item[i] $P(B \cap A^c) = P(B) - P(B \cap A)$.
@@ -104,7 +104,7 @@ Se $(\Omega, \mathcal{F}, P)$ é espaço de probabilidade, e $A$ e $B$ são even
 		            & = P(A) + P(B) - P(A \cap B).
 	\end{align*}
 \end{proof}
-\end{thm:base2 calc prob}
+\end{prop:base calculo probabilidades 2}
 
 Para espaços amostrais enumeráveis, ao associar a cada resultado individual
 um número em $[0, 1]$, de modo que a soma dos pesos resulte em 1, a soma dos pesos dos

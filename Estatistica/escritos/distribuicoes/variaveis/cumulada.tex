@@ -1,13 +1,13 @@
 \section{Função de Distribuição Acumulada}
 
 Se para cada ponto da reta real conseguimos informar qual a probabilidade de uma variável
-ter realização menor ou igual a esse ponto, então temos de informções de como está
+ter realização menor ou igual a esse ponto, então temos informções de como está
 distribuída a probabilidade da variável.
 Essa função especial ajuda a caracterizar a variável e é chamada de Função de Distribuição
 Acumulda, ou distribuição apenas.
 
 \begin{def:cdf}
-Sejam $\Omega$ um espaço amostral e $P$ uma medida de um espaço de probabilidade e $X$
+Sejam $\Omega$ um espaço amostral, $P$ uma medida de probabilidade e $X$
 uma variável aleatória.
 A função $F: \mathbb{R} \to \mathbb{R}$ é uma função de distribuição acumulada para $X$ se,
 e somente se,
@@ -16,14 +16,14 @@ e somente se,
 \]
 \end{def:cdf}
 
-Um consequência imediata da definição é que se $P_X$ é a medida do espaço induzido por
+Uma consequência imediata da definição é que se $P_X$ é a medida do espaço induzido por
 $X$, então
 \[
 	F(x) = P_X((-\infty, x]).
 \]
 
 Outros fatos devem ser satisfeitos para determinada função ser uma distribuição.
-Primeiro, ela deve ser limitada superiormente por 1 e inferiormente por 0, já que
+Primeiro, ela deve ser limitada superiormente por $1$ e inferiormente por $0$, já que
 são os valores máximo e mínimo de probabilidade que um ponto pode assumir.
 Pelo princípio de que $A \subset B$ implica $P(A) \leq P(B)$, então se $x < y$, teríamos
 $P(X \leq x) \leq P(X \leq y)$, e a distribuição é monótona.
@@ -106,8 +106,8 @@ $P_X = \mu_F$.
 	\]
 	e por $\sigma$-aditividade
 	\begin{gather*}
-		P_X((-\infty, a]) + P_X((a, b]) = P((\infty, b]) \\
-		P_X((a, b]) = P_X((\infty, b]) - P_X((-\infty, a])\\
+		P_X((-\infty, a]) + P_X((a, b]) = P((-\infty, b]) \\
+		P_X((a, b]) = P_X((-\infty, b]) - P_X((-\infty, a])\\
 		P_X((a, b]) = F(b) - F(a)
 	\end{gather*}
 	Logo,

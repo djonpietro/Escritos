@@ -56,14 +56,14 @@ $(\real, \borel)$ (ver Definição \ref{def:medida imagem}).
 A especificação de variáveis aleatórias costuma vir acompanhada de um conjunto de valores
 chamado \textbf{suporte}, que modela a noção de valores possíveis que a variável pode
 assumir no experimento.
-Um determinado valor $x$ está no suporte de $X$ se um conjunto quaisquer conjuntos de valores
-suficientemente próximos de $x$ tem probabilidade não nula.
+Um determinado valor $x$ está no suporte de $X$ se qualquer conjunto de valores
+suficientemente próximos de $x$ -- com esse incluso -- tem probabilidade não nula.
 
 \begin{def:suporte}
 O suporte de uma variável aleatória $X$ é o conjunto
 \[
 	\Omega_X = \{x \in \mathbb{R} \mid
-	\forall \epsilon > 0,\ P(x - \epsilon < X < x + \epsilon) > 0 \}
+	\forall \epsilon > 0,\ P(| X - x | < \epsilon) > 0 \}
 \]
 \end{def:suporte}
 
@@ -118,7 +118,7 @@ Se $A \in \borel$ e $P(X \in A) \ne 0$, então $A \cap S \ne \varnothing$.
 	\[
 		P(A \cup S) = P(A) + P(S) = P(A) + 1
 	\]
-	Mas pelo Teorema \ref{thm:base calc prob},
+	Mas pela Proposição \ref{prop:base calculo probabilidades},
 	\begin{gather*}
 		P(A) + 1 \le 1\\
 		P(A) \le 0
@@ -130,3 +130,5 @@ Se $A \in \borel$ e $P(X \in A) \ne 0$, então $A \cap S \ne \varnothing$.
 	\end{gather*}
 \end{proof}
 \end{prop:intersecao suporte}
+
+Em especial, se $A = \{x\}$ for unitário e $x \notin \Omega_X$, então $P(X = x) = 0$.

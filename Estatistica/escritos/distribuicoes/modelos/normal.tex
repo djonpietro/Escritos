@@ -1,0 +1,221 @@
+\section{Distribuição Normal}
+
+A distribuição normal foi introduzida em 1733 por Abraham DeMoivre para aproximar
+probabilidades de variáveis binomiais quando o parâmetro $n$ é grande.
+Essa distribuição possui grande importância na Teoria de Probabilidades e na Estatística,
+pois suas propriedades analíticas permitem o tratamento adequado de inúmeros fenômenos
+
+\begin{def:normal}
+A variável contínua $X$ tem distribuição normal com parâmetros $\mu$ e $\sigma^2$ se
+sua densidade for
+\[
+    f(x) = \frac{1}{\sqrt{2\pi\sigma^2}} e^{\frac{-(x - \mu)^2}{2\sigma^2}}.
+\]
+Uma variável normal será padrão caso $\mu = 0$ e $\sigma^2 = 1$.
+\end{def:normal}
+
+\begin{lem:integral exponencial quadrada}
+\label{lem:integral exponencial quadrada}
+A integral definida de $f(x) = e^{\frac{-x^2}{2}}$ avaliada em $(-\infty, \infty)$ é
+$\sqrt{2\pi}$.
+\[
+    \int_{-\infty}^\infty e^{\frac{-x^2}{2}} = \sqrt{2\pi}
+\]
+\end{lem:integral exponencial quadrada}
+\begin{proof}
+Equivalentemente, podemos provar que
+\[
+    \left(\int_{-\infty}^{\infty}e^{\frac{-u^2}{2}}\,du\right) \left(\int_{-\infty}^{\infty}e^{\frac{-t^2}{2}}\,dt\right) = 2\pi.
+\]
+Espressando o problema como uma integral dupla, tal que
+\[
+    \int_{-\infty}^{\infty} \int_{-\infty}^{\infty} e^{\frac{-(t+u)^2}{2}}\,dt\,du,
+\]
+e colocando em termos de coordenadas polares, isto é,
+\[
+    r^2 = u^2 + t^2, \quad t = r \cos \theta, \quad u = r \cos \theta,
+\]
+obtemos
+\[
+    \int_0^\infty \int_0^{2\pi} re^{\frac{-r^2}{2}}\,dr\,d \theta =
+    2 \pi \int_0^\infty re^{\frac{-r^2}{2}}\,dr,
+\]
+essa que pode ser resolvida via substituição, resultando em
+\[
+    - 2 \pi \left. e^{\frac{-r^2}{2}} \right|_0^\infty = 2 \pi.
+\]
+\end{proof}
+
+\begin{prop:densidade da normal}
+A função
+\[
+    f(x) = \frac{1}{\sqrt{2\pi\sigma^2}} e^{\frac{-(x - \mu)^2}{2\sigma^2}}
+\]
+é uma função de densidade.
+\end{prop:densidade da normal}
+\begin{proof}
+Para tanto, devemos mostrar que
+\[
+    \frac{1}{\sqrt{2\pi\sigma^2}} \int_{-\infty}^{\infty}e^{\frac{-(x - \mu)^2}{2\sigma^2}}\,dx = 1
+\]
+Realizemos a substituição
+\[
+    z = \frac{x - \mu}{\sigma},
+\]
+de modo que
+\[
+    \frac{1}{\sqrt{2\pi\sigma^2}} \int_{-\infty}^{\infty}e^{\frac{-(x - \mu)^2}{2\sigma^2}}\,dx =
+    \frac{1}{\sqrt{2\pi}} \int_{-\infty}^{\infty}e^{\frac{-z^2}{2}}\,dz = 1.
+\]
+Resta concluir que
+\[
+    \int_{-\infty}^{\infty}e^{\frac{-z^2}{2}}\,dz = \sqrt{2\pi},
+\]
+o que é garantido pelo Lema \ref{lem:integral exponencial quadrada}.
+\end{proof}
+
+\begin{thm:tranformacao afim da normal}
+Se $X \sim \mathrm{Normal}(\mu, \sigma^2)$ e $a$ e $b$ são constantes, então
+a variável $aX + b$ é normalmente distribuída com parâmetros $a\mu + b$ e $a^2\sigma^2$.
+\end{thm:tranformacao afim da normal}
+\begin{proof}
+Se a distribuição de $X$ é dada por
+\[
+    \int_{-\infty}^\infty \frac{1}{\sqrt{2\pi\sigma^2}} e^{\frac{-(x - \mu)^2}{2\sigma^2}}
+\]
+e temos que
+\[
+    y = ax + b \Longrightarrow x = \frac{y - b}{\mu}
+\]
+então, substituindo $x$ na função de distribuição, obtemos
+\[
+    \frac{1}{\sqrt{2\pi a^2\sigma^2}} \int_{-\infty}^{\infty} e^{\frac{-(y - a\mu - b)^2}{2a^2\sigma^2}}\,dy.
+\]
+Logo, a expressão anterior trata-se da distribuição de uma variável $Y = aX + b$ tal que
+$Y \sim \mathrm{Normal}(a\mu + b, a^2\sigma^2)$.
+\end{proof}
+
+\begin{cor:normal e normal padrao}
+\label{cor:normal e normal padrao}
+Se $X \sim \mathrm{Normal}(\mu, \sigma^2)$ e $Z = \frac{X - \mu}{\sigma}$, então
+$Z \sim \mathrm{Normal}(0, 1)$.
+\end{cor:normal e normal padrao}
+\begin{proof}
+Se $\mu_z$ e $\sigma^2_z$ são os parâmetros da distribuição de $Z$, então
+\[
+    \mu_z = \frac{1}{\sigma} \cdot \mu - \frac{\mu}{\sigma} = 0 \quad \text{e} \quad
+    \sigma_z^2 = \left(\frac{1}{\sigma}\right)^2 \cdot \sigma^2 = 1
+\]
+e
+\end{proof}
+
+\begin{thm:parametros da normal}
+Se $X \sim \mathrm{Normal}(\mu, \sigma^2)$, então
+\[
+    \ev{X} = \mu \quad \text{ e } \quad \var{X} = \sigma^2
+\]
+\end{thm:parametros da normal}
+\begin{proof}
+Se $Z \sim \mathrm{Normal}(0, 1)$, então
+\[
+    \ev{Z} = \frac{1}{\sqrt{2\pi}} \int_{-\infty}^\infty z e^{\frac{-z^2}{2}}.
+\]
+Resolvendo por substituição $u = \frac{-z^2}{2}$, obtemos
+\[
+    \ev{Z} = \frac{1}{\sqrt{2\pi}} \left. e^{\frac{-z^2}{2}} \right|_{-\infty}^\infty = 0.
+\]
+Por outro lado,
+\[
+    \var{Z} = \frac{1}{\sqrt{2\pi}} \int_{-\infty}^\infty z^2 e^{\frac{-z^2}{2}},
+\]
+a qual pode ser resolvida usando-se integração por partes com $u = z$ e
+$dv = -ze^{\frac{-z^2}{2}}dz$, obtendo $v = e^{\frac{-z^2}{2}}dz$ e
+\[
+    \var{Z} = -\frac{1}{\sqrt{2\pi}} \left( \left. z^2 e^{\frac{-z^2}{2}} \right|_{-\infty}^\infty -
+    \int_{-\infty}^{\infty} e^{\frac{-z^2}{2}}\,dz \right).
+\]
+Utilizando o Lema \ref{lem:integral exponencial quadrada}, encontramos que
+\[
+    \var{Z} = \frac{1}{\sqrt{2\pi}} \cdot \sqrt{2\pi} = 1.
+\]
+Então conclui-se que o Teorema vale para uma variável normal padrão.
+Se $X \sim \mathrm{Normal}(\mu, \sigma^2)$ e $Z = \frac{X - \mu}{\sigma}$, então, pelo Corolário
+\ref{cor:normal e normal padrao}, $Z$ é normal padrão.
+Pelos Teoremas \ref{thm:propriedades esperanca} e \ref{prop:propriedades variancia}, temos
+que
+\[
+    \ev{X} = \ev{\sigma Z + \mu} = \sigma \ev{Z} + \mu \quad \text{e} \quad
+    \var{X} = \var{\sigma Z + \mu} = \sigma^2 \var{Z}.
+\]
+Mas como $\ev{Z} = 0$ e $\var{Z} = 1$, então
+\[
+    \ev{X} = \mu \quad \text{e} \quad \var{X} = \sigma^2
+\]
+\end{proof}
+
+\begin{prop:simetria densidade normal}
+\label{prop:simetria densidade normal}
+A função de densidade $f(x)$ de uma variável normal é uma função par, isto é,
+\[
+    f(-x) = f(x)
+\]
+\end{prop:simetria densidade normal}
+\begin{proof}
+	Seja $X \sim \mathrm{Normal}(\mu, \sigma^2)$.
+	Uma vez que
+	\[
+	    | - x - \mu | = | x - \mu | \Longrightarrow (-x-\mu)^2 = (x - \mu)^2,
+	\]
+	então
+	\[
+	    f(-x) = \frac{1}{\sqrt{2\pi\sigma^2}} e^{\frac{-(-x-\mu)^2}{2\sigma^2}} =
+		\frac{1}{\sqrt{2\pi\sigma^2}} e^{\frac{-(x-\mu)^2}{2\sigma^2}} = f(x).
+	\]
+\end{proof}
+
+\begin{thm:simetria distribuicao normal}
+Se $F(x)$ for a função de distribuição de uma variável normal, então
+\[
+    F(-x) = 1 - F(x)
+\]
+\end{thm:simetria distribuicao normal}
+\begin{proof}
+Com efeito,
+\[
+    F(-x) = \int_{-\infty}^{-x} f(u)\,du.
+\]
+onde $f$ é a função de densidade da normal.
+Realizando a substituição $u = -t$, então $du = -dt$.
+Além disso, temos que $u \to -\infty$ implica em $t \to \infty$, enquanto que
+$u = -x$ nos dá $t = x$.
+Obtemos, por consequência,
+\[
+    F(-x) = - \int_{\infty}^{x} f(-t)\,du.
+\]
+Pelas propriedades de integrais,
+\[
+    F(-x) = \int_{x}^{\infty} f(-t)\,du,
+\]
+e como $f$ é par pela Proposição \ref{prop:simetria densidade normal}, então
+\[
+    F(-x) = \int_{x}^{\infty} f(t)\,du.
+\]
+No entanto,
+\begin{gather*}
+	\int_{-\infty}^x f(t)\,dt + \int_{x}^\infty  = 1 \\
+	\int_{x}^\infty f(t)\,dt = 1 - \int_{-\infty}^x f(t)\,dt\\
+	\int_{x}^\infty f(t)\,dt = 1 - F(x)\\
+\end{gather*}
+mostrando, enfim, que
+\[
+    F(-x) = 1 - F(x)
+\]
+\end{proof}
+
+\begin{thm:demoivre-laplace}[de DeMoivre-Laplace]
+Se $X \sim \mathrm{Binomial}(n, p)$, então para quaisquer reais $a$ e $b$ com $a < b$ é
+satisfetio que
+\[
+    \lim_{n \to \infty} P\left(a \le \frac{X - np}{\sqrt{np(1-p)}} \le b\right) = \Phi(b) - \Phi(a)
+\]
+\end{thm:demoivre-laplace}

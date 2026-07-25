@@ -1,0 +1,439 @@
+\section{Modelos Discretos}
+
+\subsection{Uniforme Discreta}
+
+O primeiro e mais simples modelo de distribuição discreto é a uniforme discreta.
+Ela modela experimentos onde a frequência de todos os resultados são iguais, ou seja,
+equiprováveis.
+Se $(\Omega_X, \mathcal{A}, P_X)$ é equiprovável, então a função de massa de $X$ é dada
+simplesmente por
+\[
+    p_X(x) = \frac{1}{|\Omega_X|}.
+\]
+
+\begin{def:uniforme discreta}
+A variável discreta $X$ tem distribuição uniforme discreta se sua função de massa for dada
+por
+\[
+    p_X(x) = \frac{1}{|\Omega_X|}
+\]
+onde $\Omega_X$ é o seu suporte.
+\end{def:uniforme discreta}
+
+\begin{exp:uniforme discreta 1}
+O número de caras obtidas em 1 lançamento tem dois resultados possíveis: $0$ ou $1$.
+Se a moeda é honesta, então
+\[
+    P(X = 0) = P(X = 1) = \frac{1}{2}
+\]
+e $X$ tem distribuição uniforme discreta.
+\end{exp:uniforme discreta 1}
+
+\begin{exp:uniforme discreta 1}
+Num dado honesto, as seis faces são equiprováveis de serem sorteadas.
+Logo
+\[
+    P(X = k) = \frac{1}{6}
+\]
+onde $k \in \{1, \ldots, 6\}$.
+\end{exp:uniforme discreta 1}
+
+\subsection{Bernoulli}
+
+As variáveis Bernoulli modelam fenômenos que só possuem dois resltados possíveis:
+verdadero ou falso, codificados comumente como $1$ e $0$ respectivamente.
+Seja $(\Omega, \mathcal{A}, P)$ um espaço de probabilidade, e $A \in \mathcal{A}$ tal que
+\[
+    \omega \in A \rightarrow X(\omega) = 1 \quad \text{e} \quad \omega \notin A \rightarrow X(\omega)  = 0.
+\]
+Dessa forma, $X$ equivale à função indicadora $I_A$.
+O único parâmetro $p$ da distribuição é a probabilidade do evento $A$, implicando que
+$X = 1$ com probabilidade $p$ e $X = 0$ com probabilidade $1 - p$.
+
+\begin{def:bernoulli}
+A variável $X$ tem distribuição de Bernoulli com parâmetro $p \in [0, 1]$, denotada por
+\[
+    X \sim \mathrm{Bernoulli}(p),
+\]
+se sua função de massa for
+\[
+    p_X(x) = p^x(1-p)^{1 - x}
+\]
+\end{def:bernoulli}
+
+Repetições de um experimento aleatório que resultam em \textit{sucesso} ou \textit{fracasso}
+são chamados de ensaios Bernoulli.
+A variável que indica se o experimento resultou num sucesso tem distribuição Bernoulli
+com parâmetro $p$, que é chamado de \textbf{taxa de sucesso} do experimento.
+
+\begin{exp:bernoulli 1}
+Sortear cara com uma moeda honesta é um ensaio Bernoulli com taxa de sucesso $1/2$.
+\end{exp:bernoulli 1}
+
+\begin{prop:esperanca bernoulli}
+Se $X \sim \mathrm{Bernoulli}(p)$, então
+\[
+    \ev{X} = p \quad \text{e} \quad \var{X} = p(1-p)
+\]
+\end{prop:esperanca bernoulli}
+\begin{proof}
+Com efeito,
+\[
+    \ev{X} = 1 \cdot p + 0 \cdot (1-p) = p
+\]
+Ademais, pela Proposição \ref{prop:propriedades variancia}
+\[
+    \var{X} = p - p^2 = p(1-p)
+\]
+
+\end{proof}
+
+\subsection{Binomial}
+
+Essa distribuição é usada para modelar contagens de sucessos dentro de uma quantidade
+fixa de ensaios Bernoulli independentes.
+Se $\{X_i\}_{i=1}^n$ é uma amostra independente com $X_i \sim \mathrm{Bernoulli}(p)$,
+então a variável definida por
+\[
+    X = \sum_{i=1}^n X_i
+\]
+quantificará quantos \textit{sucessos} há nessa amostra.
+A probabilidade de obter $X = k$ é a probabilidade de obter $k$ sucessos após $n$
+ensaios Bernoulli.
+Para qualquer sequência de ensaios $(X_i = x)_{i=1}^n$, com $x \in \{0, 1\}$,
+a probabilidade de haver $k$ sucessos será
+\[
+    p^k(1-p)^{n-k}.
+\]
+Ademais, o número de sequência em que ocorrem exatamente $k$ sucessos é
+\[
+    \binom{n}{k},
+\]
+e como todas elas possuem a mesma probabilidade $p^k(1-p)^{n-k}$ de ocorrer, então
+\[
+    P(X = k) = \binom{n}{k} p^k(1-p)^{n-k}
+\]
+
+\begin{def:modelo binomial}
+A variável $X$ terá distribuição Binomial com parâmetros $n$ e $p$, denotado por
+$X \sim \mathrm{Binomial}(n,p)$, se sua função de massa for
+\[
+    p_X(k) = \binom{n}{k} p^k(1-p)^{n-k}
+\]
+\end{def:modelo binomial}
+
+\begin{exp:binomial 1}
+Uma moeda honesta é lançada 10 vezes.
+A probabilidade do número de caras ser 4 será
+\[
+    P(X = 4) = \binom{10}{4} 0.5^4 \cdot 0.5^{6} \approx 0.21
+\]
+\end{exp:binomial 1}
+
+\begin{prop:esperanca binomial}
+Se $X \sim \mathrm{Binomial}(n, p)$, então
+\[
+    \ev{X} = np \quad \text{e} \quad \var{X} = np(1-p)
+\]
+\end{prop:esperanca binomial}
+\begin{proof}
+Com efeito,
+	\[
+		E[X] = \sum_{k=0}^n k \cdot \binom{n}{k} p^k (1-p)^{n-k}.
+	\]
+	Utilizando o fato de que
+	\[
+		\binom{n}{k} = \frac{n}{k} \binom{n-1}{k-1},
+	\]
+	reduzimos então a
+	\[
+		E[X] = n\sum_{k=0}^n \binom{n-1}{k-1} p^k (1-p)^{n-k},
+	\]
+	o que nos sugere realizar uma troca de variável em $k$ para que consigamos usar o
+	Teorema Binomial. Para tanto, realizemos que
+	\[
+		n\sum_{k=0}^n \binom{n-1}{k-1} p^k (1-p)^{n-k} = np \sum_{k=1}^n\binom{n-1}{k-1}p^{k-1}(1-p)^{n-k}
+	\]
+	já que somar o termo $k=0$ equivale a somar 0. Fazendo então a troca $j = k - 1$, obtemos
+	\[
+		E[X] = np \sum_{j=0}^n\binom{n-1}{j}p^{j}(1-p)^{(n-1)-j},
+	\]
+	e pelo Teorema Binomial,
+	\[
+		E[X] = np \cdot (p + 1 - p)^{n-1} = np
+	\]
+\end{proof}
+
+\subsection{Hipergeométrica}
+
+As variáveis hipergeométricas modelam a contagem de sucessos numa amostra retirada de uma
+população finita.
+A cada extração da população, o elemento extraído não é reposto, de modo que a
+probabilidade de se obter um novo sucesso é modificada a cada tentativa.
+
+Considere uma população de tamanho $N$ da qual $m$ elementos são sucessos e $N-m$ são
+fracassos, e que uma amostra de tamanho $n$ é extraída dessa população.
+Considere um conjunto $\{X_i\}_{i=1}^n$ de variáveis indicadora tais que
+\[
+    X_i = \begin{cases}
+        1,&\text{se a i-ésima tentativa é um sucesso}\\
+        0,&\text{caso contrário}
+    \end{cases}
+\]
+e definamos
+\[
+    X = \sum_{i=1}^n X_i,
+\]
+como o número de sucessos dentro da amostra.
+
+Para deduzir a probabilidade de se observar $X = k$, tratemos o problema de forma
+combinatória.
+O número de amostras com $k$ sucessos e $n-k$ fracassos é
+\[
+    \binom{m}{k} \cdot \binom{N-m}{n-k},
+\]
+enquanto que o número total de amostras de tamanho $n$ que podem ser obtidas dessa
+população é
+\[
+    \binom{N}{n}
+\]
+Uma vez que toda amostra, sem observar o número de sucessos ou fracassos, possui a mesma
+probabilidade de ser sorteada, então:
+\[
+    P(X = k) = \frac{\binom{m}{k} \cdot \binom{N-m}{n-k}}{\binom{N}{n}}
+\]
+
+\begin{def:hipergeometrica}
+A variável $X$ tem distribuição hipergeométrica com parâmetros $N$, $m$ e $n$
+-- $X \sim \mathrm{HG}(N, n, k)$ -- se
+\[
+    P(X = k) = \frac{\binom{m}{k} \cdot \binom{N-m}{n-k}}{\binom{N}{n}}
+\]
+com $\max\{0, n-(N-m)\} \le k \le \min\{n, m\}$.
+\end{def:hipergeometrica}
+
+\begin{exp:hipergeometrica 1}
+Uma urna contém $5$ bolas vermelhas e $7$ verdes.
+Teremos então que, por exemplo, a probabilidade de que, ao selecionar $3$ bolas da urna,
+$2$ delas sejam vermelhas será
+\[
+    \frac{\binom{5}{2} \cdot \binom{7}{1}}{\binom{12}{3}} \approx 0.053
+\]
+\end{exp:hipergeometrica 1}
+
+\begin{obs:hipergeometrica 1}
+Se $X \sim \mathrm{HG}(N, m, n)$ com $n = 1$, então $X \sim \mathrm{Bernoulli}(p)$ com
+$p = \frac{m}{N}$.
+\end{obs:hipergeometrica 1}
+
+\subsection{Geométrica}
+
+Considere o experimento aleatório que consiste na realização de ensaios Bernoulli até
+obter o primeiro sucesso.
+Desse modo, obtém-se uma amostra $\{X_i = x\}_{i=1}^n$ com $X_i = 0$ para $i < n$ e $X_n = 1$.
+Presuma que $X$ seja a variável que represente o número de tentativas até resultar em um
+sucesso.
+Logo, se a taxa de sucesso é $p$, então a probabilidade de $X = n$ é
+\[
+    (1-p)^{n-1}p
+\]
+
+\begin{def:geometrica}
+A variável $X$ tem distribuição geométrica com parâmetro $p$ se
+\[
+    P(X = n) = (1-p)^{n-1}p
+\]
+\end{def:geometrica}
+
+\begin{exp:geometrica 1}
+\label{exp:geometrica 1}
+Considere o experimento de lançar um dado até que a soma das faces seja $4$.
+A probabilidade de se obter esse resultado em um lançamento é $1/12$.
+Logo, a probabilidade de que o número de vezes que o dado seja lançado até que
+a soma das faces resulte no valor desejado seja $5$ é
+\[
+    \left(1-\frac{1}{12}\right)^4 \cdot \frac{1}{12} \approx 0.06
+\]
+\end{exp:geometrica 1}
+
+\begin{prop:esperanca geometrica}
+Se $X \sim \mathrm{Geo}(p)$, então
+\[
+	E[X] = \frac{1}{p}
+\]
+\end{prop:esperanca geometrica}
+\begin{proof}
+	Com efeito,
+	\[
+		E[X] = \sum_{k=0}^\infty k (1-p)^{k-1} p = p \sum_{k=0}^\infty k(1-p)^{k-1}.
+	\]
+	O somatório à esquerda é a derivada de uma série geométrica de razão $q = 1-p$,
+	tal que $q < 1$. Observemos que
+	\begin{align*}
+		\frac{d}{dq} \left(\sum_{k=0}^\infty q^k\right) & =
+		\frac{d}{dq} \left(\frac{1}{1 - q}\right)                             \\
+		\sum_{k=0}^\infty k(1-p)^{k-1}                  & = \frac{1}{(1-q)^2}
+	\end{align*}
+	donde conclui-se
+	\[
+		E[X] = \frac{p}{(1 - 1 + p)^2} = \frac{1}{p}
+	\]
+\end{proof}
+
+\begin{exp:esperanca geometrica 1}
+No exemplo \ref{exp:geometrica 1}, o número esperado de lançamentos até que se obtenha
+a soma dos dados igual a $4$ é $12$.
+\end{exp:esperanca geometrica 1}
+
+\subsection{Binomial Negativa}
+
+Suponha um experimento aleatório no qual são realizadas tentativas Bernoulli indepentes com
+taxa $p$ até que se acumulem $r$ sucessos.
+Com isso, esse experimento pode ser modelado como uma amostra $\{X_i = x\}_{i=1}^n$
+onde $X_i \sim \mathrm{Bernoulli}(p)$ e que contém $r$ sucessos.
+A probabilidade de que ela contenha $r$ sucessos será
+\[
+    (1-p)^{n-r}p^r.
+\]
+Como há
+\[
+    \binom{n}{r}
+\]
+maneiras de se obter uma amostra de com $r$ sucessos, então a probabilidade de que se tenha
+realizado $n$ tentativas é
+\[
+    \binom{n}{r} (1-p)^{n-r} p^r
+\]
+
+\begin{def:binomial negativa}
+A variável discreta $X$ terá distribuição binomial negativa com parâmetros $r$ e $p$ se
+\[
+    P(X = n) = \binom{n}{r} (1-p)^{n-r} p^r
+\]
+\end{def:binomial negativa}
+
+\begin{prop:esperanca binomial negativa}
+Se $X \sim \mathrm{BinNeg}(r, p)$, então
+\[
+	E[X] = \frac{r}{p}
+\]
+\begin{proof}
+	Suponha que $\{X_i = x\}_{i=1}^r$ seja uma amostra de variáveis tais que
+	$X_i$ denote o número de tentativas Bernoulli independentes após o último sucesso até
+	se obter um novo.
+	Com efeito, a variável $X_i \sim \mathrm{Geo}(p)$ e
+	\[
+		X = \sum_{i = 1}^r X_i
+	\]
+	téra distribuição binomial negativa com parâmetros $r$ e $p$.
+	Pela linearidade da esperança e pela esperança de uma geométrica de parâmetro $p$,
+	conclui-se que
+	\[
+		E[X] = \sum_{i = 1}^r E[X_i] = \sum_{i=1}^r \frac{1}{p} = \frac{r}{p}
+	\]
+\end{proof}
+\end{prop:esperanca binomial negativa}
+
+\subsection{Poisson}
+
+A distrbuição de Poisson modela contagem de eventos que ocorrem dentro de um intervalo
+contínuo -- como o tempo, uma superfície ou volume -- com probabilidade praticamente
+desprezível. Essa distribuição pode ser compreendida como a uma aproximação da Binomial
+quando $n \to \infty$.
+
+Considere que $X \sim \mathrm{Binomial}(n, p)$, logo
+\[
+	p_X(a) = \binom{n}{a} (1-p)^{n-a} p^a
+\]
+Se tomarmos o limite da função de massa de $X$ quando $n \to \infty$ e denotamos $np$ por $\lambda$,
+então
+\begin{align*}
+	\lim_{n \to \infty} p_X(a) & = \lim_{n \to \infty} \binom{n}{a} \left(\frac{\lambda}{n}\right)^a \left(1 - \frac{\lambda}{n}\right)^{n-a}                  \\
+	                           & = \lim_{n \to \infty} \frac{n(n-1)\ldots(n-a+1)}{a!}\left(\frac{\lambda}{n}\right)^a \left(1 - \frac{\lambda}{n}\right)^{n-a} \\
+	                           & = \lim_{n \to \infty} \prod_{k=1}^{a-1} \left(1 - \frac{k}{n}\right) \cdot
+	\lim_{n \to \infty} \frac{\lambda^a}{a!} \frac{(1 - \lambda / n)^n}{(1 - \lambda / n)^a}
+\end{align*}
+Como
+\[
+	\lim_{n \to \infty} \prod_{k=1}^{a-1} \left(1 - \frac{k}{n}\right) = 1 \quad
+	\text{e} \quad \lim_{n \to \infty} 1 - (\lambda / n)^a = 1
+\]
+então,
+\[
+	\lim_{n \to \infty} p_X(a) = \lim_{n \to \infty} \frac{\lambda^a}{a!} \left(1 - \frac{\lambda}{n}\right)^n \\
+\]
+Usando o limite exponencial fundamental
+\[
+	\lim_{n \to \infty} \left(1 - \frac{\lambda}{n}\right)^n = e^{-\lambda}
+\]
+obtemos, por fim,
+\[
+	\lim_{n \to \infty} p_X(a) = e^{-\lambda} \frac{\lambda^a}{a!}
+\]
+
+\begin{def:poisson}
+A variável $X$ tem distribuição de Poisson com parâmetro $\lambda$ se
+\[
+	P(X = a) = e^{-\lambda} \frac{\lambda^a}{a!}
+\]
+\end{def:poisson}
+
+\begin{prop:esperanca poisson}
+Se $X \sim \mathrm{Poisson}(\lambda)$, então
+\[
+	E[X] = \lambda
+\]
+\begin{proof}
+	Com efeito,
+	\begin{align*}
+		E[X] & = \sum_{k = 0}^\infty k e^{-\lambda} \frac{\lambda^k}{k!}             \\
+		     & = \lambda e^{-\lambda} \sum_{k=1}^\infty \frac{\lambda^{k-1}}{(k-1)!}
+	\end{align*}
+	O somatório equivale ao Polinômio de Taylor de $e^\lambda$, portanto
+	\[
+		E[X] = \lambda e^{-\lambda} e^{\lambda} = \lambda
+	\]
+\end{proof}
+\end{prop:esperanca poisson}
+
+\subsection{Zeta}
+
+A distribuição Zeta modela eventos cuja frequência é inversamente proporcional à sua
+posição num ranking, como frequência de palavras, população de cidades, citações de
+artigos científicos, entre outros.
+A ideia é que há poucos elementos muito frequentes, enquanto há muitos outros poucos
+frequentes.
+
+Suponha que $X$ seja a variável que indique o ranking de um evento conforme a sua posição
+nele tal que
+\[
+    P(X = k) \propto \frac{1}{k^s}
+\]
+onde $s$ indica o grau de diminuição da frequência em relação ao dacaimento no ranking.
+Logo, há uma constante $C$ tal que
+\[
+    P(X = k) = \frac{C}{k^s}.
+\]
+
+Temos que
+\[
+    \sum_{k=1}^\infty \frac{C}{k^s} = 1,
+\]
+o que implica
+\[
+    \sum_{k=1}^\infty \frac{1}{k^s} = \frac{1}{C}.
+\]
+O membro esquerdo da expressão é conhecida como a função Zeta de Riemann $\zeta(s)$.
+Logo
+\[
+    P(X = k) = \frac{k^{-s}}{\zeta(s)}
+\]
+
+\begin{def:zeta}
+A variável discreta $X$ tem distribuição Zeta com parâmetro $s \in (1, \infty)$
+se sua função de massa for
+\[
+    P(X = k) = \frac{k^{-s}}{\zeta(s)},
+\]
+onde $\zeta$ é a função Zeta de Riemann.
+\end{def:zeta}

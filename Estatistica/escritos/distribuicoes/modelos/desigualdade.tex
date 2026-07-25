@@ -1,0 +1,119 @@
+\section{Desigualdades e Lei Fraca dos Grandes Números}
+
+\begin{thm:desigualdade de markov}[da Desigualdade de Markov]
+Se $X$ é uma variável aleatória não negativa, então para todo $a > 0$
+\[
+    P(X \ge a) \le \frac{\ev{X}}{a}
+\]
+\end{thm:desigualdade de markov}
+\begin{proof}
+Seja $I$ a função indicadora tal que
+\[
+    I(x) = \begin{cases}
+        1,&\text{se } x \ge a \\
+        0,&\text{caso contrário.}
+    \end{cases}
+\]
+Com isso,
+\[
+    I \le \frac{X}{a},
+\]
+e tomando a esperança de ambos os lados
+\[
+    \ev{I} \le \frac{\ev{X}}{a}
+\]
+Já que
+\[
+    \ev{I} = 1 \cdot P(I = 1) = P(X \ge a),
+\]
+então
+\[
+    P(X \ge a) \le \frac{\ev{X}}{a}
+\]
+\end{proof}
+
+\begin{cor:desigualdade de chebyshev}
+\label{cor:desigualdade de chebyshev}
+Se $X$ é uma variável aleatória com média $\mu$ e variância $\sigma^2$, então
+para todo $k > 0$
+\[
+    P(|X - \mu| \ge k) \le \frac{\sigma^2}{k^2}
+\]
+\end{cor:desigualdade de chebyshev}
+\begin{proof}
+Pela desigualdade de Markov,
+\[
+    P((X - \mu)^2 \ge k^2) \le \frac{\ev{(X - \mu)^2}}{k^2}
+\]
+mas como $(X - \mu)^2 \ge k^2$ se, e somente se, $|X - \mu| \ge k$, e pela definição
+de variância, temos que
+\[
+    P(|X - \mu| \ge k) \le \frac{\sigma^2}{k^2}
+\]
+\end{proof}
+
+\begin{prop:variancia 0 e igual media}
+Se $X$ é uma variável aleatória com $\var{X} = 0$, então $X = \ev{X}$.
+\end{prop:variancia 0 e igual media}
+\begin{proof}
+Pela desigualde de Chebyshev,
+\[
+    P\left(|X - \mu| > \frac{1}{n}\right) \le 0
+\]
+e por não negatividade de probabilidades,
+\[
+    P\left(|X - \mu| > \frac{1}{n}\right) = 0
+\]
+para todo $n \in \real$.
+Sabemos então que
+\[
+    \lim_{n \to \infty} P\left(|X - \mu| > \frac{1}{n}\right) = 0,
+\]
+no entanto,
+\[
+    \lim_{n \to \infty} P\left(|X - \mu| > \frac{1}{n}\right) =
+    P\left[\lim_{n \to \infty} \left(|X - \mu| > \frac{1}{n}\right)\right] =
+    P(|X - \mu| > 0),
+\]
+de modo que
+\[
+    P(|X - \mu| > 0) = 0.
+\]
+Portanto,
+\[
+    P(X = \mu) = 1 \Longrightarrow X = \ev{X}.
+\]
+\end{proof}
+
+\begin{thm:lei fraca dos grandes numeros}[Lei Fraca dos Grandes Números]
+Sejam $X_1, \ldots, X_n$ variáveis aleatória iid, logo $\ev{X_i} = \mu$ e
+$\var{X_i} = \sigma^2$ para todo $i \in [n]$.
+Para qualquer $\epsilon > 0$,
+\[
+    \lim_{n \to \infty} P\left(\left| \frac{\sum_{i=1}^n X_i}{n} - \mu \right| \ge \epsilon \right) = 0
+\]
+\end{thm:lei fraca dos grandes numeros}
+\begin{proof}
+Pelos Teoremas \ref{thm:propriedades esperanca} e \ref{prop:propriedades variancia},
+\[
+    \ev{\frac{\sum_{i=1}^n X_i}{n}} = \frac{n\mu}{n} = \mu \quad \text{e} \quad
+    \var{\frac{\sum_{i=1}^n X_i}{n}} = \frac{n\sigma^2}{n^2} = \frac{\sigma^2}{n}.
+\]
+Pela desigualde de Chebyshev,
+\[
+    P\left(\left| \frac{\sum_{i=1}^n X_i}{n} - \mu \right| \ge \epsilon \right) \le \frac{\sigma^2}{n\epsilon}.
+\]
+Logo, temos
+\begin{gather*}
+    0 \le
+    \lim_{n \to \infty} P\left(\left| \frac{\sum_{i=1}^n X_i}{n} - \mu \right| \ge \epsilon \right) \le
+    \lim_{n \to \infty} \frac{\sigma^2}{n\epsilon} \\
+    0 \le
+    \lim_{n \to \infty} P\left(\left| \frac{\sum_{i=1}^n X_i}{n} - \mu \right| \ge \epsilon \right) \le
+    0
+\end{gather*}
+e, pelo Teorema do Confronto do cálculo de limties,
+\[
+    \lim_{n \to \infty} P\left(\left| \frac{\sum_{i=1}^n X_i}{n} - \mu \right| \ge \epsilon \right) = 0
+\]
+\end{proof}

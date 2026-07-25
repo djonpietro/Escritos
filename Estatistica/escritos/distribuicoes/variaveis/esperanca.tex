@@ -6,12 +6,6 @@ Defini-se esperança de $X$, ou valor esperado, denotada por $\ev{X}$, como
 \[
 	\ev{X} = \int_\Omega X\, dP
 \]
-% \[
-% 	\ev{X} = \begin{cases}
-% 		\int_\Omega X\, dP,               & \text{ se } $X$ \text{ é contínua}  \\
-% 		\sum_{x \in \Omega_X} x P(X = x), & \text{ se }  $X$ \text{ é discreta} \\
-% 	\end{cases}
-% \]
 \end{def:esperanca}
 
 \begin{thm:esperanca de transformacao}
@@ -39,6 +33,27 @@ A esperança da variável $g(X)$ é dada por
 	\[
 		\ev{g(X)} = \int_\real g(x) f(x)\, d\lambda = \int_{-\infty}^\infty g(x)f(x)\, dx
 	\]
+	Por outro lado, se $X$ for discreta, então, pela Proposição \ref{prop:existencia fmp},
+	$p_X(x) = \frac{d}{d\mu}P_X$ é a função de massa de $X$, onde $\mu$ é medida de
+	contagem, e fazendo a substituição $dP_X = p_Xd\mu$, obtemos
+	\[
+    	\ev{g(X)} = \int_\real g(x) p_X(x)\, d\mu = \int_{\real \setminus \Omega_X} g(x)p_X(x)\, d\mu +
+            \int_{\Omega_X} g(x)p_X(x)\, d\mu
+	\]
+	onde $\Omega_X$ é o suporte de $X$.
+	Uma vez que,
+	\[
+	    \forall x \in \real,\, ( x \notin \Omega_X \rightarrow p_X(x) = 0 )
+	\]
+	então
+	\[
+    	\ev{g(X)} = \int_{\Omega_X} g(x)p_X(x)\, d\mu
+	\]
+	e, pelo Teorema \ref{thm:integracao contagem},
+	\[
+    	\ev{g(X)} = \sum_{x \in \Omega_X} g(x)p_X(x)
+	\]
+
 \end{proof}
 \end{thm:esperanca de transformacao}
 
@@ -86,6 +101,7 @@ Se $X$ uma variável aleatória com esperança $\mu$, então estão definidos:
 \end{def:momentos importantes}
 
 \begin{thm:propriedades variancia}
+\label{prop:propriedades variancia}
 Seja $X$ variável aleatória com esperança $\mu$ e $a \in \real$.
 Vale que
 \begin{enumerate}
@@ -121,10 +137,103 @@ Vale que
 \end{proof}
 \end{thm:propriedades variancia}
 
+\begin{prop:padronizacao}
+\label{prop:padronizacao}
+Se $X$ é uma variável aleatória com esperança $\mu$ e variância $\sigma^2$, então
+a variável definida por
+\[
+    Z = \frac{X - \mu}{\sigma}
+\]
+possui esperança 0 e variância $1$.
+\end{prop:padronizacao}
+\begin{proof}
+	Com efeito,
+	\[
+	    \ev{Z} = \frac{1}{\sigma} \cdot \ev{X} - \frac{\mu}{\sigma} = 0
+	\]
+	enquanto que,
+	\[
+	    \var{Z} = \ev{\frac{(X - \mu)^2}{\sigma^2}} = \frac{\sigma^2}{\sigma^2} = 1
+	\]
+\end{proof}
+
 \begin{def:mgf}
 A função geradora de momentos (mgf) da variável $X$ é
 \begin{gather*}
 	M_X: \nat \to \real \\
 	M_X(t) = \ev{e^{tX}}
 \end{gather*}
+caso o valor esperado exista para $t$ numa vizinhança de $0$.
+Caso contrário, dizemos que a mgf não existe.
 \end{def:mgf}
+
+\begin{thm:derivada do momento}
+Se $X$ uma variável aleatória cuja mgf existe, então
+\[
+    \ev{X^n} = \left. \frac{d^n}{dt^n} M_X(t)\right|_{t=0}.
+\]
+\end{thm:derivada do momento}
+\begin{proof}
+Se $f(x)$ é a função de densidade de $X$, então
+\[
+    \left. \frac{d^n}{dt^n} M_X(t)\right|_{t=0} =
+    \left. \frac{d^n}{dt^n} \int_{-\infty}^\infty e^{tx} f(x)\, dx \right|_{t=0}
+\]
+Usando a Regra de Leibniz, que permite diferenciar sobre o sinal de integral,
+\[
+    \left. \frac{d^n}{dt^n} \int_{-\infty}^\infty e^{tx} f(x)\, dx \right|_{t=0} =
+    \int_{-\infty}^\infty \left. \frac{\partial^n}{\partial t^n} e^{tx} f(x)\, dx \right|_{t=0}.
+\]
+Uma vez que
+\[
+    \frac{\partial^n}{\partial t^n} e^{tx} = x^n e^{tx},
+\]
+então
+\[
+    \left. \frac{d^n}{dt^n} M_X(t)\right|_{t=0} =
+    \left. \int_{-\infty}^\infty  x^n e^{tx} f(x)\, dx \right|_{t=0} =
+    \int_{-\infty}^\infty x^n f(x)\, dx =
+    \ev {X^n}
+\]
+\end{proof}
+
+\begin{thm:condicao de igualdade de distribuicao e momento}
+Sejam $X$ e $Y$ variáveis aleatórias com distribuições $F_X(x)$ e $F_Y(y)$ cujos
+momentos existem. Valem as seguintes afirmações:
+\begin{enumerate}
+\item Se os suportes das variáveis são limitados, $F_X(u) = F_Y(u)$ para todo $u \in \real$
+se, e somente se, $\ev{X^r} = \ev{Y^r}$ para todo inteiro $r$ não negativo.
+
+\item Se a funções geradoras de momentos das variáveis existem e $M_X(t) = M_Y(t)$ para
+todo $t$ em uma vizinhança de $0$, então $F_X(u) = F_Y(u)$ para todo $u \in \real$.
+\end{enumerate}
+\end{thm:condicao de igualdade de distribuicao e momento}
+
+\begin{thm:convergencia mgf}
+Seja $(X_i)_{i=1}^n$ uma sequência de variáveis aleatórias com geradores de momentos
+$M_{X_i}(t)$ respectivamente.
+Se para todo $t$ numa vizinhança de $0$ é satisfeito que
+\[
+    \lim_{i \to \infty} M_{X_i}(t) = M_X(t)
+\]
+então há uma única distribuição $F_X(x)$ tal que
+\[
+    \lim_{i \to \infty} F_{X_i}(x) = F_X(x)
+\]
+\end{thm:convergencia mgf}
+
+\begin{prop:mgf da transformacao afim}
+Se $X$ e $Y$ é uma variável aleatória tal que $Y = a X + b$, com $a$ e $b$ reais, então
+\[
+    M_Y(t) = e^{bt} M_X(at)
+\]
+\end{prop:mgf da transformacao afim}
+\begin{proof}
+Com efeito,
+\begin{align*}
+	M_Y(t) &= E[e^{ty}] \\
+	&= \ev{e^{(at)x} \cdot e^{tb}} \\
+	&= e^{tb} \cdot \ev{e^{(at)x}} \\
+	&= e^{tb} \cdot M_X(at)
+\end{align*}
+\end{proof}

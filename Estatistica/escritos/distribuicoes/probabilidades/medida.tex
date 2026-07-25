@@ -151,15 +151,6 @@ se satisfaz
 A tripla $(\Omega, \mathcal{B}, \mu)$ é chamado de espaço de medida.
 \end{def:mensuravel}
 
-
-% 	\begin{thm:mensuravel real}
-% 	\label{thm:mensuravel real}
-% 	Dados espaços mensuráveis $(\Omega, \mathcal{B})$ e $(\real, \borel)$, uma função
-% 	real $f: \Omega \to \real$ é mensurável se, e somente, se
-% 	\[
-% 	\forall x \in \real, f^{-1}((-\infty, x]) \in \mathcal{B}.
-% \]
-% \end{thm:mensuravel real}
 Sem a restrição sobre a pré-imagem de $f$, haveriam conjuntos na imagem que podem ser
 medidos cujas contrapartes não o poderiam.
 
@@ -176,15 +167,16 @@ A medida $\lambda$ de Lebesgue para $(\real, \borel)$ satisfaz
 \]
 \end{def:medida de lebesgue}
 
-Outra medida importante é a de contagem, que associa cada conjunto à sua cardinalidade.
-Em especial, para conjunto finitos, isso representa a quantidade de elementos no conjunto.
+Outra medida importante é a de contagem, que associa cada conjunto à quantidade de
+elementos presentes nele, sendo um número natural quando o conjunto é finito, ou infinito
+quando ele não o é.
 
 \begin{def:medida de contagem}
 Se a medida $\mu$ satisfaz
 \[
 	\mu(A) = \begin{cases}
 		|A|,      & \text{ se } $A$ \text{ for finito} \\
-		|\infty|, & \text{ caso contrário }
+		\infty, & \text{ caso contrário }
 	\end{cases}
 \]
 então $\mu$ é medida de contagem.
