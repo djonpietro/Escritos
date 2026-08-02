@@ -1,5 +1,11 @@
 \section{Esperança e Momentos}
 
+A esperança de uma variável aleatória representa uma medida de centralidade dos valores
+dessa variável.
+Intuitivamente, ela é obtida ponderando-se os valores possíveis da variável por suas
+respectivas probabilidades, sumarizando a sua imagem a um único valor central.
+Na linguagem de medida, a definição formal da esperança é dada a seguir.
+
 \begin{def:esperanca}
 Seja $X$ uma variável aleatória e $(\Omega, \mathcal{F}, P)$ espaço de probabilidade.
 Defini-se esperança de $X$, ou valor esperado, denotada por $\ev{X}$, como
@@ -7,6 +13,11 @@ Defini-se esperança de $X$, ou valor esperado, denotada por $\ev{X}$, como
 	\ev{X} = \int_\Omega X\, dP
 \]
 \end{def:esperanca}
+
+Podemos obter o valor esperado de uma transformação de uma variável aleatória ponderando
+os valores da transformação pelas próprias probabilidades de suas respectivas pré-imagens,
+em vez da probabilidade dos valores em si, o que é útil quando não conhecemos em detalhes
+a distribuição de probabilidade da variável obtida pela transformação.
 
 \begin{thm:esperanca de transformacao}
 Seja $X$ variável aleatória e $g: \real \to \real$ uma transformação mensurável.
@@ -53,9 +64,12 @@ A esperança da variável $g(X)$ é dada por
 	\[
     	\ev{g(X)} = \sum_{x \in \Omega_X} g(x)p_X(x)
 	\]
-
 \end{proof}
 \end{thm:esperanca de transformacao}
+
+O Teorema a seguir enuncia quatro propriedades da esperança enquanto um operador:
+linearidade, positividade, monotonicidade e preservação de limites.
+Esse resultado serve como base de cálculos utilizando-se o operador de valor esperado.
 
 \begin{thm:propriedades esperanca}
 \label{thm:propriedades esperanca}
@@ -77,6 +91,12 @@ O operador de esperança satisfaz:
 \end{proof}
 \end{thm:propriedades esperanca}
 
+Os momentos de uma variável aleatória medem diferentes aspectos da distribuição dela.
+A intuição advém da mecânica, em que os momentos de massa descrevem como a massa
+de um sistema está distribuída entorno de um ponto.
+Analogamente, os momentos descrevem como a probabilidade dos valores da variável estão
+distribuídos.
+
 \begin{def:momento}
 Seja $n \in \nat$ e $X$ variável aleatória com esperança $\mu$.
 O enésimo momento de $X$, denotado $\mm_(\mu)'$, é definido como
@@ -90,6 +110,38 @@ O enésimo momento central, denotado $\mm_n(\mu)$, é dado por
 onde $\mu = \ev{X}$.
 \end{def:momento}
 
+Cada valor de $n$ determina um momento de uma variável, de forma que os dois primeiros
+possuem interpretações intuitivas:
+\begin{itemize}
+\item O primeiro momento é o ``centro de massa'' da distribuição, consistindo no próprio
+valor esperado da variável.
+
+\item O segundo é a ``inércia'' da variável, medindo o quão disprso estão os seus valores.
+Valores altos recebem pesos maiores do que os mais próximos da origem, tal modo que
+um pequeno segundo momento diz que as realizações estão conentradas na origem, enquanto
+um alto segundo momento diz que eles estão dispersos entorno dela.
+\end{itemize}
+
+Os momentos centrais descrevem a distribuição da variável entorno de seu centro de massa,
+ou seja, do seu valor esperado:
+
+\begin{itemize}
+\item O segundo momento central mede o quão dispersos os valores estão em relação ao valor
+esperado.
+
+\item O terceiro momento, por preservar o sinal, descreve a direção em que os valores
+se concentram em relação ao valores esperado: caso seja à esquerda, então ele será
+negativo; se à direita, então positivo; e caso a distribuição seja aproximadamente
+simétrica, então ele estará próximo de zero.
+
+\item O quarto momento central explica a distribuição de valores extremos, pois esses
+recebem pesos muito maiores do que valores mais próximos da esperança.
+\end{itemize}
+
+Na análise estatística, os principais momentos centrais usados para explicar uma variável
+aleatória são o segundo, terceiro e quarto, os quais podem ser normalizados -- com exceção
+do segundo -- para criarem medidas descritivas.
+
 \begin{def:momentos importantes}
 Se $X$ uma variável aleatória com esperança $\mu$, então estão definidos:
 \begin{enumerate}
@@ -99,6 +151,11 @@ Se $X$ uma variável aleatória com esperança $\mu$, então estão definidos:
 	\item Curtose: $\frac{\mm_4(\mu)}{\dep{X}^4} - 3   $
 \end{enumerate}
 \end{def:momentos importantes}
+
+A variância -- e, por consequência, o desvio-padrão -- é rotineiramente usado com mais
+frequência junto da esperança para descrever distribuições.
+Assim como o caso da esperança, nos é útil conhecer algumas propriedades da variância
+enquanto um operador para fins de cálculos.
 
 \begin{thm:propriedades variancia}
 \label{prop:propriedades variancia}
@@ -137,6 +194,14 @@ Vale que
 \end{proof}
 \end{thm:propriedades variancia}
 
+Uma transformação aplicável a variáveis aleatórias é aquela que subtrai a mede e divide
+o resultado pelo desvio-padrão, conhecida como \textbf{padronização}.
+O destaque para ela justifica-se pelo fato de que a variável resultante sempre terá
+valor esperado igual a $0$ e desvio-padrão igual a $1$, o que é provado na Proposição
+\ref{prop:padronizacao}.
+Esse resultado é especialmente útil quando temos um conjunto de várias variáveis e queremos
+tratá-las na mesma escala.
+
 \begin{prop:padronizacao}
 \label{prop:padronizacao}
 Se $X$ é uma variável aleatória com esperança $\mu$ e variância $\sigma^2$, então
@@ -157,6 +222,13 @@ possui esperança 0 e variância $1$.
 	\]
 \end{proof}
 
+As funções geradoras de momentos (mgf), como seu nome sugere, são usadas para obter os
+momentos de uma variável aleatória.
+No entanto, na prática, é mais razoável utilizar a própria definição de momento para fins
+de computação.
+A sua real utilidade está em oferecer uma forma de representar todos os momentos de uma
+variável enquanto uma função com poderosas propriedades teóricas.
+
 \begin{def:mgf}
 A função geradora de momentos (mgf) da variável $X$ é
 \begin{gather*}
@@ -167,7 +239,14 @@ caso o valor esperado exista para $t$ numa vizinhança de $0$.
 Caso contrário, dizemos que a mgf não existe.
 \end{def:mgf}
 
+A presença de uma exponencial no argumento do valor esperado na definição da mgf pode
+ser confusa a primeira vista.
+A razão disso é revalada na demonstração do Teorema \ref{thm:derivada do momento}, o qual
+enuncia como obter os momentos por meio da mgf: avaliando a drivada de ordem $n$ do
+gerador de momentos em torno de $t = 0$.
+
 \begin{thm:derivada do momento}
+\label{thm:derivada do momento}
 Se $X$ uma variável aleatória cuja mgf existe, então
 \[
     \ev{X^n} = \left. \frac{d^n}{dt^n} M_X(t)\right|_{t=0}.
@@ -197,30 +276,8 @@ então
 \]
 \end{proof}
 
-\begin{thm:condicao de igualdade de distribuicao e momento}
-Sejam $X$ e $Y$ variáveis aleatórias com distribuições $F_X(x)$ e $F_Y(y)$ cujos
-momentos existem. Valem as seguintes afirmações:
-\begin{enumerate}
-\item Se os suportes das variáveis são limitados, $F_X(u) = F_Y(u)$ para todo $u \in \real$
-se, e somente se, $\ev{X^r} = \ev{Y^r}$ para todo inteiro $r$ não negativo.
-
-\item Se a funções geradoras de momentos das variáveis existem e $M_X(t) = M_Y(t)$ para
-todo $t$ em uma vizinhança de $0$, então $F_X(u) = F_Y(u)$ para todo $u \in \real$.
-\end{enumerate}
-\end{thm:condicao de igualdade de distribuicao e momento}
-
-\begin{thm:convergencia mgf}
-Seja $(X_i)_{i=1}^n$ uma sequência de variáveis aleatórias com geradores de momentos
-$M_{X_i}(t)$ respectivamente.
-Se para todo $t$ numa vizinhança de $0$ é satisfeito que
-\[
-    \lim_{i \to \infty} M_{X_i}(t) = M_X(t)
-\]
-então há uma única distribuição $F_X(x)$ tal que
-\[
-    \lim_{i \to \infty} F_{X_i}(x) = F_X(x)
-\]
-\end{thm:convergencia mgf}
+O próximo resultado diz como obter a mgf de uma variável obtida por transformação afim
+de uma outra.
 
 \begin{prop:mgf da transformacao afim}
 Se $X$ e $Y$ é uma variável aleatória tal que $Y = a X + b$, com $a$ e $b$ reais, então
@@ -237,3 +294,62 @@ Com efeito,
 	&= e^{tb} \cdot M_X(at)
 \end{align*}
 \end{proof}
+
+Apesar de serem usados para descrever distribuições de variáveis aleatórias, momentos
+não necessariamente as definem.
+Em outras palavras, embora duas variáveis possuam a mesma sequência de momentos, não
+necessariamente elas possuem a mesma distribuição.
+O Teorema \ref{thm:condicao de igualdade de distribuicao e momento} estabelece algumas
+condições para que sequências de moementos idênticos permitem dizer que estamos tratando
+das mesmas distribuições.
+
+\begin{thm:condicao de igualdade de distribuicao e momento}
+\label{thm:condicao de igualdade de distribuicao e momento}
+Sejam $X$ e $Y$ variáveis aleatórias com distribuições $F_X(x)$ e $F_Y(y)$ cujos
+momentos existem. Valem as seguintes afirmações:
+\begin{enumerate}
+\item Se os suportes das variáveis são limitados, $F_X(u) = F_Y(u)$ para todo $u \in \real$
+se, e somente se, $\ev{X^r} = \ev{Y^r}$ para todo inteiro $r$ não negativo.
+
+\item Se a funções geradoras de momentos das variáveis existem e $M_X(t) = M_Y(t)$ para
+todo $t$ em uma vizinhança de $0$, então $F_X(u) = F_Y(u)$ para todo $u \in \real$.
+\end{enumerate}
+\end{thm:condicao de igualdade de distribuicao e momento}
+\begin{proof}
+Sejam $f_x$ e $f_Y$ as densidades de $X$ e $Y$ respectivamente.
+Utilizando-se a integração por partes para expressar $\ev{X^n}$,
+\[
+    \ev{X^n} = \int_{-\infty}^\infty u^n f_X(u)\,du =
+    u^n F_X(u) - n\int_{-\infty}^\infty u^{n-1} F_X(u)\,du
+\]
+mas supondo que $F_X(u) = F_Y(u)$, então
+\[
+    \ev{X^n} = u^n F_Y(u) - n\int_{-\infty}^\infty u^{n-1} F_Y(u)\,du =
+    \int_{-\infty}^\infty u^n f_Y(u)\,du =
+    \ev{Y^n}
+\]
+\end{proof}
+
+Aqui é que notamos a utilidade das funções geradoras de momentos: apesar de uma sequência
+de momentos não ser suficiente para caracterizar uma distribuição, a convergência de
+geradores de momentos permite afirmar a convergência de uma distribuição.
+
+\begin{thm:convergencia mgf}
+\label{thm:convergencia mgf}
+Seja $(X_i)_{i=1}^n$ uma sequência de variáveis aleatórias com geradores de momentos
+$M_{X_i}(t)$ respectivamente.
+Se para todo $t$ numa vizinhança de $0$ é satisfeito que
+\[
+    \lim_{i \to \infty} M_{X_i}(t) = M_X(t)
+\]
+então há uma única distribuição $F_X(x)$ tal que
+\[
+    \lim_{i \to \infty} F_{X_i}(x) = F_X(x)
+\]
+\end{thm:convergencia mgf}
+
+A demonstração desse Teorema está fora do escopo deste texto, pois ela baseia-se no fato
+de que $M_X(t)$ é Transformada de Laplace de uma única função de densidade $f(x)$.
+Também seria necessário mostar que, dada a convergência das transformadas, as densidades
+das variáveis envolvidas satisfazem determinadas hipóteses de continuidade e convergência,
+as quais permitem dizer que as próprias densidades convergem para a mesma função $f(x)$.

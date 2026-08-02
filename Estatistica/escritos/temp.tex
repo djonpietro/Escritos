@@ -122,6 +122,38 @@
 \usepackage[linesnumbered,ruled,vlined,portuguese]{algorithm2e}
 
 % ================================================================
+%  Blocos de código — sóbrio, coerente com o restante do texto
+% ================================================================
+\usepackage{listings}
+\usepackage{xcolor}
+
+\definecolor{codecomment}{gray}{0.45}
+\definecolor{coderule}{gray}{0.5}
+
+\renewcommand{\lstlistingname}{Código}
+
+\lstdefinestyle{escritos}{
+	basicstyle       = \small\ttfamily,
+	commentstyle     = \itshape\color{codecomment},
+	keywordstyle     = \bfseries,
+	stringstyle      = \upshape,
+	numbers          = left,
+	numberstyle      = \tiny\color{codecomment},
+	numbersep        = 0.7em,
+	frame            = tb,
+	rulecolor        = \color{coderule},
+	framerule        = 0.3pt,
+	xleftmargin      = 1.5em,
+	xrightmargin     = 0.5em,
+	breaklines       = true,
+	breakatwhitespace = true,
+	showstringspaces = false,
+	tabsize          = 2,
+	captionpos       = b,
+}
+\lstset{style=escritos}
+
+% ================================================================
 %  Hyperlinks — discretos e clássicos (sem cor)
 % ================================================================
 \usepackage{bookmark}
@@ -159,6 +191,7 @@
 \newcommand{\mo}[1]{\mathrm{moda}\!\left(#1\right)}
 \newcommand{\dm}[1]{\mathrm{dm}\!\left(#1\right)}
 \newcommand{\var}[1]{\mathrm{Var}\!\left(#1\right)}
+\newcommand{\cov}[2]{\mathrm{Cov}\!\left(#1,#2\right)}
 \newcommand{\dep}[1]{\mathrm{dp}\!\left(#1\right)}
 \newcommand{\Parts}[1]{\mathcal{P}\!\left(#1\right)}
 \newcommand{\borel}{\mathcal{B}(\mathbb{R})}

@@ -1,6 +1,6 @@
 \section{Distribuição Normal}
 
-A distribuição normal foi introduzida em 1733 por Abraham DeMoivre para aproximar
+A distribuição normal foi introduzida em 1733 por Abraham de De Moivre para aproximar
 probabilidades de variáveis binomiais quando o parâmetro $n$ é grande.
 Essa distribuição possui grande importância na Teoria de Probabilidades e na Estatística,
 pois suas propriedades analíticas permitem o tratamento adequado de inúmeros fenômenos
@@ -13,6 +13,13 @@ sua densidade for
 \]
 Uma variável normal será padrão caso $\mu = 0$ e $\sigma^2 = 1$.
 \end{def:normal}
+
+A função de distribuição da variável normal é um caso de integral que não pode ser expressa
+em termos de funções elementares.
+No entanto, isso não a torna menos rica analiticamente.
+O lema a seguir mostra que, embora não possamos integrar a função de densidade para
+obter a função de distribuição, somos de encontrar algumas propriedades analíticas de
+partes da função de densidade que nos serão úteis futuramente.
 
 \begin{lem:integral exponencial quadrada}
 \label{lem:integral exponencial quadrada}
@@ -46,6 +53,9 @@ essa que pode ser resolvida via substituição, resultando em
 \]
 \end{proof}
 
+Uma aplicação direta do Lema \ref{lem:integral exponencial quadrada} é mostrar que a
+função de densidade da normal é de fato válida.
+
 \begin{prop:densidade da normal}
 A função
 \[
@@ -73,6 +83,10 @@ Resta concluir que
 \]
 o que é garantido pelo Lema \ref{lem:integral exponencial quadrada}.
 \end{proof}
+
+Quanto às transformações, toda transformação afim -- um escalonamento seguido de um
+deslocamento -- de uma variável normal resulta numa nova variável normal com parâmetros
+previstos.
 
 \begin{thm:tranformacao afim da normal}
 Se $X \sim \mathrm{Normal}(\mu, \sigma^2)$ e $a$ e $b$ são constantes, então
@@ -110,6 +124,7 @@ e
 \end{proof}
 
 \begin{thm:parametros da normal}
+\label{thm:parametros da normal}
 Se $X \sim \mathrm{Normal}(\mu, \sigma^2)$, então
 \[
     \ev{X} = \mu \quad \text{ e } \quad \var{X} = \sigma^2
@@ -152,6 +167,18 @@ Mas como $\ev{Z} = 0$ e $\var{Z} = 1$, então
     \ev{X} = \mu \quad \text{e} \quad \var{X} = \sigma^2
 \]
 \end{proof}
+
+Portanto, temos que uma variável normal é caracterizada pelo seu valor esperado e por
+sua variância.
+Em conjunto com o Corolário \ref{cor:normal e normal padrao}, mostra-se que ao tomar
+uma variável normal, subtrair a sua média e depois a dividir pelo desvio-padrão resulta
+numa variável normal padrão.
+A utilidade desse fato é semelhante ao exposto para transformação de variáveis uniformes
+contínuas: podemos tabelar os valores de uma única distribuição normal e usá-los para
+computar probabilidades relacionadas a qualquer outra distribuição normal.
+Esse fato é ainda mais valioso, já que a distribuição de probabilidade de variáveis
+normais não possui fórmula fechada como da uniforme contínua.
+A proposição e o Teorema a seguir nos dizem a respeito da simetria da distribuição normal.
 
 \begin{prop:simetria densidade normal}
 \label{prop:simetria densidade normal}
@@ -212,10 +239,25 @@ mostrando, enfim, que
 \]
 \end{proof}
 
-\begin{thm:demoivre-laplace}[de DeMoivre-Laplace]
+Com isso, temos mais uma facilidade em calcular probabilidades para variáveis normais.
+Não precissamos, necessarimanete, tabelar as densidades de probabilidade para valores
+negativos da variável, basta usar a relação de simetria usando os valores positivos.
+
+O próximo Teorema enuncia o que De Moivre descobrira e que depois foi generalizado por
+Laplace: para uma amostra suficientemente grande, a contagem de sucessos tem distribuição
+aproximadamente normal.
+Isso caracteriza a aproximação da variável binomial pela variável normal.
+
+\begin{thm:demoivre-laplace}[de De Moivre-Laplace]
 Se $X \sim \mathrm{Binomial}(n, p)$, então para quaisquer reais $a$ e $b$ com $a < b$ é
 satisfetio que
 \[
     \lim_{n \to \infty} P\left(a \le \frac{X - np}{\sqrt{np(1-p)}} \le b\right) = \Phi(b) - \Phi(a)
 \]
 \end{thm:demoivre-laplace}
+
+A verdade é que resultado é ainda mais geral, não se restringindo somente às distribuições
+binomiais. A verdade é que para qualquer distribuição, se tomamos uma amostra suficientemente
+grande dela e somar os seus valores, a soma deles tem distribuição aproximadamente normal.
+Esse o Teorema Central do Limite e a razão da importância e destaque da distribuição
+normal na Estatística.

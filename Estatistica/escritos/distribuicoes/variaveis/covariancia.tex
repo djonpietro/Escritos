@@ -1,1 +1,78 @@
 \section{Independência de Variáveis e Covariância}
+
+\begin{def:independencia de variaveis}
+Duas variáveis $X$ e $Y$ são independentes se, e somente, se
+\[
+    \forall x, y \in \real,\, P(X = x, Y = y) = P(X = x) \cdot P(Y = y)
+\]
+se forem discretas, ou
+\[
+    \forall x, y \in \real,\, f_{X, Y}(X = x, Y = y) = f_X(X = x) \cdot f_Y(Y = y)
+\]
+se forem contínuas.
+\end{def:independencia de variaveis}
+
+\begin{def:covariancia}
+A covariância de um par de variáveis aleatórias $X$ e $Y$ é definida por
+\[
+    \cov{X}{Y} = \ev{(X - \ev X)(Y - \ev Y)}
+\]
+\end{def:covariancia}
+
+\begin{thm:propriedades covariancia}
+\label{thm:propriedades covariancia}
+Se $X$ e $Y$ são variáveis aleatórias, então vale que
+\begin{enumerate}
+\item $\cov{X}{Y} = \ev{XY} - \ev X \ev Y $
+\item $\cov{X}{X} = \var{X}$
+\item $\cov{aX}{Y} = a \, \cov{X}{Y}$
+\end{enumerate}
+\end{thm:propriedades covariancia}
+
+\begin{prop:variancia da soma}
+\label{prop:variancia da soma}
+Se $X$ e $Y$ são variáveis aleatórias, então
+\[
+    \var{X + Y} = \var X + \var Y + 2\, \cov{X}{Y}
+\]
+\end{prop:variancia da soma}
+
+\begin{thm:covariancia independentes}
+Se $X$ e $Y$ são variáveis aleatórias independentes, então
+\begin{enumerate}
+\item $\ev{XY} = \ev X \ev Y$
+\item $\cov{X}{Y} = 0$
+\item $\var{X + Y} = \var{X} + \var{Y}$
+\end{enumerate}
+\end{thm:covariancia independentes}
+\begin{proof}
+Com efeito, para o caso discreto,
+\[
+    \ev{XY} = \sum_{\substack{ x \in \Omega_X \\ y \in \Omega_Y}} xy\,P(X = x, Y = y) =
+    \sum_{\substack{ x \in \Omega_X \\ y \in \Omega_Y}} xy\,P(X = x)P(Y = y),
+\]
+e, com isso,
+\[
+    \ev{XY} = \sum_{x \in \Omega_X} x P(X = x) \sum_{y \in \Omega_Y} y P(Y = y) =
+    \sum_{x \in \Omega_X} x P(X = x) \ev Y
+\]
+levando a
+\[
+    \ev{XY} = \ev Y \sum_{x \in \Omega_X} x P(X = x) = \ev X \ev Y.
+\]
+O mesmo pode ser feito, analogamente, para as variáveis contínuas:
+\[
+    \ev{XY} = \int_{-\infty}^\infty \int_{-\infty}^\infty xy\, f_{X, Y}(x, y)\,dx\,dy =
+    \ev{Y} \int_{-\infty}^\infty x f_X(x)\,dx = \ev{X}\ev{Y}.
+\]
+Provamos que a afirmação 1 é satisfeita.
+Por consequência dela e do Teorema \ref{thm:propriedades covariancia},
+\[
+    \ev{XY} = \ev{X}\ev{Y} \Longrightarrow \cov{X}{Y} = 0,
+\]
+provando a afirmação 2.
+Por fim, da segunda afirmação e da Proposição \ref{prop:variancia da soma},
+\[
+    \var{X + Y} = \var X + \var Y + \cov XY  = \var X + \var Y
+\]
+\end{proof}

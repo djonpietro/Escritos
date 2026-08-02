@@ -1,0 +1,412 @@
+\section{Outros Modelos Contínuos}
+
+\subsection{Uniforme Contínua}
+
+Analogamente à distribuição uniforme discreta, na distribuição uniforme contínua, todos
+os valores no suporte possuem a mesma densidade de probabilidade.
+Os parâmetros dessa distribuição definem o suporte dessa variável, e a densidade
+de probabilidade sobre cada valor possível é o inverso do comprimento do intervalo.
+
+\begin{def:uniforme continua}
+Uma variável $X$ tem distribição uniforme contínua com parâmetros $a$ e $b$ caso a sua
+função de densidade seja dada por
+\[
+    f(x) = \begin{cases}
+    \frac{1}{b-a},&\text{se } a \le x \le b \\
+    0,&\text{caso contrário}
+    \end{cases}
+\]
+\end{def:uniforme continua}
+
+\begin{prop:uniforme continua}
+\label{prop:uniforme continua}
+Se $X \sim \mathrm{Unif}(a, b)$, então
+\begin{enumerate}
+\item sua função de distribuição é dado por
+\[
+    F(x) = \begin{cases}
+        0,&\text{se } x < a \\
+        \frac{x - a}{b-a},&\text{se } a \le x \le b \\
+        1,&\text{se } x > b \\
+    \end{cases}
+\]
+\item $\ev{X} = \frac{b + a}{2}$
+\item $\var{X} = \frac{(b-a)^2}{12}$
+\end{enumerate}
+\end{prop:uniforme continua}
+
+\begin{obs:uniforme continua 1}
+A função de distribuição da variável uniforme contínua cresce linearmente a partir de
+$(a, 0)$ até $(b,1)$.
+Portanto, a probabilidade de um determinado intervalo $(\alpha, \beta) \subset (a, b)$
+é proporcional ao tamanho do próprio intervalo:
+\[
+    F(\alpha \leq X \leq \beta) = F(\beta) - F(\alpha) = \frac{\beta - \alpha}{b - a} \propto (\beta - \alpha)
+\]
+\end{obs:uniforme continua 1}
+
+A próxima proposição mostra que uma determinada transformação aplicada numa variável
+uniforme sempre resulta na mesma variável uniforme, independente dos parâmetros da
+distribuição original.
+
+\begin{prop:transformacao uniforme continua}
+Se $X \sim \mathcal{U}(a, b)$ e
+\[
+    U = \frac{X - \frac{a+b}{2}}{b-a}
+\]
+então $U \sim \mathcal{U}(-1/2, 1/2)$.
+\end{prop:transformacao uniforme continua}
+\begin{proof}
+Se $u = g(x)$ é a transformação dada por
+\[
+    \frac{x - \frac{a+b}{2}}{b-a},
+\]
+então ela é uma transformação monótona crescente.
+Pelo Teorema \ref{thm:fda transformacao continua},
+\[
+   F_U(u) = F_X(g^{-1}(u))
+\]
+onde $F_U(u)$ e $F_X(x)$ são as funções de distribuição de $U$ e $X$ respectivamente.
+Se $a \le x \le b$, então
+\[
+   F_U(u) = \frac{1}{b-a} [u(b-a) + (b+a)/2] - \frac{a}{b-a},
+\]
+e, após algumas manipulações algébricas, chegamos a
+\[
+    F_U(u) = \frac{(b-a)u + \frac{b-a}{2}}{b-a} = u + \frac{1}{2}.
+\]
+Para determinar os parâmetros $\alpha$ e $\beta$ da distribuição de $U$, percebamos que
+\[
+    \begin{cases}
+        \beta-\alpha = 1 \\
+        -\alpha = 1/2
+    \end{cases}
+\]
+cuja solução é $\alpha = -1/2$ e $\beta = 1/2$, logo $U \sim \mathcal{U}(-1/2, 1/2)$.
+\end{proof}
+
+Essa Proposição é útil para que programas de computador, por exemplo, possam tabelar
+valores para uma única distribuição uniforme e, com isso, sejam capazes de determinar
+valores de probabilidade para qualquer outra distribuição uniforme de forma eficiente.
+
+\subsection{Exponencial}
+
+A variável exponencial é rotineiramente aplicada para modelar tempos de espera entre
+eventos os quais ocorrem a uma taxa fixa, como chamadas telefônicas a um
+\textit{call center} ou de requisições a um servidor de dados.
+Sua função de densidade inclui um parâmetro $\lambda$, que denota a taxa de ocorrência
+de eventos, de sorte que o seu inverso denota o tempo médio entre dois eventos.
+
+\begin{def:exponencial}
+A variável $X$ tem distribuição exponencial com parâmetro $\lambda > 0$ se sua função de
+densidade for dada por
+\[
+    f(x) = \begin{cases}
+        \lambda e^{-\lambda x},&\text{se } x \ge 0 \\
+        0,&\text{caso contrário.}
+    \end{cases}
+\]
+\end{def:exponencial}
+
+\begin{prop:exponencial}
+Se $X \sim \mathrm{Exp}(\lambda)$, então
+\begin{enumerate}
+\item Sua função de distribuição é dada por
+\[
+    F(x) = \begin{cases}
+        1 - e^{\lambda x},&\text{se } x \ge 0 \\
+        0,&\text{caso contrário.}
+    \end{cases}
+\]
+\item $\ev{X} = \frac{1}{\lambda}$
+\item $\var{X} = \frac{1}{\lambda^2}$
+\end{enumerate}
+\end{prop:exponencial}
+
+\begin{obs:exponencial 1}
+A variável eponencial é a contraparte contínua da variável geométrica quanto a propriedade
+de sem memória.
+Basta observar que
+\[
+    P(X \ge s \mid X \ge t) =
+    \frac{P(X \ge s)}{P(X \ge t)} =
+    \frac{1 - P(X \le s)}{1 - P(X \le t)} =
+    \frac{e^{-\lambda s}}{e^{-\lambda t}} =
+    P(X \ge s - t).
+\]
+É verdade também que a variável exponencial é a única dentre as contínuas com tal propriedade
+\end{obs:exponencial 1}
+
+\subsection{Distribuição $\Gamma$}
+
+A variável com distribuição $\Gamma$ é uma generalização da distribuição exponencial.
+A integral
+\[
+   \int_0^\infty t^{\alpha - 1} e^{-t}\, dt
+\]
+denota a função $\Gamma(\alpha)$, a qual é finita quando $\alpha > 0$, podendo ser
+expressa por uma fórmula fechada.
+Essa função satisfaz algumas relações importantes; em particular
+\[
+    \Gamma(\alpha+1) = \alpha \Gamma(\alpha),\, \alpha > 0.
+\]
+Uma vez que $\Gamma(1) = 1$, então, pela relação anterior, vale que $\Gamma(n) = n!$ para
+todo $n$ inteiro positivo.
+
+Como o integrando na definição da função $\Gamma$ é positivo, então segue de imadiato
+que
+\begin{equation}
+\label{eq:pdf gamma simples}
+    f(t) = \frac{t^{\alpha-1}e^{-t}}{\Gamma{\alpha}}
+\end{equation}
+é uma função de densidade.
+No entanto, é possível generalizar a distribuição com uma parâmetro adicional $\beta$.
+Se $T$ tem densidade igual àquela dada por \ref{eq:pdf gamma simples} e $X = \beta T$,
+então defini-se a distribuição $\Gamma$ da maneira a seguir:
+
+\begin{def:gama}
+A variável $X$ tem distribuição $\Gamma$ com parâmetros positivos $\alpha$ e $\beta$ se
+sua função de densidade for dada por
+\[
+    f(x) = \frac{1}{\Gamma(\alpha) \beta^\alpha} x^{\alpha - 1} e^{-x / \beta}
+\]
+onde a função $\Gamma(\alpha)$ é definida como
+\[
+    \Gamma(\alpha) = \int_0^\infty t^{\alpha - 1} e^{-t}\, dt.
+\]
+\end{def:gama}
+
+O parâmetro $\alpha$ é chamado de \textbf{forma} (\textit{shape}), pois caracteriza o pico
+da distribuição, enquanto que o parâmetro $\beta$ é denominado \textbf{escala}
+(\textit{scale}), já que influencia a dispersão dela.
+Percebamos também que a distribuição exponencial de taxa $\lambda$ é um caso particular da
+distribuição $\Gamma$, onde $\alpha = 1$ e $\beta = 1/\lambda$.
+Com efeito,
+\[
+    f(x \mid \alpha = 1, \beta = 1/\lambda) = \frac 1 \beta e^{-x/\beta} = \lambda e^{-\lambda x}
+\]
+
+\begin{prop:gama}
+Se $X \sim \Gamma(\alpha, \beta)$, então
+\[
+    \ev{X} = \alpha \beta \quad \text{e} \quad \var{X} = \alpha \beta^2
+\]
+\end{prop:gama}
+
+\begin{prop:mgf gama}
+Se $t < 1/\beta$, então a função geradora de momentos da distribuição $\Gamma$ está
+definida e é determinada por
+\[
+    M_X(t) = \left(\frac{1}{1 - \beta t}\right)^\alpha
+\]
+\end{prop:mgf gama}
+
+Assim como a exponencial é a contraparte contínua da variável geométrica, e
+a variável $\Gamma$ é a contraparte contínua da variável binomial negativa.
+Com isso, a distribuição $\Gamma$ é compreendida como a soma de variáveis exponenciais, e
+pode ser usada para modelar contagem de eventos até um número desejado $\alpha$ que
+ocorrem com tempo médio de intervalos iguais a $\beta$.
+
+\begin{prop:relacao gama e poison}
+Seja $X \sim \Gamma(\alpha, \beta)$.
+Para todo $x \in \real$, se $Y \sim \mathrm{Poisson}(x/\beta)$, então
+\[
+    P(X \le x) = P(Y \ge \alpha)
+\]
+\end{prop:relacao gama e poison}
+
+\subsection{Distribuição $\chi^2$}
+
+Outra especialização da distribuição $\Gamma$ é a $\chi^2$ com $n$ graus de liberdade,
+onde $\alpha = n/2$ e $\beta=2$.
+Ela é uma das principais distribuiçõe utilizadas em inferência estatística, sendo usada
+para teste de signficância estatística de parâmetros de outras distribuições e para
+amostragem da distribuição normal.
+
+\begin{def:chi quadrado}
+A variável $X$ tem distribuição $\chi^2$ com $n$ graus de liberdade se sua função de
+densidade for dada por
+\[
+    f(x) = \begin{cases}
+        \frac{1}{2^{n/2} \Gamma(n/2)} x^{n/2}e^{-x/2},&\text{se } x \ge 0 \\
+        0,&\text{caso contrário.}
+    \end{cases}
+\]
+\end{def:chi quadrado}
+
+\begin{prop:chi quadrado}
+Se $X \sim \chi^2(n)$, então
+\[
+    \ev{X} = n \quad \text{e} \quad \var{X} = 2n
+\]
+\end{prop:chi quadrado}
+
+\begin{prop:chi quadrado e normal}
+Seja $(Z_i)_{i=1}^n$ uma sequência de variáveis aleatórias com distribuição
+$\mathrm{Normal}(0, 1)$.
+A variável
+\[
+    X = \sum_{i=1}^n Z_i^2
+\]
+tem distribuição $\chi^2$ com $n$ graus de liberdade.
+\end{prop:chi quadrado e normal}
+
+\subsection{Ditribuição de Cauchy}
+
+A distribuição de Cauchy, assim como a normal, é simétrica e possui um forato de sino,
+porém com caldas mais pesadas.
+Sua função é definida a seguir:
+
+\begin{def:cauchy}
+Uma variável aleatória $X$ tem distribuição de Cauchy com parâmetros $\theta \in \real$ e
+$\gamma > 0$ se sua função de densidade for
+\[
+    f(x) = \frac{1}{\pi\gamma} \left[1 + \left(\frac{x - \theta}{\gamma}\right)^2\right]^{-1}
+\]
+\end{def:cauchy}
+
+Uma propriedade dessa distribuição é que seus momentos não existem, uma vez que todos
+eles são infinitos.
+Por consequência, a função geradora de momentos dessa variável não é definida.
+
+\begin{prop:cauchy nao tem momentos}
+Para todo $\theta \in \real$, se $X \sim \mathrm{Cauchy}(\theta)$, então
+\[
+    \ev{X^n} = \infty
+\]
+para todo $n$ inteiro positivo.
+\end{prop:cauchy nao tem momentos}
+
+Apesar da inexistência de momentos, o formato da distribuição com pico $\theta$ sugere
+um fato interessante.
+Como visto, a distribuição de Cauchy não possui média, e, na verdade, $\theta$ denota
+a mediana da distribuição, o que é enunciado na próxima Proposição.
+
+\begin{prop:mediana de cauchy}
+Se $X \sim \mathrm{Cauchy}(\theta)$, então
+\[
+    P(X \le \theta) = \frac 1 2
+\]
+\end{prop:mediana de cauchy}
+
+A distrbuição de Cauchy é muito utilizada para modelar razões entre duas outras variáveis.
+Em verdade, é possível mostrar que a razão entre duas variáveis com distribuição normal
+padrão tem distribuição de Cauchy.
+
+\subsection{Distribuição de Weilbull}
+
+A variável de Weilbull é um modelo de distribuição ainda mais geral que a distribuição
+$\Gamma$ usada para modelar tempos de vida. Além dos parâmetros de forma e escala,
+adiciona-se mais um parâmetro de localização, inidicando o tempo mínimo antes de uma
+falha poder ocorrer.
+
+\begin{def:weilbull}
+A variável $X$ tem distribuição de Weibull com parâmetros positivos $\alpha$, $\beta$ e
+$\gamma$ se sua função de densidade for dada por
+\[
+    f(x) = \begin{cases}
+        \frac \beta \alpha \left(\frac{x - \gamma}{\alpha}\right)^{\beta - 1} e^{-\left(\frac{x - \gamma}{\alpha}\right)^{\beta}},&\text{se } x \ge \gamma \\
+        0,&\text{caso contrário.}
+    \end{cases}
+\]
+\end{def:weilbull}
+
+Uma interpretação pode ser atribuía a cada parâmetro dessa distribuição:
+\begin{itemize}
+\item Parâmetro de forma $\alpha$ -- Se $\alpha < 1$, então a taxa de falha diminui com o
+tempo, a exemplo da taxas de mortalidade infantil com relação a idade.
+Caso $\alpha = 1$, então as falhas ocorrem de maneira aleatória em todo período de tempo
+observado, similar à distribuição exponencial.
+Já se $\alpha > 1$, então a taxa de falha aumenta com o tempo, como peças que se desgatam
+com o tempo.
+
+\item Parâmetro de escala $\beta$ -- modela a dispersão da distribuição no eixo do tempo,
+e, a medida que cresce, mais probabilidade é atribuída à valores maiores.
+Seu argumento representa o quantil no qual cerca de $63.2\%$ da população terá apresentado
+alguma falha.
+
+\item parâmetro de localização $\gamma$ -- indica o tempo mínimo antes que seja possível
+de ocorrer uma falha.
+Corresponde a origem da curva de densidade no eixo do tempo.
+\end{itemize}
+
+\subsection{Distribuição Beta}
+
+A distribuição Beta possui a propriedade de concentrar toda probabilidade num único
+intervalo, sendo esse, nesse caso, o intervalo $(0, 1)$.
+Com isso, ela é comumente aplicada para modelar proporções e taxas que se encontram
+no intervalo citado.
+
+\begin{def:beta}
+A variável $X$ tem distribuição beta com parâmetros positivos $a$ e $b$ se sua densidade
+for dada por
+\[
+    f(x) = \begin{cases}
+        \frac{1}{B(a, b)} x^{a-1} (1-x)^{b-1},&\text{se } 0 < x < 1 \\
+        0,&\text{caso contrário.}
+    \end{cases}
+\]
+onde
+\[
+    B(a, b) = \int_0^1 x^{a - 1} (1-x)^{b-1}\,dx = \frac{\Gamma(\alpha)\Gamma(\beta)}{\Gamma(\alpha+\beta)}
+\]
+\end{def:beta}
+
+Essa distribuição também possui a característica de assumir formas totalmente distintas
+a depender dos valores dos parâmetros.
+Em síntese, temos que
+\begin{itemize}
+\item $\alpha > 1$ e $\beta = 1$ -- distribuição estritamente crescente.
+\item $\alpha = 1$ e $\beta > 1$ -- distribuição estritamente decrescente.
+\item $\alpha < 1$ e $\beta < 1$ -- formato de ``U''.
+\item $\alpha > 1$ e $\beta > 1$ -- formato unimodal.
+\item $\alpha = \beta$ -- simétrica entorno de $1/2$ e com variância $[4(2\alpha+1)]^{-1}$.
+\end{itemize}
+
+No último caso, a distribuição torna-se cada vez mais concentrada a medida que $\alpha$
+cresce.
+Por fim, quando $\alpha = \beta = 1$, a distribuição degenera-se na uniforme no intervalo
+$(0, 1)$.
+
+\subsection{Distribuição log-normal}
+
+Quando lidando com dados assimétricos à direita (cujos distribuição concentra-se à
+esquerda da mediana), é muito comum aplicar a transformação $\log(x)$ para corrigir
+essa assimetria, pois os valores na calda à direita são ``puxados'' para estarem
+mais próximos dos menores.
+Quando essa transformação leva a uma distribuição normal, então dizemos que a variável
+original tem distribuição log-normal.
+
+\begin{def:lognormal}
+A variável $X$ tem distribuição log-normal com parâmetros $\mu$ e $\sigma^2$ se
+sua função de densidade for dada por
+\[
+    f(x | \mu, \sigma^2) = \frac{1}{\sqrt{2\pi\sigma^2}} \frac 1 x e^{-(\log x - \mu)^2/(2\sigma^2)}
+\]
+\end{def:lognormal}
+
+\begin{prop:lognormal}
+Se $\log X \sim \mathrm{Normal}(\mu, \sigma^2)$, então
+\[
+    \ev{X} = e^{\mu + (\sigma^2/2)} \quad \text{e} \quad \var{X} = e^{2(\mu+\sigma^2)} - e^{2\mu + \sigma^2}
+\]
+\end{prop:lognormal}
+
+\subsection{Distribuição de Laplace}
+
+A distribuição de Laplace é obtida ao espelhar a distribuição exponencial em torno da
+sua média.
+Visualmente, ela possui caldas mais pesada e longas do que a normal.
+Além disso, a curva da distribuição no ponto $x = \mu$ é um ``bico'', ou seja, a
+densidade não é diferenciável naquele ponto.
+
+\begin{def:laplace}
+A variável $X$ tem distribuição de Laplace se sua função de densidade é dada por
+\[
+    f(x \mid \mu, \sigma) = \frac{1}{2\sigma} e^{-|x - \mu|/\sigma}
+\]
+\end{def:laplace}
+
+Uma das aplicações da distribuição de Laplace é na seleção de atributos para uma
+regressão linear, atribuído pesos iguais a zero às características consideras não
+significativas para explicar outra variável.

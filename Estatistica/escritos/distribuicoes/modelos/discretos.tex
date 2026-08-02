@@ -1,10 +1,10 @@
 \section{Modelos Discretos}
 
-\subsection{Uniforme Discreta}
+\subsection{Distribuição Uniforme Discreta}
 
 O primeiro e mais simples modelo de distribuição discreto é a uniforme discreta.
 Ela modela experimentos onde a frequência de todos os resultados são iguais, ou seja,
-equiprováveis.
+são equiprováveis.
 Se $(\Omega_X, \mathcal{A}, P_X)$ é equiprovável, então a função de massa de $X$ é dada
 simplesmente por
 \[
@@ -38,7 +38,7 @@ Logo
 onde $k \in \{1, \ldots, 6\}$.
 \end{exp:uniforme discreta 1}
 
-\subsection{Bernoulli}
+\subsection{Distribuição Bernoulli}
 
 As variáveis Bernoulli modelam fenômenos que só possuem dois resltados possíveis:
 verdadero ou falso, codificados comumente como $1$ e $0$ respectivamente.
@@ -88,10 +88,11 @@ Ademais, pela Proposição \ref{prop:propriedades variancia}
 
 \end{proof}
 
-\subsection{Binomial}
+\subsection{Distribuição Binomial}
 
 Essa distribuição é usada para modelar contagens de sucessos dentro de uma quantidade
-fixa de ensaios Bernoulli independentes.
+fixa de ensaios Bernoulli independentes, isto é, o sucesso ou fracasso de ensaio não
+interfere na probabilidade do resultado do próximo ensaio.
 Se $\{X_i\}_{i=1}^n$ é uma amostra independente com $X_i \sim \mathrm{Bernoulli}(p)$,
 então a variável definida por
 \[
@@ -164,7 +165,7 @@ Com efeito,
 	\]
 \end{proof}
 
-\subsection{Hipergeométrica}
+\subsection{Distribuição Hipergeométrica}
 
 As variáveis hipergeométricas modelam a contagem de sucessos numa amostra retirada de uma
 população finita.
@@ -221,16 +222,49 @@ $2$ delas sejam vermelhas será
 \]
 \end{exp:hipergeometrica 1}
 
+\begin{exp:hipergeometrica 2}
+Considere numa fábrica são produzidos lotes com 100 peças cada.
+Suponha que num lote hajam 10 peças defeituosas.
+Ao selecionar 5 peças desse lote, a probabilidade de que ao menos uma seja defeituosa é
+\[
+    1 - P(X = 0) = 1 - \frac{\binom{90}{5} \cdot \binom{10}{0}}{\binom{100}{5}} \approx 0.416
+\]
+\end{exp:hipergeometrica 2}
+
 \begin{obs:hipergeometrica 1}
 Se $X \sim \mathrm{HG}(N, m, n)$ com $n = 1$, então $X \sim \mathrm{Bernoulli}(p)$ com
 $p = \frac{m}{N}$.
 \end{obs:hipergeometrica 1}
 
-\subsection{Geométrica}
+\begin{obs:hipergeometrica 2}
+Para amostras de tamanho $n$ retiradas de populações de tamanho $N$ muito grandes --
+$N \gg n$ -- é razoável aproximar a hipergeométrica por uma binomial.
+Suponha que o número de sucessos nessa população seja $m$, e definamos $p = m/N$.
+Na $k$-ésima extração, com $k \le n$, a probabilidade $p_k$ de se extrair um sucesso,
+considerando-se que se obteve $u$ sucessos até então, é
+\[
+    p_k = \frac{Np - u}{N - k}
+\]
+Já que $u \le k \le n \ll N$, então $u \ll N$ e $k \ll N$, tal que
+\[
+    p_k \approx \frac{Np - u}{N} = p - \frac{u}{N} \approx p.
+\]
+Logo, em toda extração, temos, aproximadamente, a mesma probabilidade de se extrair um sucesso.
+Em outras palavras, ao extrair uma amostra de uma população muito grande, a extração sem
+reposição equivale, praticamente, a uma extração com reposição.
+Observemos também que, nesse caso
+\[
+    \ev{X} = n \frac{Np}{N} = np \quad \text{e} \quad \var{X} = np(1 - p) \cdot \frac{N-n}{N-1} \approx np(1 -p)
+\]
+que são, aproximadamente, a mesma esperança e variância da variável binomial de parâmetros
+$n$ e $p$.
+\end{obs:hipergeometrica 2}
+
+\subsection{Distribuição Geométrica}
 
 Considere o experimento aleatório que consiste na realização de ensaios Bernoulli até
 obter o primeiro sucesso.
-Desse modo, obtém-se uma amostra $\{X_i = x\}_{i=1}^n$ com $X_i = 0$ para $i < n$ e $X_n = 1$.
+Desse modo, obtém-se uma amostra $(X_i = x)_{i=1}^n$ com $X_i = 0$ para $i < n$ e $X_n = 1$.
 Presuma que $X$ seja a variável que represente o número de tentativas até resultar em um
 sucesso.
 Logo, se a taxa de sucesso é $p$, então a probabilidade de $X = n$ é
@@ -244,6 +278,16 @@ A variável $X$ tem distribuição geométrica com parâmetro $p$ se
     P(X = n) = (1-p)^{n-1}p
 \]
 \end{def:geometrica}
+
+\begin{obs:geometrica 2}
+Uma formulação alternativa para a variável geométrica seria aquela onde a variável é
+o número de fracassos até o primeiro sucesso, e não o número total.
+Dessa forma, se $X$ é o número de tentativas até o primeiro sucesso, então o número de
+fracassos é $Y = X - 1$, e a função de massa seria dada por
+\[
+    P(Y = y) = (1-p)^yp
+\]
+\end{obs:geometrica 2}
 
 \begin{exp:geometrica 1}
 \label{exp:geometrica 1}
@@ -285,22 +329,44 @@ No exemplo \ref{exp:geometrica 1}, o número esperado de lançamentos até que s
 a soma dos dados igual a $4$ é $12$.
 \end{exp:esperanca geometrica 1}
 
-\subsection{Binomial Negativa}
+\begin{obs:geometrica 1}
+A variável geométrica é dotada da propriedade ``sem memória''.
+Matematicamente, se $X \sim \mathrm{Geo}(p)$, então temos que $P(X > s)$ dado que
+$X > t$ é igual a $P(X > s - t)$, com $s > t$.
+Isso significa que, se observamos $t$ fracassos desde o início do experimento,
+então a probabilidade de observarmos mais $s-t$ fracassos é a mesma de ter
+recomeçar a contagem (daí a perda de memória) e obter $s-t$ fracassos.
+A fim de verificar, sabemos que
+\[
+    P(X > s \mid X > t) = \frac{P(X > s \text{ e } X > t)}{P(X > t)} = \frac{P(X >s)}{P(X >t)},
+\]
+e como $P(X > k) = (1-p)^k$, já que as $k$ primeiras tentativas foram fracassos,
+então
+\[
+    P(X > s \mid X > t) = (1-p)^{s-t} = P(X > s-t).
+\]
+A verdade é que a variável geométrica é a única dentre as discretas com tal propriedade.
+Além disso, implica-se que, em experimentos nos quais conta-se o número de tentativas até o
+primeiro sucessos, e a probabilidade de um sucesso depende do tempo decorrido
+até então, a variável geométrica não pode ser aplicada.
+\end{obs:geometrica 1}
 
-Suponha um experimento aleatório no qual são realizadas tentativas Bernoulli indepentes com
-taxa $p$ até que se acumulem $r$ sucessos.
-Com isso, esse experimento pode ser modelado como uma amostra $\{X_i = x\}_{i=1}^n$
-onde $X_i \sim \mathrm{Bernoulli}(p)$ e que contém $r$ sucessos.
-A probabilidade de que ela contenha $r$ sucessos será
+\subsection{Distribuição Binomial Negativa}
+
+A variável binomial negativa conta quantas ensaios Bernoulli independentes são realizados
+até que se acumulem um número desejado de sucessos.
+Suponha que os ensaios são repetidos até que se observe $r$ sucessos, e que a taxa de
+sucesso é igual a $p$.
+Como o último ensaio deve ser obrigatoriamente um sucesso, então há
+\[
+    \binom{n-1}{r-1}
+\]
+maneiras de ter se observado $r$ sucessos ao longo de $n$ ensaios, e cada uma delas
+ocorre com probabilidade
 \[
     (1-p)^{n-r}p^r.
 \]
-Como há
-\[
-    \binom{n}{r}
-\]
-maneiras de se obter uma amostra de com $r$ sucessos, então a probabilidade de que se tenha
-realizado $n$ tentativas é
+Portanto, a probabilidade de que o número de ensaios realizados tenha sido igual a $n$ é
 \[
     \binom{n}{r} (1-p)^{n-r} p^r
 \]
@@ -312,16 +378,28 @@ A variável discreta $X$ terá distribuição binomial negativa com parâmetros 
 \]
 \end{def:binomial negativa}
 
+\begin{obs:binomial negativa 1}
+Assim como a geométrica, a variável binomial negativa tem uma formulação alternativa
+enquanto a contagem do número de fracassos até o $r$-ésimo sucesso.
+Se $X$ é o número de ensaios realizados até se acumularem $r$ sucessos, então o número
+de fracassos observados é $Y = X - r$, cuja função de massa é dada por
+\[
+    P(Y = y) = \binom{y+r-1}{y} p^r (1-p)^y.
+\]
+Essa formulação possui algumas vantagens algébricas, como a maior facilidade de tratamento
+algébrico e seu suporte ser o próprio conjunto dos inteiros não negativos.
+\end{obs:binomial negativa 1}
+
 \begin{prop:esperanca binomial negativa}
 Se $X \sim \mathrm{BinNeg}(r, p)$, então
 \[
-	E[X] = \frac{r}{p}
+	E[X] = \frac{r}{p} \quad \text{e} \quad \var{X} = \frac{r}{p^2} (1-p)
 \]
 \begin{proof}
 	Suponha que $\{X_i = x\}_{i=1}^r$ seja uma amostra de variáveis tais que
 	$X_i$ denote o número de tentativas Bernoulli independentes após o último sucesso até
 	se obter um novo.
-	Com efeito, a variável $X_i \sim \mathrm{Geo}(p)$ e
+	Com efeito, para todo $i \in [n]$, $X_i \sim \mathrm{Geo}(p)$ e
 	\[
 		X = \sum_{i = 1}^r X_i
 	\]
@@ -334,19 +412,41 @@ Se $X \sim \mathrm{BinNeg}(r, p)$, então
 \end{proof}
 \end{prop:esperanca binomial negativa}
 
-\subsection{Poisson}
+\begin{obs:binomial negativa 2}
+Se usássemos a formulação da variável $Y$ enquanto contagem de fracassos, então
+\[
+    \ev X = \ev{Y+r} = \ev{Y} + r
+\]
+mas como $\ev X = r/p$,
+\[
+    \ev{Y} = \frac r p - r = \frac r p (1-p).
+\]
+Além disso, pode-se reformular a distribuição em termos da sua própria média, ou seja,
+definindo uma variável binomial negativa cujo parâmetro é $\mu = r(1-p)/p$, de modo que
+\[
+    \var{Y} = \mu + \frac 1 r \mu^2.
+\]
+Logo, a medida que a média cresce, a dispersão aumenta em ritmo quadrático em função dela,
+condição essa conhecida como \textbf{superdispersão}, a qual possui aplicações estatísticas
+na análise de dados.
+\end{obs:binomial negativa 2}
+
+\subsection{Distribuição Poisson}
 
 A distrbuição de Poisson modela contagem de eventos que ocorrem dentro de um intervalo
 contínuo -- como o tempo, uma superfície ou volume -- com probabilidade praticamente
-desprezível. Essa distribuição pode ser compreendida como a uma aproximação da Binomial
+desprezível.
+Uma de suas premissas consiste em, para intervalos pequenos, a probabilidade de ocorrência
+de um evento é proporcional ao tamanho do intervalo.
+Essa distribuição pode ser compreendida como a uma aproximação da Binomial
 quando $n \to \infty$.
 
 Considere que $X \sim \mathrm{Binomial}(n, p)$, logo
 \[
 	p_X(a) = \binom{n}{a} (1-p)^{n-a} p^a
 \]
-Se tomarmos o limite da função de massa de $X$ quando $n \to \infty$ e denotamos $np$ por $\lambda$,
-então
+Suponha que $np$ seja igual a uma constante $\lambda$.
+Se tomarmos o limite da função de massa de $X$ quando $n \to \infty$, obteremos
 \begin{align*}
 	\lim_{n \to \infty} p_X(a) & = \lim_{n \to \infty} \binom{n}{a} \left(\frac{\lambda}{n}\right)^a \left(1 - \frac{\lambda}{n}\right)^{n-a}                  \\
 	                           & = \lim_{n \to \infty} \frac{n(n-1)\ldots(n-a+1)}{a!}\left(\frac{\lambda}{n}\right)^a \left(1 - \frac{\lambda}{n}\right)^{n-a} \\
@@ -378,10 +478,63 @@ A variável $X$ tem distribuição de Poisson com parâmetro $\lambda$ se
 \]
 \end{def:poisson}
 
+É possível mostrar, formalmente, que a distribuição de Poisson é a distribuição limite
+da binomial.
+Para tanto, utilizamos o Teorema \ref{thm:convergencia mgf}, de formar a demonstrar que,
+quando $n \to \infty$, a mgf da variável binomial converge para a mgf da variável de Poisson.
+
+\begin{prop:aproximacao poisson da binomial}
+Se $X_n \sim \mathrm{Binomial}(n, p_n)$, com $p_n = \lambda / n$ para todo $n \in \nat$,
+e $X \sim \mathrm{Poisson}(\lambda)$, então
+\[
+    \lim_{n \to \infty} F_{X_n}(x) = F_X(x)
+\]
+\end{prop:aproximacao poisson da binomial}
+\begin{proof}
+A função geradora de momentos da binomial $X_n$ é dada por
+\[
+    M_{X_n}(t) = \sum_{x=0} e^{tx} \binom n x p_n^x (1-p_n)^{n-x} =
+    \sum_{x=0} \binom n x (p_ne^t)^x (1-p_n)^{n-x},
+\]
+e, pelo Teorema Binomial,
+\[
+    M_{X_n}(t) = (p_ne^t + 1 - p_n)^n = [1 + p_n (e^t - 1)]^n.
+\]
+Avaliando $M_{X_n}(t)$ quando $n \to \infty$,
+\[
+    \lim_{n \to \infty} M_{X_n}(t) =
+    \left[1 + \frac \lambda n (e^t - 1)\right]^n =
+    e^{\lambda(e^t-1)}.
+\]
+Resta agora verificar a mgf da variável de Poisson de parâmetro $\lambda$.
+Com efeito, se $X \sim \mathrm{Poisson}(\lambda)$,
+\[
+    M_X(t) =
+    \sum_{x=0}^\infty e^{tx} e^{-\lambda} \frac{\lambda^x}{x!} =
+    \sum_{x=0}^\infty e^{-\lambda} \frac{(e^t\lambda)^x}{x!}.
+\]
+Utilizando o polinômio de Taylor para a função exponencial,
+\[
+    M_X(t) =
+    e^{-\lambda} e^{e^t\lambda} =
+    e^{\lambda(e^t - 1)}.
+\]
+Já que $\lim_{n \to \infty} M_{X_n}(t) = M_X(t)$, então pelo Teorema
+\ref{thm:convergencia mgf},
+\[
+    \lim_{n \to \infty} F_{X_n}(x) = F_X(x)
+\]
+\end{proof}
+
+Mostramos, a seguir, que o parâmetro da distribuição de Poisson é a sua própria média
+e variância.
+Pela interpretação dessa distribuição como uma aproximação da Binomial, $\lambda$ denota
+o número esperado de sucessos dentro de um número praticamente infinito de tentativas.
+
 \begin{prop:esperanca poisson}
 Se $X \sim \mathrm{Poisson}(\lambda)$, então
 \[
-	E[X] = \lambda
+	E[X] = \var{X} = \lambda
 \]
 \begin{proof}
 	Com efeito,
@@ -391,12 +544,30 @@ Se $X \sim \mathrm{Poisson}(\lambda)$, então
 	\end{align*}
 	O somatório equivale ao Polinômio de Taylor de $e^\lambda$, portanto
 	\[
-		E[X] = \lambda e^{-\lambda} e^{\lambda} = \lambda
+		E[X] = \lambda e^{-\lambda} e^{\lambda} = \lambda.
+	\]
+	Para variância, temos que
+	\[
+	    \ev{X^2} = e^{-\lambda}\sum_{x=0}^\infty x^2 \frac{\lambda^x}{x!} =
+		\lambda e^{-\lambda} \sum_{x=1}^\infty x \frac{\lambda^{x-1}}{(x-1)!}
+	\]
+	Fazendo a substituição $k = x - 1$, obtemos
+	\[
+	    \ev{X^2} =
+		\lambda e^{-\lambda} \left(\sum_{k=1}^\infty k \frac{\lambda^{k}}{k!} + \sum_{k=0}^\infty \frac{\lambda^{k}}{k!}\right).
+	\]
+	realizando a substituição $u = k - 1$, temos, por fim,
+	\[
+	    \ev{X^2} = \lambda e^{-\lambda} (\lambda e^\lambda + e^\lambda) = \lambda^2 + \lambda
+	\]
+	Uma vez que $\ev{X}^2 = \lambda^2$, então
+	\[
+	    \var{X} = \lambda^2 + \lambda - \lambda^2 = \lambda
 	\]
 \end{proof}
 \end{prop:esperanca poisson}
 
-\subsection{Zeta}
+\subsection{Distribuição Zeta}
 
 A distribuição Zeta modela eventos cuja frequência é inversamente proporcional à sua
 posição num ranking, como frequência de palavras, população de cidades, citações de

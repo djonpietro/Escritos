@@ -1,24 +1,41 @@
 \section{Tabelas de Frequência}
 
-Um procedimento para entender o comportamento e distribuição dos dados é por meio de
+Um procedimento para entender o comportamento e distribuição dos dados consiste no uso
 tabelas de frequência, especialmente para variáveis qualitativas, que não podem ser
-resumidas por ser resumidas por medidas de estatística descritiva a serem vistas mais
-adiante. Nas tabelas de frequência constam, geralmente, três colunas: a primeira é
-de categorias ou intervalos de uma classe $d_i$, a segunda a frequência absoluta
-$n_i$ de $d_i$, enquanto a terceira é a frequência relativa $f_i = n_i / n$, onde
-$n$ é o tamanho da amostra.
+resumidas por medidas de estatística descritiva a serem vistas mais adiante.
+Considere um quadro de dados $D$ com $n$ registros e com um atributo $X$ com $k$ valores
+possíveis iguais a $d_1, \ldots, d_k$.
+Numa tabela de frequência para $D$ em relação ao atributo $X$ constam, geralmente,
+duas colunas: a primeira é frequência (absoluta), i.e., o número de registros
+$n_i$ tais que $X = d_i$, enquanto a terceira é a frequência relativa $f_i = n_i / n$,
+também chamada de proporção e representada geralmente em porcentagem, denotando a fração
+de regitros que pertecem à classe $d_i$.
 
-Quando lidamos com intervalos de dados numéricos, a amplitude precisa ser definido
-a priori, e amplitudades diferentes de cada classe pode levar a visualizações distintas.
-Muitas classes podem levar a perda de informação, enquanto que poucas podem prejudica
-a tarefa de resumo. O recomendado é a criação de 5 a 15 classes de mesma amplitude.
+As tabelas de frequência também podem ser usadas para descrever dados quantitativos
+desde que esses sejam devidamente discretizados, o que ocorre, comumente, por meio
+de intervalos de amplitude pré-determinada, de forma que cada intervalo passa a representar
+uma classe.
+Diferentes valores de amplitudades para cada classe podem levar a visualizações distintas.
+Amplitudes pequenas levam a muitas classes, que por sua vez podem gerar perda de informação,
+enquanto que amplitudes grandes criam poucas classes, prejudicando a tarefa de resumo.
+O recomendado é a criação de 5 a 15 classes de mesma amplitude.
 
 Para dados contínuos discretizados em intervalos de amplitude $\Delta_i$ para a classe
-$d_i$,a tabela pode conter também: a densidade na classe, dada por $n_i / \Delta_i$,
-a densidade de frequência, obtida por $f_i / \Delta_i$, e a frequência acumulada, dado
+$d_i$, a tabela pode conter também: a densidade de frequência, dada por $n_i / \Delta_i$,
+a densidade de proporção, obtida por $f_i / \Delta_i$, e a frequência acumulada, dada
 por
 \[
-	\sum_{k = 1}^i f_i
+	\sum_{j = 1}^i f_i
 \]
 Essas novas colunas podem ser usadas para construir gráficos que permitam analisar
 distribuição dos valores de uma variável numérica.
+
+% Outra utilidade das tabelas de frequência é na construção da função de distribuição
+% empírica.
+% Suponha que $N_X(x)$ denote o número de observações para a variável $X$ tal que
+% $X \le x$.
+% Com isso, a função de distribuição empírica de $X$ é dada por
+% \[
+%     F_X(x) = \frac{N(x)}{n}
+% \]
+% onde $n$ é o numero de observações.

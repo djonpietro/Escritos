@@ -1,4 +1,4 @@
-\section{Desigualdades e Lei Fraca dos Grandes Números}
+\section{Desigualdades}
 
 \begin{thm:desigualdade de markov}[da Desigualdade de Markov]
 Se $X$ é uma variável aleatória não negativa, então para todo $a > 0$
@@ -85,35 +85,53 @@ Portanto,
 \]
 \end{proof}
 
-\begin{thm:lei fraca dos grandes numeros}[Lei Fraca dos Grandes Números]
-Sejam $X_1, \ldots, X_n$ variáveis aleatória iid, logo $\ev{X_i} = \mu$ e
-$\var{X_i} = \sigma^2$ para todo $i \in [n]$.
-Para qualquer $\epsilon > 0$,
+\begin{thm:desigualdade de jansen}
+Se $X$ é uma variável aleatória e $g$ é uma função convexa, então
 \[
-    \lim_{n \to \infty} P\left(\left| \frac{\sum_{i=1}^n X_i}{n} - \mu \right| \ge \epsilon \right) = 0
+    \ev{g(X)} \ge g(\ev{X})
 \]
-\end{thm:lei fraca dos grandes numeros}
+\end{thm:desigualdade de jansen}
+
+\begin{cor:variancia positiva}
+A variância de uma variável aleatória é sempre não negativa.
+\end{cor:variancia positiva}
 \begin{proof}
-Pelos Teoremas \ref{thm:propriedades esperanca} e \ref{prop:propriedades variancia},
+A função $g(x) = x^2$ é convexa, e pela Desigualdade de Jansen segue que
 \[
-    \ev{\frac{\sum_{i=1}^n X_i}{n}} = \frac{n\mu}{n} = \mu \quad \text{e} \quad
-    \var{\frac{\sum_{i=1}^n X_i}{n}} = \frac{n\sigma^2}{n^2} = \frac{\sigma^2}{n}.
+    \ev{X^2} \ge \ev{X}^2.
 \]
-Pela desigualde de Chebyshev,
-\[
-    P\left(\left| \frac{\sum_{i=1}^n X_i}{n} - \mu \right| \ge \epsilon \right) \le \frac{\sigma^2}{n\epsilon}.
-\]
-Logo, temos
-\begin{gather*}
-    0 \le
-    \lim_{n \to \infty} P\left(\left| \frac{\sum_{i=1}^n X_i}{n} - \mu \right| \ge \epsilon \right) \le
-    \lim_{n \to \infty} \frac{\sigma^2}{n\epsilon} \\
-    0 \le
-    \lim_{n \to \infty} P\left(\left| \frac{\sum_{i=1}^n X_i}{n} - \mu \right| \ge \epsilon \right) \le
-    0
-\end{gather*}
-e, pelo Teorema do Confronto do cálculo de limties,
-\[
-    \lim_{n \to \infty} P\left(\left| \frac{\sum_{i=1}^n X_i}{n} - \mu \right| \ge \epsilon \right) = 0
-\]
+Uma vez que $\var{X} = \ev{X^2} - \ev{X}^2$, então $\var{X} \ge 0$.
 \end{proof}
+
+% \begin{thm:lei fraca dos grandes numeros}[Lei Fraca dos Grandes Números]
+% Sejam $X_1, \ldots, X_n$ variáveis aleatória iid, logo $\ev{X_i} = \mu$ e
+% $\var{X_i} = \sigma^2$ para todo $i \in [n]$.
+% Para qualquer $\epsilon > 0$,
+% \[
+%     \lim_{n \to \infty} P\left(\left| \frac{\sum_{i=1}^n X_i}{n} - \mu \right| \ge \epsilon \right) = 0
+% \]
+% \end{thm:lei fraca dos grandes numeros}
+% \begin{proof}
+% Pelos Teoremas \ref{thm:propriedades esperanca} e \ref{prop:propriedades variancia},
+% \[
+%     \ev{\frac{\sum_{i=1}^n X_i}{n}} = \frac{n\mu}{n} = \mu \quad \text{e} \quad
+%     \var{\frac{\õsum_{i=1}^n X_i}{n}} = \frac{n\sigma^2}{n^2} = \frac{\sigma^2}{n}.
+% \]
+% Pela desigualde de Chebyshev,
+% \[
+%     P\left(\left| \frac{\sum_{i=1}^n X_i}{n} - \mu \right| \ge \epsilon \right) \le \frac{\sigma^2}{n\epsilon}.
+% \]
+% Logo, temos
+% \begin{gather*}
+%     0 \le
+%     \lim_{n \to \infty} P\left(\left| \frac{\sum_{i=1}^n X_i}{n} - \mu \right| \ge \epsilon \right) \le
+%     \lim_{n \to \infty} \frac{\sigma^2}{n\epsilon} \\
+%     0 \le
+%     \lim_{n \to \infty} P\left(\left| \frac{\sum_{i=1}^n X_i}{n} - \mu \right| \ge \epsilon \right) \le
+%     0
+% \end{gather*}
+% e, pelo Teorema do Confronto do cálculo de limties,
+% \[
+%     \lim_{n \to \infty} P\left(\left| \frac{\sum_{i=1}^n X_i}{n} - \mu \right| \ge \epsilon \right) = 0
+% \]
+% \end{proof}

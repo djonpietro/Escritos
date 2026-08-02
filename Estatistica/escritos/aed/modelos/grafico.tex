@@ -1,41 +1,105 @@
 \section{Gráficos}
 
 Nesta seção iremos descrever brevemente gráficos para realizar análise univariada de
-variáveis de acordo com o seu tipo. Para variáveis qualitativas, os gráficos são
-bsicamente construídos com base na tabela de frequência de cada classe, mostrando a
-contagem ou a frequência relativa em cada classe. Alguns exemplos incluem:
+variáveis de acordo com o seu tipo.
+Para variáveis qualitativas, os gráficos são bsicamente construídos com base na tabela de
+frequência de cada classe, mostrando a contagem ou a frequência relativa em cada classe.
+Alguns exemplos incluem:
 
 \begin{itemize}
-	\item Gráfico de Barras -- o tamanho da barra é proporcional a contagem ou frequência
-	      de resgistros na classe
+\item Gráfico de Barras -- uma barra é dedicada a cada classe, e o tamanho da barra é
+proporcional à contagem de resgistros na classe.
+O código \ref{cod:barra} mostra a criação de tal gráfico com a base \texttt{cd\_brasil}
+usando o pacote \texttt{ggplot2} da linguagem R.
 
-	\item Gráfico de Setores -- construído com um círculo de raio arbitrário em que a
-	      contagem ou frequência de registros é proporcional à área do setor circular que o
-	      representa
+\begin{lstlisting}[language=R, caption={Gráfico de Barras}, label={cod:barra}]
+library(ggplot2)
 
-	\item Gráfico de Pirulito -- mesmo princípio que o de barras, mas com aspecto mais
-	      simples, em que o tamanho é proporcional a uma linha tracejada vertical com um ponto
-	      no valor da contagem ou frequência.
+cd_brasil |>
+    ggplot(aes(x = regiao)) +
+        geom_bar(stat = "count")
+\end{lstlisting}
+
+\item Gráfico de Setores -- construído com um círculo de raio arbitrário em que a
+contagem ou frequência de registros é proporcional à área do setor circular que o
+representa.
+O código \ref{cod:setores} constrói o gráfico de setores correspondente à distribuição
+de \texttt{regiao} na base \texttt{cd\_brasil}.
+
+\begin{lstlisting}[language=R, caption={Gráfico de Setores}, label={cod:setores}]
+tab_regiao <- table(cd_brasil$regiao)
+
+pie(tab_regiao, labels = names(tab_regiao))
+\end{lstlisting}
+
+\item Gráfico de Pirulito -- mesmo princípio que o de barras, mas com aspecto mais
+simples, em que o tamanho é proporcional a uma linha vertical com um ponto no eixo do
+valor da contagem ou frequência.
+O código \ref{cod:pirulito} mostra a construção desse gráfico com \texttt{ggplot2},
+combinando \texttt{geom\_segment} para a linha e \texttt{geom\_point} para o ponto no
+topo.
+
+\begin{lstlisting}[language=R, caption={Gráfico de Pirulito}, label={cod:pirulito}]
+library(ggplot2)
+
+cd_brasil |>
+    group_by(regiao) |>
+    summarise(count = n()) |>
+    ggplot(aes(x = regiao, y = count)) +
+        geom_segment(aes(xend = regiao, y = 0, yend = count)) +
+        geom_point(size = 3)
+\end{lstlisting}
 \end{itemize}
 
 Para variáveis numéricas discretas, barras e pirulito também podem funcionar se houver
-um número não muito grande de realizações distintas no conjunto de dados. Para variáveis
-contínuas, a discretização em intervalos permite gerar vários tipos de gráficos
-que ajudam a entender a distribuição de valores da variável, como
+um número não muito grande de realizações distintas no conjunto de dados.
+Para variáveis contínuas, a discretização em intervalos permite gerar vários tipos de
+gráficos que ajudam a entender a distribuição de valores da variável, como
 
 \begin{itemize}
-	\item Histogramas -- construído também com barras com tamanho proporcional densidade
-	      -- de registros ou frequência -- em cada intervalo. Há várias fórmulas para determinar
-	      o número de intervalos (\textit{bins}), como a de Sturges, dada por
-	      $k = 1 + 3.3 \log_{10}(n)$, da raíz quadrada, com $k = \sqrt{n}$, de Scott, com
-	      $k = \frac{3.5 \sigma}{\sqrt[3]{n}}$, onde $\sigma$ é o desvio-padrão, ou a de
-	      Freedman-Diaconis, dada por $k = \frac{2 \cdot \mathrm{IQR}}{\sqrt[3]{n}}$.
+\item Histogramas -- construído também com barras com tamanho proporcional densidade
+-- de registros ou frequência -- em cada intervalo. Há várias fórmulas para determinar
+o número de intervalos (\textit{bins}), como a de Sturges, dada por
+$k = 1 + 3.3 \log_{10}(n)$, da raíz quadrada, com $k = \sqrt{n}$, de Scott, com
+$k = \frac{3.5 \sigma}{\sqrt[3]{n}}$, onde $\sigma$ é o desvio-padrão, ou a de
+Freedman-Diaconis, dada por $k = \frac{2 \cdot \mathrm{IQR}}{\sqrt[3]{n}}$.
+O código \ref{cod:histograma} constrói o histograma da variável \texttt{temp} da base
+\texttt{cd\_poluicao}.
 
-	\item Ramo-e-folha -- os ramos são uma coluna vertical com os valores interiros
-	      distintos assumidos pelas realizações. As folhas são as partes freacionárias,
-	      empilhadas verticalmente ou horizontalmente em seus ramos.
+\begin{lstlisting}[language=R, caption={Histograma}, label={cod:histograma}]
+hist(cd_poluicao$temp,
+     xlab = "Temperatura",
+     ylab = "Frequencia",
+     border = "white",
+     col = "darkblue")
+\end{lstlisting}
 
-	\item Gráfico Dispersão Unidimensional -- os dados são mapeados a pontos na reta
-	      correspondentes a seus valores. Valores repetidos podem ser empilhados, de modo a
-	      dar uma melhor visualização à distribuição dos dados.
+\item Ramo-e-folha -- os ramos são uma coluna vertical com os valores interiros
+distintos assumidos pelas realizações.
+As folhas são as partes fracionárias, empilhadas verticalmente ou horizontalmente em seus
+ramos.
+O código \ref{cod:ramo-folha} mostra a construção do diagrama para a mesma variável
+\texttt{temp}.
+
+\begin{lstlisting}[language=R, caption={Ramo-e-folha}, label={cod:ramo-folha}]
+stem(cd_poluicao$temp, scale = .5)
+\end{lstlisting}
+
+\item Gráfico Dispersão Unidimensional -- os dados são mapeados a pontos na reta
+correspondentes a seus valores.
+Valores repetidos podem ser empilhados, de modo a dar uma melhor visualização à distribuição
+dos dados.
+O código \ref{cod:dispersao 1d} mostra a construção desse gráfico, empilhando os pontos
+repetidos com a opção \texttt{method = "stack"}.
+
+\begin{lstlisting}[language=R, caption={Dispersão Unidimensional}, label={cod:dispersao 1d}]
+stripchart(cd_poluicao$temp,
+           xlab = "Temperatura",
+           method = "stack",
+           offset = 2,
+           at = 0,
+           pch = 19,
+           cex = 0.5,
+           col = "darkblue")
+\end{lstlisting}
 \end{itemize}
