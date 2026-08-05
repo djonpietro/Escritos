@@ -1,36 +1,63 @@
-\section{Medidas de Posição}
+\section{Medidas de Posição}\label{sec:medidas de posicao}
 
 Um grau maior de resumo dos dados pode ser obtido ao se computar determinadas estatísticas
 numéricas que sejam representativas de todo o conjunto, e não somente de agrupamentos
-deles, como é o caso das frequências absolutas e relativas. As medidas a serem apresentadas
-são usualmente usadas em conjunto para evitar uma redução muito drástica dos dados.
-Em especial, as medidas de posição nos dão uma ideia de centralidade dos dados.
+deles, como é o caso das frequências absolutas e relativas.
+Para tanto, podemos utilizar algumas das medidas que explicam uma determinada distribuição
+vistas na parte I, geralmente usadas em conjunto para evitar uma redução muito drásticas
+dos dados.
+Nesta seção, veremos como obter, a partir da amostra, estimativas para medidas de posição,
+em especial a moda, mediana e o valor esperado.
 
-A primeira delas, é a moda, definida simplesmente como o valor mais frequente na
-distribuição. Ela pode ser facilmente estimada contando-se o valor mais frequente. Se
-$x_1, \ldots, x_n$ são realizações de uma variável $X$, então a moda é dada como
+A primeira da qual iremos tratar será a moda, que pode ser interpretada como o valor mais
+frequente numa distribuição.
+\begin{def:moda}
+Se $X$ é uma variável aleatória, e $f(x)$ é sua função de probabilidade, seja de massa ou
+densidade, então a moda de $X$, denotada por $\mo{X}$, é o valor que satisfaz
 \[
-	\mo{X} = \argmax_x f(x),
+    \mo{X} = \argmax_x f(x).
 \]
-onde $f(x)$ é a frequência de $x$ em $X$. A moda é adequada para atributos qualitativos
-e quantitativos discretos, ao passo que para quantitativos contínuos ela pode ser pouco
-representativa devido ao grande número de possibilidades de realizações, apesar de
-ter uma definição satisfatória para esse caso.
+\end{def:moda}
+Dada uma amostra $\{x_i\}_{i=1}^n$ de realizações para um atributo $X$, a
+\textbf{moda amostral} -- estimativa da moda teórica a partir de uma amostra -- pode ser
+definida simplesmente como o valor mais frequente nessa amostra.
+A moda é adequada para atributos qualitativos e quantitativos discretos, ao passo que para
+quantitativos contínuos ela pode ser pouco representativa devido ao grande número de
+possibilidades de realizações.
 
-A segunda medida é a mediana, que o valor que acumula 50\% da frequência acumulada da
-distribuição de um atributo. Para determinar a mediana de um vetor de dados $X$, basta
-ordenar as realizações do vetor; caso sua dimensão seja ímpar, então a mediana é o valor
-do índice $\frac{n}{2}$, ao passo que, caso seja par, a mediana é obtida como a média
-entre as realizações de índice $\frac{n}{2}$ e $\frac{n+1}{2}$.
+A mediana é outra medida de centralidade muito utilizada em resumos, sendo definida a
+seguir.
+\begin{def:mediana}
+Se $X$ é uma variável aleatória com função de distribuição $F(x)$, então a mediana,
+denotada por $\med{X}$, satisfaz
+\[
+    F(\med{X}) = 0.5
+\]
+\end{def:mediana}
+Com isso, a mediana é o valor que acumula metade da distribuição de probabilidade
+de uma distribuição e, por consequência, sua contraparte amostral pode ser estimada ao
+tomar a relização que tem frequência acumulada igual a $50\%$.
+Se $N(x)$ é o número de observações tais que $X \le x$, então a mediana amostral é
+o valor $x$ que satisfaz
+\[
+    \frac{N(x)}{n} = 0.5
+\]
+Computacionalemente, uma forma de obtê-la é ordenado as $n$ observações por seus valores,
+e, caso $n$ seja ímpar, a mediana é o valor no índice $\frac{n}{2}$, ao passo que,
+caso $n$ seja par, ela será a média aritmética entre as realizações de índice $\frac{n}{2}$
+e $\frac{n+1}{2}$.
+Há outros métodos computacionais para obter a mediana sem necessariamente ordenar os
+dados, a exemplo do algoritmo \texttt{quickselect}.
 
-Por fim, a média de um vetor de dados $X$ é o valor $\bar x$ dado como
+Por fim, a média é a estimativa do valor esperado de uma variável $X$, sendo, pois,
+o valor que corresponde ao centro de massa da amostra.
+Para a obter, basta computar
 \[
 	\bar x = \frac{1}{n} \sum_{i=1}^n x_i,
 \]
-que é equivalente também a
-\[
-	\bar x = \sum_{i=1}^n x_i f(x_i).
-\]
-Tanto a média quanto a mediana são apropriadas apenas à atributos quantitativos. Caso
-estejamos lidando com intervalos discretizados desses valores, então a forma de computar
-essas medidas é por estimativa.
+Tanto a média quanto a mediana são apropriadas apenas à atributos quantitativos, com
+uma possível execeção àqueles que denotam uma ordenação, cuja média pode não ter uma
+interpretação no contexto dos dados.
+Caso estejamos lidando com intervalos discretizados desses valores, então a forma de
+computar essas medidas é por estimativa, como, por exemplo, a tomar o ponto médio de
+cada intervalo e usá-los para obter a média final.

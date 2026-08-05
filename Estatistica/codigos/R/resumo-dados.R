@@ -2,6 +2,8 @@ library(dplyr)
 library(skimr)
 library(Hmisc)
 
+
+
 df <- data.frame(
   idade = c(25, 30, 35, 40, 28, 33, 29, 45, 38, 32),
   sexo = c("M", "F", "M", "F", "M", "F", "M", "F", "M", "F"),

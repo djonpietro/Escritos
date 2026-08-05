@@ -1,0 +1,102 @@
+\section{Quantis}
+
+\begin{def:quantil}
+Seja $X$ uma variável aleatória com suporte $\Omega_X$ e função de distribuição $F(x)$.
+O número $q \in \Omega_X$ é o quantil de probabilidade $p \in [0, 1]$ da distribuição
+de $X$ se
+\[
+    F(q) = p
+\]
+\end{def:quantil}
+
+Com isso, o quantil de probabilidade $p$ é o valor que acumula $p$ de probabilidade na
+distribuição de $X$, cuja interpretação seria dada como o número tal que a probabilidade
+de $X$ ter realização menor ou igual a ele é $q$.
+
+\begin{obse:mediana}
+A mediana $\med{X}$ de $X$ é o quantil de probabilidade $0.5$.
+\end{obse:mediana}
+
+A mediana compõe também um grupo de quantis muito utilizados no resumo de distribuições
+chamados quartis, que tratam-se dos quantis de probabilidade $0.25$, $0.5$ e $0.75$.
+O seu destaque deve-se ao fato deles dividirem uma distribuição em quatro partes com
+mesma probabilidade, todas iguais a $25\%$.
+Analogamente, também poderia-se utilizar os decis, que são os quantis de probabilidade
+igual a $0.1 \cdot k$, para $k \in [10]$.
+Outros quantis de destaque são os de $0.05$ e $0.95$, muito utiliados em inferência.
+
+A determinação de quantis empíricos -- a partir de uma amostra de dados -- pode ser
+realizadas de diferentes maneiras que adotam variadas premissas.
+Uma das mais simples é uma generalização daquela usada para a mediana apresentada na
+seção \ref{sec:medidas de posicao}, chamada de interpolação.
+
+Suponha estatísticas de ordem $x_1, \ldots, x_n$ e queremos encontrar o quantil $q$ de
+probabilidade $p$.
+Presumiremos que as estatísticas dividem a distribuição em intervalos de mesma
+probabilidade, ou seja, se $Q(p)$ é o quantil de $p$, então
+\[
+    \forall i \in [n],\, \left( Q^{-1}(x_{i+1}) - Q^{-1}(x_i) = \frac{1}{n-1} \right).
+\]
+Por consequência,
+\[
+    \forall i \in [n],\, \left(Q^{-1}(x_i) = \frac{i-1}{n-1}\right),
+\]
+e, em especial, $Q^{-1}(x_1) = 0$ e $Q^{-1}(x_n) = 1$.
+Suponha que $p$ esteja entre
+\[
+    p_j = \frac{j-1}{n-1} \quad \text{e} \quad p_{j+1} = \frac{j}{n-1}.
+\]
+Disso, segue que
+\begin{gather*}
+    p_j < p < p_{j+1} \\
+    (n-1)p_j + 1 < (n-1)p + 1 < (n-1)p_{j+1} + 1 \\
+    x_j < (n-1)p + 1 < x_{j+1}.
+\end{gather*}
+Fazendo $h = (n-1)p +usados para medir simetria.
+Para distribuições aproximada 1$, e fazendo $j = \lfloor{h}\rfloor$, basta interpolar linearmente
+as estatísticas $x_j$ e $x_{j+1}$ usando o fator $\gamma = h - j$, que representa o quão
+longe estamos de $x_j$ em direção a $x_{j+1}$.
+Desse modo,
+\[
+    q = (1 - \gamma) x_j + \gamma x_{j+1}.
+\]
+O algoritmo \ref{alg:quantil} organiza esses passos para a determinação do quantil
+empírico via interpolação recebendo o vetor de estatísticas e a probabilidade acumulada
+pelo quantil ao ser obtido.
+
+\begin{algorithm}
+\SetAlgoLined
+\Entrada{vetor de estatísticas $\vec x$ de tamanho $n$ e $p \in [0,1]$}
+\Saida{O quantil empírico $q$}
+\Inicio{
+    $\vec s \gets \mathrm{ordene}(\vec x)$\;
+    \Se {$n = 1$} {
+        \Retorna $s[1]$\;
+    }
+    $h \gets (n-1)p + 1$\;
+    $j \gets \lfloor h \rfloor$\;
+    $\gamma \gets h - j$\;
+    \Retorna {$(1 - \gamma) s[j] + \gamma \cdot s[j+1]$}\;
+}
+\caption{Método de Interpolação do Quantil Empírico}
+\label{alg:quantil}
+\end{algorithm}
+
+Além de uma medida de posição, os quantis podem ser usados para medir dispersão.
+O Intervalo Interquantílico (IQR) é a distância entre o primeiro e terceiro quartil, e
+quanto maior for sua magnitude, mais dispersa será a distribuição.
+\begin{def:iqr}
+Se $q_1$ e $q_3$ são os primeiro e terceiro quartis respectivamente da distribuição da
+variável $X$, então
+\[
+    d_q =  q_3 - q_1
+\]
+é o intervalo interquantílico da distribuição.
+\end{def:iqr}
+Uma vantagem do uso dessa medida são que ela ignora $50\%$ mais extremos -- os $25\%$
+inferiores e os $25\%$ superiores -- e preservar os $50\%$ mais centrais,
+de forma a medir a dispersão típica da variável, isto é, sem a presença dos valores
+atípicos.
+Ela também é considerada mais robusta para distribuições assimétricas, pois medidas
+como a variância e, consequentemente, o desvio-padrão são facilmente distrocidos por
+distribuições de calda longa.
