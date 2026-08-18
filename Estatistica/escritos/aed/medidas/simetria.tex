@@ -1,0 +1,73 @@
+\section{Simetria e Assimetria}
+
+Entre as motivações para se estudar a assimetria ou simetria dos dados estão a constação
+de
+\begin{itemize}
+\item Concentração dos dados em uma dada região de valores.
+\item Presença de caldas particularmente longas.
+\item Afastamento dos dados do centro.
+\item Validade de hipóteses sobre o modelo adotado para a distribuição.
+\end{itemize}
+
+Quando os dados possuem distribuição simétrica, algumas vantagens analíticas e estatísticas
+surgem.
+Por exemplo, a média se torna representativa para medir centralidade, pois essa localiza-se
+justamente no centro da distribuição, de sorte que a variância -- e o desvio-padrão --
+também passa a ser representativa para medir variabilidade, já que os dados estão
+centrados na média.
+Quando os dados são assimétricos, medidas de resumo como mediana e qartis são preferíveis
+por serem menos sensíveis à forma da distribuição.
+Algumas técnicas de inferência estatística, principalmente aquelas que se baseiam no uso
+da distribuição normal, a serem apresentadas adiante, também se aproveitam da estrutura
+simétrica da distribuição, facilitando a produção de algumas análises.
+
+Seja $X$ um atributo.
+Para medir sua assimetria, são geralmente usados
+\begin{itemize}
+\item Primeiro Coeficiente de Assimetria de Pearson -- usado quando a distribuição é
+unimodal, e a moda pode ser bem definida.
+\[
+   \frac{\overline x - \mo X}{\sigma^3}
+\]
+
+\item Segundo Coeficiente de Assimetria de Pearson -- usado quando a distribuição não
+é unimodal ou a moda não pode ser bem definida, dada por
+\[
+     \frac{3\,(\overline x - \med X)}{\sigma^3}
+\]
+
+\item Coeficiente Quatílico de Assimetria -- utiliza os quartis da distribuição, partindo
+do princípio que o primeiro e terceiro quartil são equidistantes da mediana
+\[
+    \frac{q_1 + q_2 - 2\, \med X}{q_3 - q_1}
+\]
+
+\item Coeficiente de Assimetria de Fisher -- um estimador baseado no terceiro momento
+central multiplicado por um fator que remove o viés do tamanho da amostra
+\[
+    \frac{\sqrt{n(n-1)}}{n-2} \cdot \frac{1}{n\sigma^3} \cdot \sum_{i=1}^n (x_i - \overline x)^3
+\]
+\end{itemize}
+A depender da medida $c$ utilizada, ela pode ter seus valores interpretados como
+\begin{itemize}
+\item $c > 0$ -- assimetria positiva, indicando que $\overline X > \mo X$, também
+chamada de assimetria à esquerda, pois os dados possuem uma calda mais longa nessa
+direção enquanto que seus valores concentram-se mais à direita.
+
+\item $c < 0$ -- assimetria negativa, e provavelmente temso $\overline X < \mo X$, o que
+é chamado de assimetria à direita, direção na qual se estende a calda da distribuição,
+e os dados concentram-se em valores mais baixos.
+
+\item $c = 0$ -- ausência de assimetria, levando a hipótese de que $\overline X = \mo X$
+e que a distribuição é possivelmente simétrica.
+\end{itemize}
+
+Uma ferramente visual para medir assimetria de dados são os \textbf{gráficos de simetria}.
+As estatísticas de ordem são usadas para computar pares $(u_i, v_i)$ tais que
+\[
+    u_i = \med X - x_i \quad \text{e} \quad v_i = x_{n-i+1} - \med X.
+\]
+Junto desses pares, é mostrado também a reta $v = u$.
+Se os pontos se alinharem a reta, temos uma evidência visual de que os dados tem pouca
+assimetria ou são simétricos, enquanto que, caso alguns pontos se desviem das extreidades
+dela, então teremos uma visualização que indica assimetria.

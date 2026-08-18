@@ -1,0 +1,37 @@
+\section{Medidas Robustas}
+
+Tomemos o exemplo de uma base que contenha salários de funcionários de uma empresa.
+A média pode ser pouco representativa para descrever esses dados, pois, normalmente, há
+poucos funcionários que ganham altos salários, como executivos, enquanto a grande maioria
+dos funcionários tem uma remuneração consideravelmente mais baixa.
+Por consequência, a variância e o desvio-padrão também podem não ser apropriados para
+medir a variabilidade, pois os valores extremos podem indicar uma dispersão enquanto que
+os dados, na realidade, concentram-se num determinado intervalo.
+
+A mediana e o IQR, usados para medir centralidade e dispersão respectivamente, sofrem
+menos influência da magnitude do dado do que a média e variância, por exemplo.
+Isso se deve ao fato de que seus valores são computados utilizando somente parte
+dos dados, e não por uma agregação completa deles.
+Logo, na suspeita da presença de valores extremos e de forte assimetria, essas medidas
+podem ser mais apropriadas para realizar a descrição da base.
+
+Há também outras medidas muito utilizas para descrever dados de maneira robusta.
+A primeira a citar é a \textbf{média aparada}, que consiste no cálculo da média
+considerando apenas parte dos dados menos extremos.
+Para isso, decidi-se por um parâmetro $\alpha \in [0, 1]$ e calcula-se a média apenas
+das estatísticas entre aquelas que acumulam $\alpha$ e $1-\alpha$ de probabilidade.
+Isso garante que a média não será influenciada por valores extremos, sendo, pois, mais
+representativa.
+
+Uma segunda medida, dessa vez de dispersão, é o \textbf{coeficiente de variação}.
+Ele é calculado apenas tomando-se o desvio-padrão e o divindido pela média, produzindo,
+por conseguinte, uma grandeza adimensional.
+Essa propriedade permite avaliar a variabilidade de um atributo de forma padronizada, ou
+seja, independente da escala dele, tornando possível, também, comparar comparar a
+variabilidade de dois atributos de magnitude ou escala distintos.
+
+Uma segunda medida robusta de dispersão é o \textbf{desvio absoluto mediano}, análogo ao
+desvio absoluto médio.
+Para o computar, basta tomar a mediana dos desvios das estatísticas em relação a mediana
+do atributo.
+Assim, valores extremos pouco interferem no valor final.

@@ -1,0 +1,243 @@
+\section{Simetria}
+
+\begin{def:simetria}
+\label{def:simetria}
+Uma variável $X$ possui distribuição simétrica entorno de $x = m$ se, e somente se,
+\[
+    \forall t \in \real,\, P(X - m \le t) = 1 - P(X - m < -t)
+\]
+\end{def:simetria}
+
+\begin{obs:simetria 1}
+Se fizémos $t = -u$, então
+\begin{equation}
+\label{eq:equacao simetria}
+    P(X - m \le -u)  = 1 - P(X - m < u)
+\end{equation}
+para todo $u \in \real$.
+Logo, a expressão \ref{eq:equacao simetria} é uma formulação equivalente para
+a definição \ref{def:simetria}.
+\end{obs:simetria 1}
+
+\begin{obs:simetria 2}
+Se $X$ for variável contínua, então a definição de simetria equivale a
+\begin{gather*}
+	P(X - m \le t) = 1 - P(X - m \le -t) \\
+	F_X(m+t) = 1 - F_X(m-t)
+\end{gather*}
+\end{obs:simetria 2}
+
+\begin{prop:equivalencia simetria}
+\label{prop:equivalencia simetria}
+Se $X$ é uma variável com distribuição simétrica entorno de $m$, então
+\[
+    P(X \le m) = P(X \ge m ).
+\]
+\end{prop:equivalencia simetria}
+\begin{proof}
+Com efeito,
+\begin{gather*}
+P(X - m \le 0) = 1 - P(X - m < 0) \\
+P(X \le m) = 1 - P(X < m) \\
+P(X \le m) - [1 - P(X < m)] = 0 \\
+P(X \le m) - P(X \ge m) = 0 \\
+P(X \le m) = P(X \ge m) \\
+\end{gather*}
+\end{proof}
+
+\begin{def:mediana}
+A mediana $m$ da distribuição de uma variável aleatória $X$ satisfaz
+\[
+    P(X \ge m) \ge \frac 1 2 \quad \text{e} \quad P(X \le m) \ge \frac 1 2
+\]
+\end{def:mediana}
+
+\begin{prop:simetria e mediana}
+Se $X$ possui distribuição simétrica entorno de $m$, então $m$ é mediana da distribuição
+de $X$.
+\end{prop:simetria e mediana}
+\begin{proof}
+Sabemos que
+\begin{gather*}
+	P(X \le m) + P(X > m) = 1 \\
+	P(X \le m) + P(X > m) + P(X = m) = 1 + P(X = m) \\
+	P(X \le m) + P(X \ge m) = 1 + P(X = m) \\
+\end{gather*}
+mas pela Proposição \ref{prop:equivalencia simetria}
+\[
+    2P(X \le m) = 1 + P(X = m) \\
+\]
+Uma vez que $P(X = m) \ge 0$, então $1 + P(X = m) \ge 1$, e
+\begin{gather*}
+    2P(X \le m) \ge 1 \\
+    P(X \le m) \ge \frac 1 2. \\
+\end{gather*}
+Mais uma vez, pela Proposição \ref{prop:equivalencia simetria},
+\[
+    P(X \ge m) \ge \frac 1 2 \\
+\]
+\end{proof}
+
+\begin{thm:simetria funcao de probabilidade}
+\label{thm:simetria funcao de probabilidade}
+A variável $X$ ter simetria entorno de $m$ equivale a
+\begin{enumerate}
+\item Se $X$ for discreta, então
+\[
+    p_X(m+t) = p_X(m-t).
+\]
+
+\item Se $X$ for contínua, então
+\[
+    f_X(m+t) = f_X(m-t).
+\]
+\end{enumerate}
+\end{thm:simetria funcao de probabilidade}
+\begin{proof}
+Suponha que $X$ seja simétrica.
+Para provar 1, considere que
+\[
+    P(X - m \le t) = P(X - m = t) + P(X - m < t)
+\]
+mas, por simetria,
+\[
+    P(X - m \le t) = 1 - P(X - m < -t)
+\]
+de forma que
+\[
+    P(X - m = t) = 1 - [P(X - m < -t) + P(X - m < t)]
+\]
+Analogamente, por $\sigma$-aditividade e simetria, iremos concluir que,
+\[
+    P(X - m = -t) = 1 - [P(X - m < -t) + P(X - m < t)]
+\]
+Logo,
+\[
+    P(X - m = t) = P(X - m = -t)
+\]
+e, como $X$ é discreto, então
+\[
+    p_X(m+t) = p_X(m-t)
+\]
+Para provar a afirmação 2, observe que
+\[
+    F_X(m+t) = 1 - F_X(m-t),
+\]
+e como $f_X$ é contínua em $\Omega_X$, então fazendo $F_Y(y) = F_X(m+t)$ e $F_U(u) = F_X(m-t)$,
+obtemos
+\[
+     \frac{d}{dt} F_Y(y) = - \frac{d}{dt} F_U(u).
+\]
+Já que $y = m+t$ e $u = m-t$, então pelo Teorema \ref{thm:fdp transformacao continua}
+\[
+     f_X(m+t) = - [-f_X(m-t)] = f_X(m-t).
+\]
+
+Agora suponha que as equações das afirmações 1 e 2 valem.
+Partindo de 1, temos que
+\[
+    P(X-m \le -t) = \sum_{y \le -t} P(X-m=y)
+\]
+mas como para todo $t \in \real$ vale que $P(X-m=t) = P(X-m=-t)$, então
+\[
+    P(X-m \le -t) = \sum_{y \le -t} P(X-m=y) = \sum_{-y \ge t} P(X-m=-y) = P(X-m \ge t).
+\]
+Uma vez que $P(X-m \ge t) = 1 - P(X-m < t)$, então
+\[
+    P(X - m \ge t) = 1 - P(X - m < t).
+\]
+O que prova a simetria para o caso discreto.
+Direcionando agora para o caso contínuo, considere $Y = X - m$, de modo que
+$f_y(y) = f_X(y+m)$.
+Com efeito
+\[
+    F_Y(Y \le t) = \int_{-\infty}^{t} f_X(m+y)\,dy = 1 - \int_{t}^{\infty} f(m+y)\,dy.
+\]
+mas supondo a afirmação 2, obtemos
+\[
+    F_Y(Y \le t) = 1 - \int_{t}^{\infty} f(m-y)\,dy.
+\]
+Fazendo a substituição $y = -u$ e invertendo os limites de integração ajustados à troca
+de variável, veremos que
+\[
+    F_Y(Y \le t) = 1 - \int_{-\infty}^{-t} f(m+u)\,du
+\]
+Fazendo outra troca de variável do tipo $u = w$, é possível concluir que
+\begin{gather*}
+    F_Y(Y \le t) = 1 - F_Y(Y \le -t) \\
+    F_X(m+t) = 1 - F_X(m-t)
+\end{gather*}
+\end{proof}
+
+\begin{cor:simetria e media aritmetica}
+Se $X$ tem distribuição simétrica entorno de $m$ e com função de probabilidade -- seja
+de massa ou densidade -- $\pi(x)$, então
+\[
+    \forall x_1, x_2 \in \real,\, x_1 \le m \le x_2 \text{ e } \pi(x_1) = \pi(x_2) \rightarrow \frac{x_1 + x_2}{2} = m
+\]
+\end{cor:simetria e media aritmetica}
+\begin{proof}
+Suponha que $x_1 = m - a$ e $x_2 = m + b$, logo
+\[
+    \pi(x_1) = \pi(m-a) = \pi(m+a)
+\]
+mas, pela hipótese $\pi(x_1) = \pi(x_2)$, temos
+\[
+    \pi(m+a) = \pi(m+b).
+\]
+Logo, $a = b$ e, por conseguinte,
+\[
+    \frac{x_1 + x_2}{2}  = m.
+\]
+\end{proof}
+
+\begin{def:moda}
+A moda $\mo X$ de uma variável aleatória $X$ é o valor tal que
+\begin{enumerate}
+\item Se $X$ é discreta, então
+\[
+    \mo X = \argmax_x p_X(x)
+\]
+\item Se $X$ for contínua, então
+\[
+    \mo X = \argmax_x f_X(x)
+\]
+\end{enumerate}
+\end{def:moda}
+
+\begin{thm:simetria media moda mediana}
+Se $X$ é uma variável aleatória cuja distribuição é simétrica entorno da mediana $m$,
+então
+\begin{enumerate}
+\item Se a distribuição é unimodal, então $m = \mo X$.
+\item Se $\ev{X} < \infty$, então $m = \ev X$.
+\end{enumerate}
+\end{thm:simetria media moda mediana}
+\begin{proof}
+Seja $p$ a função de massa de $X$ discreta.
+Suponha que a moda esteja num valor $x$ diferente de $m$, de modo que $x = m + a$ ou
+$x = m - a$.
+No entanto, por hipótese de simetria, do Teorema \ref{thm:simetria funcao de probabilidade}
+segue que
+\[
+    p(m+a) = p(m-a),
+\]
+implicando que a distribuição tem duas modas, logo não pode ser unimodal.
+O mesmo argumento é replicado para uma variável contínua substituindo a função $p$ pela
+densidade $f$.
+Portanto, $m$ é a moda da distribuição.
+
+Consideremos agoa a transformação $Y = X - m$, tal que
+\begin{gather*}
+P_X(Y \le t) = 1 - P_X(Y \le -t) \\
+P_X(Y \le t) = P_X(Y \ge -t) \\
+P_X(Y \le t) = P_X(-Y \le t),
+\end{gather*}
+indicando que $Y$ e $-Y$ tem a mesma distribuição, logo, o mesmo valor esperado.
+Com efeito,
+\begin{align*}
+    \ev Y &= \ev{-Y} \\
+    \ev{X} - m &= m - \ev X \\
+    \ev X &= m.
+\end{align*}
+\end{proof}
