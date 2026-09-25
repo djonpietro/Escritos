@@ -8,7 +8,7 @@ Hmisc::describe(tab2_1)
 
 stripchart(cd_notas, method = "stack", offset = 2, at = 0, pch = 19, cex = 0.5)
 
-stem(cd_notas$nota)
+stem(cd_notas$nota, scale = 0.5)
 
 hist(cd_poluicao$temp, xlab = "temperatura", ylab= "frequência", border = "white", col = "darkblue")
 
@@ -18,9 +18,8 @@ at = 0, pch = 19, cex = 0.5, col = "darkblue")
 stem(cd_poluicao$temp, scale = .5)
 
 cd_brasil |>
-  group_by(regiao) |>
-  summarise(
-    count = n()
-  ) |>
-  ggplot(aes(x = regiao, y = count)) +
-    geom_col()
+  ggplot(aes(x = regiao)) +
+    geom_bar(stat = "proportion")
+
+tab_regiao <- table ( cd_brasil$regiao)
+pie( tab_regiao , labels = names ( tab_regiao ) )

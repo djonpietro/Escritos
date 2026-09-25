@@ -57,3 +57,32 @@ ggplot(df, aes(x = sexo, y = salario, fill = sexo)) +
        x = "Categoria",
        y = "Valores") +
   theme_minimal()
+
+library(ggplot2)
+
+# Função para criar o gráfico de simetria
+grap_simetria <- function(dados) {
+  med <- median(dados)
+  acima <- sort(dados[dados > med])
+  abaixo <- sort(dados[dados < med], decreasing = TRUE)
+  
+  # Ajustar tamanhos iguais para a comparação
+  n <- min(length(acima), length(abaixo))
+  dist_sup <- acima[1:n] - med
+  dist_inf <- med - abaixo[1:n]
+  
+  df <- data.frame(Dist_Superior = dist_sup, Dist_Inferior = dist_inf)
+  
+  ggplot(df, aes(x = Dist_Inferior, y = Dist_Superior)) +
+    geom_point(color = "blue", size = 2) +
+    geom_abline(intercept = 0, slope = 1, color = "red", linetype = "dashed") +
+    labs(title = "Gráfico de Simetria",
+         x = "Distância Inferior à Mediana",
+         y = "Distância Superior à Mediana") +
+    theme_minimal()
+}
+
+# Exemplo de uso:
+set.seed(123)
+dados_exemplo <- rnorm(100, mean = 10, sd = 2) # Dados assimétricos
+grap_simetria(dados_exemplo)
