@@ -1,35 +1,185 @@
 \section*{Visão Geral da Estatística e Análise de Dados}
 
+\subsection*{O que é Estatística}
+
+A estatística é a ciência matemática -- e parte da metodologia científica -- que busca
+extrair, reduzir, analisar e modelar um conjunto de dados.
+Seu principal objetivo é encontrar padrões em dados e possibilitar a tomada de conclusões
+e decisões bem informadas sob incerteza.
+A Teoria das Probabilidades, que estuda os eventos e as variáveis aleatórias, é
+a principal base matemática dos conhecimentos estatísticos, conferindo-lhes rigor e
+confiabilidade.
+
+Para encontrar tais padrões num conjunto de dados, a estatística faz o uso de modelos
+estatísticos.
+Esses modelos tentam descrever o dado em duas partes: a parte suave, onde se encontram
+os padrões, e a parte ruidosa, que corresponde ao fator aleatório inerente a fonte
+de extração do conjunto.
+A formulação dos modelos estatísitcos ainda pode ser realizada visando-se dois fins,
+sendo o primeiro o de predizer o comportamento de dados não observados, enquanto que o
+segundo consiste na inferência, isto é, tomar conclusões sobre os parâmetros encontrados.
+
+A inferência estatística possui um lugar de centralidade no ramo estatístico, pois é sua
+abordagem que permite generalizar as conclusões sobre os parâmetros dos modelos ajustados
+sobre uma amostra para uma população, ao mesmo tempo que quantifica a incerteza dessas
+conclusões.
+Há duas grandes escolas de inferência estatística, que se diferenciam quanto a
+interpretação do que é uma probabilidade e, consequentemente, como tratar a incerteza.
+A primeira é a clássica ou frequentista, que entende probabilidades como frequências
+relativas obtidas na observação a longo prazo, enquanto os parâmetros são considerados
+fixos e desconhecidos, com a incerteza vindo da distribuição dos valores dados pelos
+estimadores.
+A segunda é a bayesiana, que interpreta probabilidade como o grau de crença num evento
+ocorrer e vê os parâmetros como variáveis aleatórias, possuindo esses distribuição
+própria atualizada pelas observações via o famoso Teorema de Bayes.
+
 \subsection*{Uma Breve História da Estatística}
 
 A palavra estatística deriva dos termos neolatim \textit{statisticum collegium} e italiano
-\textit{statista}, que significam Colégio de Estado e Estadista respectivamente. A palavra
-alemã \textit{Statistik} foi usada modernamente por Gottfried Achenwall em meados do
-século XVIII para designar a coleta de dados políticos, econômicos e sociais de um país,
-cujo equivalente em inglês era \textit{political arithmetic}. Posteriormente, através de
-Sir John Sinclair e seus trabalhos no \textit{Statistical Accounts of Scotland}, a palavra
-ganhou uma conotação mais ampla sobre coleta e classificação de dados.
+\textit{statista}, que significam Colégio de Estado e Estadista respectivamente.
+A palavra alemã \textit{Statistik} foi usada modernamente por Gottfried Achenwall em
+meados do século XVIII para designar a coleta de dados políticos, econômicos e sociais de
+um país, cujo equivalente em inglês era \textit{political arithmetic}.
+Posteriormente, através de Sir John Sinclair e seus trabalhos no
+\textit{Statistical Accounts of Scotland}, a palavra ganhou uma conotação mais ampla sobre
+coleta e classificação de dados.
 
 Como vistos pelas suas raízes etimológicas, a estatística surgiu enquanto a disciplina
 que se preocupava com a coleta, tratamento, classificação e análise de dados sobre
 características político-sócio-econômicas de um país a fim de apoiar a formulação de
-políticas públicas.
+políticas pelos seus governos.
+Dado isso, a prática estatística apareceu, provavelmente, há milhares de anos atrás,
+quando foram realizados os primeiros censos e contagens de recursos pelos povos.
+No entanto, enquanto disciplina científica, a estatística desenvolve-se a partir
+do século XIX, apoiada pelas ferramentas matemáticas estudadas em séculos anteriores,
+especialmente por aquelas da Teoria das Probabilidades.
 
-A Estatística Matemática tem seus fundamentos no desenvolvimento da Teoria das
-Probabilidades, antes, com tratamento mais informal, nos trabalhos de Pierre de Fermat,
-Blaise Pascal e Christian Huygens no século XVII e Thomas Bayes no século XVIII.
-O rigor matemático também se expandiu no século XVIII com as obras \textit{Ars Conjectandi}
-(1713) de Jakob Bernoulli e \textit{The Doctrine of Chances} de Abraham Moivre (1718).
-A formalização matemática rigorosa das probabilidades veio ao auge com Andrei Kolmogorov
-no século XIX.
+O estudo moderno e decumentado de probabilidades inicia-se no século XVI com Girolamo
+Cardano, um polimata italiano que, motivado pelo seu hábito de apostar, escreveu o livro
+``\textit{Liber de ludo aleae}'' (O livro dos jogos de azar) entre 1550 e 1564.
+Nesse trabalho, ele documenta a técnica de computar probabilidades como razões
+de resultados favoráveis sobre o número total de resultados possíveis, desde que todas
+as conclusões possíveis sejam equiprováveis.
+Entretanto, o livro não foi devidamente publicado até 1663, quando cálculos sobre jogos
+de azar simples já estavam amplamente disseminados pela Europa.
 
-A disciplina estatística também tem laços com a Teoria de Erros, cujas origens remontam
-a \textit{Opera Miscellanea} de Roger Cottes de 1772, e sua reedição por Thomas Simpson
-em 1755, que aplicou a teoria a erros de observação. A Teoria de Erros ganhou um aspecto
-mais analítico ainda no final do século XVIII e ao longo do XIX nas mãos de Pierre-Simon
-de Laplace, Joseph Louis Lagrange e Daniel Bernoulli. O seminal Método dos Mínimos Quadrados
-(MMQ) foi desenvolvido e publicado independentemente por Adrien-Marie Legendre, Carl
-Friedrich Gauss e Robert Adrain.
+O estudo de jogos de azar e, consequentemente, de probabilidades foi também realizado ao
+longo das correspondências entre os franceses Pierre de Fermat e Blaise Pascal em meados
+do século XVII, principalmente em apoio aos jogos do nobre Chevelier de Méré.
+Suas contribuições consistiram no uso de técnicas combinatórias para resolver diversos
+tipos jogos, essas que se tornaram amplamente difundidas e compuseram as bases da moderna
+Teoria de Probabilidades.
+
+A influência dos estudiosos franceses estendeu-se ao holandês Christiaan Huygens,
+que sistematizou os conhecimentos desevolvidos naquele considerado o primeiro tratado
+sistemático sobre Probabilidades: ``\textit{Van Rekenningh in Spelen van Geluck}''
+(Sobre o Cálculo em Jogos de Azar), introduzindo conceitos como a esperança matemática
+e registrando a resolução do ``Problema dos Pontos''.
+Os trabalhos de Huygens também encontraram aplicações no cálculos de taxas de anuidades
+financeiras na Holanda, sobre as quais também publicou um tratado em 1671.
+O uso vasto e sofisticado de probabilidades para cálculos de riscos, taxas de empréstimos
+e de seguros se deu mais futuramente em meados do século XVIII.
+
+Em 1713, é publicada postumamente a célebre obra \textit{Ars conjectandi}, de Jakob
+Bernoulli, reunindo e aprofundando ideias dos autores anteriormente citados e dando a
+primeira formulação da Lei dos Grandes Números.
+No ano de 1718, Abraham de Moivre publica \textit{The Doctrine of Chances}, outro marco
+para a Teoria de Probabilidades, trazando uma definição formal de independência estaística
+e apresentando a primeira formulação do Teorema Central do Limite, a qual consistia no
+caso limite da distribuição binomial.
+Já em 1763, é enviado, postumamente, um ensaio de Thomas Bayes à \textit{Royal Society}
+britânica que discutia o hoje conhecido Teorema de Bayes.
+Na França, a probabilidade ainda encontrou aplicações nas chamadas ciências morais, no
+sistema judiciário e em eleições de cargos.
+Pierre de Laplace e o Marquês de Condorcet, usaram as probabilidades para calcular as
+chances de um veredito de um júri ou um grupo de eleitores tomarem a decisão ``correta''.
+
+Com o intenso desenvolvimento do estudos de probabilidades, a estatística moderna
+começou a ganhar forma ao longo dos séculos XVII e XVIII através do nome de
+\textbf{aritmética política}.
+Dado o contexto do Iluminismo e o interesse em generalizar o comportamento social
+por meio de leis universais, assim como a física fizera com a natureza, houve um
+crescimento nos estudos sobre população, doenças e riquezas.
+Exemplos desses estudos incluem os de John Graunt e William Petty, que publicaram,
+respectivamente, registros sobre a população londrina e a renda irlandesa.
+O pastor prussiano Johann Peter Süssmilch também publicou dados sobre proporções
+de nascimentos e mortes, atrelados a ideia da manifestação da Divina Providência
+na regularidade demográfica mostrada pelos dados.
+Todavia, a aritmética política ainda carecia de métodos de coleta mais gerais sobre as
+populações.
+
+A constituição dos Estados Unidos trazia no seu texto a obrigatoriedade da promoção de
+censos demográficos a cada 10 anos a partir de 1790, cuja motivação era de atualizar
+o número de deputados para o Congresso e a distribuição dos impostos federais.
+O mando constitucional promoveu a sistematização e regularização dos sistemas de coleta,
+além de incentivar o desenvolvmento de novos processos.
+Muitas nações europeias também adotaram a prática em meados do século XIX.
+Com as novas demandas criadas pelos censos e a maior oferta de dados para análise,
+a estatística cresceu e floresceu ao longo do século XIX tendo em vista análises nos mais
+diversos campos: dados territoriais, produção agrícola, renda, nascimentos, mortes,
+criminalidade, suícidios, entre outros.
+
+Concimitantemente ao desenvolvimento da aritmética política, outras ciências matemáticas
+contribuiram para a formação da disciplina estatística.
+A Roger Cottes publicou \textit{Opera Miscellanea} em 1722, inaugurando a Teoria de Erros
+através da análise astronômicas e o uso da média para combinar observações.
+Thomas Simpson aplica a análise probablística aos erros de observação em 1755, argumentando
+formalmente o porquê a média é mais confiável que um dado isolado.
+
+Andrien-Marie Legendre publica o Método dos Mínimos Quadrados em 1805, utilizando-o na
+geodésica para estimar o comprimento do meridiano da Terra e determinar a unidade do metro.
+Carl Friedrich Gauss desenvolve e aplica a técnica de forma indepenente para traçar a
+órbita de Ceres, constatando também que ela encontrava o parâmetro ótimo sob a hipótese
+dos erros seguirem a hoje denominada distribuição Normal ou Gaussiana.
+Adiante, o Métodos dos Mínimos Quadrados tornou-se amplamente difundido para obter
+estimativas de parâmetros de populações a partir de amostras em várias disciplinas
+quantitativas.
+
+Na Teoria Cinética dos Gases, a regularidade nas estatísticas sociais inspirou modelos
+termodinâmicos desenvolvidos nos trabalhos de Anders Celsius, James Clerk Maxweel e
+Ludwig Boltzmann.
+Nesses trabalhos, é inaugurada a moderna Mecânica Estatística, que usa modelos
+probablísticos para explicar propriedades macroscópicas de um sistema a partir da
+observação do comportamento geral de suas partes microscópicas.
+
+A biologia também trouxe grandes contribuições à estatística na forma da biometria.
+Sir Francis Galton utilizou os conhecimentos estatísticos desenvolvidos até meados do
+século XIX para analisar a diversidade biológica implicada pela Teoria da Evolução de
+Charles Darwin.
+Ele também foi um dos primeiros a desenvolver os métodos de regressões e correlação,
+os quais aplicou à análise de heriditariedade.
+Os trabalhos de Galton também influenciaram Karl Pearson, cujo nome batiza um dos
+principais testes e medidas de associação em análise de dados, além de introduzir
+o método dos momentos para estimação de parâmetros.
+Pearson também funda o primeiro departamento universitário de estatística do mundo no
+University College London em 1911, além da influente revista \textit{Biometrika}, que
+durante muito tempo foi a principal difusora de novos métodos estatísticos e de
+suas aplicações.
+
+No início do século XX, observou-se a necessidade de métodos sistemáticos de planejamento
+de experimentos e coletagem de amostras que garantissem a eliminação de vieses e a
+representividade da população amostrada em várias variáveis.
+Com esse fim, o estatístico polonês Jerzy Neyman introduz o método de amostragem
+estratificada em 1934.
+O método ganha fama com George Gallup em 1936, o qual previu a reeleição
+de Fraklin D. Roosvelt à presidência dos Estados Unidos, em oposição a previsão feita
+pela grande revista da época \textit{Literacy Magazine}, que apesar de coletar um número
+maior de observações, o fez de forma a coletar apenas a opinião de americanos de classe
+média alta, os quais tendiam a votar no candidato repubicano Alfred Landon.
+A anedota mudou para sempre as noções do que seria uma amostragem aleatória e o desing de
+experimentos que necessitam de amostras representativas de populações.
+
+Ainda na primeira metade e meados do século XX, o nome do biólogo e estatístico Ronald
+Fisher ganha destaque.
+Fisher expande o projeto e desing de experimentos, sistematiza os testes de hipótese
+e de significância estatística, cria o método ANOVA para estudos multipopulacionais
+e introduz o método da Máxima Verossimilhança para estimação de parâmetros.
+Fisher é um dos grandes nomes na sistematização de estudos quantitativos, contribuindo
+para que a estatística não se prendesse somente a mera identificação de correlações, mas
+indo também em direção às causas dos fenômenos, tendo contribuições na ecologia,
+psicologia e pesquisas clínicas.
+
+
 
 Com o desenvolvimento e sofisticação das técnicas estatísticas, como a amostragem,
 modelagem e inferência, a estatística na virada do século XIX para o XX, expandiu-se
@@ -44,31 +194,6 @@ dados e incertezas. O avanço das técnicas computacionais viabilizaram o desenv
 de técnicas e aplicações estatísticas cada vez mais robustas e complexas para lidar
 com quantidades massivas de dados e geração de conhecimento e compreensão para diversas
 áreas, como economia, ciências sociais, computação, inteligência de negócios, saúde, etc.
-
-\subsection*{Modelos Estatísticos}
-
-A estatística é um ramo da matemática aplicada e da metodologia científica
-que busca extrair, reduzir, analisar e modelar um conjunto de dados que
-amostram uma população. Para isso, são usadas principalmente as ferramentas
-teóricas providas pela Teoria das Probabilidades, pois entende-se que os
-dados originam-se de fenômenos aleatórios, e, uma vez modelados, geralmente
-dois objetivos visam ser cumpridos: estimar ou predizer o comportamento dos
-dados no futuro, ou realizar inferência, que consiste em detectar os padrões
-embutidos. A inferência pode ser feita por duas abordagens: a inferência
-dedutiva, que aceita determinadas premissas para chegar às conclusões, ou
-a inferência indutiva, que parte de casos particulares para generalizar.
-
-Ainda sobre a inferência estatística, quando tenta-se modelar um determinado
-conjunto de dados, tentamos identificar padrões e tendências de comportamento
-através de modelos estatísticos. Supondo que temos um conjunto de dados $D$,
-e identificamos que conseguimos ajustar a eles um modelo $M$, teremos então que
-\[
-	D = M + R
-\]
-onde $R$ descreve a parte aleatória dos dados que não pode ser capturada pelo
-modelo, chamada de resíduos. Normalmente, busca-se que resíduos não devam conter nenhuma
-suavidade, pois isso implicaria em padrões que o modelo falhou em capturar, e mais
-suavização por parte de $M$ será necessária.
 
 \subsection*{Análise de Dados}
 
