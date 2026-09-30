@@ -1,0 +1,111 @@
+\section{Sistemas de Equações Lineares}
+
+\begin{def:equacao linear}
+Dizemos que $E(\vec x)$ é uma equação linear em $n$ variáveis $x_1, \ldots, x_n$ se puder
+ser expresso como
+\[
+	E(\vec x) = -a_0 + \sum_{i=1}^n a_i x_i
+\]
+onde $ \vec x = (x_1, \ldots, x_n) \in \real^n$, e $a_i \in \real$, com $0 \le i \le n$,
+são constantes.
+A constante $a_0$ é chamada de termo independente, enquanto que as demais são denominadas
+coeficientes.
+\end{def:equacao linear}
+
+\begin{def:solucao}
+Seja $E(\vec x)$ uma equação linear, dizemos que $\vechat x$ é solução da equação se, e somente
+se,
+\[
+	E(\vechat x) = 0
+\]
+que equivale a
+\[
+	\sum_{i=1}^n a_i \hat x_i = a_0
+\]
+onde $a_i$, com $1 \le i \le n$, é um coeficiente e $a_0$ é o termo independente de $E(\vechat x)$.
+\end{def:solucao}
+
+\begin{prop:operacoes equacoes}
+Equações lineares são fechadas por adição e multiplicação por uma constante.
+\end{prop:operacoes equacoes}
+\begin{proof}
+	Suponha equações lineares
+	\[
+		E(\vec x) = - a_0 + \sum_{i=1}^n a_i x_i \qquad e \qquad
+		F(\vec x) = - b_0 + \sum_{i=1}^n b_i x_i.
+	\]
+	Somando-as, obtemos a equação linear
+	\[
+		G(\vec x) = -(a_0 + b_0) + \sum_{i=1}^n (a_i + b_i) x_i.
+	\]
+	Se $c \in \real$ é uma constante, então
+	\[
+		H(\vec x) = c \cdot E(\vec x) = -(c \cdot a_0) + \sum_{i=1}^n (c \cdot a_i) x_i
+	\]
+	é uma equação linear.
+\end{proof}
+
+\begin{def:sistema de equacoes}
+Dizemos que $S$ é um sistema linear se for um conjunto $\{E_i, \ldots, E_m\}$ onde
+$E \in S$ é uma equação linear em $n$ variáveis.
+Dizemos que $\vechat x$ é solução do sistema se
+\[
+	\forall E \in S, E(\vechat x) = 0
+\]
+\end{def:sistema de equacoes}
+
+\begin{def:operacao elementar}
+Sejam $E_i$ e $E_j$ equações de um sistema linear $S$.
+Chamamos de operação elementar a equação resultante
+\[
+	cE_i + E_j
+\]
+onde $c \in \real$ é uma constante.
+\end{def:operacao elementar}
+
+\begin{prop:solucao operacao elementar}
+\label{prop:solucao operacao elementar}
+Sejam $E(\vec x)$ e $F(\vec x)$ equações lineares e $\vechat x$ solução de $E$.
+Teremos que $\vechat x$ é solução $F(\vec x)$ se, e somente se, for solução de
+$G(\vec x) = cE(\vec x) + F(\vec x)$, onde $c \in \real$.
+\end{prop:solucao operacao elementar}
+\begin{proof}
+	Com efeito,
+	\[
+		G(\vechat x) = c E(\vechat x) + F(\vechat x) = 0 + 0 = 0
+	\]
+	e $\vechat x$ é solução de $G$.
+	Por outro lado, suponha
+	\[
+		c E(\vechat x) + F(\vechat x) = 0,
+	\]
+	mas como $E(\vechat x) = 0$, então
+	\[
+		F(\vechat x) = 0
+	\]
+\end{proof}
+
+\begin{cor:sistema equivalente}
+Seja $S$ um sistema linear.
+Se $S'$ é um sistema obtido trocando-se a $j$-ésima equação de $S$ por
+$c \cdot E_i + E_j$, com $c \in \real$ constante, então $\vechat x$ é solução de $S$,
+se, e somente se, for solução de $S'$.
+\end{cor:sistema equivalente}
+\begin{proof}
+	Com efeito, $\vechat x$ é solução de toda equação linear $E \in S$.
+	Por instância, $\vechat x$ é solução das equações $E_i$ e $E_j$ de $S$ e, pela
+	proposição \ref{prop:solucao operacao elementar}, será solução de $c \cdot E_i + E_j$.
+	Por consequência, $\vechat x$ será solução de toda equação $E' \in S'$.
+
+	Por outro lado, sendo $\vechat x$ solução tanto de $E_i \in S$ quanto de
+	$c \cdot E_i + E_j \in S'$, então $\vechat x$ é solução de $E_j$ pela
+	proposição \ref{prop:solucao operacao elementar}.
+	Uma vez que $S$ e $S'$ compartilham as mesmas equações a menos de $E_j \in S$ e
+	$c \cdot E_i + E_j \in S'$, então $\vechat x$ é solução de toda equação de $S$.
+\end{proof}
+
+\begin{def:forma escada}
+Seja $S$ um sistema linear de $m$ equações em $n$ variáveis.
+Deizemos que $S$ está em forma escada se para todo $i \in [m]$ e para todo $j \in [n]$ com
+$j > i$, o coeficiente $a_i$ de $E_j$ é igual a zero.
+\end{def:forma escada}

@@ -1,0 +1,258 @@
+\section{Matrizes}
+
+Matrizes são objetos tabulares, dispondo números por linhas e colunas que são referenciados
+pela sua posição.
+O número de linhas e colunas da matriz definem a sua dimensão, ou tipo.
+Essa característica irá restringir quais tipos de operações poderão ser realizadas
+envolvendo matrizes.
+
+\begin{def:matriz}
+Dados inteiros positivos $m$ e $n$, uma matriz $A$ de dimensão -- ou tipo -- $m \times n$,
+é uma tabela com $m$ linhas e $n$ colunas cujos elementos, denominados entradas ou
+coeficientes, são números reais; de forma sintética, $A \in \real^{m \times n}$.
+A entrada de $A$ da linha de índice $i \in [m]$ e coluna de índice $j \in [n]$ é denotada
+como $a_{ij} \in \real$.
+\end{def:matriz}
+
+\begin{exp:repr matriz}
+Exemplos de matrizes:
+\[
+	\begin{bmatrix}
+		1 & 0 \\
+		3 & 2
+	\end{bmatrix}, \quad
+	\begin{bmatrix}
+		5 & 0  & 5  \\
+		8 & 2  & 10 \\
+		5 & 11 & 4  \\
+	\end{bmatrix} \quad \text{e} \quad
+	\begin{bmatrix}
+		5 & 4  & 3  \\
+		0 & 12 & 20 \\
+	\end{bmatrix} \quad
+\]
+\end{exp:repr matriz}
+
+Para que duas matrizes sejam iguais, elas devem ter as mesmas entradas nas mesmas posições,
+precisando, pois, serem do mesmo tipo.
+
+\begin{def:igualdade matrizes}
+Duas matrizes $A$ e $B$ são iguais se, e somente se, são do mesmo tipo $m \times n$ e
+para quaisquer índices $i \in [m]$ e $j \in [n]$, a entrada $a_{ij}$ de $A$ é igual à
+entrada $b_{ij}$ de $B$.
+\[
+	\forall i \in [m]\,\forall j \in [n]\,, ( a_{ij} = b_{ij} )
+\]
+\end{def:igualdade matrizes}
+
+Um tipo especial de matrizes são aquelas cujo número de linhas é igual a de colunas,
+que são chamadas de \textbf{quadradas}.
+Em outro caso, elas são chamadas de \textbf{retangulares}, havendo dois subtipos:
+as \textbf{altas}, que possuem mais linhas do que colunas, e as \textbf{largas}, as quais
+o número de colunas supera o de linhas.
+
+\begin{def:matriz quadrada}
+Uma matriz $A$ do tipo $m \times n$ é dita quadrada se $m = n$.
+Se $A$ é do tipo $n \times n$, então dizemos que $A$ é de ordem $n$.
+\end{def:matriz quadrada}
+
+Um elemento importante das matrizes quadradas são as suas diagonais: a principal, que
+consiste daquela que vai do canto suprior esquerdo até o inferior direto, e a secudária,
+que vai do elemento suprior direito ao inferior esquerdo.
+
+\begin{def:diagonal}
+Seja $A$ uma matriz quadrada $n \times n$.
+A digonal principal de $A$ é composta pelas entradas $a_{ij}$ com $i = j$.
+A diagonal secudária é composta pelas entradas $a_{ij}$ tal que $i + j = n + 1$.
+\end{def:diagonal}
+
+\begin{def:transposta}
+Se $A$ é uma matriz $m \times n$, então a sua transposta, denotada por $A^\top$, é
+a matriz $n \times m$ cujas entradas $p_{ij}$ são dadas por
+\[
+	p_{ij} = a_{ji}
+\]
+\end{def:transposta}
+
+\begin{exp:transposta1}
+\[
+	A = \begin{bmatrix}
+		3 & 2 \\
+		1 & 0
+	\end{bmatrix} \rightarrow
+	A^\top = \begin{bmatrix}
+		3 & 1 \\
+		2 & 0
+	\end{bmatrix}
+\]
+\end{exp:transposta1}
+
+\begin{exp:transposta2}
+\[
+	A = \begin{bmatrix}
+		2 & 4  & 4  \\
+		2 & -2 & 10
+	\end{bmatrix} \rightarrow
+	A^\top = \begin{bmatrix}
+		2 & 2  \\
+		4 & -2 \\
+		4 & 10
+	\end{bmatrix}
+\]
+\end{exp:transposta2}
+
+Uma classe especial de matrizes são as chamadas matrizes \textbf{esparsas}, que surgem
+em diversos problemas aplicados e possuem interessantes propriedades computacionais.
+Essas matrizes caracterizam-se por ter boa parte de suas entradas iguais a $0$, porém
+não há uma condição que diga de maneira inequívoca se dada matriz seja esparsa ou não.
+No entanto, há outras classificações de matrizes que satisfazem determinadas definições que
+são amplamente consideradas como esparsa.
+Um exemplo trivial de matriz esparsa é matriz nula: aquela cujas entradas são todas zero.
+
+\begin{def:matriz nula}
+A matriz $O \in \real^{m \times n}$ é nula se, e somente se, para quaisquer $i \in [m]$
+e $j \in [n]$, tem-se que $o_{ij} = 0$.
+\end{def:matriz nula}
+
+Outra classificação, de grande importância na Álgebra Linear, são as matrizes diagonais,
+cujos elementos fora da diagonal principal são iguais a zero.
+
+\begin{def:matriz diagonal}
+Uma matriz quadrada $\Lambda \in \real^{n \times n}$ é dita diagonal se para quaisquer
+$i, j \in [n]$ é satisfeito que
+\[
+	i \ne j \rightarrow \lambda_{ij} = 0
+\]
+\end{def:matriz diagonal}
+
+\begin{exp:diagonal1}
+As matrizes
+\[
+	\begin{bmatrix}
+		2 & 0 \\
+		0 & 1
+	\end{bmatrix} \quad \text{ e } \quad
+	\begin{bmatrix}
+		4 & 0  & 0 \\
+		0 & -1 & 0 \\
+		0 & 0  & 3
+	\end{bmatrix}
+\]
+são diagonais.
+\end{exp:diagonal1}
+
+Um exemplo especial de matriz diagonal e, portanto, esparsa, é a matriz \textbf{identidade},
+cuja diagonal é preenchida apenas por $1$.
+
+\begin{def:matriz identidade}
+Chama-se matriz identidade de ordem $n$, denotada por $\mathbf I_n$, toda matriz diagonal
+$n \times n$ cujas entradas da diagonal principal são todas iguais a $1$.
+\end{def:matriz identidade}
+
+Em seguida, definimos as matrizes básicas como aquelas cujas entradas são todas iguais
+iguais a zero, a menos de uma.
+
+\begin{def:matriz básica}
+Uma matriz básica $B_{rs}(\beta)$ é uma matriz quadrada cujas entradas são definidas tal como
+\[
+	b_{ij} = \begin{cases}
+		\beta, & \text{se } i = r \text{ e } j = s \\
+		0,     & \text{caso contrário.}
+	\end{cases}
+\]
+\end{def:matriz básica}
+
+\begin{exp:matriz basica}
+A matriz $3 \times 3$ a seguir
+\[
+	B_{21}(1) = \begin{bmatrix}
+		0 & 0 & 0 \\
+		1 & 0 & 0 \\
+		0 & 0 & 0
+	\end{bmatrix}
+\]
+é básica.
+\end{exp:matriz basica}
+
+Por sua vez, as matrizes elementares são aquelas cuja a diagonal princpal é toda igual a
+$1$ e, caso não seja diagonal, então exatamente um elemento fora da diagonal principal
+é não nulo.
+
+\begin{def:matriz elementar}
+Uma matriz quadrada $L_{rs}(\alpha)$ é dita elementar se para quaisquer índices $i, j \in [n]$
+temos que
+\[
+	\ell_{ij} = \begin{cases}
+		1,      & \text{se } i = j                  \\
+		\alpha, & \text{se } i = r \text{ e } j = s \\
+		0,      & \text{caso contrário}
+	\end{cases}
+\]
+\end{def:matriz elementar}
+
+Outras matrizes esparsas de destaque na Álgebra Linear são as triangulares, cujo nome
+deriva do seu formato tipo escada.
+Uma triangular superior é aquela cujas entradas abaixo da diagonal principal são nulos,
+enquanto que as inferiores possuem as entradas acima da diagonal principal iguais as zero.
+
+\begin{def:matriz triangular}
+Uma matriz quadrada $U$ é dita triangular superior se para quaisquer $i, j \in [n]$
+\[
+	i > j \rightarrow u_{ij} = 0
+\]
+Uma matriz quadrada $L$ é traingular inferior se para quaisquer $i, j \in [n]$
+\[
+	i < j \rightarrow u_{ij} = 0
+\]
+\end{def:matriz triangular}
+
+\begin{exp:triangular1}
+A matriz
+\[
+	\begin{bmatrix}
+		2 & 3 & 0 \\
+		0 & 4 & 1 \\
+		0 & 0 & 8
+	\end{bmatrix}
+\]
+é triangular superior
+\end{exp:triangular1}
+
+\begin{exp:triangular2}
+A matriz
+\[
+	\begin{bmatrix}
+		0  & 0 & 0 \\
+		2  & 4 & 0 \\
+		-5 & 1 & 8
+	\end{bmatrix}
+\]
+é triangular inferior.
+\end{exp:triangular2}
+
+\begin{def:simetrica}
+Uma matriz $A$ é dita simétrica se, e somente se, para qualquer índices $i$ e $j$,
+\[
+	a_{ij} = a_{ji}
+\]
+o que equivale a
+\[
+	A^\top = A
+\]
+\end{def:simetrica}
+
+\begin{exp:simetrica1}
+As matrizes identidade e nula são matrizes simétricas.
+\end{exp:simetrica1}
+
+\begin{exp:simetrica2}
+A matriz
+\[
+	\begin{bmatrix}
+		2  & -3 & 7 \\
+		-3 & 1  & 9 \\
+		7  & 9  & 5
+	\end{bmatrix}
+\]
+é simétrica.
+\end{exp:simetrica2}

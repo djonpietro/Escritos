@@ -1,0 +1,106 @@
+\section{Operações com Matrizes}
+
+\begin{def:adicao de matrizes}
+Sejam $A$ e $B$	matrizes de tipo $m \times n$.
+A soma delas será uma matriz $C$ de tipo $m \times n$ tal que, se $a_{ij}$ é entrada de
+$A$ e $b_{ij}$ entrada de $B$, então a entrada $c_{ij}$ de $C$ é
+\[
+	c_{ij} = a_{ij} + b_{ij}
+\]
+\end{def:adicao de matrizes}
+
+\begin{exp:soma matrizes}
+\[
+	\begin{bmatrix}
+		2 & 3 \\
+		4 & 5
+	\end{bmatrix} +
+	\begin{bmatrix}
+		4 & 1  \\
+		7 & 10
+	\end{bmatrix} =
+	\begin{bmatrix}
+		2 + 4 & 3 + 1  \\
+		4 + 7 & 5 + 10
+	\end{bmatrix} =
+	\begin{bmatrix}
+		6  & 4  \\
+		11 & 15
+	\end{bmatrix}
+\]
+\end{exp:soma matrizes}
+
+\begin{def:produto escalar matriz}
+Seja $A$ uma matriz do tipo $m \times n$ e $c \in \real$.
+O produto de $A$ por $c$ é uma matriz $P$ cuja entrada $p_{ij}$ é dada por
+\[
+	p_{ij} = c \cdot a_{ij}
+\]
+\end{def:produto escalar matriz}
+
+\begin{exp:produto escalar matriz}
+\[
+	2 \cdot \begin{bmatrix}
+		3 & 5  \\
+		8 & 10
+	\end{bmatrix} =
+	\begin{bmatrix}
+		2 \cdot 3 & 2 \cdot 5  \\
+		2 \cdot 8 & 2 \cdot 10
+	\end{bmatrix} =
+	\begin{bmatrix}
+		6  & 10 \\
+		16 & 20
+	\end{bmatrix}
+\]
+\end{exp:produto escalar matriz}
+
+\begin{prop:propriedades soma matrizes}
+A soma de duas matrizes é dotada das propriedades de
+\begin{enumerate}
+	\item Associatividade: $(A + B) + C = A + (B + C)$.
+	\item Comutativadade: $A + B = B + A$.
+	\item Elemento Neutro: $A + O = A$, onde $O$ é matriz nula.
+	\item Inverso Aditivo: $A + (-A) = O$
+\end{enumerate}
+\end{prop:propriedades soma matrizes}
+\begin{proof}
+	Segue diretamente das propriedades de soma de números reais.
+\end{proof}
+
+\begin{def:produto de matrizes}
+O produto $C$ de duas matrizes $A$ e $B$ de tipos $m \times n$ e $p \times q$ está definido
+se $n = p$.
+A entrada $c_{ij}$ de $C$ é dada por
+\[
+	c_{ij} = \sum_{k=1}^n a_{ik} \cdot b_{kj}
+\]
+\end{def:produto de matrizes}
+
+\begin{prop:elemento neutro produto}
+A matriz identidade é o elemento neutro da multiplicação de matrizes.
+\end{prop:elemento neutro produto}
+\begin{proof}
+	Seja $A$ uma matriz $m \times n$.
+	Com efeito, a entrada $c_{ij}$ de $A \cdot \mathbf I_n$ é definida como
+	\[
+		c_{ij} = \sum_{k=1}^n a_{ik} \lambda_{kj}
+	\]
+	Temos que $\lambda_{kj} = 1$ quando $k = j$, e zero caso contrário.
+	Consequentemente,
+	\[
+		c_{ij} = a_{ij}
+	\]
+	para quaisquer índices $i \in [m]$ e $j \in [n]$.
+	O mesmo vale analogamente para $\mathbf I_n \cdot A$.
+\end{proof}
+
+\begin{def:matriz do sistema}
+Seja $S$ um sistema linear de $m$ equações em $n$ variáveis.
+A forma matricial de $S$ é composta por matrizes $A \in \real^{m \times n}$,
+$\vec x \in \real^n$ e $\vec b \in \real^m$ tal que
+\begin{enumerate}
+	\item A entrada $a_{ij}$ de $A$ é o $j$-ésimo coeficiente da $i$-ésima equação
+	\item $\vec x$
+\end{enumerate}
+\end{def:matriz do sistema}
