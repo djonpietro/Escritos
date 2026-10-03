@@ -1,0 +1,66 @@
+\section{Vetores}
+
+Um vetor é um conjunto de objetos de mesmo tipo\footnote{Isso porque dois dados do
+mesmo tipo possuem o mesmo número de bytes na memória.} que são armazenados contiguamente na
+memória.
+Seus elementos podem ser acessados diretamente pelos seus índices.
+Se o nome do vetor é $S$, então acessamos seu $i$-ésimo membro como $S[i]$.
+O nome do vetor é um ponteiro para o seu primeiro elemento, e, ao somá-lo com um
+valor inteiro não negativo $i$, obtemos um ponteiro para o elemento de índice $i$ do
+vetor, portanto $S[i] = *(S + i)$.
+
+Na sua formulação mais simples, vetores possuem dois atributos principais: tamanho --
+o número máximo de elementos que ele suporta -- e o número efetivo de membros.
+Chamamos de estáticos os vetores que possuem tamanho previamente determinado e fixo,
+enquanto são denominados dinâmicos aqueles cujo tamanho varia conforme a necessidade
+da aplicação.
+Além disso, os vetores podem ser ordenados ou não.
+
+\subsection{Vetores não ordenados}
+
+A busca em vetores não ordenados é realizada percorrendo o vetor sequencialmente até
+achar o elemento com a chave desejada.
+No pior caso, o elemento ou está na última posição ou não existe no vetor.
+Com isso, a complexidade de uma busca sequencial no vetor com $n$ elementos é $O(n)$.
+
+\begin{function}[H]
+\SetAlgoLined
+\caption{Busca-Vetor($S$, $k$)}
+$i \gets 0$\;
+\Enqto{$i < S.\NumElem\ \E\ S[i].\Chave \neq k$}{
+    $i \gets i + 1$\;
+}
+\Se{$i = S.\NumElem$}{
+    \Retorna{$\nil$}\;
+}
+\Retorna{$\&S[i]$}\;
+\end{function}
+
+
+A inserção em vetores não ordenados pode ser feita apenas inserindo após o último elemento.
+Já a operação de remoção pode ser realizada simplesmente copiando
+o último elemento para a posição do elemento que está sendo removido.
+Ambas são realizadas em tempo $O(1)$, mas como pode ser necessário buscar o elemento
+no vetor antes de o remover, a remoção dele pode custar $O(n)$.
+
+\begin{function}[H]
+\SetAlgoLined
+\caption{Insere-Vetor($S$, $x$)}
+    \Se{$S.\Len = S.\NumElem$}{
+        \textbf{erro} ``overflow''\;
+    }
+    \Copia{$S+S.\NumElem$, $x$}\;
+    $S.\NumElem \gets S.\NumElem + 1$\;
+\end{function}
+
+\begin{function}[H]
+\SetAlgoLined
+\caption{Remove-Vetor($S$, $x$)}
+\tcp{$x$ deve apontar para um elemento do vetor: $S \le x < S + S.\NumElem$}
+\Se{$S.\NumElem = 0$}{
+    \textbf{erro} ``underflow''\;
+}
+$S.\NumElem \gets S.\NumElem - 1$\;
+ultimo $\gets S+S.\NumElem$\;
+\Copia{$x$, $\mathrm{ultimo}$}\;
+\end{function}

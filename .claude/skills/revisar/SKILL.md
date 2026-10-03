@@ -41,8 +41,11 @@ Não rode os dois primeiros em paralelo: o matemático precisa ver o texto final
 ## 3. Relatório
 
 Grave em `<livro>/docs/revisao-<nome-do-arquivo-sem-.tex>.md` no formato da skill
-`estilo-escritos`. Se o arquivo já existir, **acrescente** uma nova seção datada
-no fim em vez de sobrescrever.
+`estilo-escritos`. Se o arquivo já existir, **sobrescreva-o**: o relatório
+descreve só o estado atual do arquivo, com a data desta revisão — sem histórico
+de passadas anteriores (o git guarda isso). Antes de sobrescrever, leia o antigo
+e mantenha numa seção curta **Decisões do autor** os itens que o autor descartou
+ou adiou, para não serem levantados de novo.
 
 - Entram na lista `- [ ]` apenas os achados matemáticos **confirmados** e
   **ajustados** (com a correção da batida, quando ajustada), ordenados por

@@ -1,0 +1,48 @@
+Na matemática, conjuntos são coleções imutáveis de objetos distintos.
+Na ciência da computação, conferimos a nomenclatura de \textbf{conjuntos} a qualquer
+coleção finita abstrata de objetos.
+A imutabilidade, nesse caso, não é um requisito; conjuntos computacionais podem crescer
+ou diminuir de tamanho ao longo das operações de um algoritmo que o manipula.
+Tais conjuntos que podem ter seu tamanho alterado chamamos de \textbf{dinâmicos}.
+Os conjuntos dinâmicos que também permitem o teste de pertinência de um membro dado
+são chamados de \textbf{dicionários}.
+
+Os elementos de um conjunto de dados são, geralmente, um registro, cujos campos podem
+ser de tipos elementares, ponteiros, ou compostos de outros registros.
+Os elementos num conjunto não necessariamente precisam ser todos distintos entre si,
+a exemplo da coleção de idades de um grupo de pessoas; nada impede que haja duas com a
+mesma idade.
+Em alguns casos, o membros de um conjunto possuem uma \textbf{chave} que os identifica, e,
+caso as chaves sejam todas distintas, o conjunto pode ser considerado como uma coleção de
+chaves.
+
+As operações de um conjunto podem ser de dois tipos: consulta ou modificação.
+A primeira apenas resgata um valor, membro ou estatística do conjutno.
+A segundo altera o estado do conjunto, como sua ordenação, inserindo, removendo ou
+modificando membros, entre outras.
+Em geral, quase todo conjunto aceita as seguintes operações:
+
+\paragraph{Insere($S,x$)} Operação que toma um conjunto $S$ e insere o membro apontado
+por $x$.
+Presume-se que tanto $S$ quanto $x$ já foram inicializados.
+Dependendo da aplicação, a operação pode falhar caso um membro $x$ com a mesma chave
+já exista em $S$.
+
+\paragraph{Remove($S, x$)} Remove do conjunto $S$ o membro apontado por $x$.
+
+\paragraph{Busca($S, k$)} Retorna um ponteiro para um membro $x$ em $S$ cuja chave seja
+igual a $k$, ou $\nil$ caso nenhum elemento contenha tal chave.
+
+Outras operações básicas que acompanham conjuntos dinâmicos são
+
+\paragraph{Máximo($S$)} Retorna o membro $x$ de $S$ cujo valor da chave é máximo no
+conjunto
+
+\paragraph{Mínimo($S$)} Retorna o membro $x$ de $S$ cujo valor da chave é mínimo no
+conjunto
+
+\paragraph{Predecesor($S, x$)} Num conjunto ordenado, retorna o membro $w \in S$ que
+precede $x$, ou $\nil$ quando $x$ é o elemento mínimo.
+
+\paragraph{Sucessor($S, x$)} Num conjunto ordenado, retorna o membro $y \in S$ que
+sucede $x$, ou $\nil$ quando $x$ é o elemento máximo.
