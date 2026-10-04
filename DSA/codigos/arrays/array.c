@@ -9,9 +9,20 @@ void * array_pti(Array *arr, int i) {
     return p;
 }
 
+// checks whether x points to the start of one of the n_elem stored elements
+static int array_contains(Array *arr, void *x) {
+    uintptr_t base = (uintptr_t) arr->array;
+    uintptr_t p = (uintptr_t) x;
+
+    if (p < base || p >= base + arr->n_elem * arr->elem_size) return 0;
+    return (p - base) % arr->elem_size == 0;
+}
+
 Array * array_init(int len, size_t elem_size) {
+    if (len <= 0) return NULL;
+
     Array *arr = malloc(sizeof(Array));
-    if (!arr || len <= 0) return NULL;
+    if (!arr) return NULL;
 
     arr->len = len;
     arr->elem_size = elem_size;
@@ -42,7 +53,7 @@ int array_insert(Array * arr, void * x) {
 }
 
 int array_remove(Array *arr, void *x) {
-    if (arr->n_elem == 0) return -1;
+    if (!array_contains(arr, x)) return -1;
 
     arr->n_elem--;
     void * last = (char *) arr->array + arr->n_elem * arr->elem_size;
@@ -75,7 +86,7 @@ int array_insert_sorted(Array *arr, void *x, int (*compare)(void*a,void*b)) {
 }
 
 int array_remove_sorted(Array *arr, void *x) {
-    if (arr->n_elem == 0) return -1;
+    if (!array_contains(arr, x)) return -1;
 
     int idx = ((uint8_t *) x - (uint8_t *) arr->array) / arr->elem_size;
     for (int i = idx; i < arr->n_elem - 1; i++) {
@@ -83,6 +94,26 @@ int array_remove_sorted(Array *arr, void *x) {
     }
     arr->n_elem--;
     return 0;
+}
+
+void * array_max(Array *arr) {
+    if (arr->n_elem == 0) return NULL;
+    return array_pti(arr, arr->n_elem-1);
+}
+
+void * array_min(Array *arr) {
+    if (arr->n_elem == 0) return NULL;
+    return arr->array;
+}
+
+void * array_elem_successor(Array *arr, void *x) {
+    if (!array_contains(arr, x) || x == array_max(arr)) return NULL;
+    return (uint8_t*) x + arr->elem_size;
+}
+
+void * array_elem_predecessor(Array *arr, void *x) {
+    if (!array_contains(arr, x) || x == array_min(arr)) return NULL;
+    return (uint8_t*) x - arr->elem_size;
 }
 
 void array_free(Array *arr) {

@@ -105,3 +105,39 @@ $S.\NumElem \gets S.\NumElem +1$\;
 }
 $S.\NumElem \gets S.\NumElem - 1$\;
 \end{function}
+
+Operações para obter o máximo e o mínimo, basta retornar o ponteiro para o último e o
+primeiro elemento no vetor respectivamente.
+Para obter o predecessor de um elemento, devemos apenas subtrair $1$ ao ponteiro dado como
+argumento caso esse não seja o último.
+Para o sucessor, devemos somar $1$ a esse ponteiro, caso ele não aponte para o último.
+
+\begin{algorithm}[H]
+\SetKwFunction{Predecessor}{Predecessor}
+\SetKwFunction{Sucessor}{Sucessor}
+\SetKwFunction{Maximo}{Maximo}
+\SetKwFunction{Minimo}{Minimo}
+\SetAlgoLined
+
+\Fn{\Maximo{$S$}}{
+    \Retorna{$S + S.\NumElem - 1$}\;
+}
+
+\Fn{\Minimo{$S$, $x$}}{
+    \Retorna{$S$}\;
+}
+
+\Fn{\Predecessor{$S$, $x$}}{
+    \Se{$x = \Minimo{$S$}$}{
+        \Retorna{$\nil$}\;
+    }
+    \Retorna{$x - 1$}\;
+}
+
+\Fn{\Sucessor{$S$, $x$}}{
+    \Se{$x = \Maximo{$S$}$}{
+        \Retorna{$\nil$}\;
+    }
+    \Retorna{$x + 1$}\;
+    }
+\end{algorithm}
