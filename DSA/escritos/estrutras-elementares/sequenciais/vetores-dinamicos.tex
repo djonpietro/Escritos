@@ -16,7 +16,7 @@ enquanto são denominados dinâmicos aqueles cujo tamanho varia conforme a neces
 da aplicação.
 Além disso, os vetores podem ser ordenados ou não.
 
-\subsection{Vetores não ordenados}
+\subsection{Vetores Não Ordenados}
 
 A busca em vetores não ordenados é realizada percorrendo o vetor sequencialmente até
 achar o elemento com a chave desejada.
@@ -63,4 +63,45 @@ no vetor antes de o remover, a remoção dele pode custar $O(n)$.
 $S.\NumElem \gets S.\NumElem - 1$\;
 ultimo $\gets S+S.\NumElem$\;
 \Copia{$x$, $\mathrm{ultimo}$}\;
+\end{function}
+
+\subsection{Vetores Ordenados}
+
+Em vetores ordenados, a busca pode ser feita em tempo sublinear $O(\log n)$ se usarmos o
+algoritmo de busca binária, que será apresentado num capítulo mais adiante.
+Uma abordagem possível para a inserção é inserir o novo membro ao final do vetor,
+e o movimentar na direção decrescente enquanto sua chave for menor que a do membro na
+posição anterior.
+Para remoção, o procedimento consiste em deslocar todos os membros à frente daquele que
+foi removido para uma posição atrás.
+Ambas as operações passam a ter, pois, complexidade $O(n)$, já que necessitam mover todos
+os membros do vetor no pior caso.
+
+\begin{function}[H]
+\SetAlgoLined
+\caption{Insere-Vetor-Ordenado($S$, $x$)}
+\Se{$S.\Len = S.\NumElem$}{
+    \textbf{erro} ``overflow''\;
+}
+\Copia{$S + S.\NumElem$, $x$}\;
+$i \gets S.\NumElem$\;
+\Enqto{$i \ge 1$ \E $S[i].\Chave < S[i-1].\Chave$}{
+    temp $\gets S[i-1]$\;
+    $S[i-1] \gets S[i]$\;
+    $S[i] \gets$ temp\;
+    $i \gets i - 1$\;
+}
+$S.\NumElem \gets S.\NumElem +1$\;
+\end{function}
+
+\begin{function}[H]
+\SetAlgoLined
+\caption{Remove-Vetor-Ordenado($S$, $x$)}
+\Se{$S.\NumElem = 0$}{
+    \textbf{erro} ``underflow''\;
+}
+\Para{$i \gets x - S$ \Ate $S.\NumElem - 2$}{
+    $S[i] \gets S[i+1]$\;
+}
+$S.\NumElem \gets S.\NumElem - 1$\;
 \end{function}

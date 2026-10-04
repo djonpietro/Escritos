@@ -17,6 +17,10 @@ int array_insert(Array * arr, void * x);
 
 int array_remove(Array * arr, void * x);
 
+int array_insert_sorted(Array *arr, void *x, int (*compare)(void*a,void*b));
+
+int array_remove_sorted(Array *arr, void *x);
+
 void array_free(Array * arr);
 
 #endif
