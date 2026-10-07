@@ -18,6 +18,29 @@ static int array_contains(Array *arr, void *x) {
     return (p - base) % arr->elem_size == 0;
 }
 
+int array_reallocate(Array *arr, int len) {
+    if (len < arr->len) return -1;
+
+    void * new_array = calloc(len, arr->elem_size);
+    if (!new_array) {
+        return -1;
+    }
+
+    memcpy(new_array, arr->array, arr->len * arr->elem_size);
+
+    arr->len = len;
+    free(arr->array);
+    arr->array = new_array;
+    return 0;
+}
+
+// if the array is full, doubles its length when policy is ARRAY_REALLOC
+static int array_make_room(Array *arr, int policy) {
+    if (arr->n_elem < arr->len) return 0;
+    if (policy != ARRAY_REALLOC) return -1;
+    return array_reallocate(arr, 2 * arr->len);
+}
+
 Array * array_init(int len, size_t elem_size) {
     if (len <= 0) return NULL;
 
@@ -43,8 +66,8 @@ void * array_search(Array * arr, void * k, int (*compare)(void*a,void*b)) {
     return NULL;
 }
 
-int array_insert(Array * arr, void * x) {
-    if (arr->n_elem >= arr->len) return -1;
+int array_insert(Array * arr, void * x, int policy) {
+    if (array_make_room(arr, policy) != 0) return -1;
 
     char * dest = (char *) arr->array + arr->n_elem * arr->elem_size;
     memcpy(dest, x, arr->elem_size);
@@ -62,8 +85,8 @@ int array_remove(Array *arr, void *x) {
     return 0;
 }
 
-int array_insert_sorted(Array *arr, void *x, int (*compare)(void*a,void*b)) {
-    if (arr->n_elem == arr->len) return -1;
+int array_insert_sorted(Array *arr, void *x, int (*compare)(void*a,void*b), int policy) {
+    if (array_make_room(arr, policy) != 0) return -1;
 
     memcpy(array_pti(arr, arr->n_elem), x, arr->elem_size);
     int i = arr->n_elem;

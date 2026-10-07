@@ -1,0 +1,142 @@
+\section{Listas Encadeadas}
+
+Lista encadeada é uma implementação de conjunto dinâmico cujos membros, denominados
+nós, nas suas formas mais simples, detêm um campo de chave e um ponteiro \texttt{proximo}
+que aponta para o próximo membro no conjunto.
+Numa implementação típica, a lista possui dois ponteiros especiais: \texttt{head} e
+\texttt{tail}.
+O \texttt{head} aponta para o primeiro elemento, enquanto o segundo para o último.
+No entanto, para simplificar condições de contorno nas operações de inserção e remoção,
+principalmente no início da lista, adiciona-se um nó chamado de \texttt{sentinela}, que
+não possui chave válida, é apontado pelo \texttt{head} e cujo \texttt{proximo} aponta
+para o primeiro membro efetivo da lista.
+
+As listas encadeadas possuem diversas variações: listas simplesmente encadeadas,
+duplamente encadeadas e circulares.
+Também podemos contar com variações que incluem elementos de mais de um tipo.
+De forma geral, assim como em vetores não ordenados, é possível realizar inserções e
+remoções de um dado membro em tempo constante caso a ordenação não seja requisitada, e
+buscas em tempo linear.
+
+As listas encadeadas possuem a vantagem de serem mais flexíveis e permitirem inserções sem
+necessariamente conhecer o total de elementos a serem comportados, diferentemente dos
+vetores, que precisam ser realocados à medida que o número de membros cresce.
+No entanto, os vetores fazem melhor aproveitamento da cache devido ao princípio de
+localidade espacial.
+No caso de existência de ordenação, a vantagem das listas encadeadas diminui mais,
+pois uma busca num vetor ordenado pode ser executada em tempo logarítmico, enquanto
+nas listas continua sendo realizado em tempo linear.
+
+\subsection{Lista Simplesmente Encadeada}
+
+Consiste na implementação mais simples para uma lista encadeada.
+A lista mantém três atributos: \texttt{head}, \texttt{tail} e o número de elementos.
+Uma busca nessa lista consiste numa pesquisa sequencial: percorremos cada elemento,
+seguindo os ponteiros de \texttt{proximo} até obter a chave desejada.
+É importante frisar que o que é retornado não é um ponteiro para o membro cuja chave
+é aquela sendo pesquisada, mas sim um ponteiro para o membro anterior.
+Isso porque um nó não conhece aquele que o antecede, apenas o que lhe sucede.
+
+\begin{function}
+\SetAlgoLined
+\caption{Busca-Lista($L$, $k$)}
+$w \gets L.\Head$\;
+\Enqto{$w.\Prox \ne \nil$ \E $w.\Prox.\Chave \ne k$}{
+    $w \gets w.\Prox$\;
+}
+\Se{$w.\Prox = \nil$}{
+    \Retorna{$\nil$}\;
+}
+\Retorna{$w$}\;
+\end{function}
+
+A inserção é feita tomando-se como argumento o nó \texttt{prev} que antecederá o novo
+membro do conjunto.
+Neste momento, é feito o ajuste dos ponteiros de \texttt{proximo}, a fim de que o
+\texttt{proximo} de \texttt{prev} aponte para o novo membro, e o \texttt{proximo} desse
+último aponte para o antigo sucessor de \texttt{prev}.
+Se \texttt{prev} era o \texttt{tail} da lista, então o novo nó será o novo \texttt{tail},
+o que pode ser feito verificando-se se o \texttt{proximo} do novo é $\nil$.
+
+\begin{function}[H]
+\SetAlgoLined
+\caption{Insere-Lista($L$, prev, $x$)}
+$x.\Prox \gets $ prev.\Prox\;
+prev.\Prox $\gets x$\;
+\Se{$x.\Prox = \nil$}{
+    $L.\Tail \gets x$\;
+}
+$L.\NumElem \gets L.\NumElem + 1$\;
+\end{function}
+
+A remoção toma como argumento o nó \texttt{prev} que precede aquele que será removido.
+Nessa operação, o \texttt{proximo} de \texttt{prev} irá apontar para o \texttt{proximo}
+do nó retirado.
+Se o removido era o \texttt{tail}, então \texttt{prev} passa a ocupar essa função.
+
+\begin{function}[H]
+\SetAlgoLined
+\caption{Remove-Lista($L$, prev)}
+\Se{$\mathrm{prev}.\Prox = \nil$}{
+    \Retorna\;
+}
+$x \gets \mathrm{prev}.\Prox$\;
+prev.\Prox $\gets x.\Prox$\;
+\Se{$\mathrm{prev}.\Prox = \nil$}{
+    $L.\Tail \gets$ prev\;
+}
+$L.\NumElem \gets L.\NumElem - 1$\;
+\end{function}
+
+\subsection{Lista Duplamente Encadeada}
+
+Essa variante funciona de maneira análoga à encadeada simples.
+O adicional é que os membros agora possuem um ponteiro de \texttt{anterior}, que aponta
+para o nó antecessor.
+Nesse caso, a busca pode retornar um ponteiro para o próprio elemento que possui a chave
+pesquisada.
+
+\begin{function}
+\SetAlgoLined
+\caption{Busca-Lista-D($L$, $k$)}
+$w \gets L.\Head.\Prox$\;
+\Enqto{$w \ne \nil$ \E $w.\Chave \ne k$}{
+    $w \gets w.\Prox$\;
+}
+\Se{$w = \nil$}{
+    \Retorna{$\nil$}\;
+}
+\Retorna{$w$}\;
+\end{function}
+
+\begin{function}[H]
+\SetAlgoLined
+\caption{Insere-Lista-D($L$, prev, $x$)}
+$x.\Prox \gets $ prev.\Prox\;
+prev.\Prox $\gets x$\;
+$x.\Ant \gets \mathrm{prev}$\;
+\eSe{$x.\Prox = \nil$}{
+    $L.\Tail \gets x$\;
+}
+{
+    $x.\Prox.\Ant \gets x$\;
+}
+$L.\NumElem \gets L.\NumElem + 1$\;
+\end{function}
+
+\begin{function}[H]
+\SetAlgoLined
+\caption{Remove-Lista-D($L$, prev)}
+\Se{$\mathrm{prev}.\Prox = \nil$}{
+    \Retorna\;
+}
+$x \gets \mathrm{prev}.\Prox$\;
+$\mathrm{prev}.\Prox \gets x.\Prox$\;
+\eSe{$\mathrm{prev}.\Prox = \nil$}{
+    $L.\Tail \gets$ prev\;
+}
+{
+    $x.\Prox.\Ant \gets \mathrm{prev}$\;
+}
+$L.\NumElem \gets L.\NumElem - 1$\;
+\end{function}

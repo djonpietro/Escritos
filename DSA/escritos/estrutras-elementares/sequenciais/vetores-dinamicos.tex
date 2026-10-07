@@ -36,22 +36,51 @@ $i \gets 0$\;
 \Retorna{$\&S[i]$}\;
 \end{function}
 
-
-A inserção em vetores não ordenados pode ser feita apenas inserindo após o último elemento.
-Já a operação de remoção pode ser realizada simplesmente copiando
-o último elemento para a posição do elemento que está sendo removido.
-Ambas são realizadas em tempo $O(1)$, mas como pode ser necessário buscar o elemento
-no vetor antes de o remover, a remoção dele pode custar $O(n)$.
+A inserção em vetores não ordenados pode ser feita apenas inserindo após o último elemento,
+tendo, pois, custo de tempo constante caso o vetor não esteja cheio.
+Senão, será necessário realocá-lo para uma nova região da memória, movendo todos
+os seus membros.
+Com isso, o custo de pior caso de uma inserção é $O(n)$.
 
 \begin{function}[H]
 \SetAlgoLined
 \caption{Insere-Vetor($S$, $x$)}
     \Se{$S.\Len = S.\NumElem$}{
-        \textbf{erro} ``overflow''\;
+        $S \gets \RealocaVetor{$S$}$\;
     }
     \Copia{$S+S.\NumElem$, $x$}\;
     $S.\NumElem \gets S.\NumElem + 1$\;
 \end{function}
+
+Se toda vez que realoquemos o vetor dobrarmos o seu tamanho, o custo amortizado da
+operação será reduzido.
+Cada realocação de $n$ elementos é precedida por $n$ inserções com custo constante,
+enquanto que a próxima realoca $2n$ elementos após $n$ novas inserções.
+Desse modo, a quantidade de elementos realocados na $k$-ésima realocação é
+\[
+    \sum_{i=0}^{k-1} 2^k \cdot n = n(2^{k-1} - 1)
+\]
+Portanto, o custo amortizado da realocação em relação às inserções é
+% prova do custo amortizado
+
+\begin{function}
+\SetAlgoLined
+\caption{Reloca-Vetor($S$)}
+    $T \gets \Aloca{$S.\Len * 2$}$\;
+    \Copia{$T$, $S$}\;
+    $T.\NumElem \gets S.\NumElem$\;
+    $T.\Len \gets S.\Len$\;
+    \Retorna{$T$}\;
+\end{function}
+
+
+A operação de remoção, por sua vez pode ser realizada simplesmente copiando
+o último elemento para a posição do elemento que está sendo removido e decrementando
+o atributo de contagem de membros.
+Caso uma nova inserção seja feita, o elemento que antes ocupava a última posição será
+sobrescrito.
+A complexidade é $O(1)$.
+
 
 \begin{function}[H]
 \SetAlgoLined
@@ -111,6 +140,7 @@ primeiro elemento no vetor respectivamente.
 Para obter o predecessor de um elemento, devemos apenas subtrair $1$ ao ponteiro dado como
 argumento caso esse não seja o último.
 Para o sucessor, devemos somar $1$ a esse ponteiro, caso ele não aponte para o último.
+Todas essas opações são realizadas em tempo constante.
 
 \begin{algorithm}[H]
 \SetKwFunction{Predecessor}{Predecessor}
@@ -120,10 +150,16 @@ Para o sucessor, devemos somar $1$ a esse ponteiro, caso ele não aponte para o 
 \SetAlgoLined
 
 \Fn{\Maximo{$S$}}{
+    \Se{$S.\NumElem = 0$}{
+        \Retorna{$\nil$}\;
+    }
     \Retorna{$S + S.\NumElem - 1$}\;
 }
 
-\Fn{\Minimo{$S$, $x$}}{
+\Fn{\Minimo{$S$}}{
+    \Se{$S.\NumElem = 0$}{
+        \Retorna{$\nil$}\;
+    }
     \Retorna{$S$}\;
 }
 
