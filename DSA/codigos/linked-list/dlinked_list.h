@@ -70,25 +70,15 @@ int dlist_insert_next(DList *dlist, DListNode *prev, void *data);
 int dlist_insert_prev(DList *dlist, DListNode *next, void *data);
 
 /*
- * Remove o elemento logo depois do nó prev, O(1). Se prev for NULL, remove
- * o primeiro elemento.
+ * Remove o elemento node, O(1). node deve ser um elemento desta lista.
  *
  * Se data não for NULL, o ponteiro para o dado removido é guardado em *data
  * e o chamador passa a ser responsável por ele. Se for NULL, o dado é
  * liberado com destroy.
  *
- * Retorna 0 em sucesso, ou -1 se não houver elemento depois de prev.
+ * Retorna 0 em sucesso, ou -1 se node for NULL ou a sentinela.
  */
-int dlist_remove_next(DList *dlist, DListNode *prev, void **data);
-
-/*
- * Remove o elemento logo antes do nó next, O(1). Se next for NULL, remove o
- * último elemento. O tratamento de data é o mesmo de dlist_remove_next.
- *
- * Retorna 0 em sucesso, ou -1 se não houver elemento antes de next (next é
- * a sentinela ou o primeiro elemento) ou se a lista estiver vazia.
- */
-int dlist_remove_prev(DList *dlist, DListNode *next, void **data);
+int dlist_remove(DList *dlist, DListNode *node, void **data);
 
 /*
  * Libera a lista e seus nós, chamando destroy sobre cada dado. dlist pode

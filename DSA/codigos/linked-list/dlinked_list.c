@@ -66,45 +66,23 @@ int dlist_insert_prev(DList *dlist, DListNode *next, void *data) {
     return 0;
 }
 
-int dlist_remove_next(DList *dlist, DListNode *prev, void **data) {
-    if (!prev) prev = dlist->head;
+int dlist_remove(DList *dlist, DListNode *node, void **data) {
+    if (node == dlist->head || node == NULL) return -1;
 
-    if (prev->next == NULL) return -1;
+    DListNode *prev = node->prev;
 
-    DListNode *old = prev->next;
-    prev->next = old->next;
-
+    prev->next = node->next;
     if (prev->next == NULL)
         dlist->tail = prev;
     else
         prev->next->prev = prev;
 
     if (data)
-        *data = old->data;
+        *data = node->data;
     else if (dlist->destroy)
-        dlist->destroy(old->data);
+        dlist->destroy(node->data);
 
-    free(old);
-    dlist->num_elem--;
-    return 0;
-}
-
-int dlist_remove_prev(DList *dlist, DListNode *next, void **data) {
-    if (!next)
-        return dlist_remove_next(dlist, dlist->tail->prev, data);
-
-    if (next->prev == dlist->head || next == dlist->head) return -1;
-
-    DListNode *old = next->prev;
-    next->prev = old->prev;
-    old->prev->next = next;
-
-    if (data)
-        *data = old->data;
-    else if (dlist->destroy)
-        dlist->destroy(old->data);
-
-    free(old);
+    free(node);
     dlist->num_elem--;
     return 0;
 }
@@ -112,7 +90,7 @@ int dlist_remove_prev(DList *dlist, DListNode *next, void **data) {
 void dlist_destroy(DList *dlist) {
     if (!dlist) return;
     while(dlist->head->next != NULL)
-        dlist_remove_next(dlist, NULL, NULL);
+        dlist_remove(dlist, dlist->head->next, NULL);
     free(dlist->head);
     free(dlist);
 }

@@ -126,11 +126,11 @@ $L.\NumElem \gets L.\NumElem + 1$\;
 
 \begin{function}[H]
 \SetAlgoLined
-\caption{Remove-Lista-D($L$, prev)}
-\Se{$\mathrm{prev}.\Prox = \nil$}{
+\caption{Remove-Lista-D($L$, $x$)}
+\Se{$x = L.\Head$}{
     \Retorna\;
 }
-$x \gets \mathrm{prev}.\Prox$\;
+$\mathrm{prev} \gets x.\Ant$\;
 $\mathrm{prev}.\Prox \gets x.\Prox$\;
 \eSe{$\mathrm{prev}.\Prox = \nil$}{
     $L.\Tail \gets$ prev\;
@@ -138,5 +138,66 @@ $\mathrm{prev}.\Prox \gets x.\Prox$\;
 {
     $x.\Prox.\Ant \gets \mathrm{prev}$\;
 }
+$L.\NumElem \gets L.\NumElem - 1$\;
+\end{function}
+
+\subsection{Lista Circular Duplamente Encadeada}
+
+A lista encadeada circular é aquela em que o último nó aponta para o primeiro em vez de
+$\nil$, ou seja, o \texttt{head} da lista equivale a $L.\Tail.\Prox$.
+Ao adicionar o ponteiro \texttt{anterior} a cada membro, obtemos, então, a lista
+circular duplamente encadeada, que combina todos os elementos vistos até então sobre listas.
+As operações de busca, inserção e remoção são análogas àquelas vistas para listas
+duplamente encadeadas.
+
+Iremos expor a implementação dessa variação usando o nó sentinela.
+Com a lista vazia, os ponteiros \texttt{proximo} e \texttt{anterior} da sentinela apontam
+para ela mesma.
+À medida que as inserções ocorrem, esses ponteiros são ajustados para refletir a
+estrutura circular.
+
+A busca continua retornando um ponteiro para o nó que contém a chave desejada.
+O que muda é a condição de parada quando a chave não existe.
+Em vez de encerrar quando atingir $\nil$, o critério de parada passa a ser revisitar a
+sentinela.
+
+\begin{function}
+\SetAlgoLined
+\caption{Busca-Lista-DC($L$, $k$)}
+$w \gets L.\Head.\Prox$\;
+\Enqto{$w \ne L.\Head$ \E $w.\Chave \ne k$}{
+    $w \gets w.\Prox$\;
+}
+\Se{$w = L.\Head$}{
+    \Retorna{$\nil$}\;
+}
+\Retorna{$w$}\;
+\end{function}
+
+A estrutura circular elimina a condição de contorno de quando inserimos ou eliminamos no
+final da lista.
+Desse modo, as inserções e remoções funcionam da mesma forma independentemente de onde as
+realizamos na lista.
+A única operação que deve ser coibida é a remoção da própria sentinela.
+
+\begin{function}[H]
+\SetAlgoLined
+\caption{Insere-Lista-DC($L$, prev, $x$)}
+$x.\Prox \gets \mathrm{prev}.\Prox$ \;
+prev.\Prox $\gets x$\;
+$x.\Ant \gets \mathrm{prev}$\;
+$x.\Prox.\Ant \gets x$\;
+$L.\NumElem \gets L.\NumElem + 1$\;
+\end{function}
+
+\begin{function}[H]
+\SetAlgoLined
+\caption{Remove-Lista-DC($L$, $x$)}
+\Se{$x = L.\Head$}{
+    \Retorna\;
+}
+$\mathrm{prev} \gets x.\Ant$\;
+$\mathrm{prev}.\Prox \gets x.\Prox$\;
+$x.\Prox.\Ant \gets \mathrm{prev}$\;
 $L.\NumElem \gets L.\NumElem - 1$\;
 \end{function}
