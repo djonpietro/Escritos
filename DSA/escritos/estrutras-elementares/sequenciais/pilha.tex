@@ -1,1 +1,63 @@
 \section{Pilha}
+
+Uma pilha é uma estrutura de dados abstrata que define uma política na ordem das inserções
+e remoções.
+Essa política é denominada \textbf{LIFO}: o último elemento a entrar é sempre o primeiro
+a ser removido.
+Uma analogia é uma pilha de pratos num restaurante; normalmente, os pratos colocados
+acima, que correspondem aos últimos a terem sido adicionados, são os primeiros a serem
+removidos.
+Ao manipular uma pilha, a operação de inserção é denominada \textit{push}, enquanto
+a de retirada é denominada \textit{pop}.
+
+Há pelo menos duas maneiras de implementar pilhas: com vetores ou com listas encadeadas
+simples.
+Independentemente da estrutura subjacente escolhida, é importante garantir que tanto a
+adição quanto a remoção possuam custo constante em tempo.
+
+Na implementação com vetor, basta adicionar o novo elemento ao final.
+Dependendo do requisito da aplicação, realocações podem ou não ser realizadas.
+Caso não o sejam, um erro de \textit{stack overflow} deve ser levantado.
+Já para a operação de \textit{pop}, basta retirar o elemento na última posição.
+Usualmente, seu conteúdo é retornado para impedir que ele seja perdido.
+Dessa forma, cabe a quem chama o procedimento decidir se irá ou não salvar o objeto
+devolvido.
+
+\begin{algorithm}
+\SetAlgoLined
+\Fn{\Push{$S$, $x$}}{
+    \Se{$S.\NumElem = S.\Len$}{
+        \textbf{erro} ``stack overflow''\;
+    }
+    \InsereVetor{$S$, $x$, $S.\NumElem$}\;
+}
+
+\Fn{\Pop{$S$}}{
+    \Se{$S.\NumElem = 0$}{
+        \textbf{erro} ``underflow''\;
+    }
+    $x \gets S[S.\NumElem - 1]$\;
+    \RemoveVetor{$S$, $S.\NumElem - 1$}\;
+    \Retorna{$x$}\;
+}
+\end{algorithm}
+
+Na implementação por listas encadeadas, o topo da pilha é colocado no início da lista.
+Isso porque o procedimento \RemoveLista recebe como argumento o membro que antecede
+aquele que será removido, de forma a impossibilitar remoções eficientes.
+
+\begin{algorithm}
+\SetAlgoLined
+\Fn{\Push{$S$, $x$}}{
+    \InsereLista{$S$, $S.\Head$, $x$}\;
+}
+
+\Fn{\Pop{$S$}}{
+    \Se{$S.\Head.\Prox = \nil$}{
+        \textbf{erro} ``underflow''\;
+    }
+    $x \gets S.\Head.\Prox$\;
+    \RemoveLista{$S$, $S.\Head$}\;
+    \Retorna{$*x$}\;
+}
+\end{algorithm}

@@ -78,7 +78,7 @@ int array_insert(Array * arr, void * x, int i) {
 
 int array_remove(Array *arr, int i) {
     if (arr->n_elem == 0 || i < 0 || i >= arr->n_elem) return -1;
-    memcpy(array_pti(arr, i), array_pti(arr, arr->n_elem - 1), arr->elem_size);
+    memmove(array_pti(arr, i), array_pti(arr, arr->n_elem - 1), arr->elem_size);
     arr->n_elem--;
     return 0;
 }
