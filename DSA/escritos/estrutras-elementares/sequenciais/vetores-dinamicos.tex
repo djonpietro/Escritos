@@ -7,21 +7,26 @@ Seus elementos podem ser acessados diretamente pelos seus índices.
 Se o nome do vetor é $S$, então acessamos seu $i$-ésimo membro como $S[i]$.
 O nome do vetor é um ponteiro para o seu primeiro elemento, e, ao somá-lo com um
 valor inteiro não negativo $i$, obtemos um ponteiro para o elemento de índice $i$ do
-vetor, portanto $S[i] = *(S + i)$.
+vetor, portanto,
+\[
+    S[i] = *(S + i)
+\]
 
 Na sua formulação mais simples, vetores possuem dois atributos principais: tamanho --
 o número máximo de elementos que ele suporta -- e o número efetivo de membros.
 Chamamos de estáticos os vetores que possuem tamanho previamente determinado e fixo,
 enquanto são denominados dinâmicos aqueles cujo tamanho varia conforme a necessidade
 da aplicação.
-Além disso, os vetores podem ser ordenados ou não.
+Nas implementações expostas, presume-se que os vetores são dinâmicos.
 
 \subsection{Vetores Não Ordenados}
 
 A busca em vetores não ordenados é realizada percorrendo o vetor sequencialmente até
 achar o elemento com a chave desejada.
-No pior caso, o elemento ou está na última posição ou não existe no vetor.
-Com isso, a complexidade de uma busca sequencial no vetor com $n$ elementos é $O(n)$.
+No pior caso, o elemento ou está na última posição, ou não existe no vetor.
+Com isso, a sua complexidade é $O(n)$.
+Para vetores, é conveniente retornar o índice do elemento sendo buscado, e, caso ele
+não exista, retornamos $-1$ no lugar.
 
 \begin{function}[H]
 \SetAlgoLined
@@ -31,149 +36,105 @@ $i \gets 0$\;
     $i \gets i + 1$\;
 }
 \Se{$i = S.\NumElem$}{
-    \Retorna{$\nil$}\;
+    \Retorna{$-1$}\;
 }
-\Retorna{$\&S[i]$}\;
+\Retorna{$i$}\;
 \end{function}
 
-A inserção em vetores não ordenados pode ser feita apenas inserindo após o último elemento,
-tendo, pois, custo de tempo constante caso o vetor não esteja cheio.
-Senão, será necessário realocá-lo para uma nova região da memória, movendo todos
-os seus membros.
-Com isso, o custo de pior caso de uma inserção é $O(n)$.
+A inserção num vetor pode receber como argumentos um ponteiro para o objeto a ser inserido
+e o índice da posição em que ele será colocado.
+Como pode ser necessário mover os membros já presentes para inserir um novo, ou realocar
+o vetor quando esse já está cheio, a inserção tem complexidade $O(n)$.
 
 \begin{function}[H]
 \SetAlgoLined
-\caption{Insere-Vetor($S$, $x$)}
-    \Se{$S.\Len = S.\NumElem$}{
-        $S \gets \RealocaVetor{$S$}$\;
-    }
-    \Copia{$S+S.\NumElem$, $x$}\;
-    $S.\NumElem \gets S.\NumElem + 1$\;
+\caption{Insere-Vetor($S$, $x$, $i$)}
+\Se{$i < 0\ \Ou\ i > S.\NumElem$}{
+   \textbf{erro}\;
+}
+\Se{$S.\NumElem = S.\Len$}{
+    $S \gets \RealocaVetor{$S$}$\;
+}
+$j \gets S.\NumElem$\;
+\Enqto{$j \neq i$}{
+    $S[j] \gets S[j-1]$\;
+    $j \gets j - 1$\;
+}
+$S[i] \gets *x$\;
+$S.\NumElem \gets S.\NumElem + 1$\;
 \end{function}
 
-Se toda vez que realoquemos o vetor dobrarmos o seu tamanho, o custo amortizado da
-operação será reduzido.
-Cada realocação de $n$ elementos é precedida por $n$ inserções com custo constante,
-enquanto que a próxima realoca $2n$ elementos após $n$ novas inserções.
-Desse modo, a quantidade de elementos realocados na $k$-ésima realocação é
-\[
-    \sum_{i=0}^{k-1} 2^k \cdot n = n(2^{k-1} - 1)
-\]
-Portanto, o custo amortizado da realocação em relação às inserções é
-% prova do custo amortizado
+Contudo, se o vetor for um conjunto não ordenado, então podemos sempre inserir o novo
+elemento logo após o último membro, de forma a não executar o laço que move elementos a
+partir do índice $i$ uma posição adiante.
+Com isso, a inserção assume complexidade $O(1)$ a menos de uma realocação com custo $O(n)$.
 
 \begin{function}
 \SetAlgoLined
-\caption{Reloca-Vetor($S$)}
+\caption{Realoca-Vetor($S$)}
     $T \gets \Aloca{$S.\Len * 2$}$\;
-    \Copia{$T$, $S$}\;
+    \Para{$i \gets 0\ \Ate\ S.\NumElem - 1$}{
+        $T[i] \gets S[i]$\;
+    }
     $T.\NumElem \gets S.\NumElem$\;
-    $T.\Len \gets S.\Len$\;
+    $T.\Len \gets S.\Len \cdot 2$\;
     \Retorna{$T$}\;
 \end{function}
 
+% Explicação sobre amortização da inserção
 
-A operação de remoção, por sua vez pode ser realizada simplesmente copiando
-o último elemento para a posição do elemento que está sendo removido e decrementando
-o atributo de contagem de membros.
-Caso uma nova inserção seja feita, o elemento que antes ocupava a última posição será
-sobrescrito.
-A complexidade é $O(1)$.
-
+Em vetores não ordenados, a remoção pode ser realizada simplesmente copiando o último
+elemento para a posição daquele que está sendo retirado.
+Desse modo, a remoção é executada em tempo constante.
 
 \begin{function}[H]
 \SetAlgoLined
-\caption{Remove-Vetor($S$, $x$)}
-\tcp{$x$ deve apontar para um elemento do vetor: $S \le x < S + S.\NumElem$}
+\caption{Remove-Vetor($S$, $i$)}
 \Se{$S.\NumElem = 0$}{
     \textbf{erro} ``underflow''\;
 }
+\Se{$i < 0\ \Ou\ i \ge S.\NumElem$}{
+   \textbf{erro}\;
+}
+$S[i] \gets S[S.\NumElem - 1]$\;
 $S.\NumElem \gets S.\NumElem - 1$\;
-ultimo $\gets S+S.\NumElem$\;
-\Copia{$x$, $\mathrm{ultimo}$}\;
 \end{function}
 
 \subsection{Vetores Ordenados}
 
-Em vetores ordenados, a busca pode ser feita em tempo sublinear $O(\log n)$ se usarmos o
-algoritmo de busca binária, que será apresentado num capítulo mais adiante.
-Uma abordagem possível para a inserção é inserir o novo membro ao final do vetor,
-e o movimentar na direção decrescente enquanto sua chave for menor que a do membro na
-posição anterior.
-Para remoção, o procedimento consiste em deslocar todos os membros à frente daquele que
-foi removido para uma posição atrás.
-Ambas as operações passam a ter, pois, complexidade $O(n)$, já que necessitam mover todos
-os membros do vetor no pior caso.
+Em vetores ordenados, geralmente em ordem crescente, a busca pode ser feita em tempo
+sublinear $O(\log n)$ se usarmos o algoritmo de busca binária, que será apresentado num
+capítulo mais adiante.
+Com ela, em vez de retornar $-1$ quando a chave não é encontrada, retornamos o índice que
+o elemento com a chave buscada ocuparia caso estivesse no vetor.
+Na inserção, realiza-se a busca pela chave do elemento a ser inserido no vetor para obter
+o índice no qual ele deve ser posicionado.
+Depois, passa-se esse índice para o mesmo procedimento de inserção apresentado para
+vetores não ordenados.
+
+Remoções em vetores ordenados requerem que todo membro que sucedia aquele que está sendo
+retirado seja movido para uma posição atrás.
+Por consequência, a complexidade da operação é $O(n)$.
 
 \begin{function}[H]
 \SetAlgoLined
-\caption{Insere-Vetor-Ordenado($S$, $x$)}
-\Se{$S.\Len = S.\NumElem$}{
-    \textbf{erro} ``overflow''\;
-}
-\Copia{$S + S.\NumElem$, $x$}\;
-$i \gets S.\NumElem$\;
-\Enqto{$i \ge 1$ \E $S[i].\Chave < S[i-1].\Chave$}{
-    temp $\gets S[i-1]$\;
-    $S[i-1] \gets S[i]$\;
-    $S[i] \gets$ temp\;
-    $i \gets i - 1$\;
-}
-$S.\NumElem \gets S.\NumElem +1$\;
-\end{function}
-
-\begin{function}[H]
-\SetAlgoLined
-\caption{Remove-Vetor-Ordenado($S$, $x$)}
+\caption{Remove-Vetor-Ordenado($S$, $i$)}
 \Se{$S.\NumElem = 0$}{
     \textbf{erro} ``underflow''\;
 }
-\Para{$i \gets x - S$ \Ate $S.\NumElem - 2$}{
-    $S[i] \gets S[i+1]$\;
+\Se{$i < 0\ \Ou\ i \ge S.\NumElem$}{
+   \textbf{erro}\;
+}
+$j \gets i$\;
+\Enqto{$j < S.\NumElem - 1$}{
+    $S[j] \gets S[j+1]$\;
+    $j \gets j+1$\;
 }
 $S.\NumElem \gets S.\NumElem - 1$\;
 \end{function}
 
-Operações para obter o máximo e o mínimo, basta retornar o ponteiro para o último e o
-primeiro elemento no vetor respectivamente.
-Para obter o predecessor de um elemento, devemos apenas subtrair $1$ ao ponteiro dado como
-argumento caso esse não seja o último.
-Para o sucessor, devemos somar $1$ a esse ponteiro, caso ele não aponte para o último.
-Todas essas opações são realizadas em tempo constante.
-
-\begin{algorithm}[H]
-\SetKwFunction{Predecessor}{Predecessor}
-\SetKwFunction{Sucessor}{Sucessor}
-\SetKwFunction{Maximo}{Maximo}
-\SetKwFunction{Minimo}{Minimo}
-\SetAlgoLined
-
-\Fn{\Maximo{$S$}}{
-    \Se{$S.\NumElem = 0$}{
-        \Retorna{$\nil$}\;
-    }
-    \Retorna{$S + S.\NumElem - 1$}\;
-}
-
-\Fn{\Minimo{$S$}}{
-    \Se{$S.\NumElem = 0$}{
-        \Retorna{$\nil$}\;
-    }
-    \Retorna{$S$}\;
-}
-
-\Fn{\Predecessor{$S$, $x$}}{
-    \Se{$x = \Minimo{$S$}$}{
-        \Retorna{$\nil$}\;
-    }
-    \Retorna{$x - 1$}\;
-}
-
-\Fn{\Sucessor{$S$, $x$}}{
-    \Se{$x = \Maximo{$S$}$}{
-        \Retorna{$\nil$}\;
-    }
-    \Retorna{$x + 1$}\;
-    }
-\end{algorithm}
+Para as operações de consulta de máximo e mínimo, basta retornar o ponteiro para o último
+e o primeiro elemento no vetor respectivamente, sendo, pois, triviais por meio da indexação.
+O mesmo vale para o predecessor e sucessor do elemento de índice $i$, que consistem nos
+elementos de índices $i-1$ e $i+1$ respectivamente quando esses são válidos, senão,
+$\nil$ deve ser retornado.

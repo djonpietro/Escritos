@@ -1,5 +1,6 @@
 #ifndef ARRAY_H
 #define ARRAY_H
+#include <stdint.h>
 #include <stdlib.h>
 
 /*
@@ -19,40 +20,41 @@
  *   - ponteiros para elementos apontam para dentro do vetor, não para
  *     cópias: são invalidados por array_reallocate, por inserções com
  *     ARRAY_REALLOC e por array_free, e o elemento para o qual apontam pode
- *     mudar após uma remoção ou inserção ordenada.
+ *     mudar após uma remoção ou inserção.
  */
 typedef struct {
     void * array;      // bloco de memória com os elementos
     int len;           // capacidade: número máximo de elementos em array
     int n_elem;        // número de elementos armazenados (n_elem <= len)
     size_t elem_size;  // tamanho, em bytes, de cada elemento
+    uint8_t realoc_policy; // ARRAY_NO_REALLOC ou ARRAY_REALLOC (ver abaixo)
 } Array;
 
 /*
- * Política de overflow, passada às funções de inserção para dizer o que
- * fazer quando o vetor está cheio (n_elem == len):
+ * Política de overflow, guardada em arr->realoc_policy, que diz o que a
+ * inserção faz quando o vetor está cheio (n_elem == len):
  *   ARRAY_NO_REALLOC  a inserção falha (-1);
  *   ARRAY_REALLOC     a capacidade é dobrada com array_reallocate e a
  *                     inserção prossegue; se a realocação falhar, a
  *                     inserção também falha (-1).
+ * A política é escolhida em array_init.
  */
 #define ARRAY_NO_REALLOC 0
 #define ARRAY_REALLOC    1
 
 /*
- * Cria um vetor vazio com capacidade para len elementos de elem_size bytes.
+ * Cria um vetor vazio com capacidade para len elementos de elem_size bytes
+ * e política de overflow realoc_policy (ARRAY_NO_REALLOC ou ARRAY_REALLOC).
  * A memória é inicializada com zeros.
  *
  * Retorna o vetor criado, ou NULL se len <= 0 ou se faltar memória.
  * O vetor deve ser liberado com array_free.
  */
-Array * array_init(int len, size_t elem_size);
+Array * array_init(int len, size_t elem_size, uint8_t realoc_policy);
 
 /*
- * Retorna o ponteiro para o elemento de índice i (a partir de 0).
- *
- * Não verifica limites: o chamador deve garantir 0 <= i < arr->len. Só os
- * índices menores que arr->n_elem contêm elementos válidos.
+ * Retorna o ponteiro para o elemento de índice i (a partir de 0), ou NULL se
+ * i não estiver em [0, n_elem).
  */
 void * array_pti(Array *arr, int i);
 
@@ -85,77 +87,35 @@ void array_free(Array * arr);
 void * array_search(Array * arr, void * k, int (*compare)(void*a,void*b));
 
 /*
- * Insere uma cópia do elemento apontado por x no fim do vetor, O(1).
- * policy é ARRAY_NO_REALLOC ou ARRAY_REALLOC (ver acima).
+ * Insere uma cópia do elemento apontado por x na posição i, deslocando os
+ * elementos de índice i em diante uma posição para a direita, O(n). Com
+ * i == n_elem, insere no fim sem deslocar nada, O(1). Se o vetor estiver
+ * cheio, segue arr->realoc_policy.
  *
- * Retorna 0 em sucesso, ou -1 se o vetor estiver cheio e não puder crescer.
+ * Retorna 0 em sucesso, ou -1 se i não estiver em [0, n_elem] ou se o vetor
+ * estiver cheio e não puder crescer.
  */
-int array_insert(Array * arr, void * x, int policy);
+int array_insert(Array * arr, void * x, int i);
 
 /*
- * Remove o elemento apontado por x, O(1): o último elemento é copiado para
- * a posição de x, de modo que a ordem dos elementos não é preservada.
+ * Remove o elemento de índice i, O(1): o último elemento é copiado para a
+ * posição i, de modo que a ordem dos elementos não é preservada.
  *
- * x deve ser um ponteiro para um elemento do vetor, como os devolvidos por
- * array_search. Retorna 0 em sucesso, ou -1 se x não apontar para um dos
- * n_elem elementos armazenados.
+ * Retorna 0 em sucesso, ou -1 se i não estiver em [0, n_elem).
  */
-int array_remove(Array * arr, void * x);
+int array_remove(Array * arr, int i);
 
 // --------------- Operações de vetores ordenados
 //
-// Estas operações supõem o vetor em ordem crescente segundo a função
-// compare(a, b), que retorna um valor negativo, zero ou positivo conforme
-// a seja menor, igual ou maior que b. Use apenas array_insert_sorted para
-// inserir, a fim de manter essa ordem.
+// Para inserir mantendo a ordem, obtenha a posição i do novo elemento e
+// chame array_insert(arr, x, i).
 
 /*
- * Insere uma cópia do elemento apontado por x na posição que mantém o vetor
- * ordenado, O(n). Elementos iguais mantêm a ordem de inserção (a inserção é
- * estável: x entra depois dos elementos iguais a ele).
- * policy é ARRAY_NO_REALLOC ou ARRAY_REALLOC (ver acima).
+ * Remove o elemento de índice i deslocando os seguintes uma posição para a
+ * esquerda, O(n); a ordem é preservada.
  *
- * Retorna 0 em sucesso, ou -1 se o vetor estiver cheio e não puder crescer,
- * ou se faltar memória.
+ * Retorna 0 em sucesso, ou -1 se i não estiver em [0, n_elem).
  */
-int array_insert_sorted(Array *arr, void *x, int (*compare)(void*a,void*b), int policy);
-
-/*
- * Remove o elemento apontado por x deslocando os seguintes uma posição para
- * a esquerda, O(n); a ordem é preservada.
- *
- * x deve ser um ponteiro para um elemento do vetor, como os devolvidos por
- * array_search, array_min ou array_max. Retorna 0 em sucesso, ou -1 se x não
- * apontar para um dos n_elem elementos armazenados.
- */
-int array_remove_sorted(Array *arr, void *x);
-
-/*
- * Retorna o ponteiro para o maior elemento (o último), O(1), ou NULL se o
- * vetor estiver vazio.
- */
-void * array_max(Array *arr);
-
-/*
- * Retorna o ponteiro para o menor elemento (o primeiro), O(1), ou NULL se o
- * vetor estiver vazio.
- */
-void * array_min(Array *arr);
-
-/*
- * Retorna o ponteiro para o sucessor de x (o elemento seguinte), O(1).
- *
- * Retorna NULL se x for o maior elemento ou se não apontar para um dos
- * n_elem elementos armazenados.
- */
-void * array_elem_successor(Array *arr, void *x);
-
-/*
- * Retorna o ponteiro para o predecessor de x (o elemento anterior), O(1).
- *
- * Retorna NULL se x for o menor elemento ou se não apontar para um dos
- * n_elem elementos armazenados.
- */
-void * array_elem_predecessor(Array *arr, void *x);
+int array_remove_sorted(Array *arr, int i);
 
 #endif
