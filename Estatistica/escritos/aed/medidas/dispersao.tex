@@ -1,7 +1,7 @@
 \section{Medidas de Dispersão}
 
 Além de ver onde nossos dados estão centrados, é desejável saber o quanto eles variam,
-geralmente entorno do próprio centro.
+geralmente em torno do próprio centro.
 Para esse fim, utiliza-se as medidas de dispersão.
 
 Tomando a média como centro, podemos obter, como medida de dispersão, o desvio médio
@@ -9,15 +9,17 @@ absoluto, que corresponde a uma estimativa do erro médio cometido ao substituir
 os dados pela prórpria média, indicando, também, se essa é uma boa medida de resumo dos
 dados.
 \[
-	\dm{X} = \frac{1}{n} \sum_{i=1}^n |x_i - \bar x| \quad e \quad
+	\dm{X} = \frac{1}{n} \sum_{i=1}^n |x_i - \bar x|
 \]
-Outra candidata a medida de dispersão é a variância, que, como visto na seção ??,
+Outra candidata a medida de dispersão é a variância, que, como visto na Definição \ref{def:momento},
 corresponde ao segundo momento central de uma distribuição.
 Numa amostra, ela pode ser interpretada como o erro quadrático médio ao substituir todos
 os dados pela média, sendo obtida, geralmente para amostras grandes, pela fórmula
 \[
-	\var{X} = \frac{1}{n} \sum_{i=1}^n |x_i - \bar x|^2.
+	\var{X} = \frac{1}{n} \sum_{i=1}^n (x_i - \bar x)^2.
 \]
+Quando se deseja estimar a variância da população a partir de uma amostra, usa-se
+o divisor $n - 1$ no lugar de $n$, o que torna o estimador não viesado.
 Ao elevar as diferenças ao quadrado, desvios maiores tem mais peso do que os menores.
 Como a variância possui unidade igual ao quadrado da unidade do atributo original,
 então sua interpretação pode ser prejudicada, e, com isso, o desvio-padrão,
@@ -29,7 +31,7 @@ pode ser usado para substituir a variância caso deseje-se que o erro esteja na 
 dos dados.
 
 O desvio absoluto médio e o desvio-padrão possuem interpretações e aplicações semelhantes
-ao avaliar a dispersão entorno da média.
+ao avaliar a dispersão em torno da média.
 No entanto, o primeiro nos oferece uma noção mais intuitiva de dispersão, pois todos os
 desvios possuem o mesmo peso independente da magnitude.
 Já o desvio-padrão, uma vez que atribui pesos distintos a erros conforme a sua magnitude,

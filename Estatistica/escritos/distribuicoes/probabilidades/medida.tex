@@ -11,9 +11,9 @@ poder aproximar uma função real a um determinado valor variando suavemente seu
 argumento.
 
 \begin{def:pontualmente continua}
-Um função $f: \real \to \real$ é uniformemente contínua em $a \in \real$ se
+Uma função $f: \real \to \real$ é contínua em $a \in \real$ se
 \[
-	\forall \epsilon > 0\, \exists \delta \in \real\, \forall x \in \real\,,
+	\forall \epsilon > 0\, \exists \delta > 0\, \forall x \in \real\,,
 	| x - a | < \delta \rightarrow | f(x) - f(a) | < \epsilon
 \]
 \end{def:pontualmente continua}
@@ -22,7 +22,7 @@ Outra forma equivalente de definição de continuidade é
 \[
 	\lim_{x \to a} f(x) = \lim_{x \to a^+} f(x) = \lim_{x \to a^-} f(x) = f(a).
 \]
-Funções que não são contínuas em determinado ponto signfica que, a depender de onde nos
+Funções que não são contínuas em determinado ponto significa que, a depender de onde nos
 aproximamos, o valor para o qual a função converge se diferencia.
 
 \begin{exp:pontualmente contínua}
@@ -37,14 +37,14 @@ Funções escadas são exemplo de funções não contínuas.
 \end{exp:pontualmente contínua neg}
 
 A próxima definição é uma versão mais forte da anterior.
-A continuidade uniforme signigica que, independente da escolha de limite de erro $\epsilon$
+A continuidade uniforme significa que, independente da escolha de limite de erro $\epsilon$
 para o valor da função, há um único $\delta$ tal que em qualquer lugar observa-se que,
 se $|x - a| < \delta$, então $|f(x) - f(a)| < \epsilon$.
 
 \begin{def:uniformemente continua}
 Uma função $f: \real \to \real$ é uniformemente contínua se
 \[
-	\forall \epsilon > 0\, \exists \delta \in \real\, \forall x,a \in \real\,,
+	\forall \epsilon > 0\, \exists \delta > 0\, \forall x,a \in \real\,,
 	| x - a | < \delta \rightarrow | f(x) - f(a) | < \epsilon
 \]
 \end{def:uniformemente continua}
@@ -53,19 +53,20 @@ Uma função que não é uniformemente contínua pode ter variações muita abru
 intervalos, e mais suaves em outros.
 
 \begin{exp:uniformemente contínua}
-As funções $\sin x$, $\cos x$ e funções lineares são exemplos de absolutamente contínuas,
+As funções $\sin x$, $\cos x$ e funções lineares são exemplos de funções uniformemente contínuas,
 pois suas taxas de variação não se tornam infinitamente grandes conforme a função se
 aproxima de qualquer ponto.
 \end{exp:uniformemente contínua}
 
 \begin{exp:uniformemente contínua neg}
-A função $f(x) = 1/x$ não é uniformemente contínua, pois conforme se aproxima de $0$,
+A função $f: (0, \infty) \to \real$ dada por $f(x) = 1/x$ não é uniformemente contínua, pois conforme se aproxima de $0$,
 a sua variação se torna infinitamente grande.
 \end{exp:uniformemente contínua neg}
 
-Conjuntos que podem ser inteiramente contidos em um aberto e que possuem todos os seus
-pontos de acumulação são ditos compactos. Quando uma função é contínua em cada ponto
-de um compacto, então é seguro dizer que ela será uniformemente contínuo ao longo de
+Um conjunto é dito compacto se toda cobertura sua por abertos admite uma subcobertura
+finita. Em $\real$, isso equivale a dizer que o conjunto é fechado e limitado
+(Teorema de Heine--Borel). Quando uma função é contínua em cada ponto
+de um compacto, então é seguro dizer que ela será uniformemente contínua ao longo de
 todo o conjunto.
 
 \begin{thm:heine}
@@ -82,7 +83,7 @@ mais estrita a pontos somente.
 \begin{def:absolutamente continua}
 \label{def:absolutamente continua}
 Uma função $f$ é absolutamente contínua em $[a, b]$ se para todo $\epsilon > 0$ existe
-$\delta \in \real$ tal que, para quaisquer intervalos disjuntos
+$\delta > 0$ tal que, para quaisquer intervalos disjuntos
 \[
 	(a_k, b_k) \subset [a, b]
 \]
@@ -106,18 +107,20 @@ O conjunto $\mathcal{B}$ é uma $\sigma$-álgebra de $\Omega$ se, e somente se,
 \begin{enumerate}
 	\item[i] $\varnothing \in \mathcal{B}$.
 	\item[ii] $\forall A \in \mathcal{B}, A^c \in \mathcal{B}$.
-	\item[iii] $\forall A \in \mathcal{B},\ \bigcup_{i=1}^\infty A_i \in \mathcal{B}$.
+	\item[iii] Para toda sequência $(A_i)_{i \in \nat} \subset \mathcal{B}$,
+	      $\bigcup_{i=1}^\infty A_i \in \mathcal{B}$.
 \end{enumerate}
 Se $\Omega$ é um espaço amostral, então $A \in \mathcal{B}$ é denominado evento de
 $\Omega$.
 \end{def:sigma algebra}
 
 O caso dos números reais será especial a nós.
-Comumente, nos referimos à \textbf{topologia usual} dos reais como a coleção de todos
-os intervalos -- abertos e fechados -- e conjuntos enumeráveis de números reais.
-A $\sigma$-álgebra de Borel para $\real$ é aquela que, a partir de um conjunto de
-geradores na forma  $(-\infty, x]$, com $x \in \real$, consegue criar a topologia
-usual dos reais.
+A \textbf{topologia usual} dos reais é a coleção de todos os conjuntos abertos de $\real$,
+que são exatamente as uniões (enumeráveis) de intervalos abertos.
+A $\sigma$-álgebra de Borel para $\real$ é a menor $\sigma$-álgebra que contém todos os
+abertos. Ela pode ser gerada, equivalentemente, a partir de conjuntos na forma
+$(-\infty, x]$, com $x \in \real$, pois todo intervalo aberto $(a, b)$ é obtido deles
+por meio de complementos, uniões e interseções enumeráveis.
 
 \begin{def:borel}
 Seja \(\mathcal{G} = \{(-\infty, x] \mid x \in \mathbb{R}\}\). A $\sigma$-álgebra gerada por
@@ -127,7 +130,7 @@ Seja \(\mathcal{G} = \{(-\infty, x] \mid x \in \mathbb{R}\}\). A $\sigma$-álgeb
 
 \begin{def:medida nula}
 Um conjunto é dito de medida nula se para todo $\epsilon > 0$ existe uma cobertura
-enumerável $\{I_k\}_1^n$ tal que a soma dos comprimentos de cada intervalo $I_k$ é
+enumerável por intervalos $\{I_k\}_{k \in \nat}$ tal que a soma dos comprimentos de cada intervalo $I_k$ é
 menor que $\epsilon$.
 \end{def:medida nula}
 
@@ -206,7 +209,7 @@ ou igual ao do conjunto que contém. Isso expressa-se no próximo Teorema.
 
 \begin{thm:medida de subconjunto}
 \label{thm:medida de subconjunto}
-Seja $(\Omega, \mathcal{B}, \mu)$ espaço de medida, e $A$ e $B$ elemetos de $\mathcal{B}$.
+Seja $(\Omega, \mathcal{B}, \mu)$ espaço de medida, e $A$ e $B$ elementos de $\mathcal{B}$.
 \[
 	A \subset B \rightarrow \mu(A) \le \mu(B)
 \]
@@ -232,7 +235,9 @@ com $\mu(A_n) < \infty$ para todo $n \in \nat$.
 
 \begin{thm:lebesgue sigma finita}
 \label{thm:sigma finita}
-A medida de Lebesgue e de contagem são $\sigma$-finitas.
+A medida de Lebesgue em $\real$ é $\sigma$-finita.
+A medida de contagem em $\Omega$ é $\sigma$-finita se, e somente se, $\Omega$ é enumerável;
+em particular, ela não é $\sigma$-finita em $\real$.
 \end{thm:lebesgue sigma finita}
 
 \begin{def:medida absolutamente continua}
@@ -247,7 +252,7 @@ $\nu \ll \mu$, se
 
 Funções, sob certas circuntâncias apropriadas, podem ser compreendidas como transformações
 de um espaço.
-Quando aplicamos uma função $f$ com domínio no univero $\Omega$ de um espaço mensurável
+Quando aplicamos uma função $f$ com domínio no universo $\Omega$ de um espaço mensurável
 e obtemos um novo universo que pode ser medido, então essa função será mensurável caso,
 para todo conjunto ``medível'' na imagem, sua contraparte no domínio também é um conjunto
 que pode ser medido.
@@ -282,24 +287,24 @@ São verdadeiras as seguintes afirmações:
 
 Quando temos uma função $f$ mensurável, pode ser desejável trabalhar como uma versão
 dela que se comporte tal como uma medida, mas especialmente como a medida de Lebesgue.
-Com esse fim, defini-se a medida de Steltjes, que mede intervalos como, por exemplo,
+Com esse fim, define-se a medida de Stieltjes, que mede intervalos como, por exemplo,
 a distância vertical entre dois pontos no gráfico de uma função real.
 
 \begin{def:steltjes}
 \label{def:steljes}
 Se $f: \real \to \real$ é uma função mensurável monótona crescente e contínua à direita,
-então a medida induzida de Steltjes por $f$, denotada por $\mu_f$, satisfaz
+então a medida induzida de Stieltjes por $f$, denotada por $\mu_f$, satisfaz
 \[
 	\mu_f((a, b]) = f(b) - f(a)
 \]
 \end{def:steltjes}
 
-O próximo resultado mostra uma propriedade fundamental das medidas de Steltjes.
+O próximo resultado mostra uma propriedade fundamental das medidas de Stieltjes.
 
 \begin{thm:medida steltjes}
 \label{thm:medida steltjes}
-Seja $\mu_f$ a medida de Steltjes induzida por $f$.
-A função $f$ é absulotamente contínua se, e somente se, $\mu_f \ll \lambda$, onde $\lambda$
+Seja $\mu_f$ a medida de Stieltjes induzida por $f$.
+A função $f$ é absolutamente contínua se, e somente se, $\mu_f \ll \lambda$, onde $\lambda$
 é a medida de Lebesgue.
 \end{thm:medida steltjes}
 
@@ -323,7 +328,7 @@ onde $a_i \in \real$ e $\{A_i\}_{i=1}^n \subset \borel$ são dois a dois disjunt
 
 As funções simples designam uma classe de funções que assumem um conjunto finito de valores.
 Sua importância encontra-se no Teorema a seguir, o qual enuncia que qualquer função
-não negativa pode ser aproximado por uma seqência de funções simples.
+não negativa pode ser aproximado por uma sequência de funções simples.
 
 \begin{thm:aproximacao monotona}
 Para toda função $f \ge 0$ há uma sequência $\{\phi_i\}_\nat$ não negativa e crescente de
@@ -350,7 +355,7 @@ satisfaz
 	      e o limite existe e não depende da sequência $\{\phi\}_\nat$.
 	\item[iii.] Se $f = f^+ - f^-$, onde $f^+ = \max(0, f)$ e $f^- = \max(0, -f)$, então
 	      \[
-		      \int f\, d\lambda = \int f^+\, d\lambda + \int f^-\, d\lambda
+		      \int f\, d\lambda = \int f^+\, d\lambda - \int f^-\, d\lambda
 	      \]
 	      desde que $\int |f|\, d\lambda < \infty$.
 \end{enumerate}
@@ -398,7 +403,7 @@ A integral de Lebesgue satisfaz
 % \end{thm:0 quase sempre}
 
 \begin{thm:convergencia monotona}[Convergência Monótona]
-Se $\{f_n\}_\nat$ é uma sequêcia não negativa e crescente de funções mensuráveis e
+Se $\{f_n\}_\nat$ é uma sequência não negativa e crescente de funções mensuráveis e
 $f_n \to f \qs$, então
 \[
 	\lim_{n \to \infty} \int f_n\, d\lambda = \int f\, d\lambda
@@ -413,6 +418,7 @@ Se $f_n \ge 0$ são mensuráveis, então
 \end{lem:fatou}
 
 \begin{thm:convergencia dominada}
+\label{thm:convergencia dominada}
 Se $f_n \to f \qs$ e existe $g \in L^1(\lambda)$ tal que $|f_n| \le g \qs$ para todo $n$,
 então
 \[
@@ -420,7 +426,7 @@ então
 \]
 \end{thm:convergencia dominada}
 
-O Teorema de Toneli é um importante resultado do cálculo integral.
+O Teorema de Tonelli é um importante resultado do cálculo integral.
 Ele enuncia que dada uma função não negativa e desejamos integrá-la
 num espaço de medida dado como produto de outros dois, podemos
 integrar individualmente em relação a cada espaço individualemente
@@ -433,7 +439,7 @@ Para $f \ge 0$ mensurável em
 \]
 vale que
 \[
-	\int \int f\, d(\mu_1 \otimes \mu_2) = \int \left(f\, d\mu_1\right)\,d\mu_2 = \int \left(f\, d\mu_2\right)\,d\mu_1
+	\int \int f\, d(\mu_1 \otimes \mu_2) = \int \left(\int f\, d\mu_1\right)\,d\mu_2 = \int \left(\int f\, d\mu_2\right)\,d\mu_1
 \]
 \end{thm:toneli}
 
@@ -492,20 +498,21 @@ Se $p = \infty$,
 \]
 \end{def:lp}
 
-O Teorema de Hölder é uma generalização da famosa Desigualdade Cauchy-Schwartz para funções
+O Teorema de Hölder é uma generalização da famosa Desigualdade Cauchy--Schwarz para funções
 em espaços $L^p$ distos conjugados.
 
 \begin{thm:holder}[de Hölder]
-\[
-	\int (fg)\, d\mu = \norm{f}_p \cdot \norm{g}_q
-\]
-onde
+Sejam $1 \le p, q \le \infty$ tais que
 \[
 	\frac{1}{p} + \frac{1}{q} = 1.
 \]
+Então
+\[
+	\int |fg|\, d\mu \le \norm{f}_p \cdot \norm{g}_q
+\]
 \end{thm:holder}
 
-Se $p = q = 2$, então o Teorema de Hölder equivale à Desigualdade de Cauchy-Schwartz.
+Se $p = q = 2$, então o Teorema de Hölder equivale à Desigualdade de Cauchy--Schwarz.
 O próximo teorema generaliza a desigualdade triangular para espaços $L^p$.
 
 \begin{thm:minkowski}
@@ -518,7 +525,7 @@ Logo, todos os espaços $L^p$ são normados e completos (de Banach).
 Em especial, $L^2$ é um espaço de Hilbert.
 
 \begin{thm:consq holder}
-Se $\mu(\Omega) < \infty$ e $p \le q$, então $L^p(\Omega) \subset L^q(\Omega)$
+Se $\mu(\Omega) < \infty$ e $p \le q$, então $L^q(\Omega) \subset L^p(\Omega)$
 \end{thm:consq holder}
 
 \begin{thm:radon nikodym}[de Radon-Nikodym]

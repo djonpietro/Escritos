@@ -40,7 +40,7 @@ onde $k \in \{1, \ldots, 6\}$.
 
 \subsection{Distribuição Bernoulli}
 
-As variáveis Bernoulli modelam fenômenos que só possuem dois resltados possíveis:
+As variáveis Bernoulli modelam fenômenos que só possuem dois resultados possíveis:
 verdadero ou falso, codificados comumente como $1$ e $0$ respectivamente.
 Seja $(\Omega, \mathcal{A}, P)$ um espaço de probabilidade, e $A \in \mathcal{A}$ tal que
 \[
@@ -206,7 +206,7 @@ probabilidade de ser sorteada, então:
 
 \begin{def:hipergeometrica}
 A variável $X$ tem distribuição hipergeométrica com parâmetros $N$, $m$ e $n$
--- $X \sim \mathrm{HG}(N, n, k)$ -- se
+-- $X \sim \mathrm{HG}(N, m, n)$ -- se
 \[
     P(X = k) = \frac{\binom{m}{k} \cdot \binom{N-m}{n-k}}{\binom{N}{n}}
 \]
@@ -218,7 +218,7 @@ Uma urna contém $5$ bolas vermelhas e $7$ verdes.
 Teremos então que, por exemplo, a probabilidade de que, ao selecionar $3$ bolas da urna,
 $2$ delas sejam vermelhas será
 \[
-    \frac{\binom{5}{2} \cdot \binom{7}{1}}{\binom{12}{3}} \approx 0.053
+    \frac{\binom{5}{2} \cdot \binom{7}{1}}{\binom{12}{3}} = \frac{70}{220} \approx 0.318
 \]
 \end{exp:hipergeometrica 1}
 
@@ -291,9 +291,9 @@ fracassos é $Y = X - 1$, e a função de massa seria dada por
 
 \begin{exp:geometrica 1}
 \label{exp:geometrica 1}
-Considere o experimento de lançar um dado até que a soma das faces seja $4$.
+Considere o experimento de lançar dois dados até que a soma das faces seja $4$.
 A probabilidade de se obter esse resultado em um lançamento é $1/12$.
-Logo, a probabilidade de que o número de vezes que o dado seja lançado até que
+Logo, a probabilidade de que o número de vezes que os dados sejam lançados até que
 a soma das faces resulte no valor desejado seja $5$ é
 \[
     \left(1-\frac{1}{12}\right)^4 \cdot \frac{1}{12} \approx 0.06
@@ -309,14 +309,14 @@ Se $X \sim \mathrm{Geo}(p)$, então
 \begin{proof}
 	Com efeito,
 	\[
-		E[X] = \sum_{k=0}^\infty k (1-p)^{k-1} p = p \sum_{k=0}^\infty k(1-p)^{k-1}.
+		E[X] = \sum_{k=1}^\infty k (1-p)^{k-1} p = p \sum_{k=1}^\infty k(1-p)^{k-1}.
 	\]
 	O somatório à esquerda é a derivada de uma série geométrica de razão $q = 1-p$,
 	tal que $q < 1$. Observemos que
 	\begin{align*}
 		\frac{d}{dq} \left(\sum_{k=0}^\infty q^k\right) & =
 		\frac{d}{dq} \left(\frac{1}{1 - q}\right)                             \\
-		\sum_{k=0}^\infty k(1-p)^{k-1}                  & = \frac{1}{(1-q)^2}
+		\sum_{k=1}^\infty k(1-p)^{k-1}                  & = \frac{1}{(1-q)^2}
 	\end{align*}
 	donde conclui-se
 	\[
@@ -368,13 +368,13 @@ ocorre com probabilidade
 \]
 Portanto, a probabilidade de que o número de ensaios realizados tenha sido igual a $n$ é
 \[
-    \binom{n}{r} (1-p)^{n-r} p^r
+    \binom{n-1}{r-1} (1-p)^{n-r} p^r
 \]
 
 \begin{def:binomial negativa}
 A variável discreta $X$ terá distribuição binomial negativa com parâmetros $r$ e $p$ se
 \[
-    P(X = n) = \binom{n}{r} (1-p)^{n-r} p^r
+    P(X = n) = \binom{n-1}{r-1} (1-p)^{n-r} p^r
 \]
 \end{def:binomial negativa}
 
@@ -456,7 +456,7 @@ Se tomarmos o limite da função de massa de $X$ quando $n \to \infty$, obteremo
 Como
 \[
 	\lim_{n \to \infty} \prod_{k=1}^{a-1} \left(1 - \frac{k}{n}\right) = 1 \quad
-	\text{e} \quad \lim_{n \to \infty} 1 - (\lambda / n)^a = 1
+	\text{e} \quad \lim_{n \to \infty} (1 - \lambda / n)^a = 1
 \]
 então,
 \[
@@ -554,9 +554,11 @@ Se $X \sim \mathrm{Poisson}(\lambda)$, então
 	Fazendo a substituição $k = x - 1$, obtemos
 	\[
 	    \ev{X^2} =
+		\lambda e^{-\lambda} \sum_{k=0}^\infty (k + 1) \frac{\lambda^{k}}{k!} =
 		\lambda e^{-\lambda} \left(\sum_{k=1}^\infty k \frac{\lambda^{k}}{k!} + \sum_{k=0}^\infty \frac{\lambda^{k}}{k!}\right).
 	\]
-	realizando a substituição $u = k - 1$, temos, por fim,
+	No primeiro somatório, $\sum_{k=1}^\infty k \frac{\lambda^k}{k!} = \lambda \sum_{u=0}^\infty \frac{\lambda^u}{u!} = \lambda e^\lambda$,
+	com $u = k - 1$; o segundo é $e^\lambda$. Temos, por fim,
 	\[
 	    \ev{X^2} = \lambda e^{-\lambda} (\lambda e^\lambda + e^\lambda) = \lambda^2 + \lambda
 	\]

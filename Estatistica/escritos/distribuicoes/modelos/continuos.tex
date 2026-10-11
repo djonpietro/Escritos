@@ -50,6 +50,7 @@ uniforme sempre resulta na mesma variável uniforme, independente dos parâmetro
 distribuição original.
 
 \begin{prop:transformacao uniforme continua}
+\label{prop:transformacao uniforme continua}
 Se $X \sim \mathcal{U}(a, b)$ e
 \[
     U = \frac{X - \frac{a+b}{2}}{b-a}
@@ -114,7 +115,7 @@ Se $X \sim \mathrm{Exp}(\lambda)$, então
 \item Sua função de distribuição é dada por
 \[
     F(x) = \begin{cases}
-        1 - e^{\lambda x},&\text{se } x \ge 0 \\
+        1 - e^{-\lambda x},&\text{se } x \ge 0 \\
         0,&\text{caso contrário.}
     \end{cases}
 \]
@@ -144,25 +145,24 @@ A integral
 \[
    \int_0^\infty t^{\alpha - 1} e^{-t}\, dt
 \]
-denota a função $\Gamma(\alpha)$, a qual é finita quando $\alpha > 0$, podendo ser
-expressa por uma fórmula fechada.
+denota a função $\Gamma(\alpha)$, a qual é finita quando $\alpha > 0$.
 Essa função satisfaz algumas relações importantes; em particular
 \[
     \Gamma(\alpha+1) = \alpha \Gamma(\alpha),\, \alpha > 0.
 \]
-Uma vez que $\Gamma(1) = 1$, então, pela relação anterior, vale que $\Gamma(n) = n!$ para
+Uma vez que $\Gamma(1) = 1$, então, pela relação anterior, vale que $\Gamma(n) = (n-1)!$ para
 todo $n$ inteiro positivo.
 
 Como o integrando na definição da função $\Gamma$ é positivo, então segue de imadiato
 que
 \begin{equation}
 \label{eq:pdf gamma simples}
-    f(t) = \frac{t^{\alpha-1}e^{-t}}{\Gamma{\alpha}}
+    f(t) = \frac{t^{\alpha-1}e^{-t}}{\Gamma(\alpha)}
 \end{equation}
 é uma função de densidade.
 No entanto, é possível generalizar a distribuição com uma parâmetro adicional $\beta$.
 Se $T$ tem densidade igual àquela dada por \ref{eq:pdf gamma simples} e $X = \beta T$,
-então defini-se a distribuição $\Gamma$ da maneira a seguir:
+então define-se a distribuição $\Gamma$ da maneira a seguir:
 
 \begin{def:gama}
 A variável $X$ tem distribuição $\Gamma$ com parâmetros positivos $\alpha$ e $\beta$ se
@@ -228,7 +228,7 @@ A variável $X$ tem distribuição $\chi^2$ com $n$ graus de liberdade se sua fu
 densidade for dada por
 \[
     f(x) = \begin{cases}
-        \frac{1}{2^{n/2} \Gamma(n/2)} x^{n/2}e^{-x/2},&\text{se } x \ge 0 \\
+        \frac{1}{2^{n/2} \Gamma(n/2)} x^{n/2-1}e^{-x/2},&\text{se } x \ge 0 \\
         0,&\text{caso contrário.}
     \end{cases}
 \]
@@ -254,7 +254,7 @@ tem distribuição $\chi^2$ com $n$ graus de liberdade.
 \subsection{Ditribuição de Cauchy}
 
 A distribuição de Cauchy, assim como a normal, é simétrica e possui um forato de sino,
-porém com caldas mais pesadas.
+porém com caudas mais pesadas.
 Sua função é definida a seguir:
 
 \begin{def:cauchy}
@@ -265,12 +265,11 @@ $\gamma > 0$ se sua função de densidade for
 \]
 \end{def:cauchy}
 
-Uma propriedade dessa distribuição é que seus momentos não existem, uma vez que todos
-eles são infinitos.
+Uma propriedade dessa distribuição é que seus momentos não existem.
 Por consequência, a função geradora de momentos dessa variável não é definida.
 
 \begin{prop:cauchy nao tem momentos}
-Para todo $\theta \in \real$, se $X \sim \mathrm{Cauchy}(\theta)$, então
+Para todos $\theta \in \real$ e $\gamma > 0$, se $X \sim \mathrm{Cauchy}(\theta, \gamma)$, então
 \[
     \ev{X^n} = \infty
 \]
@@ -283,7 +282,7 @@ Como visto, a distribuição de Cauchy não possui média, e, na verdade, $\thet
 a mediana da distribuição, o que é enunciado na próxima Proposição.
 
 \begin{prop:mediana de cauchy}
-Se $X \sim \mathrm{Cauchy}(\theta)$, então
+Se $X \sim \mathrm{Cauchy}(\theta, \gamma)$, então
 \[
     P(X \le \theta) = \frac 1 2
 \]
@@ -293,9 +292,9 @@ A distrbuição de Cauchy é muito utilizada para modelar razões entre duas out
 Em verdade, é possível mostrar que a razão entre duas variáveis com distribuição normal
 padrão tem distribuição de Cauchy.
 
-\subsection{Distribuição de Weilbull}
+\subsection{Distribuição de Weibull}
 
-A variável de Weilbull é um modelo de distribuição ainda mais geral que a distribuição
+A variável de Weibull é um modelo de distribuição ainda mais geral que a distribuição
 $\Gamma$ usada para modelar tempos de vida. Além dos parâmetros de forma e escala,
 adiciona-se mais um parâmetro de localização, inidicando o tempo mínimo antes de uma
 falha poder ocorrer.
@@ -313,14 +312,14 @@ $\gamma$ se sua função de densidade for dada por
 
 Uma interpretação pode ser atribuía a cada parâmetro dessa distribuição:
 \begin{itemize}
-\item Parâmetro de forma $\alpha$ -- Se $\alpha < 1$, então a taxa de falha diminui com o
+\item Parâmetro de forma $\beta$ -- Se $\beta < 1$, então a taxa de falha diminui com o
 tempo, a exemplo da taxas de mortalidade infantil com relação a idade.
-Caso $\alpha = 1$, então as falhas ocorrem de maneira aleatória em todo período de tempo
+Caso $\beta = 1$, então as falhas ocorrem de maneira aleatória em todo período de tempo
 observado, similar à distribuição exponencial.
-Já se $\alpha > 1$, então a taxa de falha aumenta com o tempo, como peças que se desgatam
+Já se $\beta > 1$, então a taxa de falha aumenta com o tempo, como peças que se desgatam
 com o tempo.
 
-\item Parâmetro de escala $\beta$ -- modela a dispersão da distribuição no eixo do tempo,
+\item Parâmetro de escala $\alpha$ -- modela a dispersão da distribuição no eixo do tempo,
 e, a medida que cresce, mais probabilidade é atribuída à valores maiores.
 Seu argumento representa o quantil no qual cerca de $63.2\%$ da população terá apresentado
 alguma falha.
@@ -338,17 +337,17 @@ Com isso, ela é comumente aplicada para modelar proporções e taxas que se enc
 no intervalo citado.
 
 \begin{def:beta}
-A variável $X$ tem distribuição beta com parâmetros positivos $a$ e $b$ se sua densidade
+A variável $X$ tem distribuição beta com parâmetros positivos $\alpha$ e $\beta$ se sua densidade
 for dada por
 \[
     f(x) = \begin{cases}
-        \frac{1}{B(a, b)} x^{a-1} (1-x)^{b-1},&\text{se } 0 < x < 1 \\
+        \frac{1}{B(\alpha, \beta)} x^{\alpha-1} (1-x)^{\beta-1},&\text{se } 0 < x < 1 \\
         0,&\text{caso contrário.}
     \end{cases}
 \]
 onde
 \[
-    B(a, b) = \int_0^1 x^{a - 1} (1-x)^{b-1}\,dx = \frac{\Gamma(\alpha)\Gamma(\beta)}{\Gamma(\alpha+\beta)}
+    B(\alpha, \beta) = \int_0^1 x^{\alpha - 1} (1-x)^{\beta-1}\,dx = \frac{\Gamma(\alpha)\Gamma(\beta)}{\Gamma(\alpha+\beta)}
 \]
 \end{def:beta}
 
@@ -360,7 +359,7 @@ Em síntese, temos que
 \item $\alpha = 1$ e $\beta > 1$ -- distribuição estritamente decrescente.
 \item $\alpha < 1$ e $\beta < 1$ -- formato de ``U''.
 \item $\alpha > 1$ e $\beta > 1$ -- formato unimodal.
-\item $\alpha = \beta$ -- simétrica entorno de $1/2$ e com variância $[4(2\alpha+1)]^{-1}$.
+\item $\alpha = \beta$ -- simétrica em torno de $1/2$ e com variância $[4(2\alpha+1)]^{-1}$.
 \end{itemize}
 
 No último caso, a distribuição torna-se cada vez mais concentrada a medida que $\alpha$
@@ -372,7 +371,7 @@ $(0, 1)$.
 
 Quando lidando com dados assimétricos à direita (cujos distribuição concentra-se à
 esquerda da mediana), é muito comum aplicar a transformação $\log(x)$ para corrigir
-essa assimetria, pois os valores na calda à direita são ``puxados'' para estarem
+essa assimetria, pois os valores na cauda à direita são ``puxados'' para estarem
 mais próximos dos menores.
 Quando essa transformação leva a uma distribuição normal, então dizemos que a variável
 original tem distribuição log-normal.
@@ -381,7 +380,10 @@ original tem distribuição log-normal.
 A variável $X$ tem distribuição log-normal com parâmetros $\mu$ e $\sigma^2$ se
 sua função de densidade for dada por
 \[
-    f(x | \mu, \sigma^2) = \frac{1}{\sqrt{2\pi\sigma^2}} \frac 1 x e^{-(\log x - \mu)^2/(2\sigma^2)}
+    f(x | \mu, \sigma^2) = \begin{cases}
+        \frac{1}{\sqrt{2\pi\sigma^2}} \frac 1 x e^{-(\log x - \mu)^2/(2\sigma^2)},&\text{se } x > 0 \\
+        0,&\text{caso contrário.}
+    \end{cases}
 \]
 \end{def:lognormal}
 
@@ -396,7 +398,7 @@ Se $\log X \sim \mathrm{Normal}(\mu, \sigma^2)$, então
 
 A distribuição de Laplace é obtida ao espelhar a distribuição exponencial em torno da
 sua média.
-Visualmente, ela possui caldas mais pesada e longas do que a normal.
+Visualmente, ela possui caudas mais pesada e longas do que a normal.
 Além disso, a curva da distribuição no ponto $x = \mu$ é um ``bico'', ou seja, a
 densidade não é diferenciável naquele ponto.
 
@@ -408,5 +410,7 @@ A variável $X$ tem distribuição de Laplace se sua função de densidade é da
 \end{def:laplace}
 
 Uma das aplicações da distribuição de Laplace é na seleção de atributos para uma
-regressão linear, atribuído pesos iguais a zero às características consideras não
-significativas para explicar outra variável.
+regressão linear: adotar uma priori de Laplace para os coeficientes equivale a penalizar
+a soma de seus valores absolutos (penalização $L^1$, ou LASSO), o que tende a atribuir
+pesos iguais a zero às características consideradas não significativas para explicar
+outra variável.

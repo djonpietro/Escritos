@@ -2,7 +2,7 @@
 
 \begin{def:simetria}
 \label{def:simetria}
-Uma variável $X$ possui distribuição simétrica entorno de $x = m$ se, e somente se,
+Uma variável $X$ possui distribuição simétrica em torno de $x = m$ se, e somente se,
 \[
     \forall t \in \real,\, P(X - m \le t) = 1 - P(X - m < -t)
 \]
@@ -29,7 +29,7 @@ Se $X$ for variável contínua, então a definição de simetria equivale a
 
 \begin{prop:equivalencia simetria}
 \label{prop:equivalencia simetria}
-Se $X$ é uma variável com distribuição simétrica entorno de $m$, então
+Se $X$ é uma variável com distribuição simétrica em torno de $m$, então
 \[
     P(X \le m) = P(X \ge m ).
 \]
@@ -53,7 +53,7 @@ A mediana $m$ da distribuição de uma variável aleatória $X$ satisfaz
 \end{def:mediana}
 
 \begin{prop:simetria e mediana}
-Se $X$ possui distribuição simétrica entorno de $m$, então $m$ é mediana da distribuição
+Se $X$ possui distribuição simétrica em torno de $m$, então $m$ é mediana da distribuição
 de $X$.
 \end{prop:simetria e mediana}
 \begin{proof}
@@ -80,7 +80,7 @@ Mais uma vez, pela Proposição \ref{prop:equivalencia simetria},
 
 \begin{thm:simetria funcao de probabilidade}
 \label{thm:simetria funcao de probabilidade}
-A variável $X$ ter simetria entorno de $m$ equivale a
+A variável $X$ ter simetria em torno de $m$ equivale a
 \begin{enumerate}
 \item Se $X$ for discreta, então
 \[
@@ -123,12 +123,11 @@ Para provar a afirmação 2, observe que
 \[
     F_X(m+t) = 1 - F_X(m-t),
 \]
-e como $f_X$ é contínua em $\Omega_X$, então fazendo $F_Y(y) = F_X(m+t)$ e $F_U(u) = F_X(m-t)$,
-obtemos
+e derivando em relação a $t$,
 \[
-     \frac{d}{dt} F_Y(y) = - \frac{d}{dt} F_U(u).
+     \frac{d}{dt} F_X(m+t) = - \left[-\frac{d}{dt} F_X(m-t)\right].
 \]
-Já que $y = m+t$ e $u = m-t$, então pelo Teorema \ref{thm:fdp transformacao continua}
+Portanto,
 \[
      f_X(m+t) = - [-f_X(m-t)] = f_X(m-t).
 \]
@@ -170,7 +169,7 @@ Fazendo outra troca de variável do tipo $u = w$, é possível concluir que
 \end{proof}
 
 \begin{cor:simetria e media aritmetica}
-Se $X$ tem distribuição simétrica entorno de $m$ e com função de probabilidade -- seja
+Se $X$ tem distribuição simétrica em torno de $m$ e com função de probabilidade -- seja
 de massa ou densidade -- $\pi(x)$, então
 \[
     \forall x_1, x_2 \in \real,\, x_1 \le m \le x_2 \text{ e } \pi(x_1) = \pi(x_2) \rightarrow \frac{x_1 + x_2}{2} = m
@@ -206,11 +205,11 @@ A moda $\mo X$ de uma variável aleatória $X$ é o valor tal que
 \end{def:moda}
 
 \begin{thm:simetria media moda mediana}
-Se $X$ é uma variável aleatória cuja distribuição é simétrica entorno da mediana $m$,
+Se $X$ é uma variável aleatória cuja distribuição é simétrica em torno da mediana $m$,
 então
 \begin{enumerate}
-\item Se a distribuição é unimodal, então $m = \mo X$.
-\item Se $\ev{X} < \infty$, então $m = \ev X$.
+\item Se a distribuição é unimodal (isto é, possui uma única moda), então $m = \mo X$.
+\item Se $\ev{|X|} < \infty$, então $m = \ev X$.
 \end{enumerate}
 \end{thm:simetria media moda mediana}
 \begin{proof}

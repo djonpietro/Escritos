@@ -53,7 +53,7 @@ de variância, temos que
 \end{proof}
 
 \begin{prop:variancia 0 e igual media}
-Se $X$ é uma variável aleatória com $\var{X} = 0$, então $X = \ev{X}$.
+Se $X$ é uma variável aleatória com $\var{X} = 0$, então $X = \ev{X}$ quase certamente, isto é, $P(X = \ev{X}) = 1$.
 \end{prop:variancia 0 e igual media}
 \begin{proof}
 Pela desigualde de Chebyshev,
@@ -64,7 +64,7 @@ e por não negatividade de probabilidades,
 \[
     P\left(|X - \mu| > \frac{1}{n}\right) = 0
 \]
-para todo $n \in \real$.
+para todo $n \in \nat$.
 Sabemos então que
 \[
     \lim_{n \to \infty} P\left(|X - \mu| > \frac{1}{n}\right) = 0,
@@ -81,8 +81,9 @@ de modo que
 \]
 Portanto,
 \[
-    P(X = \mu) = 1 \Longrightarrow X = \ev{X}.
+    P(X = \mu) = 1,
 \]
+ou seja, $X = \ev{X}$ quase certamente.
 \end{proof}
 
 \begin{thm:desigualdade de jansen}
@@ -96,7 +97,7 @@ Se $X$ é uma variável aleatória e $g$ é uma função convexa, então
 A variância de uma variável aleatória é sempre não negativa.
 \end{cor:variancia positiva}
 \begin{proof}
-A função $g(x) = x^2$ é convexa, e pela Desigualdade de Jansen segue que
+A função $g(x) = x^2$ é convexa, e pela Desigualdade de Jensen segue que
 \[
     \ev{X^2} \ge \ev{X}^2.
 \]

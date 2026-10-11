@@ -11,7 +11,7 @@ de $X$ se
 
 Com isso, o quantil de probabilidade $p$ é o valor que acumula $p$ de probabilidade na
 distribuição de $X$, cuja interpretação seria dada como o número tal que a probabilidade
-de $X$ ter realização menor ou igual a ele é $q$.
+de $X$ ter realização menor ou igual a ele é $p$.
 
 \begin{obse:mediana}
 A mediana $\med{X}$ de $X$ é o quantil de probabilidade $0.5$.
@@ -52,8 +52,7 @@ Disso, segue que
     (n-1)p_j + 1 < (n-1)p + 1 < (n-1)p_{j+1} + 1 \\
     x_j < (n-1)p + 1 < x_{j+1}.
 \end{gather*}
-Fazendo $h = (n-1)p +usados para medir simetria.
-Para distribuições aproximada 1$, e fazendo $j = \lfloor{h}\rfloor$, basta interpolar linearmente
+Fazendo $h = (n-1)p + 1$, e fazendo $j = \lfloor{h}\rfloor$, basta interpolar linearmente
 as estatísticas $x_j$ e $x_{j+1}$ usando o fator $\gamma = h - j$, que representa o quão
 longe estamos de $x_j$ em direção a $x_{j+1}$.
 Desse modo,
@@ -83,7 +82,7 @@ pelo quantil ao ser obtido.
 \end{algorithm}
 
 Além de uma medida de posição, os quantis podem ser usados para medir dispersão.
-O Intervalo Interquantílico (IQR) é a distância entre o primeiro e terceiro quartil, e
+O Intervalo Interquartílico (IQR) é a distância entre o primeiro e terceiro quartil, e
 quanto maior for sua magnitude, mais dispersa será a distribuição.
 \begin{def:iqr}
 Se $q_1$ e $q_3$ são os primeiro e terceiro quartis respectivamente da distribuição da
@@ -91,7 +90,7 @@ variável $X$, então
 \[
     d_q =  q_3 - q_1
 \]
-é o intervalo interquantílico da distribuição.
+é o intervalo interquartílico da distribuição.
 \end{def:iqr}
 Uma vantagem do uso dessa medida são que ela ignora $50\%$ mais extremos -- os $25\%$
 inferiores e os $25\%$ superiores -- e preservar os $50\%$ mais centrais,
@@ -99,7 +98,7 @@ de forma a medir a dispersão típica da variável, isto é, sem a presença dos
 atípicos.
 Ela também é considerada mais robusta para distribuições assimétricas, pois medidas
 como a variância e, consequentemente, o desvio-padrão são facilmente distrocidos por
-distribuições de calda longa.
+distribuições de cauda longa.
 
 Os quartis também possuem outra aplicação, neste caso a construção dos diagramas de
 \textit{box-plot}.

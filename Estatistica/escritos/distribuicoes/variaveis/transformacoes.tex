@@ -5,7 +5,7 @@
 Uma transformação de uma variável aleatória $X$ é toda função $g: \real \to \real$.
 \end{def:transformacao}
 
-Em experimentos aleatórios, comumente defini-se variáveis aleatórias a partir
+Em experimentos aleatórios, comumente define-se variáveis aleatórias a partir
 de outras variáveis.
 Dizemos então que a variável derivada é obtida por uma transformação da variável
 original, consistindo da composição de uma função real mensurável, essa que, pelo
@@ -74,7 +74,7 @@ A variável $Y$ é discreta e sua função de massa é dada por
 	\[
 		p_Y(y) = P_X(Y = y) = P(X \in g^{-1}(y)),
 	\]
-	e, pelo Lema
+	e, pela $\sigma$-aditividade de $P$ (os pontos fora de $\Omega_X$ têm massa nula),
 	\[
 		p_Y(y) = \sum_{x \in g^{-1}(y)} p_X(x).
 	\]
@@ -84,12 +84,14 @@ A variável $Y$ é discreta e sua função de massa é dada por
 \subsection{Transformação de Variáveis Contínuas}
 
 Para transformações de variáveis contínuas, concentramos-nos, primeiramente, nas
-transformações monótonas, pois essas compõem uma classe mais fácil de se analisar.
+transformações monótonas e bijetoras, pois essas compõem uma classe mais fácil de se
+analisar.
 
 \begin{thm:fda transformacao continua}
 \label{thm:fda transformacao continua}
 Seja $X$ uma variável aleatória contínua com distribuição $F_X$ e suporte $\Omega_X$.
-Seja também $Y=g(X)$ com suporte $\Omega_Y$, em que $g$ é uma transformação monótona.
+Seja também $Y=g(X)$ com suporte $\Omega_Y$, em que $g$ é uma transformação monótona
+bijetora.
 Se $g$ for crescente, então
 \[
 	F_{Y}(y) =  F_{X}(g^{-1}(y)).
@@ -132,7 +134,7 @@ Caso contrário,
 Por sua vez, a densidade de transformações $Y=g(X)$ em casos em que a densidade de $X$
 é contínua, pode ser obtidas via a Regra da Cadeia do Cálculo Diferencial, com a
 condição de que a inversa de $g$ seja também contínua em $\Omega_Y$.
-Caso a densidade de $X$ nem a inversa da transoformação sejam contínuas em $\Omega_X$ e
+Caso a densidade de $X$ nem a inversa da transformação sejam contínuas em $\Omega_X$ e
 $\Omega_Y$ respectivamente, a regra da cadeia não poderia ser aplicada, complexificando
 a determinação da densidade de $Y$.
 
@@ -141,7 +143,7 @@ a determinação da densidade de $Y$.
 Seja $X$ uma variável aleatória com f.d.p. igual a $f_X$.
 Seja $Y=g(X)$ uma variável obtida pela transformação $g$ e com suporte $\Omega_Y$.
 Se $g$ é monótona, $f_X$ é contínua em $\Omega_X$ e $g^{-1}$ tem
-derivada contínua em $\Omega_Y$, então a densiade $f_Y$ de $Y$ é dada por
+derivada contínua em $\Omega_Y$, então a densidade $f_Y$ de $Y$ é dada por
 \[
 	f_{Y}(y) = \begin{cases}
 		f_{X}(g^{-1}(y)) \cdot \left| \frac{d}{dy} g^{-1}(y)\right|, & \text{ se } y \in \Omega_{Y} \\
@@ -197,48 +199,63 @@ A densidade da variável definida pela transformação poderá, portanto, ser ob
 resultado a seguir
 
 \begin{thm:fdp transformacao nao monotona continua}
-Seja $X$ uma variável aleatória com densidade igual a $f_X$ contínua em $\Omega_X$.
-Seja $Y=g(X)$ a variável obtida pela transformação $g$ e com suporte $\Omega_Y$.
-Se $\Omega_X$ admite uma partição em intervalos $\{A_i\}_{i=1}^n$ que torne possível
-definir a família de funções $\{g_i: A_i \to \mathbb{R}\}_{i=1}^n$ tal que
+\label{thm:fdp transformacao nao monotona continua}
+Seja $X$ uma variável aleatória contínua com densidade $f_X$ e suporte $\Omega_X$, e seja
+$Y=g(X)$ a variável obtida pela transformação $g$.
+Suponha que $\Omega_X$ admita uma partição em intervalos $\{A_i\}_{i=1}^n$ e defina
+$g_i: A_i \to \real$ por $g_i(x) = g(x)$, de modo que, para todo $i \in [n]$,
 \begin{enumerate}
-	\item[i] $g_i(x) = g(x)$
-	\item[ii] $g_i(x)$ é monótona em $A_i$
-	\item[iii] $g_i(A_i) = \Omega_Y$ para todo $i \in [n]$.
-	\item[iv] $g_i^{-1}$ tem derivada contínua em $\Omega_Y$ para todo $i \in [n]$.
+	\item[i] $g_i$ é contínua e estritamente monótona em $A_i$, de modo que
+	      $B_i = g_i(A_i)$ é um intervalo e a inversa $g_i^{-1}: B_i \to A_i$ está bem definida;
+	\item[ii] $g_i^{-1}$ tem derivada contínua no interior de $B_i$.
 \end{enumerate}
-então a densidade $f_Y$ de $Y$ é dada por
+Então uma densidade de $Y$ é dada por
 \[
 	f_{Y}(y) = \begin{cases}
-		\sum_{i=1}^nf_{X}(g_i^{-1}(y)) \cdot \left| \frac{d}{dy} g_i^{-1}(y)\right|, & \text{ se } y \in \Omega_{Y} \\
-		0, \text{ caso contrário.}
+		\displaystyle\sum_{i \,:\, y \in B_i} f_{X}(g_i^{-1}(y)) \cdot \left| \frac{d}{dy} g_i^{-1}(y)\right|, & \text{ se } y \in \bigcup_{i=1}^n B_i \\
+		0, & \text{ caso contrário.}
 	\end{cases}
 \]
 \begin{proof}
-	Com efeito, $f_Y = F_Y'$ e também
+	Seja $B \in \borel$.
+	Como os $A_i$ particionam $\Omega_X$ e $P(X \in \Omega_X) = 1$, temos, por
+	$\sigma$-aditividade,
 	\[
-		F_Y(y) = P(Y \le y) = P(X \le g^{-1}((-\infty, y]))
+		P(Y \in B) = \sum_{i=1}^n P(X \in A_i,\ g(X) \in B) =
+		\sum_{i=1}^n \int_{A_i \cap g_i^{-1}(B)} f_X(x)\, dx.
 	\]
-	Mas pelo \nameref{thm:probabilidade total},
+	Em cada $A_i$, a função $g_i$ é uma bijeção estritamente monótona sobre $B_i$, cuja
+	inversa tem derivada contínua no interior de $B_i$; os extremos de $B_i$ formam um
+	conjunto de medida nula.
+	Logo, pela mudança de variável $x = g_i^{-1}(y)$, com $dx = \left|\frac{d}{dy}g_i^{-1}(y)\right| dy$
+	-- o módulo leva em conta a inversão dos limites de integração quando $g_i$ é decrescente --,
 	\[
-		F_Y(y) = \sum_{i=1}^n P(X \le g^{-1}((-\infty, y]) \mid X \in A_i) \cdot P(X \in A_i)
+		\int_{A_i \cap g_i^{-1}(B)} f_X(x)\, dx =
+		\int_{B \cap B_i} f_X(g_i^{-1}(y)) \cdot \left|\frac{d}{dy}g_i^{-1}(y)\right| dy.
 	\]
-	e tomando $f(y) = F_Y'(y) \qs$,
+	Somando em $i$ e escrevendo $I_{B_i}$ para a função indicadora de $B_i$,
 	\[
-		f_Y(y) = \sum_{i=1}^n \frac{d}{dy} F_X(g_i^{-1}(y)) + \sum_{i=1}^n \frac{d}{dy} P(X \in A_i) \qs
+		P(Y \in B) =
+		\int_B \sum_{i=1}^n I_{B_i}(y)\, f_X(g_i^{-1}(y)) \cdot \left|\frac{d}{dy}g_i^{-1}(y)\right| dy =
+		\int_B f_Y(y)\, dy.
 	\]
-	como $P(X \in A_i)$ não depende de $y$, $\frac{d}{dy} P(X \in A_i) = 0$ para todo $i \in [n]$.
-	Além disso, pela hipótese (iv.) e o fato de que $F_X$ é absolutamente contínua,
-	se $y \in \Omega_Y$, então a equação $F_X(g_i^{-1}(y))$ será contínua em $y$.
-	Da Regra da Cadeia obtemos,
-	\[
-		f_Y(y) = \sum_{i=1}^n f_X(g_i^{-1}(y)) \cdot \left|\frac{d}{dy}g_i^{-1}(y)\right| \qs \text{ se } y \in \Omega_Y
-	\]
-	Pelos Teoremas \ref{thm:tfc qs} e \ref{thm:fdp transformacao continua}, seguirá então,
-	\[
-		f_Y(y) = \sum_{i=1}^n f_X(g_i^{-1}(y)) \cdot \left|\frac{d}{dy}g_i^{-1}(y)\right| \text{ se } y \in \Omega_Y
-	\]
-	Noutro caso de $y \notin \Omega_Y$, o Teorema \ref{thm:suporte continua} implicará que
-	$f_Y(y) = 0$.
+	Como a igualdade vale para todo $B \in \borel$, $f_Y$ é uma densidade de $Y$, que é
+	única a menos de um conjunto de medida nula pelo Teorema \nameref{thm:radon nikodym}.
 \end{proof}
 \end{thm:fdp transformacao nao monotona continua}
+
+\begin{obs:transformacao nao monotona}
+As imagens $B_i$ não precisam coincidir.
+Se $X \sim \mathcal{U}(-1, 2)$ e $Y = X^2$, tomamos $A_1 = (-1, 0)$ e $A_2 = [0, 2)$, de
+modo que $B_1 = (0, 1)$ e $B_2 = [0, 4)$, com $g_1^{-1}(y) = -\sqrt y$ e
+$g_2^{-1}(y) = \sqrt y$.
+Assim, para $0 < y < 1$ há duas parcelas na soma, enquanto para $1 \le y < 4$ há apenas
+uma:
+\[
+	f_Y(y) = \begin{cases}
+		2 \cdot \frac 1 3 \cdot \frac{1}{2\sqrt y} = \frac{1}{3\sqrt y}, & \text{ se } 0 < y < 1 \\
+		\frac 1 3 \cdot \frac{1}{2\sqrt y} = \frac{1}{6\sqrt y},       & \text{ se } 1 \le y < 4 \\
+		0,                                                             & \text{ caso contrário.}
+	\end{cases}
+\]
+\end{obs:transformacao nao monotona}

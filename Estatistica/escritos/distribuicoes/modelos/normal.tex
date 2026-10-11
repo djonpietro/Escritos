@@ -1,10 +1,5 @@
 \section{Distribuição Normal}
 
-A distribuição normal foi introduzida em 1733 por Abraham de De Moivre para aproximar
-probabilidades de variáveis binomiais quando o parâmetro $n$ é grande.
-Essa distribuição possui grande importância na Teoria de Probabilidades e na Estatística,
-pois suas propriedades analíticas permitem o tratamento adequado de inúmeros fenômenos
-
 \begin{def:normal}
 A variável contínua $X$ tem distribuição normal com parâmetros $\mu$ e $\sigma^2$ se
 sua densidade for
@@ -36,15 +31,15 @@ Equivalentemente, podemos provar que
 \]
 Espressando o problema como uma integral dupla, tal que
 \[
-    \int_{-\infty}^{\infty} \int_{-\infty}^{\infty} e^{\frac{-(t+u)^2}{2}}\,dt\,du,
+    \int_{-\infty}^{\infty} \int_{-\infty}^{\infty} e^{\frac{-(t^2+u^2)}{2}}\,dt\,du,
 \]
 e colocando em termos de coordenadas polares, isto é,
 \[
-    r^2 = u^2 + t^2, \quad t = r \cos \theta, \quad u = r \cos \theta,
+    r^2 = u^2 + t^2, \quad t = r \cos \theta, \quad u = r \sin \theta,
 \]
 obtemos
 \[
-    \int_0^\infty \int_0^{2\pi} re^{\frac{-r^2}{2}}\,dr\,d \theta =
+    \int_0^{2\pi} \int_0^\infty re^{\frac{-r^2}{2}}\,dr\,d \theta =
     2 \pi \int_0^\infty re^{\frac{-r^2}{2}}\,dr,
 \]
 essa que pode ser resolvida via substituição, resultando em
@@ -89,24 +84,35 @@ deslocamento -- de uma variável normal resulta numa nova variável normal com p
 previstos.
 
 \begin{thm:tranformacao afim da normal}
-Se $X \sim \mathrm{Normal}(\mu, \sigma^2)$ e $a$ e $b$ são constantes, então
+Se $X \sim \mathrm{Normal}(\mu, \sigma^2)$ e $a \ne 0$ e $b$ são constantes, então
 a variável $aX + b$ é normalmente distribuída com parâmetros $a\mu + b$ e $a^2\sigma^2$.
 \end{thm:tranformacao afim da normal}
 \begin{proof}
-Se a distribuição de $X$ é dada por
+Seja $Y = g(X)$ com $g(x) = ax + b$.
+Como $a \ne 0$, a função $g$ é monótona -- crescente se $a > 0$ e decrescente se $a < 0$ --
+e bijetora de $\real$ em $\real$, com inversa
 \[
-    \int_{-\infty}^\infty \frac{1}{\sqrt{2\pi\sigma^2}} e^{\frac{-(x - \mu)^2}{2\sigma^2}}
+    g^{-1}(y) = \frac{y - b}{a}
+    \quad \text{e} \quad
+    \frac{d}{dy} g^{-1}(y) = \frac{1}{a},
 \]
-e temos que
+que tem derivada contínua em $\Omega_Y = \real$.
+Além disso, a densidade $f_X$ da normal é contínua em $\Omega_X = \real$.
+Pelo Teorema \ref{thm:fdp transformacao continua}, para todo $y \in \real$,
 \[
-    y = ax + b \Longrightarrow x = \frac{y - b}{\mu}
+    f_Y(y) = f_X\left(\frac{y - b}{a}\right) \cdot \frac{1}{|a|} =
+    \frac{1}{|a|\sqrt{2\pi\sigma^2}} e^{\frac{-\left(\frac{y - b}{a} - \mu\right)^2}{2\sigma^2}}.
 \]
-então, substituindo $x$ na função de distribuição, obtemos
+Uma vez que $|a| = \sqrt{a^2}$ e
 \[
-    \frac{1}{\sqrt{2\pi a^2\sigma^2}} \int_{-\infty}^{\infty} e^{\frac{-(y - a\mu - b)^2}{2a^2\sigma^2}}\,dy.
+    \left(\frac{y - b}{a} - \mu\right)^2 = \frac{(y - a\mu - b)^2}{a^2},
 \]
-Logo, a expressão anterior trata-se da distribuição de uma variável $Y = aX + b$ tal que
-$Y \sim \mathrm{Normal}(a\mu + b, a^2\sigma^2)$.
+obtemos
+\[
+    f_Y(y) = \frac{1}{\sqrt{2\pi a^2\sigma^2}} e^{\frac{-(y - (a\mu + b))^2}{2a^2\sigma^2}},
+\]
+que é a densidade de uma variável normal com parâmetros $a\mu + b$ e $a^2\sigma^2$.
+Portanto, $Y \sim \mathrm{Normal}(a\mu + b, a^2\sigma^2)$.
 \end{proof}
 
 \begin{cor:normal e normal padrao}
@@ -173,8 +179,8 @@ sua variância.
 Em conjunto com o Corolário \ref{cor:normal e normal padrao}, mostra-se que ao tomar
 uma variável normal, subtrair a sua média e depois a dividir pelo desvio-padrão resulta
 numa variável normal padrão.
-A utilidade desse fato é semelhante ao exposto para transformação de variáveis uniformes
-contínuas: podemos tabelar os valores de uma única distribuição normal e usá-los para
+A utilidade desse fato é semelhante à da transformação de variáveis uniformes
+contínuas, vista adiante na Proposição \ref{prop:transformacao uniforme continua}: podemos tabelar os valores de uma única distribuição normal e usá-los para
 computar probabilidades relacionadas a qualquer outra distribuição normal.
 Esse fato é ainda mais valioso, já que a distribuição de probabilidade de variáveis
 normais não possui fórmula fechada como da uniforme contínua.
@@ -182,26 +188,26 @@ A proposição e o Teorema a seguir nos dizem a respeito da simetria da distribu
 
 \begin{prop:simetria densidade normal}
 \label{prop:simetria densidade normal}
-A função de densidade $f(x)$ de uma variável normal é uma função par, isto é,
+A função de densidade $f(x)$ de uma variável normal padrão é uma função par, isto é,
 \[
     f(-x) = f(x)
 \]
 \end{prop:simetria densidade normal}
 \begin{proof}
-	Seja $X \sim \mathrm{Normal}(\mu, \sigma^2)$.
+	Seja $X \sim \mathrm{Normal}(0, 1)$.
 	Uma vez que
 	\[
-	    | - x - \mu | = | x - \mu | \Longrightarrow (-x-\mu)^2 = (x - \mu)^2,
+	    | - x | = | x | \Longrightarrow (-x)^2 = x^2,
 	\]
 	então
 	\[
-	    f(-x) = \frac{1}{\sqrt{2\pi\sigma^2}} e^{\frac{-(-x-\mu)^2}{2\sigma^2}} =
-		\frac{1}{\sqrt{2\pi\sigma^2}} e^{\frac{-(x-\mu)^2}{2\sigma^2}} = f(x).
+	    f(-x) = \frac{1}{\sqrt{2\pi}} e^{\frac{-(-x)^2}{2}} =
+		\frac{1}{\sqrt{2\pi}} e^{\frac{-x^2}{2}} = f(x).
 	\]
 \end{proof}
 
 \begin{thm:simetria distribuicao normal}
-Se $F(x)$ for a função de distribuição de uma variável normal, então
+Se $F(x)$ for a função de distribuição de uma variável normal padrão, então
 \[
     F(-x) = 1 - F(x)
 \]
@@ -211,7 +217,7 @@ Com efeito,
 \[
     F(-x) = \int_{-\infty}^{-x} f(u)\,du.
 \]
-onde $f$ é a função de densidade da normal.
+onde $f$ é a função de densidade da normal padrão.
 Realizando a substituição $u = -t$, então $du = -dt$.
 Além disso, temos que $u \to -\infty$ implica em $t \to \infty$, enquanto que
 $u = -x$ nos dá $t = x$.

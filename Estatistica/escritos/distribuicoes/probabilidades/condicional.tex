@@ -7,7 +7,7 @@ está condicionado a outro.
 \begin{def:probabilidade condicional}
 Seja $(\Omega, \mathcal{B}, P)$ um espaço de probabilidade.
 Sejam $E$ e $F$ eventos de $\mathcal{B}$ com $P(F) \ne 0$.
-A probablidade condicional do evento $E$ dado $F$, denotada por $P(E|F)$, é dada por
+A probabilidade condicional do evento $E$ dado $F$, denotada por $P(E|F)$, é dada por
 \[
 	P(E|F) = \frac{P(E \cap F)}{P(F)}
 \]
@@ -15,15 +15,19 @@ A probablidade condicional do evento $E$ dado $F$, denotada por $P(E|F)$, é dad
 
 % Mostrar que probabilidade condicional é uma medida de probabilidade
 
-Quando a interseção entre dois eventos é vazia, então teremos que a probablidade
+Quando a interseção entre dois eventos é vazia, então teremos que a probabilidade
 condicional será $0$.
-A probablidade condicional induz uma forma de determinar a probabilidade do evento
+A probabilidade condicional induz uma forma de determinar a probabilidade do evento
 dado como interseção de vários outros.
 
 % Consertar a prova para conjuntos enumeráveis
 \begin{prop:regra da multiplicacao}[Regra do Produto]
-Seja $\mathcal{F} = \{E_i\}_n$ uma família de eventos disjuntos de um
-espaço de probabilidade $(\Omega, \mathcal{B}, P)$.
+Se $\mathcal{F} = \{E_i\}_{i=1}^n$ é uma família de eventos de um espaço de probabilidade
+$(\Omega, \mathcal{B}, P)$ satisfazendo
+\[
+    P\left(\bigcap_{j<n} E_j\right) > 0,
+\]
+então
 \[
 	P\left(\bigcap_{E \in \mathcal{F}} E\right) =
 	\prod_{i=1}^n P\left(E_i\ \middle|\ \bigcap_{j < i} E_j\right)
@@ -33,19 +37,19 @@ espaço de probabilidade $(\Omega, \mathcal{B}, P)$.
 
 	Base: $n = 1$ é trivial.
 
-	Hipótse de Indução: admita que o resultado vale para uma família de $n$ eventos. Se
+	Hipótese de Indução: admita que o resultado vale para uma família de $n$ eventos. Se
 	$|\mathcal{F}| = n + 1$, então façamos
 	\[
 		\bigcap_{j < n+1} E_j  = E'
 	\]
 	e obtemos que
 	\[
-		P\left(\bigcap_{E \in \mathcal{F}} E\right) = P(E' \cap E_n) = P(E_n | E') P(E').
+		P\left(\bigcap_{E \in \mathcal{F}} E\right) = P(E' \cap E_{n+1}) = P(E_{n+1} | E') P(E').
 	\]
 	Como a hipótese de indução vale para $E'$, então
 	\[
 		P\left(\bigcap_{E \in \mathcal{F}} E\right) =
-		P\left(E_n\ \middle|\ \bigcap_{j < n+1} E_j\right) \cdot
+		P\left(E_{n+1}\ \middle|\ \bigcap_{j < n+1} E_j\right) \cdot
 		\prod_{i=1}^n P\left(E_i\ \middle|\ \bigcap_{j < i} E_j\right) =
 		\prod_{i=1}^{n+1} P\left(E_i\ \middle|\ \bigcap_{j < i} E_j\right)
 	\]
@@ -113,7 +117,7 @@ Se eles são independentes, então os seguintes eventos também o são:
 \end{proof}
 \end{prop:independencia complementar}
 
-\begin{thm:probabilidade total}[Teorema de Probablidade Total]
+\begin{thm:probabilidade total}[Teorema de Probabilidade Total]
 \label{thm:probabilidade total}
 Seja o espaço de probabilidade $(\Omega, \mathcal{B}, P)$.
 Seja $\mathcal{F} = \{F_i\}_\mathbb{N}$, com $\mathcal{F} \subset \mathcal{B}$, uma partição de

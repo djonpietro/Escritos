@@ -18,7 +18,7 @@ podem ser mais apropriadas para realizar a descrição da base.
 Há também outras medidas muito utilizas para descrever dados de maneira robusta.
 A primeira a citar é a \textbf{média aparada}, que consiste no cálculo da média
 considerando apenas parte dos dados menos extremos.
-Para isso, decidi-se por um parâmetro $\alpha \in [0, 1]$ e calcula-se a média apenas
+Para isso, decide-se por um parâmetro $\alpha \in [0, 0.5)$ e calcula-se a média apenas
 das estatísticas entre aquelas que acumulam $\alpha$ e $1-\alpha$ de probabilidade.
 Isso garante que a média não será influenciada por valores extremos, sendo, pois, mais
 representativa.
@@ -30,7 +30,7 @@ Essa propriedade permite avaliar a variabilidade de um atributo de forma padroni
 seja, independente da escala dele, tornando possível, também, comparar comparar a
 variabilidade de dois atributos de magnitude ou escala distintos.
 
-Uma segunda medida robusta de dispersão é o \textbf{desvio absoluto mediano}, análogo ao
+Outra medida robusta de dispersão é o \textbf{desvio absoluto mediano}, análogo ao
 desvio absoluto médio.
 Para o computar, basta tomar a mediana dos desvios das estatísticas em relação a mediana
 do atributo.

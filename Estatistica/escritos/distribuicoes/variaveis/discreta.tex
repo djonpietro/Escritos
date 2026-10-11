@@ -17,28 +17,10 @@ Isso sugere que o suporte é possivelmente um conjunto enumerável, o que é pro
 Teorema a seguir.
 
 \begin{prop:suporte enumeravel}
-O suporte $\Omega_X$ de uma variável aleatória $X$ é enumerável se, e somente se,
-$X$ é discreta.
+Se o suporte $\Omega_X$ de uma variável aleatória $X$ é enumerável, então $X$ é discreta.
 \begin{proof}
 	Sendo $\Omega_X$ enumerável, então pelo Teorema \ref{thm:prob suporte} segue que $X$
-	é discreta. Por outro lado, supondo $X$ discreta, então seja $S$ tal que $P_X(S) = 1$.
-	Sendo $x \in \Omega_X$, então
-	\[
-		\forall \epsilon > 0, P(|X - x| < \epsilon) > 0
-	\]
-	mas se $x \notin S$, segue da Proposição \ref{prop:intersecao suporte} que
-	\[
-		\forall \epsilon > 0, S \cap (x-\epsilon, x+\epsilon) \ne \varnothing,
-	\]
-	concluindo-se que todo ponto em $\Omega_X \setminus S$ é de acumulação em $S$.
-	Definamos
-	\[
-		A = S \cup \{x \in \real \setminus S \mid x \text{ é ponto de acumulação de } S\}
-	\]
-	donde teremos $\Omega_X \subset A$.
-	Como $S$ é enumerável, então o conjunto de seus pontos de acumulação também será, assim
-	como $A$.
-	Uma vez que $\Omega_X$ é subconjunto de um enumerável, então ele próprio é enumerável.
+	é discreta.
 \end{proof}
 \end{prop:suporte enumeravel}
 
@@ -52,26 +34,27 @@ com contradomínio em $[0, 1]$ satisfazendo
 \]
 onde $\mu$ é a medida de contagem.
 \begin{proof}
-	A medida de contagem, pelo Teorema \ref{thm:sigma finita}, é $\sigma$-finita.
-	Ademais,
-	\[
-		\forall B \in \borel, \mu(B) = 0 \Longleftrightarrow B = \varnothing,
-	\]
-	implicando que $P_X$ é absolutamente contínua em relação a $\mu$ pela Definição
-	\ref{def:medida absolutamente continua}.
-	Pelo Teorema \nameref{thm:radon nikodym}, segue que existe $p_X \in L^1(\mu)$ tal que
-	\[
-		p_X = \frac{d}{d\mu} P_X \Longleftrightarrow P_X = \int p_X\, d\mu
-	\]
-	o que equivale a, pelo Teorema \ref{thm:integracao contagem},
-	\[
-		\forall A \in \borel, P_X(A) = \sum_{x \in A} p_X(x).
-	\]
-	Uma vez que para todo $x \in \real$, tem-se $0 < P(X = x) < 1$, e
-	\[
-		P(X = x) = P_X(\{x\}) = \sum_{a \in \{x\}} p_X(a) = p_X(x)
-	\]
-	então $p_X \in [0, 1]$.
+    % refazer a prova
+	% A medida de contagem, pelo Teorema \ref{thm:sigma finita}, é $\sigma$-finita.
+	% Ademais,
+	% \[
+	% 	\forall B \in \borel, \mu(B) = 0 \Longleftrightarrow B = \varnothing,
+	% \]
+	% implicando que $P_X$ é absolutamente contínua em relação a $\mu$ pela Definição
+	% \ref{def:medida absolutamente continua}.
+	% Pelo Teorema \nameref{thm:radon nikodym}, segue que existe $p_X \in L^1(\mu)$ tal que
+	% \[
+	% 	p_X = \frac{d}{d\mu} P_X \Longleftrightarrow P_X = \int p_X\, d\mu
+	% \]
+	% o que equivale a, pelo Teorema \ref{thm:integracao contagem},
+	% \[
+	% 	\forall A \in \borel, P_X(A) = \sum_{x \in A} p_X(x).
+	% \]
+	% Uma vez que para todo $x \in \real$, tem-se $0 \le P(X = x) \le 1$, e
+	% \[
+	% 	P(X = x) = P_X(\{x\}) = \sum_{a \in \{x\}} p_X(a) = p_X(x)
+	% \]
+	% então $p_X \in [0, 1]$.
 \end{proof}
 \end{prop:existencia fmp}
 
@@ -88,58 +71,6 @@ Seja $X: \Omega \to \mathbb{R}$ uma v.a. discreta. A função $p_X: \mathbb{R} \
 	P(X = x) = p_X(x)
 \]
 \end{def:fmp}
-
-% O próximo resultado diz que quando definimos uma função que mapeia todo evento do
-% experimento à soma das probabilidades pontuais das massas de probabilidade dos pontos
-% no evento, então essa função é uma medida de probabilidade.
-
-% \begin{prop:fmp}
-% Seja $X$ uma variável aleatória discreta tal que $P(X \in S)=1$, onde $S \subset \mathbb R$,
-% e $p_X$ a função de massa de probabilidade.
-% A aplicação
-% \begin{gather*}
-% 	\mu_X: \mathcal{F} \to [0,1]\\
-% 	A \mapsto \sum_{x\in A} p_X(x)
-% \end{gather*}
-% é uma medida de probabilidade para $(S,\mathcal{F})$.
-% \begin{proof}
-% 	Para todo $A\subset S$,
-% 	\[
-% 		\mu_X(A) = \sum_{x\in A} p_X(x) = \sum_{x\in A} P(X=x).
-% 	\]
-
-% 	Como os eventos $\{X=x\}$, com $x\in A$, são dois a dois disjuntos,
-% 	segue da $\sigma$-aditividade de $P$ que
-% 	\[
-% 		\mu_X(A) = P(X\in A).
-% 	\]
-
-% 	Em particular,
-% 	\[
-% 		\mu_X(S) = P(X\in S) = 1.
-% 	\]
-
-% 	Logo, $\mu_X$ é uma medida de probabilidade em
-% 	$(S,\mathcal P(S))$.
-% \end{proof}
-% \end{prop:fmp}
-
-% A consequência direta dessa proposição é que a probabilidade de um evento no espaço de
-% resultados pode ser dada simplesmente por meio da função de massa de probabilidade.
-
-% \begin{lem:prob conjunto enumeravel}
-% \label{lem:prob conjunto enumeravel}
-% Se $X$ é variável discreta e $A \in \borel$ é enumerável, então
-% \[
-% 	P(X \in A) = \sum_{x \in A} p_X(x)
-% \]
-% \begin{proof}
-% 	Por $\sigma$-aditividade,
-% 	\[
-% 		P(X \in A) = \sum_{x \in A} P(X = x) = \sum_{x \in A} p_X(x)
-% 	\]
-% \end{proof}
-% \end{lem:prob conjunto enumeravel}
 
 Enunciemos agora como obter a distribuição $F$ de uma variável aleatória discreta.
 
@@ -182,23 +113,23 @@ suporte $\Omega_X$, então a distribuição de $X$ é
 \end{proof}
 \end{prop:fda discreto}
 
-Com isso, se $S = \{x \in \real \mid p_X(x) > 0\} \subseteq \Omega_X$, então seja
-$\{x_i\}_\nat$ uma ordenação de $S$ de tal modo
-\[
-	F(x) = \begin{cases}
-		0,      & \text{ se } x < x_1              \\
-		F(x_1), & \text{ se } x_1 \leq x < x_2     \\
-		\vdots                                     \\
-		F(x_i), & \text{ se } x_i \leq x < x_{i+1} \\
-		\vdots                                     \\
-	\end{cases}.
-\]
-A função $F$ é, pois, uma função constante por partes que sempre incluem a extremidade
-esquerda de seu domínio devido à propriedade necessária de uma distribuição sempre ser contínua
-à direita. Uma vez que
-\begin{gather*}
-	P(X = x_i) = P(X \leq x_i) - P(X < x_i)\\
-	P(X = x_i) = F(x_i) - \lim_{x \to x_i^-} F(x)\\
-	P(X = x_i) = F(x_i) - F(x_{i-1}),
-\end{gather*}
-então $p_X(x_i)$ é o salto entre duas partes consecutivas da distribuição de $X$.
+% Com isso, se $S = \{x \in \real \mid p_X(x) > 0\} \subseteq \Omega_X$, e $\Omega_X$ é
+% discreto e enumerável, então seja $\{x_i\}_\nat$ uma ordenação de $S$ de tal modo
+% \[
+% 	F(x) = \begin{cases}
+% 		0,      & \text{ se } x < x_1              \\
+% 		F(x_1), & \text{ se } x_1 \leq x < x_2     \\
+% 		\vdots                                     \\
+% 		F(x_i), & \text{ se } x_i \leq x < x_{i+1} \\
+% 		\vdots                                     \\
+% 	\end{cases}.
+% \]
+% A função $F$ é, pois, uma função constante por partes que sempre incluem a extremidade
+% esquerda de seu domínio devido à propriedade necessária de uma distribuição sempre ser contínua
+% à direita. Uma vez que
+% \begin{gather*}
+% 	P(X = x_i) = P(X \leq x_i) - P(X < x_i)\\
+% 	P(X = x_i) = F(x_i) - \lim_{x \to x_i^-} F(x)\\
+% 	P(X = x_i) = F(x_i) - F(x_{i-1}),
+% \end{gather*}
+% então $p_X(x_i)$ é o salto entre duas partes consecutivas da distribuição de $X$.

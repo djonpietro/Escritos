@@ -62,29 +62,27 @@ variável aleatória $X$, então
 		\lim_{x \to a^+} P(X \leq x) = P \left(\lim_{x \to a^+} X \leq x\right)
 		= P (X \leq a) = F(a)
 	\]
-	Para as afirmações (3) e (4), considere a sequência de intervalos encaixados
-	\[
-		I_1 \subset I_2 \subset \ldots
-	\]
-	com extremos inferiores e superiores $a_i$ e $b_i$ respectivamente com $i \in \mathbb{N}$.
-	Os eventos $\{X \leq b_i\}$ formam uma sequência crescente de eventos encaixados tal
+	Para a afirmação (3), como $F$ é não decrescente, basta tomar $x = n \in \mathbb{N}$.
+	Os eventos $\{X \leq n\}$ formam uma sequência crescente de eventos encaixados tal
 	que
 	\[
-		\lim_{n \to \infty} \{X = b_n\} = \{X \leq \infty\}
+		\bigcup_{n=1}^\infty \{X \leq n\} = \Omega
 	\]
 	Novamente, pela continuidade da probabilidade,
 	\[
 		\lim_{x \to \infty} F(x) =
-		\lim_{x \to \infty} P(X \leq x) =
-		P(X \leq \infty) =
-		P(\mathbb{R}) = 1
+		\lim_{n \to \infty} P(X \leq n) =
+		P(\Omega) = 1
 	\]
-	O mesmo argumento é replicável para (4): a sequência de eventos $\{X \leq a_i\}$ converge
-	para $\{X \leq -\infty\}$, de sorte que
+	O mesmo argumento é replicável para (4): os eventos $\{X \leq -n\}$ formam uma
+	sequência decrescente com
+	\[
+		\bigcap_{n=1}^\infty \{X \leq -n\} = \varnothing,
+	\]
+	de sorte que
 	\[
 		\lim_{x \to -\infty} F(x) =
-		\lim_{x \to -\infty} P(X \leq x) =
-		P(X \leq -\infty) =
+		\lim_{n \to \infty} P(X \leq -n) =
 		P(\varnothing) = 0
 	\]
 \end{proof}
@@ -92,12 +90,12 @@ variável aleatória $X$, então
 
 Portanto, o Teorema \ref{thm:cdf} garante que há uma medida induzida de Steljes para a
 distribuição $F$ (ver Definição \ref{def:steljes}).
-Sendo $\mu_F$ a medidade de Steltjes induzida por $F$, então essa equivale a medida
+Sendo $\mu_F$ a medida de Stieltjes induzida por $F$, então essa equivale a medida
 imagem $P_X$.
 
 \begin{prop:steltjes e fda}
 \label{prop:steltjes e fda}
-Se $X$ é variável aleatória e $\mu_F$ é a medida de Steltjes induzida por $F$, então
+Se $X$ é variável aleatória e $\mu_F$ é a medida de Stieltjes induzida por $F$, então
 $P_X = \mu_F$.
 \begin{proof}
 	Para quaisquer $a, b \in \real$, temos

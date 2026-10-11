@@ -4,7 +4,7 @@ Entre as motivações para se estudar a assimetria ou simetria dos dados estão 
 de
 \begin{itemize}
 \item Concentração dos dados em uma dada região de valores.
-\item Presença de caldas particularmente longas.
+\item Presença de caudas particularmente longas.
 \item Afastamento dos dados do centro.
 \item Validade de hipóteses sobre o modelo adotado para a distribuição.
 \end{itemize}
@@ -22,24 +22,25 @@ da distribuição normal, a serem apresentadas adiante, também se aproveitam da
 simétrica da distribuição, facilitando a produção de algumas análises.
 
 Seja $X$ um atributo.
-Para medir sua assimetria, são geralmente usados
+Para medir sua assimetria, são geralmente usados os coeficientes a seguir, onde $s$ denota
+o desvio-padrão dos dados.
 \begin{itemize}
 \item Coeficiente de Assimetria de Pearson I -- usado quando a distribuição é
 unimodal, e a moda pode ser bem definida.
 \[
-   \frac{\overline x - \mo X}{\sigma^3}
+   \frac{\overline x - \mo X}{s}
 \]
 
 \item Coeficiente de Assimetria de Pearson II -- usado quando a distribuição não
 é unimodal ou a moda não pode ser bem definida, dada por
 \[
-     \frac{3\,(\overline x - \med X)}{\sigma^3}
+     \frac{3\,(\overline x - \med X)}{s}
 \]
 
 \item Coeficiente Quatílico de Assimetria -- utiliza os quartis da distribuição, partindo
 do princípio que o primeiro e terceiro quartil são equidistantes da mediana
 \[
-    \frac{q_1 + q_2 - 2\, \med X}{q_3 - q_1}
+    \frac{q_1 + q_3 - 2\, \med X}{q_3 - q_1}
 \]
 
 \item Coeficiente de Assimetria de Fisher -- um estimador baseado no terceiro momento
@@ -47,15 +48,16 @@ central multiplicado por um fator que remove o viés do tamanho da amostra
 \[
     \frac{\sqrt{n(n-1)}}{n-2} \cdot \frac{1}{n\sigma^3} \cdot \sum_{i=1}^n (x_i - \overline x)^3
 \]
+onde $\sigma = \sqrt{\frac 1 n \sum_{i=1}^n (x_i - \overline x)^2}$ é o desvio-padrão com divisor $n$.
 \end{itemize}
 A depender da medida $c$ utilizada, ela pode ter seus valores interpretados como
 \begin{itemize}
 \item $c > 0$ -- assimetria positiva, indicando que $\overline X > \mo X$, também
-chamada de assimetria à esquerda, pois os dados possuem uma calda mais longa nessa
+chamada de assimetria à esquerda, pois os dados possuem uma cauda mais longa nessa
 direção enquanto que seus valores concentram-se mais à direita.
 
 \item $c < 0$ -- assimetria negativa, e provavelmente temso $\overline X < \mo X$, o que
-é chamado de assimetria à direita, direção na qual se estende a calda da distribuição,
+é chamado de assimetria à direita, direção na qual se estende a cauda da distribuição,
 e os dados concentram-se em valores mais baixos.
 
 \item $c = 0$ -- ausência de assimetria, levando a hipótese de que $\overline X = \mo X$

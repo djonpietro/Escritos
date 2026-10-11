@@ -8,7 +8,7 @@ Na linguagem de medida, a definição formal da esperança é dada a seguir.
 
 \begin{def:esperanca}
 Seja $X$ uma variável aleatória e $(\Omega, \mathcal{F}, P)$ espaço de probabilidade.
-Defini-se esperança de $X$, ou valor esperado, denotada por $\ev{X}$, como
+Define-se esperança de $X$, ou valor esperado, denotada por $\ev{X}$, como
 \[
 	\ev{X} = \int_\Omega X\, dP
 \]
@@ -93,13 +93,14 @@ O operador de esperança satisfaz:
 
 Os momentos de uma variável aleatória medem diferentes aspectos da distribuição dela.
 A intuição advém da mecânica, em que os momentos de massa descrevem como a massa
-de um sistema está distribuída entorno de um ponto.
+de um sistema está distribuída em torno de um ponto.
 Analogamente, os momentos descrevem como a probabilidade dos valores da variável estão
 distribuídos.
 
 \begin{def:momento}
+\label{def:momento}
 Seja $n \in \nat$ e $X$ variável aleatória com esperança $\mu$.
-O enésimo momento de $X$, denotado $\mm_(\mu)'$, é definido como
+O enésimo momento de $X$, denotado $\mm_n(\mu)'$, é definido como
 \[
 	\mm_n(\mu)' = \ev{X^n}
 \]
@@ -119,10 +120,10 @@ valor esperado da variável.
 \item O segundo é a ``inércia'' da variável, medindo o quão disprso estão os seus valores.
 Valores altos recebem pesos maiores do que os mais próximos da origem, tal modo que
 um pequeno segundo momento diz que as realizações estão conentradas na origem, enquanto
-um alto segundo momento diz que eles estão dispersos entorno dela.
+um alto segundo momento diz que eles estão dispersos em torno dela.
 \end{itemize}
 
-Os momentos centrais descrevem a distribuição da variável entorno de seu centro de massa,
+Os momentos centrais descrevem a distribuição da variável em torno de seu centro de massa,
 ou seja, do seu valor esperado:
 
 \begin{itemize}
@@ -232,7 +233,7 @@ variável enquanto uma função com poderosas propriedades teóricas.
 \begin{def:mgf}
 A função geradora de momentos (mgf) da variável $X$ é
 \begin{gather*}
-	M_X: \nat \to \real \\
+	M_X: \real \to \real \\
 	M_X(t) = \ev{e^{tX}}
 \end{gather*}
 caso o valor esperado exista para $t$ numa vizinhança de $0$.
@@ -253,27 +254,55 @@ Se $X$ uma variável aleatória cuja mgf existe, então
 \]
 \end{thm:derivada do momento}
 \begin{proof}
-Se $f(x)$ é a função de densidade de $X$, então
+Seja $h > 0$ tal que $M_X(t) < \infty$ para todo $|t| < h$.
+Mostremos, primeiramente, que
+\begin{equation}
+\label{eq:momentos mgf finitos}
+    \ev{|X|^k e^{\tau X}} < \infty \quad \text{para todo } k \in \nat \text{ e } |\tau| < h.
+\end{equation}
+Com efeito, tome $\epsilon > 0$ tal que $|\tau| + \epsilon < h$.
+Pela série de Taylor da exponencial, $e^{\epsilon |x|} \ge (\epsilon |x|)^k / k!$, de modo que
 \[
-    \left. \frac{d^n}{dt^n} M_X(t)\right|_{t=0} =
-    \left. \frac{d^n}{dt^n} \int_{-\infty}^\infty e^{tx} f(x)\, dx \right|_{t=0}
+    |x|^k \le \frac{k!}{\epsilon^k} e^{\epsilon |x|} \le \frac{k!}{\epsilon^k} \left(e^{\epsilon x} + e^{-\epsilon x}\right)
 \]
-Usando a Regra de Leibniz, que permite diferenciar sobre o sinal de integral,
+e, portanto,
 \[
-    \left. \frac{d^n}{dt^n} \int_{-\infty}^\infty e^{tx} f(x)\, dx \right|_{t=0} =
-    \int_{-\infty}^\infty \left. \frac{\partial^n}{\partial t^n} e^{tx} f(x)\, dx \right|_{t=0}.
+    \ev{|X|^k e^{\tau X}} \le \frac{k!}{\epsilon^k} \left(M_X(\tau + \epsilon) + M_X(\tau - \epsilon)\right) < \infty,
 \]
-Uma vez que
+já que $|\tau \pm \epsilon| < h$.
+
+Provemos agora, por indução em $k$, que $M_X^{(k)}(t) = \ev{X^k e^{tX}}$ para todo $|t| < h$.
+O caso $k = 0$ é a própria definição de $M_X$.
+Suponha que a igualdade valha para $k$, e fixe $|t| < h$ e $\epsilon > 0$ com
+$|t| + \epsilon < h$.
+Para $0 < |s| \le \epsilon/2$,
 \[
-    \frac{\partial^n}{\partial t^n} e^{tx} = x^n e^{tx},
+    \frac{M_X^{(k)}(t+s) - M_X^{(k)}(t)}{s} = \ev{X^k \cdot \frac{e^{(t+s)X} - e^{tX}}{s}}.
 \]
-então
+Pelo Teorema do Valor Médio, para cada $x$ existe $\xi$ entre $t$ e $t+s$ tal que
 \[
-    \left. \frac{d^n}{dt^n} M_X(t)\right|_{t=0} =
-    \left. \int_{-\infty}^\infty  x^n e^{tx} f(x)\, dx \right|_{t=0} =
-    \int_{-\infty}^\infty x^n f(x)\, dx =
-    \ev {X^n}
+    \frac{e^{(t+s)x} - e^{tx}}{s} = x e^{\xi x},
 \]
+e, como $\xi \in [t - \epsilon/2, t + \epsilon/2]$ e $\xi \mapsto e^{\xi x}$ é monótona,
+\[
+    \left| x^k \cdot \frac{e^{(t+s)x} - e^{tx}}{s} \right| \le
+    |x|^{k+1} \left(e^{(t - \epsilon/2) x} + e^{(t + \epsilon/2) x}\right).
+\]
+O lado direito não depende de $s$ e, por (\ref{eq:momentos mgf finitos}), tem esperança
+finita.
+Além disso, o integrando converge para $X^{k+1} e^{tX}$ quando $s \to 0$.
+Pelo Teorema da Convergência Dominada (Teorema \ref{thm:convergencia dominada}),
+aplicado ao longo de qualquer sequência $s_n \to 0$ e
+à medida $P$,
+\[
+    M_X^{(k+1)}(t) = \lim_{s \to 0} \frac{M_X^{(k)}(t+s) - M_X^{(k)}(t)}{s} = \ev{X^{k+1} e^{tX}}.
+\]
+Por fim, avaliando em $t = 0$,
+\[
+    \left. \frac{d^n}{dt^n} M_X(t)\right|_{t=0} = \ev{X^n e^{0}} = \ev{X^n}.
+\]
+Note que a demonstração não supõe que $X$ seja contínua ou discreta: ela vale para qualquer
+variável aleatória cuja mgf exista.
 \end{proof}
 
 O próximo resultado diz como obter a mgf de uma variável obtida por transformação afim
@@ -328,6 +357,7 @@ mas supondo que $F_X(u) = F_Y(u)$, então
     \int_{-\infty}^\infty u^n f_Y(u)\,du =
     \ev{Y^n}
 \]
+% a continuar
 \end{proof}
 
 Aqui é que notamos a utilidade das funções geradoras de momentos: apesar de uma sequência
