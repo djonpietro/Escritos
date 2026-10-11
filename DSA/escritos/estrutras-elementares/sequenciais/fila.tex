@@ -1,0 +1,72 @@
+\section{Filas}
+
+Uma fila, assim como a pilha, é uma estrutura de dados que implementa uma política para
+a ordem de inserções e remoções no conjunto.
+A política implementada para a fila é a \textbf{FIFO}: o primeiro elemento a entrar
+é também o primeiro a sair, assim como filas de atendimento.
+O ato de inserir numa fila é chamado de \textit{enqueue}, enquanto o de remover de
+\textit{dequeue}.
+Similarmente às pilhas, elas podem ser implementadas a partir de vetores ou listas
+encadeadas.
+
+A forma mais intuitiva de criar uma fila com um vetor é inserir os novos membros
+num extremo, e remover a partir do outro.
+Entretanto, supondo que as inserções são feitas no início e as remoções no fim do vetor,
+toda inserção implicaria na movimentação de todos os elementos já presentes.
+O mesmo valeria caso as remoções fossem no início.
+
+Uma abordagem possível para realizar as operações de \textit{enqueue} e \textit{dequeue}
+em tempo constante é fazendo com que a fila seja circular, de forma a utilizar dois
+índices especiais: $f$ e $r$, que indicam, respectivamente, o primeiro e o último elemento
+na fila.
+Quando a fila está inicialmente vazia, temos $f=0$ e $r = n-1$, em que $n$ é a capacidade
+da fila.
+Ao adicionar um novo membro, executamos $r \gets (r+1)\bmod n$ e inserimos o elemento
+na posição $r$ do vetor.
+A operação de \textit{dequeue} é realizada retornando o membro apontado por $f$ e depois
+fazendo $f \gets (f + 1) \bmod n$.
+
+\begin{algorithm}
+\SetAlgoLined
+\Fn{\Enqueue{$Q$, $x$}}{
+    \Se{$Q.\NumElem = Q.\Len$}{
+        \textbf{erro} ``overflow''\;
+    }
+    $Q.r \gets (Q.r + 1) \bmod Q.\Len$\;
+    $Q[Q.r] \gets *x$\;
+    $Q.\NumElem \gets Q.\NumElem + 1$\;
+}
+
+\Fn{\Dequeue{$Q$}}{
+    \Se{$Q.\NumElem = 0$}{
+        \textbf{erro} ``underflow''\;
+    }
+    $x \gets Q[Q.f]$\;
+    $Q.f \gets (Q.f + 1) \bmod Q.\Len$\;
+    $Q.\NumElem \gets Q.\NumElem - 1$\;
+    \Retorna{$x$}\;
+}
+\end{algorithm}
+
+A abordagem com listas encadeadas é substancialmente mais simples e intuitiva.
+A adição dum elemento novo é feita sempre ao final da própria lista, enquanto
+a remoção é feita no início.
+A razão é a mesma explicada para as pilhas: não é possível realizar a remoção
+do último elemento da lista sem buscar o elemento que o antecede, fazendo com que
+a operação não seja realizada em tempo constante.
+
+\begin{algorithm}
+\SetAlgoLined
+\Fn{\Enqueue{$Q$, $x$}}{
+    \InsereLista{$Q$, $Q.\Tail$, $x$}\;
+}
+
+\Fn{\Dequeue{$Q$}}{
+    \Se{$Q.\Head.\Prox = \nil$}{
+        \textbf{erro} ``underflow''\;
+    }
+    $x \gets *(Q.\Head.\Prox)$\;
+    \RemoveLista{$Q$, $Q.\Head$}\;
+    \Retorna{$x$}\;
+}
+\end{algorithm}
