@@ -64,8 +64,8 @@ int list_insert_next(List *list, ListNode *previous, void *data);
 int list_remove_next(List *list, ListNode *previous, void **data);
 
 /*
- * Libera a lista e seus nós, chamando destroy sobre cada dado. list não
- * pode ser NULL. Após a chamada, list é inválido.
+ * Libera a lista e seus nós, chamando destroy sobre cada dado. Aceita
+ * list == NULL. Após a chamada, list é inválido.
  */
 void list_destroy(List *list);
 

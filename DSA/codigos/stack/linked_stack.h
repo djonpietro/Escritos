@@ -33,8 +33,8 @@ typedef List LStack;
 #define lstack_init list_init
 
 /*
- * Libera a pilha e seus nós, chamando destroy sobre cada dado. stack não
- * pode ser NULL. Após a chamada, stack é inválido.
+ * Libera a pilha e seus nós, chamando destroy sobre cada dado. Aceita
+ * stack == NULL. Após a chamada, stack é inválido.
  */
 #define lstack_destroy list_destroy
 
