@@ -1,24 +1,12 @@
 # Revisão — erros e pendências
 
 Levantamento feito em 2026-09-29 sobre o estado do `main.pdf` (121 p.); atualizado em
-2026-10-11. Erros de digitação, notação e ortografia já foram corrigidos; aqui ficam os
+2026-10-13. Erros de digitação, notação e ortografia já foram corrigidos; aqui ficam os
 erros conceituais, enunciados falsos e demonstrações erradas, além das pendências
 (provas ainda não escritas).
 Números de linha referem-se aos `.tex` em 2026-10-11 e podem ter deslocado.
 
-## 1. Erros matemáticos (prioridade alta)
-
-### Variáveis Aleatórias — `distribuicoes/variaveis/`
-
-- [ ] **`simetria.tex:164`** — na volta do caso contínuo de `thm:simetria funcao de probabilidade`, a "troca de variável do tipo $u = w$" é vazia; basta notar que $1 - \int_{-\infty}^{-t} f(m+u)\,du = 1 - F_Y(-t)$.
-- [ ] **`simetria.tex:171–190`** — Corolário `cor:simetria e media aritmetica`: de $\pi(m+a) = \pi(m+b)$ conclui-se $a = b$ (l.187), o que é falso se $\pi$ não for injetiva em $[m, \infty)$ (p.ex., densidade simétrica bimodal). Exigir, p.ex., $\pi$ estritamente decrescente em $[m, \infty)$, ou reformular.
-
-### Modelos — `distribuicoes/modelos/`
-
-- [ ] **`intro/visao-geral.tex:88–91`** — atribui à edição de 1718 da *Doctrine of Chances* a "primeira formulação do TCL" (limite da binomial). Esse resultado é de 1733 e só entrou na 2ª edição (1738).
-- [ ] **`continuos.tex:271–277`** — Proposição `prop:cauchy nao tem momentos` afirma $\ev{X^n} = \infty$ para todo $n$; para $n$ ímpar o momento não existe (é indefinido), não é infinito. O texto antes da proposição já diz "não existem".
-
-## 2. Análise Exploratória — `aed/`
+## 1. Análise Exploratória — `aed/`
 
 Ainda não revisitado após a primeira rodada.
 
@@ -28,13 +16,13 @@ Ainda não revisitado após a primeira rodada.
 - [ ] **`medidas/simetria.tex:55–61`** — direções trocadas: $c > 0$ = assimetria **à direita** (cauda longa à direita, $\bar x > \mathrm{mo}$); $c < 0$ = à esquerda.
 - [ ] **`medidas/robustas.tex:26`** — coeficiente de variação apresentado como medida robusta (não é: usa média e desvio-padrão).
 
-## 3. Pendências (provas a escrever)
+## 2. Pendências (provas a escrever)
 
 - [ ] **`discreta.tex:28`** — Proposição `prop:existencia fmp`: prova comentada ("% refazer a prova"). A versão antiga usava Radon–Nikodym com a contagem em $\real$, que não é σ-finita; dá para usar a contagem restrita ao conjunto enumerável $S$ com $P_X(S) = 1$, ou provar direto por σ-aditividade.
 - [ ] **`esperanca.tex:335`** — Teorema `thm:condicao de igualdade de distribuicao e momento`: prova incompleta ("% a continuar").
 - [ ] **`condicional.tex:23`** — Regra do Produto: comentário "Consertar a prova para conjuntos enumeráveis" (a prova atual cobre famílias finitas).
 
-## 4. Estrutura e pedagogia (para decidir depois)
+## 3. Estrutura e pedagogia (para decidir depois)
 
 - [ ] Definir público-alvo: a Parte I usa teoria da medida; a Parte II é receituário descritivo que não aproveita essa base.
 - [ ] "Noções de Medida" é lista densa sem provas — enxugar ao que é usado depois ou mover para apêndice.

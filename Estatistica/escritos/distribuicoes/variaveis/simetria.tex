@@ -147,7 +147,7 @@ Uma vez que $P(X-m \ge t) = 1 - P(X-m < t)$, então
 \]
 O que prova a simetria para o caso discreto.
 Direcionando agora para o caso contínuo, considere $Y = X - m$, de modo que
-$f_y(y) = f_X(y+m)$.
+$f_Y(y) = f_X(y+m)$.
 Com efeito
 \[
     F_Y(Y \le t) = \int_{-\infty}^{t} f_X(m+y)\,dy = 1 - \int_{t}^{\infty} f(m+y)\,dy.
@@ -159,32 +159,33 @@ mas supondo a afirmação 2, obtemos
 Fazendo a substituição $y = -u$ e invertendo os limites de integração ajustados à troca
 de variável, veremos que
 \[
-    F_Y(Y \le t) = 1 - \int_{-\infty}^{-t} f(m+u)\,du
+    F_Y(Y \le t) = 1 - \int_{-\infty}^{-t} f(m+u)\,du.
 \]
-Fazendo outra troca de variável do tipo $u = w$, é possível concluir que
+Portanto,
 \begin{gather*}
-    F_Y(Y \le t) = 1 - F_Y(Y \le -t) \\
+    F_Y(Y \le t) = 1 - F_Y(-t) \\
     F_X(m+t) = 1 - F_X(m-t)
 \end{gather*}
 \end{proof}
 
 \begin{cor:simetria e media aritmetica}
-Se $X$ tem distribuição simétrica em torno de $m$ e com função de probabilidade -- seja
-de massa ou densidade -- $\pi(x)$, então
+Se $X$ é contínua, tem distribuição simétrica em torno de $m$ e sua densidade $f(x)$ é
+estritamente decrescente em $[m, \infty)$, então
 \[
-    \forall x_1, x_2 \in \real,\, x_1 \le m \le x_2 \text{ e } \pi(x_1) = \pi(x_2) \rightarrow \frac{x_1 + x_2}{2} = m
+    \forall x_1, x_2 \in \real,\, x_1 \le m \le x_2 \text{ e } f(x_1) = f(x_2) \rightarrow \frac{x_1 + x_2}{2} = m
 \]
 \end{cor:simetria e media aritmetica}
 \begin{proof}
 Suponha que $x_1 = m - a$ e $x_2 = m + b$, logo
 \[
-    \pi(x_1) = \pi(m-a) = \pi(m+a)
+    f(x_1) = f(m-a) = f(m+a)
 \]
-mas, pela hipótese $\pi(x_1) = \pi(x_2)$, temos
+mas, pela hipótese $f(x_1) = f(x_2)$, temos
 \[
-    \pi(m+a) = \pi(m+b).
+    f(m+a) = f(m+b).
 \]
-Logo, $a = b$ e, por conseguinte,
+Como $a, b \ge 0$ e $f$ é estritamente decrescente, logo injetiva, em $[m, \infty)$,
+segue que $a = b$ e, por conseguinte,
 \[
     \frac{x_1 + x_2}{2}  = m.
 \]
