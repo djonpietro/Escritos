@@ -3,30 +3,80 @@
 Um procedimento para entender o comportamento e distribuição dos dados consiste no uso
 tabelas de frequência, especialmente para variáveis qualitativas, que não podem ser
 resumidas por medidas de estatística descritiva a serem vistas mais adiante.
-Considere um quadro de dados $D$ com $n$ registros e com um atributo $X$ com $k$ valores
-possíveis iguais a $d_1, \ldots, d_k$.
-Numa tabela de frequência para $D$ em relação ao atributo $X$ constam, geralmente,
-duas colunas: a primeira é frequência (absoluta), i.e., o número de registros
-$n_i$ tais que $X = d_i$, enquanto a segunda é a frequência relativa $f_i = n_i / n$,
-também chamada de proporção e representada geralmente em porcentagem, denotando a fração
-de regitros que pertecem à classe $d_i$.
+Dado uma quadro $D$ com um atributo $X$ tal que $x \in X(D)$, chamamos de frequência
+\begin{itemize}
+\item Absoluta: o número de linhas em que se observa $X = x$;
+\item Relativa: a frequência absoluta de $x$ normalizada pelo número de linhas;
+\item Acumulada: quantas linhas observa-se $X \le x$.
+\end{itemize}
+A definição \ref{def:frequencia} nos dá como expressar formalmente essas grandezas.
 
-As tabelas de frequência também podem ser usadas para descrever dados quantitativos
-desde que esses sejam devidamente discretizados, o que ocorre, comumente, por meio
-de intervalos de amplitude pré-determinada, de forma que cada intervalo passa a representar
-uma classe.
-Diferentes valores de amplitudades para cada classe podem levar a visualizações distintas.
+\begin{def:frequencia}
+\label{def:frequencia}
+Seja $X$ um atributo de um quadro $D$ com $n$ linhas.
+Chamamos de
+\begin{itemize}
+\item Frequência absoluta
+\[
+    N_X(A) = \card{X \in A}
+\]
+onde $A \subset X(D)$, e $N(x) = N_X(\{x\})$.
+
+\item Frequência Relativa
+\[
+    f(x) = \frac{N(x)}{n}
+\]
+
+\item Frequência Acumulada
+\[
+    \hat F(x) = \card{X \le x}
+\]
+\end{itemize}
+\end{def:frequencia}
+
+Ao explorar um quadro de dados $D$ com atributos discretos ou categóricos, uma tabela de
+frequências torna-se uma ferramenta útil para visualizar rapidamente quais valores se
+destacam em dado atributo $X$.
+Dedicamos a primeira coluna aos valores unitários de $X(D)$ ou agrupamentos deles.
+Nas colunas seguintes constam as frequências absoluta, relativa e acumulada de cada faixa.
+
+\begin{exp:tabela de frequencia}
+Considere um quadro $D$ com $n = 20$ linhas, em que o atributo $X$ registra o número de
+filhos de cada indivíduo, com $X(D) = \{0, 1, 2, 3, 4\}$.
+Contando as linhas de cada conjunto $\{X = x\}$, obtemos a tabela a seguir,
+\begin{center}
+\begin{tabular}{cccc}
+\toprule
+$x$ & $N(x)$ & $f(x)$ & $\hat F(x)$ \\
+\midrule
+$0$ & $6$ & $0.30$ & $0.30$ \\
+$1$ & $7$ & $0.35$ & $0.65$ \\
+$2$ & $4$ & $0.20$ & $0.85$ \\
+$3$ & $2$ & $0.10$ & $0.95$ \\
+$4$ & $1$ & $0.05$ & $1.00$ \\
+\midrule
+Total & $20$ & $1.00$ & \\
+\bottomrule
+\end{tabular}
+\end{center}
+Por exemplo, $\card{X = 1} = 7$ indivíduos têm exatamente um filho, o que corresponde a
+$f(1) = 7/20 = 0.35$ do quadro, e $\hat F(1) = 0.65$ indica que $65\%$ dos indivíduos
+têm no máximo um filho.
+A tabela evidencia que o valor mais frequente é $x = 1$ e que famílias com três ou mais
+filhos são raras, com $N_X(\{3, 4\}) = 3$.
+\end{exp:tabela de frequencia}
+
+No geral, para usar tabelas de frequência com dados quantitativos, discretiza-se os
+valores em intervalos de amplitude pré-determinada, de forma que cada intervalo passa a
+representar uma classe.
+Diferentes amplitudades para cada classe podem levar a visualizações distintas.
 Amplitudes pequenas levam a muitas classes, que por sua vez podem gerar perda de informação,
-enquanto que amplitudes grandes criam poucas classes, prejudicando a tarefa de resumo.
+enquanto amplitudes grandes criam poucas classes, prejudicando a tarefa de resumo.
 O recomendado é a criação de 5 a 15 classes de mesma amplitude.
 
 Para dados contínuos discretizados em intervalos de amplitude $\Delta_i$ para a classe
 $d_i$, a tabela pode conter também: a densidade de frequência, dada por $n_i / \Delta_i$,
-a densidade de proporção, obtida por $f_i / \Delta_i$, e a frequência acumulada, dada
-por
-\[
-	\sum_{j = 1}^i f_j
-\]
+a densidade de proporção, obtida por $f_i / \Delta_i$,
 Essas novas colunas podem ser usadas para construir gráficos que permitam analisar
 distribuição dos valores de uma variável numérica.
 
