@@ -1,39 +1,46 @@
 \section{Medidas de Dispersão}
 
-Além de ver onde nossos dados estão centrados, é desejável saber o quanto eles variam,
-geralmente em torno do próprio centro.
-Para esse fim, utiliza-se as medidas de dispersão.
+Além de ver onde nossos dados estão centrados, é desejável saber o quanto eles variam.
+Para esse fim, utilizam-se as medidas de dispersão.
 
-Tomando a média como centro, podemos obter, como medida de dispersão, o desvio médio
-absoluto, que corresponde a uma estimativa do erro médio cometido ao substituir todos
-os dados pela prórpria média, indicando, também, se essa é uma boa medida de resumo dos
-dados.
+Tomando a média como centro, obteremos, como medida de dispersão, o \textbf{desvio absoluto
+médio}, que corresponde ao erro absoluto médio cometido ao substituir todos
+os dados pela própria média.
+Isso indica se a média é uma boa medida de resumo para os dados.
+\begin{def:desvio absoluto medio}
+Se $X$ é um atributo dum quadro com $n$ linhas, então o seu desvio absoluto médio
+é dado por
 \[
-	\dm{X} = \frac{1}{n} \sum_{i=1}^n |x_i - \bar x|
+	\dm{X} = \frac{1}{n} \sum_{i=1}^n |x_i - \bar X|
 \]
-Outra candidata a medida de dispersão é a variância, que, como visto na Definição \ref{def:momento},
-corresponde ao segundo momento central de uma distribuição.
-Numa amostra, ela pode ser interpretada como o erro quadrático médio ao substituir todos
-os dados pela média, sendo obtida, geralmente para amostras grandes, pela fórmula
+\end{def:desvio absoluto medio}
+
+Outra candidata a medida de dispersão é a \textbf{variância amostral}.
+Ela pode ser interpretada, a menos do fator $\frac{n}{n-1}$, como o erro quadrático médio
+ao substituir todos os dados pela média.
+\begin{def:variancia amostral}
+Se $X$ é um atributo dum quadro com $n \ge 2$ linhas, então sua variância amostral é dada
+por\footnote{Justifica-se ter $n-1$ no denominador em vez de $n$ para produzir um
+estimador não enviesado -- conceito a ser visto adiante -- para a variância populacional.}
 \[
-	\var{X} = \frac{1}{n} \sum_{i=1}^n (x_i - \bar x)^2.
+	s_X^2 = \frac{1}{n-1} \sum_{i=1}^n (x_i - \bar X)^2.
 \]
-Quando se deseja estimar a variância da população a partir de uma amostra, usa-se
-o divisor $n - 1$ no lugar de $n$, o que torna o estimador não viesado.
-Ao elevar as diferenças ao quadrado, desvios maiores tem mais peso do que os menores.
+\end{def:variancia amostral}
+Note que $\frac{n-1}{n} s_X^2$ é a variância $\var{X}$ de $X$ sob a probabilidade
+empírica $P_D$.
+
 Como a variância possui unidade igual ao quadrado da unidade do atributo original,
-então sua interpretação pode ser prejudicada, e, com isso, o desvio-padrão,
-dado como
+sua interpretação pode ser prejudicada.
+Esse fato motiva o uso do desvio-padrão:
 \[
-	\dep{X} = \sqrt{\var{X}},
+	s_X = \sqrt{s_X^2},
 \]
-pode ser usado para substituir a variância caso deseje-se que o erro esteja na unidade
-dos dados.
+o qual produz uma estatística na mesma unidade de medida dos dados.
 
 O desvio absoluto médio e o desvio-padrão possuem interpretações e aplicações semelhantes
 ao avaliar a dispersão em torno da média.
 No entanto, o primeiro nos oferece uma noção mais intuitiva de dispersão, pois todos os
-desvios possuem o mesmo peso independente da magnitude.
+desvios possuem o mesmo peso independentemente da magnitude.
 Já o desvio-padrão, uma vez que atribui pesos distintos a erros conforme a sua magnitude,
-é preferível quando objetiva-se detectar rapidamente a presença de realizações muito distantes
+é preferível quando se objetiva detectar rapidamente a presença de realizações muito distantes
 da média, o que pode indicar valores atípicos.
