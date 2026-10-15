@@ -44,3 +44,19 @@ desvios possuem o mesmo peso independentemente da magnitude.
 Já o desvio-padrão, uma vez que atribui pesos distintos a erros conforme a sua magnitude,
 é preferível quando se objetiva detectar rapidamente a presença de realizações muito distantes
 da média, o que pode indicar valores atípicos.
+
+Por fim, quando se deseja comparar a variabilidade de atributos medidos em unidades ou
+magnitudes distintas, usa-se o \textbf{coeficiente de variação}.
+Se $X$ é um atributo com média $\bar X > 0$, ele é dado por
+\[
+	\mathrm{CV}(X) = \frac{s_X}{\bar X},
+\]
+isto é, o desvio-padrão dividido pela média, o que produz uma grandeza adimensional.
+Essa propriedade permite avaliar a variabilidade de um atributo de forma padronizada: para
+todo $c > 0$, vale $\mathrm{CV}(cX) = \mathrm{CV}(X)$, ou seja, o coeficiente não depende
+da unidade de medida escolhida.
+Ele não é, contudo, invariante por translação, de modo que só faz sentido para atributos
+com zero absoluto: a série $(10, 20, 30)$, em graus Celsius, tem coeficiente de variação
+$0.5$, mas, convertida para graus Fahrenheit, tem aproximadamente $0.265$.
+Por ser a razão entre duas medidas sensíveis a valores extremos, o coeficiente de variação
+também não é uma medida robusta.

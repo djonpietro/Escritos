@@ -1,6 +1,6 @@
 \section{Simetria e Assimetria}
 
-Entre as motivações para se estudar a assimetria ou simetria dos dados estão a constação
+Entre as motivações para se estudar a assimetria ou simetria dos dados estão a constatação
 de
 \begin{itemize}
 \item Concentração dos dados em uma dada região de valores.
@@ -11,65 +11,81 @@ de
 
 Quando os dados possuem distribuição simétrica, algumas vantagens analíticas e estatísticas
 surgem.
-Por exemplo, a média se torna representativa para medir centralidade, pois essa localiza-se
+Por exemplo, a média se torna representativa para medir centralidade, pois essa se localiza
 justamente no centro da distribuição, de sorte que a variância -- e o desvio-padrão --
 também passa a ser representativa para medir variabilidade, já que os dados estão
 centrados na média.
-Quando os dados são assimétricos, medidas de resumo como mediana e qartis são preferíveis
+Quando os dados são assimétricos, medidas de resumo como mediana e quartis são preferíveis
 por serem menos sensíveis à forma da distribuição.
 Algumas técnicas de inferência estatística, principalmente aquelas que se baseiam no uso
 da distribuição normal, a serem apresentadas adiante, também se aproveitam da estrutura
 simétrica da distribuição, facilitando a produção de algumas análises.
 
-Seja $X$ um atributo.
-Para medir sua assimetria, são geralmente usados os coeficientes a seguir, onde $s$ denota
-o desvio-padrão dos dados.
+Seja $X$ um atributo de um quadro com $n$ linhas.
+Para medir sua assimetria, são geralmente usados os coeficientes a seguir, onde $s_X$ denota
+o desvio-padrão amostral de $X$, com divisor $n-1$.
 \begin{itemize}
 \item Coeficiente de Assimetria de Pearson I -- usado quando a distribuição é
 unimodal, e a moda pode ser bem definida.
 \[
-   \frac{\overline x - \mo X}{s}
+   \frac{\bar X - \mo X}{s_X}
 \]
 
 \item Coeficiente de Assimetria de Pearson II -- usado quando a distribuição não
-é unimodal ou a moda não pode ser bem definida, dada por
+é unimodal ou a moda não pode ser bem definida, dado por
 \[
-     \frac{3\,(\overline x - \med X)}{s}
+     \frac{3\,(\bar X - \med X)}{s_X}
 \]
 
-\item Coeficiente Quatílico de Assimetria -- utiliza os quartis da distribuição, partindo
-do princípio que o primeiro e terceiro quartil são equidistantes da mediana
+\item Coeficiente Quartílico de Assimetria -- compara as distâncias $q_3 - \med X$ e
+$\med X - q_1$, que coincidem sob simetria, medindo o quanto o primeiro e o terceiro quartil
+deixam de ser equidistantes da mediana
 \[
-    \frac{q_1 + q_3 - 2\, \med X}{q_3 - q_1}
+    \frac{(q_3 - \med X) - (\med X - q_1)}{q_3 - q_1}
+        = \frac{q_1 + q_3 - 2\, \med X}{d_q},
 \]
+em que $d_q$ é o intervalo interquartílico.
+Seu valor está em $[-1, 1]$, e o coeficiente não está definido quando $d_q = 0$.
 
 \item Coeficiente de Assimetria de Fisher -- um estimador baseado no terceiro momento
-central multiplicado por um fator que remove o viés do tamanho da amostra
+central multiplicado por um fator de correção para amostras pequenas
 \[
-    \frac{\sqrt{n(n-1)}}{n-2} \cdot \frac{1}{n\sigma^3} \cdot \sum_{i=1}^n (x_i - \overline x)^3
+    \frac{\sqrt{n(n-1)}}{n-2} \cdot \frac{1}{n\sigma^3} \cdot \sum_{i=1}^n (x_i - \bar X)^3
 \]
-onde $\sigma = \sqrt{\frac 1 n \sum_{i=1}^n (x_i - \overline x)^2}$ é o desvio-padrão com divisor $n$.
+onde $\sigma = \sqrt{\frac 1 n \sum_{i=1}^n (x_i - \bar X)^2}$ é o desvio-padrão com divisor $n$.
+Ele exige $n \ge 3$ e $\sigma > 0$.
 \end{itemize}
-A depender da medida $c$ utilizada, ela pode ter seus valores interpretados como
+Seja $c$ o valor de um desses coeficientes.
+O seu sinal indica o lado em que a cauda da distribuição é mais longa:
 \begin{itemize}
-\item $c > 0$ -- assimetria positiva, indicando que $\overline X > \mo X$, também
-chamada de assimetria à esquerda, pois os dados possuem uma cauda mais longa nessa
-direção enquanto que seus valores concentram-se mais à direita.
+\item $c > 0$ -- assimetria positiva, também chamada de assimetria à direita, pois os
+dados possuem uma cauda mais longa nessa direção, enquanto seus valores concentram-se
+mais à esquerda, em valores mais baixos; em geral, $\bar X > \mo X$.
 
-\item $c < 0$ -- assimetria negativa, e provavelmente temso $\overline X < \mo X$, o que
-é chamado de assimetria à direita, direção na qual se estende a cauda da distribuição,
-e os dados concentram-se em valores mais baixos.
+\item $c < 0$ -- assimetria negativa, também chamada de assimetria à esquerda, direção
+na qual se estende a cauda da distribuição, enquanto os dados concentram-se em valores
+mais altos; em geral, $\bar X < \mo X$.
 
-\item $c = 0$ -- ausência de assimetria, levando a hipótese de que $\overline X = \mo X$
-e que a distribuição é possivelmente simétrica.
+\item $c = 0$ -- ausência de assimetria segundo o coeficiente, o que sugere, mas não
+garante, que a distribuição seja simétrica.
 \end{itemize}
+A relação entre o sinal de $c$ e o de $\bar X - \mo X$ é uma tendência típica, que vale por
+definição apenas no coeficiente de Pearson I.
+Coeficientes diferentes podem discordar em sinal nos mesmos dados.
+Por exemplo, para $x = (0, 10, 10, 10, 11, 11, 12, 13, 14)$, temos $\bar X \approx 10{,}11$,
+$\mo X = 10$ e $\med X = 11$; o coeficiente de Pearson I é positivo, o de Pearson II vale
+aproximadamente $-0{,}66$, o de Fisher, aproximadamente $-2{,}29$, e o quartílico é nulo.
 
-Uma ferramente visual para medir assimetria de dados são os \textbf{gráficos de simetria}.
-As estatísticas de ordem são usadas para computar pares $(u_i, v_i)$ tais que
+Uma ferramenta visual para medir assimetria de dados são os \textbf{gráficos de simetria}.
+As estatísticas de ordem são usadas para computar pares $(u_i, v_i)$, para
+$i \in [\lfloor n/2 \rfloor]$, tais que
 \[
-    u_i = \med X - x_i \quad \text{e} \quad v_i = x_{n-i+1} - \med X.
+    u_i = \med X - x_{(i)} \quad \text{e} \quad v_i = x_{(n-i+1)} - \med X,
 \]
-Junto desses pares, é mostrado também a reta $v = u$.
-Se os pontos se alinharem a reta, temos uma evidência visual de que os dados tem pouca
-assimetria ou são simétricos, enquanto que, caso alguns pontos se desviem das extreidades
-dela, então teremos uma visualização que indica assimetria.
+ambos não negativos.
+Junto desses pares, é mostrada também a reta $v = u$.
+Se os pontos se alinharem à reta, temos uma evidência visual de que os dados têm pouca
+assimetria ou são simétricos.
+Caso os pontos fiquem acima da reta ($v_i > u_i$), a cauda superior é mais longa, indicando
+assimetria à direita; caso fiquem abaixo, a assimetria é à esquerda.
+Os pontos com $i$ pequeno, mais à direita no gráfico, são os que retratam as caudas.

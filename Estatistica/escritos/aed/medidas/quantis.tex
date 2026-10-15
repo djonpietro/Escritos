@@ -1,71 +1,72 @@
 \section{Quantis}
 
+Um quantil de probabilidade $p$ é um valor que separa a distribuição da variável $X$
+em duas partes: ao menos $p$ de probabilidade em valores menores ou iguais a ele e ao
+menos $1 - p$ em valores maiores ou iguais a ele.
+Quando $F$ é contínua, isso equivale a dizer que a probabilidade de $X$ ter realização
+menor ou igual a ele é exatamente $p$.
+
 \begin{def:quantil}
 Seja $X$ uma variável aleatória com suporte $\Omega_X$ e função de distribuição $F(x)$.
-O número $q \in \Omega_X$ é o quantil de probabilidade $p \in [0, 1]$ da distribuição
+O número $q \in \mathbb{R}$ é um quantil de probabilidade $p \in (0, 1)$ da distribuição
 de $X$ se
 \[
-    F(q) = p
+    P(X \le q) \ge p \quad \text{e} \quad P(X \ge q) \ge 1 - p.
 \]
 \end{def:quantil}
 
-Com isso, o quantil de probabilidade $p$ é o valor que acumula $p$ de probabilidade na
-distribuição de $X$, cuja interpretação seria dada como o número tal que a probabilidade
-de $X$ ter realização menor ou igual a ele é $p$.
+\begin{obs:mediana}
+Pela definição \ref{def:mediana}, a mediana é um quantil de probabilidade $0.5$.
+\end{obs:mediana}
 
-\begin{obse:mediana}
-A mediana $\med{X}$ de $X$ é o quantil de probabilidade $0.5$.
-\end{obse:mediana}
+A mediana compõe um grupo de quantis muito utilizados no resumo de distribuições
+chamados \textbf{quartis}, que são os quantis de probabilidade $0.25$, $0.5$ e $0.75$.
+O seu destaque deve-se ao fato de eles dividirem uma distribuição em quatro partes com
+mesma probabilidade, todas iguais a $25\%$, quando $F$ é contínua.
+Analogamente, há os decis, que são os quantis de probabilidade igual a $0.1 \cdot k$, para
+$k \in [9]$.
+Outros quantis de destaque são os de $0.05$ e $0.95$, muito utilizados em inferência.
 
-A mediana compõe também um grupo de quantis muito utilizados no resumo de distribuições
-chamados quartis, que tratam-se dos quantis de probabilidade $0.25$, $0.5$ e $0.75$.
-O seu destaque deve-se ao fato deles dividirem uma distribuição em quatro partes com
-mesma probabilidade, todas iguais a $25\%$.
-Analogamente, também poderia-se utilizar os decis, que são os quantis de probabilidade
-igual a $0.1 \cdot k$, para $k \in [10]$.
-Outros quantis de destaque são os de $0.05$ e $0.95$, muito utiliados em inferência.
-
-A determinação de quantis empíricos -- a partir de uma amostra de dados -- pode ser
-realizadas de diferentes maneiras que adotam variadas premissas.
+A determinação de quantis empíricos pode ser realizada de diferentes maneiras.
 Uma das mais simples é uma generalização daquela usada para a mediana apresentada na
 seção \ref{sec:medidas de posicao}, chamada de interpolação.
 
-Suponha estatísticas de ordem $x_1, \ldots, x_n$ e queremos encontrar o quantil $q$ de
-probabilidade $p$.
-Presumiremos que as estatísticas dividem a distribuição em intervalos de mesma
-probabilidade, ou seja, se $Q(p)$ é o quantil de $p$, então
+Suponha estatísticas de ordem $(x_{(i)})_{i=1}^n$, com $n \ge 2$; a partir delas,
+queremos encontrar um quantil empírico $q$ de probabilidade $p \in [0, 1]$.
+Presumiremos que $x_{(1)}$ e $x_{(n)}$ correspondem às probabilidades $0$ e $1$ e que as
+estatísticas dividem a distribuição em intervalos de mesma probabilidade, iguais a
+$\frac{1}{n-1}$.
+Assim, associamos a cada estatística $x_{(i)}$ a probabilidade
 \[
-    \forall i \in [n],\, \left( Q^{-1}(x_{i+1}) - Q^{-1}(x_i) = \frac{1}{n-1} \right).
+    \forall i \in [n],\, \left(p_i = \frac{i-1}{n-1}\right),
 \]
-Por consequência,
-\[
-    \forall i \in [n],\, \left(Q^{-1}(x_i) = \frac{i-1}{n-1}\right),
-\]
-e, em especial, $Q^{-1}(x_1) = 0$ e $Q^{-1}(x_n) = 1$.
-Suponha que $p$ esteja entre
-\[
-    p_j = \frac{j-1}{n-1} \quad \text{e} \quad p_{j+1} = \frac{j}{n-1}.
-\]
+de modo que $p_1 = 0$, $p_n = 1$ e $p_{i+1} - p_i = \frac{1}{n-1}$ para todo $i \in [n-1]$.
+O quantil empírico é obtido interpolando linearmente os pontos $(p_i, x_{(i)})$, o que
+continua válido quando há empates entre as estatísticas.
+Esse é o método padrão das funções de quantil do R e do NumPy.
+Suponha que $p_j \le p < p_{j+1}$ para algum $j \in [n-1]$.
 Disso, segue que
 \begin{gather*}
-    p_j < p < p_{j+1} \\
-    (n-1)p_j + 1 < (n-1)p + 1 < (n-1)p_{j+1} + 1 \\
-    x_j < (n-1)p + 1 < x_{j+1}.
+    p_j \le p < p_{j+1} \\
+    (n-1)p_j + 1 \le (n-1)p + 1 < (n-1)p_{j+1} + 1 \\
+    j \le (n-1)p + 1 < j+1.
 \end{gather*}
 Fazendo $h = (n-1)p + 1$, e fazendo $j = \lfloor{h}\rfloor$, basta interpolar linearmente
-as estatísticas $x_j$ e $x_{j+1}$ usando o fator $\gamma = h - j$, que representa o quão
-longe estamos de $x_j$ em direção a $x_{j+1}$.
+as estatísticas $x_{(j)}$ e $x_{(j+1)}$ usando o fator $\gamma = h - j$, que representa o
+quão longe estamos de $x_{(j)}$ em direção a $x_{(j+1)}$.
 Desse modo,
 \[
-    q = (1 - \gamma) x_j + \gamma x_{j+1}.
+    q = (1 - \gamma) x_{(j)}+ \gamma x_{(j+1)}.
 \]
+O caso $p = 1$ fica fora desses intervalos; nele, tomamos $j = n-1$, de modo que
+$\gamma = 1$ e $q = x_{(n)}$.
 O algoritmo \ref{alg:quantil} organiza esses passos para a determinação do quantil
-empírico via interpolação recebendo o vetor de estatísticas e a probabilidade acumulada
-pelo quantil ao ser obtido.
+empírico via interpolação recebendo o vetor de observações e a probabilidade acumulada
+pelo quantil a ser obtido.
 
 \begin{algorithm}
 \SetAlgoLined
-\Entrada{vetor de estatísticas $\vec x$ de tamanho $n$ e $p \in [0,1]$}
+\Entrada{vetor de observações $\vec x$ de tamanho $n \ge 1$ e $p \in [0,1]$}
 \Saida{O quantil empírico $q$}
 \Inicio{
     $\vec s \gets \mathrm{ordene}(\vec x)$\;
@@ -73,7 +74,7 @@ pelo quantil ao ser obtido.
         \Retorna $s[1]$\;
     }
     $h \gets (n-1)p + 1$\;
-    $j \gets \lfloor h \rfloor$\;
+    $j \gets \min(\lfloor h \rfloor, n-1)$\;
     $\gamma \gets h - j$\;
     \Retorna {$(1 - \gamma) s[j] + \gamma \cdot s[j+1]$}\;
 }
@@ -92,23 +93,25 @@ variável $X$, então
 \]
 é o intervalo interquartílico da distribuição.
 \end{def:iqr}
-Uma vantagem do uso dessa medida são que ela ignora $50\%$ mais extremos -- os $25\%$
-inferiores e os $25\%$ superiores -- e preservar os $50\%$ mais centrais,
-de forma a medir a dispersão típica da variável, isto é, sem a presença dos valores
-atípicos.
+Uma vantagem do uso dessa medida é que ela ignora os $50\%$ mais extremos -- os $25\%$
+inferiores e os $25\%$ superiores -- e preserva os $50\%$ mais centrais,
+de forma a medir a dispersão típica da variável, isto é, pouco sensível a valores
+atípicos, desde que estes não excedam $25\%$ dos dados em cada cauda.
 Ela também é considerada mais robusta para distribuições assimétricas, pois medidas
-como a variância e, consequentemente, o desvio-padrão são facilmente distrocidos por
+como a variância e, consequentemente, o desvio-padrão são facilmente distorcidos por
 distribuições de cauda longa.
 
 Os quartis também possuem outra aplicação, neste caso a construção dos diagramas de
 \textit{box-plot}.
 Neles, usam-se caixas verticais (ou horizontais) para representar a distribuição dos dados,
-onde a o limite inferior (ou mais à esquerda) é o primeiro quartil, e o limite superior
-(ou mais à dereita) é o terceiro quartil.
+onde o limite inferior (ou mais à esquerda) é o primeiro quartil, e o limite superior
+(ou mais à direita) é o terceiro quartil.
 A mediana também é marcada como uma linha vertical ou horizontal a depender da orientação
 da caixa.
-Outro elemento do \textit{box-plot} são os bigodes, que consistem de traços conectados
-a caixa por um segmento que marcam a última instância da amostra cujo valor está dentro
-de $q_1 - 1.5 (q_3 - q_1)$ no caso inferior ou $q_3 + 1.5 (q_3 - q_1)$ no caso superior.
+Outro elemento do \textit{box-plot} são os bigodes, segmentos que partem da caixa e
+terminam num traço: o inferior vai até a menor observação maior ou igual a
+$q_1 - 1.5\, d_q$, e o superior, até a maior observação menor ou igual a $q_3 + 1.5\, d_q$.
+As observações fora desse intervalo são marcadas individualmente como possíveis valores
+atípicos.
 Os \textit{box-plot} são de grande ajuda para compreender a distribuição de um atributo,
 especialmente em aspectos de simetria e na detecção de valores atípicos.
