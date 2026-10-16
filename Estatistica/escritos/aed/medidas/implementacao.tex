@@ -1,0 +1,284 @@
+\section{Implementação em R}
+\label{sec:medidas em r}
+
+As medidas vistas neste capítulo estão, em grande parte, disponíveis nas funções básicas
+da linguagem R, de modo que seu cálculo, na prática, se resume a poucas linhas de código.
+Ainda assim, é preciso conhecer as convenções adotadas por cada função, pois nem sempre
+elas coincidem com as definições apresentadas aqui -- como é o caso do divisor da
+variância e da constante do desvio absoluto mediano.
+Nesta seção, veremos como computar cada uma delas, e, quando a linguagem não oferecer uma
+função pronta, como implementá-la a partir da definição.
+
+Usaremos, ao longo dos exemplos, o vetor
+\[
+    x = (0, 10, 10, 10, 11, 11, 12, 13, 14),
+\]
+o mesmo da seção de simetria, de sorte que os valores obtidos possam ser conferidos com
+aqueles já calculados.
+As saídas de cada comando são mostradas como comentários logo abaixo dele.
+
+\subsection{Medidas de Posição}
+
+O R não possui uma função para a moda amostral -- a função \texttt{mode} retorna o modo de um objeto,
+como \texttt{"numeric"} ou \texttt{"character"}, e não a medida estatística.
+Pela definição de moda amostral, basta tomar o valor que maximiza a frequência
+absoluta $N(x)$, o que pode ser feito a partir da tabela de frequências produzida por
+\texttt{table}.
+Como o máximo pode não ser único, o código \ref{cod:moda} retorna todos os valores que o
+atingem, o que deixa explícito quando a distribuição é multimodal.
+
+\begin{lstlisting}[language=R, caption={Moda Amostral}, label={cod:moda}]
+moda <- function(x) {
+    freq <- table(x)
+    as.numeric(names(freq)[freq == max(freq)])
+}
+
+x <- c(0, 10, 10, 10, 11, 11, 12, 13, 14)
+moda(x)
+# [1] 10
+\end{lstlisting}
+
+Note que \texttt{table} converte os valores em nomes, isto é, em cadeias de caracteres,
+daí a necessidade de \texttt{as.numeric}; para atributos qualitativos, essa conversão deve
+ser omitida.
+
+As estatísticas de ordem são obtidas com \texttt{sort}, e a mediana e a média, com
+\texttt{median} e \texttt{mean} respectivamente.
+A função \texttt{median} segue a definição \ref{def:mediana amostral}, tomando a média
+das duas estatísticas centrais quando $n$ é par.
+
+\begin{lstlisting}[language=R, caption={Estatísticas de Ordem, Mediana e Média}, label={cod:posicao}]
+sort(x)
+# [1]  0 10 10 10 11 11 12 13 14
+median(x)
+# [1] 11
+mean(x)
+# [1] 10.11111
+\end{lstlisting}
+
+Se houver algum valor ausente no vetor, \texttt{median} e \texttt{mean} retornam
+\texttt{NA}, assim como \texttt{var}, \texttt{sd} e \texttt{mad}, vistas adiante; já
+\texttt{quantile} e \texttt{IQR} interrompem a execução com um erro.
+Para descartar os valores ausentes antes do cálculo, usa-se, em todas essas funções, o
+argumento \texttt{na.rm = TRUE}.
+Por outro lado, \texttt{sort} e \texttt{table} -- e, portanto, a função \texttt{moda} --
+descartam os valores ausentes sem nenhum aviso, o que pode esconder o fato de que o valor
+ausente é o mais frequente do atributo.
+
+\subsection{Medidas de Dispersão}
+
+A variância e o desvio-padrão são dados pelas funções \texttt{var} e \texttt{sd}, ambas
+com divisor $n - 1$, conforme a definição de variância amostral.
+Caso se deseje a variância sob a probabilidade empírica, isto é, com divisor $n$, basta
+multiplicar o resultado por $\frac{n-1}{n}$.
+Já o desvio absoluto médio e o coeficiente de variação não possuem funções próprias, mas
+são escritos diretamente a partir de suas fórmulas.
+
+\begin{lstlisting}[language=R, caption={Medidas de Dispersão}, label={cod:dispersao}]
+n <- length(x)
+
+mean(abs(x - mean(x)))    # desvio absoluto medio
+# [1] 2.320988
+var(x)
+# [1] 16.36111
+var(x) * (n - 1) / n      # variancia com divisor n
+# [1] 14.54321
+sd(x)
+# [1] 4.044887
+sd(x) / mean(x)           # coeficiente de variacao
+# [1] 0.4000438
+\end{lstlisting}
+
+\subsection{Quantis}
+
+Os quantis empíricos são computados pela função \texttt{quantile}, que recebe o vetor de
+observações e um vetor \texttt{probs} de probabilidades.
+Quando este é omitido, são retornados os quartis junto do mínimo e do máximo.
+A função implementa nove métodos distintos de determinação de quantis, escolhidos pelo
+argumento \texttt{type}; o padrão, \texttt{type = 7}, é justamente o método de
+interpolação do algoritmo \ref{alg:quantil}.
+O intervalo interquartílico, por sua vez, é dado por \texttt{IQR}, que usa o mesmo método.
+
+\begin{lstlisting}[language=R, caption={Quantis e Intervalo Interquartílico}, label={cod:quantis}]
+quantile(x)
+#   0%  25%  50%  75% 100%
+#    0   10   11   12   14
+quantile(x, probs = c(0.05, 0.95))
+#   5%  95%
+#  4.0 13.6
+IQR(x)
+# [1] 2
+\end{lstlisting}
+
+Para conferir a equivalência, o código \ref{cod:quantil interpolacao} traduz o algoritmo
+\ref{alg:quantil} para o R.
+Como os vetores do R são indexados a partir de $1$, a tradução é direta.
+
+\begin{lstlisting}[language=R, caption={Quantil Empírico por Interpolação}, label={cod:quantil interpolacao}]
+quantil <- function(x, p) {
+    s <- sort(x)
+    n <- length(s)
+    if (n == 1) return(s[1])
+    h <- (n - 1) * p + 1
+    j <- min(floor(h), n - 1)
+    gama <- h - j
+    (1 - gama) * s[j] + gama * s[j + 1]
+}
+
+sapply(c(0.05, 0.25, 0.5, 0.75, 0.95), quantil, x = x)
+# [1]  4.0 10.0 11.0 12.0 13.6
+\end{lstlisting}
+
+A função \texttt{summary}, aplicada a um vetor numérico, reúne num só comando o mínimo,
+os quartis, a média e o máximo, sendo um bom primeiro resumo de um atributo quantitativo.
+Deve-se ter cuidado, entretanto, com a função \texttt{fivenum}, que retorna as dobradiças
+de Tukey em vez dos quartis do método padrão; as duas coincidem no exemplo, mas diferem
+em geral.
+
+\begin{lstlisting}[language=R, caption={Resumo com \texttt{summary} e \texttt{fivenum}}, label={cod:summary}]
+summary(x)
+#    Min. 1st Qu.  Median    Mean 3rd Qu.    Max.
+#    0.00   10.00   11.00   10.11   12.00   14.00
+fivenum(x)
+# [1]  0 10 11 12 14
+\end{lstlisting}
+
+O \textit{box-plot} é construído pela função \texttt{boxplot}, e os valores usados no seu
+desenho podem ser obtidos com \texttt{boxplot.stats}.
+Seu componente \texttt{out} contém as observações fora dos bigodes, isto é, os possíveis
+valores atípicos.
+Os quartis usados por essas funções também são as dobradiças de Tukey.
+
+\begin{lstlisting}[language=R, caption={Box-plot e Valores Atípicos}, label={cod:boxplot}]
+boxplot(x, horizontal = TRUE, xlab = "x")
+
+boxplot.stats(x)$out
+# [1] 0
+\end{lstlisting}
+
+No exemplo, $q_1 - 1.5\, d_q = 10 - 3 = 7$, e a observação $0$ é a única abaixo desse
+limite.
+
+\subsection{Simetria e Assimetria}
+
+Nenhum dos coeficientes de assimetria vistos está presente nas funções básicas do R.
+O código \ref{cod:assimetria} os implementa a partir das fórmulas da seção de simetria,
+reaproveitando a função \texttt{moda} do código \ref{cod:moda}.
+O coeficiente de Pearson I usa apenas a primeira moda retornada, pois só faz sentido
+quando a distribuição é unimodal.
+
+\begin{lstlisting}[language=R, caption={Coeficientes de Assimetria}, label={cod:assimetria}]
+pearson_1 <- function(x) (mean(x) - moda(x)[1]) / sd(x)
+
+pearson_2 <- function(x) 3 * (mean(x) - median(x)) / sd(x)
+
+quartilico <- function(x) {
+    q <- quantile(x, c(0.25, 0.5, 0.75), names = FALSE)
+    (q[1] + q[3] - 2 * q[2]) / (q[3] - q[1])
+}
+
+fisher <- function(x) {
+    n <- length(x)
+    sigma <- sqrt(mean((x - mean(x))^2))
+    sqrt(n * (n - 1)) / (n - 2) * sum((x - mean(x))^3) / (n * sigma^3)
+}
+
+c(pearson_1(x), pearson_2(x), quartilico(x), fisher(x))
+# [1]  0.02746952 -0.65926851  0.00000000 -2.28919119
+\end{lstlisting}
+
+Os valores reproduzem o exemplo em que os coeficientes discordam em sinal.
+Note que, em \texttt{fisher}, o desvio-padrão $\sigma$ é calculado com divisor $n$, e
+não com \texttt{sd}.
+O mesmo coeficiente é oferecido pela função \texttt{skewness} do pacote \texttt{e1071},
+com o argumento \texttt{type = 2}.
+
+Por fim, o gráfico de simetria é construído tomando os pares $(u_i, v_i)$ a partir das
+estatísticas de ordem e traçando a reta $v = u$, como no código \ref{cod:grafico simetria}.
+
+\begin{lstlisting}[language=R, caption={Gráfico de Simetria}, label={cod:grafico simetria}]
+grafico_simetria <- function(x) {
+    s <- sort(x)
+    n <- length(s)
+    m <- median(s)
+    i <- seq_len(n %/% 2)
+    u <- m - s[i]
+    v <- s[n - i + 1] - m
+    plot(u, v, pch = 19, xlab = "u", ylab = "v",
+         xlim = c(0, max(u, v)), ylim = c(0, max(u, v)))
+    abline(a = 0, b = 1, lty = 2)
+}
+
+grafico_simetria(x)
+\end{lstlisting}
+
+Para o vetor $x$, os pares obtidos são $(11, 3)$, $(1, 2)$, $(1, 1)$ e $(1, 0)$.
+O primeiro deles, que retrata as caudas, fica bem abaixo da reta, o que evidencia a
+cauda inferior longa causada pela observação $0$.
+
+\subsection{Medidas Robustas}
+
+A média aparada é obtida pela própria função \texttt{mean}, por meio do argumento
+\texttt{trim}, que corresponde ao parâmetro $\alpha$ da definição de média aparada:
+são descartadas as $\lfloor n\alpha \rfloor$ menores e maiores observações.
+O desvio absoluto mediano é dado pela função \texttt{mad}, mas, por padrão, ela multiplica
+o resultado pela constante $1.4826$, que o torna comparável ao desvio-padrão quando os dados
+provêm de uma distribuição normal.
+Para obter a medida tal como definida aqui, deve-se usar \texttt{constant = 1}.
+
+Retomemos o exemplo dos salários com um vetor de dez salários, em milhares de reais, no
+qual há um único valor muito acima dos demais.
+
+\begin{lstlisting}[language=R, caption={Medidas Robustas}, label={cod:robustas}]
+salario <- c(2.1, 2.3, 2.4, 2.6, 2.8, 3.0, 3.1, 3.5, 4.0, 25.0)
+
+c(mean(salario), median(salario), mean(salario, trim = 0.1))
+# [1] 5.0800 2.9000 2.9625
+c(sd(salario), IQR(salario), mad(salario, constant = 1))
+# [1] 7.02263 0.95000 0.55000
+mad(salario)
+# [1] 0.81543
+\end{lstlisting}
+
+A média é quase o dobro da mediana, ao passo que a média aparada com $\alpha = 0.1$, que
+descarta apenas a menor e a maior observação, já se aproxima desta.
+Da mesma forma, o desvio-padrão é muito maior que o intervalo interquartílico e o desvio
+absoluto mediano, pois é dominado pelo valor $25$.
+
+\subsection{Resumo por Grupos}
+
+Na prática, as medidas costumam ser computadas para cada nível de um atributo
+qualitativo do quadro, a fim de comparar as distribuições entre os grupos.
+O pacote \texttt{dplyr} permite fazê-lo agrupando o quadro com \texttt{group\_by} e
+aplicando as funções vistas dentro de \texttt{summarise}, como no código
+\ref{cod:resumo grupos}.
+O resultado de \texttt{summarise} é um \textit{tibble}, que arredonda os valores ao ser
+impresso; a conversão com \texttt{as.data.frame} serve apenas para exibi-los com mais
+casas decimais.
+
+\begin{lstlisting}[language=R, caption={Medidas de Resumo por Grupos}, label={cod:resumo grupos}]
+library(dplyr)
+
+salarios <- data.frame(
+    setor = rep(c("A", "B"), each = 6),
+    salario = c(2.1, 2.4, 2.6, 2.8, 3.0, 3.1,
+                2.3, 2.5, 3.5, 4.0, 4.2, 25.0)
+)
+
+salarios |>
+    group_by(setor) |>
+    summarise(media = mean(salario),
+              mediana = median(salario),
+              aparada = mean(salario, trim = 0.2),
+              dp = sd(salario),
+              iqr = IQR(salario),
+              mad = mad(salario, constant = 1)) |>
+    as.data.frame()
+#   setor    media mediana aparada        dp iqr  mad
+# 1     A 2.666667    2.70    2.70 0.3777124 0.5 0.30
+# 2     B 6.916667    3.75    3.55 8.8925624 1.4 0.85
+\end{lstlisting}
+
+No setor A, as medidas clássicas e as robustas praticamente coincidem, enquanto, no setor
+B, a média e o desvio-padrão são inflados por um único salário, o que as medidas robustas
+revelam de imediato.

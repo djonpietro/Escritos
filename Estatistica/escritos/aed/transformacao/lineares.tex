@@ -1,0 +1,252 @@
+\section{Transformações Lineares}
+
+O mais simples tipo de transformação que pode ser aplicado a um atributo $X$ quantitativo
+é uma transformação linear na forma $aX+b$, com $a, b \in \real$.
+Ela pode ser interpretada como um escalonamento seguido de um deslocamento.
+Os valores dos parâmetros $a$ e $b$ dependem da finalidade da exploração.
+
+Analisemos o impacto de uma transformação linear em algumas medidas de resumo.
+No Teorema \ref{thm:propriedades esperanca} vimos que a esperança é um operador linear.
+Como a média é a esperança de $X$ sob a probabilidade empírica, isso implica que ela também
+o seja; ainda assim, a verificação direta é imediata.
+
+\begin{prop:media linear}
+\label{prop:media linear}
+Se $Y=aX+b$ é uma transformação aplicada a um atributo $X$, então a média de $Y$ é
+$a \bar X + b$.
+\end{prop:media linear}
+\begin{proof}
+Seja $n$ o número de linhas do quadro de $X$.
+\[
+    \frac 1 n \sum_{i=1}^n (ax_i + b) = \frac a n \sum_{i=1}^n x_i + b = a \bar X + b
+\]
+\end{proof}
+
+Algo análogo à transformação linear da média ocorre com a mediana.
+
+\begin{prop:mediana linear}
+\label{prop:mediana linear}
+Se $Y=aX+b$ é uma transformação aplicada a um atributo $X$, então a mediana de $Y$ é
+$a \cdot \med X + b$.
+\end{prop:mediana linear}
+\begin{proof}
+Se $a \ge 0$, então a transformação $x \mapsto ax + b$ é não decrescente, e a ordenação
+das estatísticas de ordem não é alterada, isto é, $\eo{y}{k} = a \eo{x}{k} + b$ para todo
+$k \in [n]$.
+Sendo $n$ o número de linhas do quadro de $X$, se $n$ é ímpar, então a mediana é
+\[
+    a x_{(\frac{n+1}{2})} + b.
+\]
+Caso seja par,
+\[
+   \frac{(a \eo{x}{\frac n 2} + b) + (a \eo{x}{\frac{n}{2}+1} + b)}{2} =
+    a\frac{(\eo{x}{\frac n 2} + \eo{x}{\frac{n}{2}+1})}{2} + b =
+    a \cdot \med{X} + b.
+\]
+Quando $a < 0$, ocorre uma inversão na ordem das estatísticas de ordem, de modo que
+$\eo{y}{k} = a \eo{x}{n+1-k} + b$ para todo $k \in [n]$.
+Todavia, a troca de índices $k \mapsto n+1-k$ leva $\frac{n+1}{2}$ nele mesmo e permuta
+$\frac n 2$ com $\frac n 2 + 1$.
+Assim, se $n$ é ímpar, $\eo{y}{\frac{n+1}{2}} = a \eo{x}{\frac{n+1}{2}} + b$, e, se $n$
+é par, as estatísticas usadas para computar a mediana de $Y$ são as mesmas do caso anterior
+em ordem trocada, o que não altera a sua média aritmética.
+Em ambos os casos, a mediana de $Y$ é $a \cdot \med X + b$.
+\end{proof}
+
+A moda acompanha a transformação de forma ainda mais direta, pois depende apenas das
+frequências dos valores, e não de sua ordenação.
+
+\begin{prop:moda linear}
+\label{prop:moda linear}
+Se $Y=aX+b$ é uma transformação aplicada a um atributo $X$ e $m$ é uma moda amostral de
+$X$, então $am + b$ é uma moda amostral de $Y$.
+\end{prop:moda linear}
+\begin{proof}
+Se $a = 0$, então $Y$ é constante e igual a $b = am + b$, que é, pois, sua única moda.
+Se $a \neq 0$, então a função $x \mapsto ax + b$ é injetora, de modo que $Y$ assume o
+valor $ax + b$ exatamente nas linhas em que $X$ assume o valor $x$, isto é,
+$N_Y(\{ax+b\}) = N_X(\{x\})$ para todo $x \in X(D)$.
+Como $m$ maximiza $N_X(\{x\})$, segue que $am + b$ maximiza $N_Y(\{y\})$.
+\end{proof}
+Quando $a \neq 0$, a correspondência é uma bijeção entre as modas de $X$ e as de $Y$.
+
+A mediana é um caso particular dos quantis empíricos, e o comportamento visto acima se
+estende a eles, com a ressalva de que, para $a < 0$, a inversão da ordem troca o quantil
+de probabilidade $p$ pelo de probabilidade $1 - p$.
+Denotaremos por $q_p(X)$ o quantil empírico de probabilidade $p$ de $X$ obtido pelo
+algoritmo \ref{alg:quantil}.
+
+\begin{prop:quantil linear}
+\label{prop:quantil linear}
+Seja $Y=aX+b$ uma transformação aplicada a um atributo $X$ de um quadro com $n \ge 2$
+linhas, e seja $p \in [0, 1]$.
+Se $a \ge 0$, então $q_p(Y) = a\, q_p(X) + b$; se $a < 0$, então
+$q_p(Y) = a\, q_{1-p}(X) + b$.
+\end{prop:quantil linear}
+\begin{proof}
+Seja $\ell_X : [1, n] \to \real$ a função linear por partes que liga os pontos
+$(k, \eo{x}{k})$, para $k \in [n]$, isto é,
+\[
+    \ell_X(t) = (1 - (t - k))\, \eo{x}{k} + (t - k)\, \eo{x}{k+1},
+    \quad t \in [k, k+1].
+\]
+Pelo algoritmo \ref{alg:quantil}, com $h = (n-1)p + 1$, temos $q_p(X) = \ell_X(h)$,
+inclusive no caso $p = 1$, em que $q_1(X) = \eo{x}{n} = \ell_X(n)$.
+Defina $\ell_Y$ de forma análoga para $Y$.
+
+Se $a \ge 0$, então $\eo{y}{k} = a\eo{x}{k} + b$, como visto na prova da proposição
+\ref{prop:mediana linear}.
+As funções $\ell_Y$ e $a\ell_X + b$ são lineares em cada intervalo $[k, k+1]$ e coincidem
+nos inteiros, logo são iguais, e $q_p(Y) = \ell_Y(h) = a\, q_p(X) + b$.
+
+Se $a < 0$, então $\eo{y}{k} = a\eo{x}{n+1-k} + b$.
+A função $t \mapsto a\,\ell_X(n+1-t) + b$ também é linear em cada intervalo $[k, k+1]$,
+pois $n + 1 - t$ percorre o intervalo $[n-k, n+1-k]$, e vale $a\eo{x}{n+1-k} + b = \eo{y}{k}$
+em cada inteiro $k$, de modo que $\ell_Y(t) = a\,\ell_X(n+1-t) + b$.
+Como $n + 1 - h = (n-1)(1-p) + 1$, segue que
+\[
+    q_p(Y) = a\,\ell_X((n-1)(1-p) + 1) + b = a\, q_{1-p}(X) + b.
+\]
+\end{proof}
+Para $p = 0.5$, temos $1 - p = p$, e a proposição \ref{prop:quantil linear} recupera a
+proposição \ref{prop:mediana linear}.
+
+A transformação linear da variância amostral é análoga à mostrada para aquela do
+Teorema \ref{prop:propriedades variancia}.
+
+\begin{prop:variancia linear}
+\label{prop:variancia linear}
+Se $Y=aX+b$ é uma transformação aplicada a um atributo $X$, então $s_Y^2=a^2 s_X^2$.
+\end{prop:variancia linear}
+\begin{proof}
+Se $n$ é o número de linhas do quadro de $X$, então
+\[
+   \frac{1}{n-1} \sum_{i=1}^n (ax_i+b - (a\bar X+b))^2 =
+   \frac{a^2}{n-1} \sum_{i=1}^n (x_i - \bar X)^2 =
+   a^2 s_X^2
+\]
+\end{proof}
+
+O desvio absoluto médio, o intervalo interquartílico e o desvio absoluto mediano
+comportam-se da mesma maneira que o desvio-padrão:
+são multiplicadas por $|a|$ e não dependem do deslocamento $b$.
+Isso é esperado, pois um deslocamento move todos os dados juntos, sem alterar as
+distâncias entre eles, ao passo que o escalonamento multiplica todas essas distâncias
+por $|a|$.
+
+\begin{prop:dispersao linear}
+\label{prop:dispersao linear}
+Seja $Y=aX+b$ uma transformação aplicada a um atributo $X$ de um quadro com $n \ge 2$
+linhas.
+Então
+\begin{gather*}
+    \dm{Y} = |a| \dm{X}, \quad s_Y = |a|\, s_X, \\
+    d_q(Y) = |a|\, d_q(X) \quad \text{e} \quad
+    \mathrm{MAD}(Y) = |a|\, \mathrm{MAD}(X),
+\end{gather*}
+onde $d_q(X) = q_{0.75}(X) - q_{0.25}(X)$ é o intervalo interquartílico empírico.
+\end{prop:dispersao linear}
+\begin{proof}
+Pela proposição \ref{prop:media linear}, $y_i - \bar Y = a(x_i - \bar X)$, logo
+\[
+    \dm{Y} = \frac 1 n \sum_{i=1}^n |a|\,|x_i - \bar X| = |a| \dm{X}.
+\]
+A igualdade $s_Y = |a|\, s_X$ segue da proposição \ref{prop:variancia linear} tomando a
+raiz quadrada.
+Para o intervalo interquartílico, se $a \ge 0$, a proposição \ref{prop:quantil linear} dá
+\[
+    d_q(Y) = (a\, q_{0.75}(X) + b) - (a\, q_{0.25}(X) + b) = a\, d_q(X),
+\]
+e, se $a < 0$, ela dá
+\[
+    d_q(Y) = (a\, q_{0.25}(X) + b) - (a\, q_{0.75}(X) + b) = -a\, d_q(X) = |a|\, d_q(X).
+\]
+Por fim, pela proposição \ref{prop:mediana linear}, $|y_i - \med Y| = |a|\,|x_i - \med X|$.
+Assim, os desvios absolutos de $Y$ em relação à sua mediana são os de $X$ multiplicados
+por $|a| \ge 0$, e, aplicando novamente a proposição \ref{prop:mediana linear}, com
+coeficiente $|a|$ e deslocamento $0$, obtemos $\mathrm{MAD}(Y) = |a|\, \mathrm{MAD}(X)$.
+\end{proof}
+
+Como consequência, o coeficiente de variação satisfaz $\mathrm{CV}(aX) = \mathrm{CV}(X)$
+para $a > 0$, mas não é preservado por deslocamentos, já que $s_X$ não depende de $b$,
+enquanto a média depende, como já observado na seção de medidas de dispersão.
+
+Por fim, os coeficientes de assimetria não dependem nem da escala, nem da posição dos
+dados, mas apenas do sentido da transformação.
+
+\begin{prop:assimetria linear}
+\label{prop:assimetria linear}
+Seja $Y=aX+b$, com $a \neq 0$, uma transformação aplicada a um atributo $X$, e seja $c$ um
+dos coeficientes de assimetria de Pearson I, Pearson II, quartílico ou de Fisher, definido
+para $X$.
+Então $c$ está definido para $Y$, e
+\[
+    c(Y) = \frac{a}{|a|}\, c(X).
+\]
+\end{prop:assimetria linear}
+\begin{proof}
+Pelas proposições \ref{prop:media linear}, \ref{prop:mediana linear},
+\ref{prop:moda linear} e \ref{prop:dispersao linear}, as diferenças $\bar Y - \mo Y$ e
+$\bar Y - \med Y$ são iguais às respectivas diferenças de $X$ multiplicadas por $a$, ao
+passo que $s_Y = |a|\, s_X$, o que prova o resultado para os coeficientes de Pearson,
+com $s_Y > 0$ sempre que $s_X > 0$.
+
+Para o coeficiente quartílico, se $a > 0$, a proposição \ref{prop:quantil linear} dá
+\[
+    q_{0.25}(Y) + q_{0.75}(Y) - 2\med Y
+        = a\left(q_{0.25}(X) + q_{0.75}(X) - 2\med X\right);
+\]
+se $a < 0$, os quartis trocam de papel, mas a soma $q_{0.25} + q_{0.75}$ é a mesma, e a
+igualdade acima continua válida.
+Como $d_q(Y) = |a|\, d_q(X)$, o resultado segue.
+
+Para o coeficiente de Fisher, temos $(y_i - \bar Y)^3 = a^3 (x_i - \bar X)^3$, e, sendo
+$\sigma_X$ e $\sigma_Y$ os desvios-padrão com divisor $n$ de $X$ e $Y$, pelo mesmo
+argumento da proposição \ref{prop:variancia linear}, $\sigma_Y = |a|\,\sigma_X > 0$.
+O fator de correção depende apenas de $n$, logo o coeficiente de $Y$ é o de $X$
+multiplicado por $\frac{a^3}{|a|^3} = \frac{a}{|a|}$.
+\end{proof}
+
+Em particular, para $a > 0$, nenhum desses coeficientes se altera, o que formaliza a
+afirmação de que transformações lineares não mudam a forma da distribuição.
+Para $a < 0$, a distribuição é refletida, e a cauda mais longa muda de lado.
+
+Dentre as transformações lineares mais usadas em análise exploratória está a padronização,
+por vezes também chamada de normalização.
+Ela é usada para ajustar os valores de uma sequência de atributos a uma escala comum
+para facilitar a comparação entre eles.
+
+Um exemplo de padronização é a transformação $(X - \bar X)/s_X$, definida quando
+$s_X > 0$, isto é, quando $X$ não é constante.
+Ela produz um novo atributo com média $0$ e desvio-padrão amostral igual a $1$, o que
+segue das Proposições \ref{prop:media linear} e \ref{prop:variancia linear} com
+$a = 1/s_X$ e $b = -\bar X/s_X$, de forma análoga ao exposto na Proposição
+\ref{prop:padronizacao}.
+Essa transformação é adequada quando o atributo se aproxima de uma distribuição normal,
+de modo que o atributo resultante aproximar-se-á de uma distribuição normal padrão.
+Também é útil quando aplicamos modelos sensíveis à escala dos atributos, como aqueles
+baseados em distâncias.
+Note, porém, que, por ser linear com $a = 1/s_X > 0$, a padronização não altera a forma da
+distribuição, conforme a proposição \ref{prop:assimetria linear}, de modo que não torna
+normal um atributo que não o seja.
+Além disso, como $\bar X$ e $s_X$ não são robustos, a presença de \textit{outliers} infla
+$s_X$ e comprime os valores típicos num intervalo estreito, prejudicando a comparação entre
+atributos.
+
+Uma variação robusta da padronização utiliza a mediana e o IQR no lugar da média e do
+desvio-padrão, respectivamente, dada por $(X - \med X)/d_q$, definida quando $d_q > 0$.
+Essa condição pode falhar mesmo para atributos não constantes: para $X = (0, 0, 0, 0, 1)$,
+o método de interpolação dá $q_{0.25}(X) = q_{0.75}(X) = 0$.
+Tomando $a = 1/d_q$ e $b = -\med X / d_q$, o resultado é um atributo com mediana $0$,
+pela proposição \ref{prop:mediana linear}, e IQR igual a $1$, pela proposição
+\ref{prop:dispersao linear}.
+Sua aplicação é recomendada quando os dados possuem \textit{outliers} que não podem ser
+descartados, possuem distribuição assimétrica ou cauda pesada.
+
+Outro exemplo é a normalização min-max, que escala os valores para o intervalo $[0,1]$,
+definida quando $\max X > \min X$ e dada por
+\[
+    \frac{X - \min X}{\max X - \min X}.
+\]
+Sua vantagem sobre a padronização tradicional é que os dados são ajustados para um
+intervalo fixo e não negativo, porém também sofre na presença de \textit{outliers}.
